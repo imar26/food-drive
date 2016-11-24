@@ -5,14 +5,17 @@
  */
 package Business.Organization;
 
+import Business.Employee.EmployeeDirectory;
+import Business.WorkQueue.WorkQueue;
+
 /**
  *
  * @author Aadesh Randeria
  */
 public abstract class Organization {
     private String name;
-    //private WorkQueue workQueue;
-    //private EmployeeDirectory employeeDirectory;
+    private WorkQueue workQueue;
+    private EmployeeDirectory employeeDirectory;
     //private UserAccountDirectory userAccountDirectory;
     private int organizationID;
     private static int counter;
