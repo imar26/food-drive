@@ -9,6 +9,12 @@ package Business.Organization;
  *
  * @author Aadesh Randeria
  */
-public class Organization {
+public abstract class Organization {
+    private String name;
+    //private WorkQueue workQueue;
+    //private EmployeeDirectory employeeDirectory;
+    //private UserAccountDirectory userAccountDirectory;
+    private int organizationID;
+    private static int counter;
     
 }
