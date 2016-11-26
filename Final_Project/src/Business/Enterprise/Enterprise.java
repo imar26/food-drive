@@ -24,7 +24,7 @@ public abstract class Enterprise extends Organization{
     }
     
     public enum EnterpriseType{
-        MainCenter("MainCenter"), InspectionCenter("InspectionCenter"), CompostingCenter("CompostingCenter"), TransportAgency("TransportAgency");
+        MainCenter("Main Center"), InspectionCenter("Inspection Center"), CompostingCenter("Composting Center"), TransportAgency("Transport Agency");
         
         private String value;
         private EnterpriseType(String value){

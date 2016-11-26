@@ -25,8 +25,7 @@ public abstract class Role {
         LabAssistant("Lab Assistant"),
         CompostManager("Compost Manager"),
         TransportManager("Transport Manager"),
-        Driver("Driver"),
-        Doctor("Doctor");
+        Driver("Driver");
         
         private String value;
         private RoleType(String value){
