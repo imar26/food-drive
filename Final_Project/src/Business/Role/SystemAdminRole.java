@@ -7,22 +7,20 @@ package Business.Role;
 
 import Business.EcoSystem;
 import Business.Enterprise.Enterprise;
-import Business.Organization.Donor;
 import Business.Organization.Organization;
-import Business.Role.Role;
 import Business.UserAccount.UserAccount;
 import javax.swing.JPanel;
 
 /**
  *
- * @author Apurva Sawant
+ * @author HP
  */
-public class DonorRole extends Role{
-    
+public class SystemAdminRole extends Role{
 
     @Override
     public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, EcoSystem business) {
-       // return new DonorWorkAreaJPanel(userProcessContainer, account, (Donor)organization, enterprise);
-    return null;
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return null;
     }
+    
 }
