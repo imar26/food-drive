@@ -7,6 +7,7 @@ package userinterface;
 //import Business.Ecosystem;
 //import Business.ConfigureASystem;
 //import Business.DB4OUtil.DB4OUtil;
+import Business.ConfigureASystem;
 import Business.EcoSystem;
 import Business.Enterprise.Enterprise;
 import Business.Network.Network;
@@ -30,6 +31,7 @@ public class MainJFrame extends javax.swing.JFrame {
 
     public MainJFrame() {
         initComponents();
+        system= ConfigureASystem.configure();
     //    system = dB4OUtil.retrieveSystem();
     }
 
