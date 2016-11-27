@@ -6,6 +6,7 @@
 package userinterface;
 
 import Business.Donor.Donor;
+import Business.EcoSystem;
 import Business.UserAccount.UserAccount;
 import Business.UserAccount.UserAccountDirectory;
 import Business.Validations;
@@ -22,10 +23,11 @@ public class SignupJPanel extends javax.swing.JPanel {
      * Creates new form SignupJPanel
      */
     private JPanel jpanel;
-    public SignupJPanel(JPanel container) {
+    private EcoSystem system;
+    public SignupJPanel(JPanel container, EcoSystem system) {
         initComponents();
         jpanel=container;
-        
+        this.system=system;
     }
 
     /**
@@ -47,56 +49,66 @@ public class SignupJPanel extends javax.swing.JPanel {
         phoneNoTxt = new javax.swing.JTextField();
         emailTxt = new javax.swing.JTextField();
         userNameTxt = new javax.swing.JTextField();
-        passvordTxt = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         typeComboBox = new javax.swing.JComboBox<>();
         submitButton = new javax.swing.JButton();
+        passvordTxt = new javax.swing.JPasswordField();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setText("Enter your details:");
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(145, 11, -1, -1));
 
         jLabel2.setText("Name:");
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 34, -1, -1));
 
         jLabel3.setText("Phone number:");
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 65, -1, -1));
 
         jLabel4.setText("Email id:");
+        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 96, -1, -1));
 
         jLabel5.setText("UserName:");
+        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 127, -1, -1));
 
         jLabel6.setText("Password:");
+        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 158, -1, -1));
 
         nameTxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nameTxtActionPerformed(evt);
             }
         });
+        add(nameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(155, 31, 117, -1));
 
         phoneNoTxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 phoneNoTxtActionPerformed(evt);
             }
         });
+        add(phoneNoTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(155, 62, 117, -1));
 
         emailTxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 emailTxtActionPerformed(evt);
             }
         });
+        add(emailTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(155, 93, 117, -1));
 
         userNameTxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 userNameTxtActionPerformed(evt);
             }
         });
-
-        passvordTxt.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                passvordTxtActionPerformed(evt);
-            }
-        });
+        add(userNameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(155, 124, 117, -1));
 
         jLabel7.setText("Type:");
+        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 184, -1, -1));
 
         typeComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Individual", "Hotel", "Event" }));
+        add(typeComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(155, 181, 117, -1));
 
         submitButton.setText("Submit");
         submitButton.addActionListener(new java.awt.event.ActionListener() {
@@ -104,82 +116,16 @@ public class SignupJPanel extends javax.swing.JPanel {
                 submitButtonActionPerformed(evt);
             }
         });
+        add(submitButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(109, 219, -1, -1));
+        add(passvordTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(155, 155, 117, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(145, 145, 145)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(42, 42, 42)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(nameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
-                                .addComponent(phoneNoTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(userNameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(emailTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel6)
-                                    .addComponent(jLabel7))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(passvordTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE)
-                                    .addComponent(typeComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
-                .addGap(128, 128, 128))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(109, 109, 109)
-                .addComponent(submitButton)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(nameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(phoneNoTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(emailTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(userNameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(passvordTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(typeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7))
-                .addGap(18, 18, 18)
-                .addComponent(submitButton)
-                .addContainerGap(58, Short.MAX_VALUE))
-        );
+        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 8)); // NOI18N
+        jLabel8.setText("(example@eg.com)");
+        add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 90, 70, 20));
+
+        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 8)); // NOI18N
+        jLabel9.setText("(xxx-xxx-xxxx)");
+        add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 60, 70, 20));
     }// </editor-fold>//GEN-END:initComponents
 
     private void nameTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameTxtActionPerformed
@@ -198,10 +144,6 @@ public class SignupJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_userNameTxtActionPerformed
 
-    private void passvordTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passvordTxtActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_passvordTxtActionPerformed
-
     private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitButtonActionPerformed
           boolean nameFlag=false;
           boolean phoneNoFlag=false;
@@ -210,7 +152,7 @@ public class SignupJPanel extends javax.swing.JPanel {
           if(nameTxt.getText().isEmpty() )
           {
             nameFlag=true;
-            JOptionPane.showMessageDialog(null, "Please enter First Name and Last Name");
+            JOptionPane.showMessageDialog(null, "Please enter your full name");
           }
           
           if(phoneNoTxt.getText().isEmpty() || !Validations.isPhoneNumber(phoneNoTxt.getText()))
@@ -233,7 +175,7 @@ public class SignupJPanel extends javax.swing.JPanel {
           if(passvordTxt.getText().isEmpty() )
           {
             passFlag=true;
-            JOptionPane.showMessageDialog(null, "Please enter First Name and Last Name");
+            JOptionPane.showMessageDialog(null, "Please enter a password");
           }
           
            if (!nameFlag & !phoneNoFlag & !emailIdFlag ){
@@ -243,12 +185,15 @@ public class SignupJPanel extends javax.swing.JPanel {
               Donor donor=new Donor();
               donor.setName(nameTxt.getText());
               donor.setEmailId(emailTxt.getText());
-              donor.setPhoneNo(Long.parseLong(phoneNoTxt.getText()));
+              donor.setPhoneNo(phoneNoTxt.getText());
+              donor.setType(String.valueOf(typeComboBox.getSelectedItem()));
               user.setDonor(donor);
               user.setUsername(userNameTxt.getText());
-              user.setPassword(passvordTxt.getText());
-              UserAccountDirectory userAccountDirectory=new UserAccountDirectory();
-              userAccountDirectory.addAccount(user);
+              user.setPassword(String.valueOf(passvordTxt.getPassword()));
+             // UserAccountDirectory userAccountDirectory=new UserAccountDirectory();
+              system.getUserAccountDirectory().addAccount(user);
+             // userAccountDirectory.addAccount(user);
+              JOptionPane.showMessageDialog(null, "Details saved successfully. You may login now");
            }
     }//GEN-LAST:event_submitButtonActionPerformed
 
@@ -262,8 +207,10 @@ public class SignupJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JTextField nameTxt;
-    private javax.swing.JTextField passvordTxt;
+    private javax.swing.JPasswordField passvordTxt;
     private javax.swing.JTextField phoneNoTxt;
     private javax.swing.JButton submitButton;
     private javax.swing.JComboBox<String> typeComboBox;

@@ -223,7 +223,7 @@ public class MainJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_logoutJButtonActionPerformed
 
     private void signUpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signUpButtonActionPerformed
-       SignupJPanel signUpJPanel = new SignupJPanel(container);
+       SignupJPanel signUpJPanel = new SignupJPanel(container,system);
        CardLayout layout = (CardLayout) container.getLayout();
         
         container.add("signUpJPanel", signUpJPanel);
