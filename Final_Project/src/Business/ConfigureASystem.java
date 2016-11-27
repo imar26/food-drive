@@ -13,7 +13,7 @@ import Business.UserAccount.UserAccount;
  *
  * @author neeraj
  */
-public class ConfigureABusiness {
+public class ConfigureASystem {
     
 //    public static Business configure(){
 //        
