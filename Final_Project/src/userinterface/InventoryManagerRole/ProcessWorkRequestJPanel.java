@@ -3,25 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package userinterface.OfficeManagerRole;
-
-import Business.WorkQueue.MainOfficeWorkRequest;
-import javax.swing.JPanel;
+package userinterface.InventoryManagerRole;
 
 /**
  *
  * @author HP
  */
 public class ProcessWorkRequestJPanel extends javax.swing.JPanel {
-    JPanel userProcessContainer;
-    MainOfficeWorkRequest request;
+
     /**
      * Creates new form ProcessWorkRequestJPanel
      */
-    public ProcessWorkRequestJPanel(JPanel userProcessContainer, MainOfficeWorkRequest request) {
+    public ProcessWorkRequestJPanel() {
         initComponents();
-        this.userProcessContainer = userProcessContainer;
-        this.request = request;
     }
 
     /**
