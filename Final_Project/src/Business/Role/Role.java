@@ -25,6 +25,8 @@ public abstract class Role {
         LabAssistant("Lab Assistant"),
         CompostManager("Compost Manager"),
         TransportManager("Transport Manager"),
+        StoreChainManager("StoreChainManager"),     
+        StoreManager("StoreManager"),
         Driver("Driver");
         
         private String value;

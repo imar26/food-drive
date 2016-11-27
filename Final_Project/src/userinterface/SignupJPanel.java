@@ -7,6 +7,11 @@ package userinterface;
 
 import Business.Donor.Donor;
 import Business.EcoSystem;
+import Business.Enterprise.Enterprise;
+import Business.Enterprise.MainCenterEnterprise;
+import Business.Network.Network;
+import Business.Organization.DonorOrganization;
+import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
 import Business.UserAccount.UserAccountDirectory;
 import Business.Validations;
@@ -149,6 +154,23 @@ public class SignupJPanel extends javax.swing.JPanel {
           boolean phoneNoFlag=false;
           boolean emailIdFlag=false; 
           boolean passFlag=false;
+          Organization organization=null;
+          for(Network network:system.getNetworkList())
+          {
+             for(Enterprise enterprise: network.getEnterpriseDirectory().getEnterpriseList())
+             {
+                if(enterprise instanceof MainCenterEnterprise)
+                {
+                    for(Organization org: enterprise.getOrganizationDirectory().getOrganizationList())
+                    {
+                       if(org instanceof DonorOrganization)   
+                       {
+                          organization=org;
+                       }    
+                    }    
+                }    
+             }    
+          }    
           if(nameTxt.getText().isEmpty() )
           {
             nameFlag=true;
@@ -191,7 +213,7 @@ public class SignupJPanel extends javax.swing.JPanel {
               user.setUsername(userNameTxt.getText());
               user.setPassword(String.valueOf(passvordTxt.getPassword()));
              // UserAccountDirectory userAccountDirectory=new UserAccountDirectory();
-              system.getUserAccountDirectory().addAccount(user);
+              organization.getUserAccountDirectory().addAccount(user);
              // userAccountDirectory.addAccount(user);
               JOptionPane.showMessageDialog(null, "Details saved successfully. You may login now");
            }
