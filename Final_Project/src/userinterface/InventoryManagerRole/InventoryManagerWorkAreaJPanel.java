@@ -6,6 +6,7 @@
 package userinterface.InventoryManagerRole;
 
 import Business.Enterprise.Enterprise;
+import Business.Organization.Inventory;
 import Business.Organization.MainOffice;
 import Business.UserAccount.UserAccount;
 import Business.WorkQueue.InventoryWorkRequest;
@@ -26,10 +27,10 @@ public class InventoryManagerWorkAreaJPanel extends javax.swing.JPanel {
      * Creates new form InventoryManagerWorkAreaJPanel
      */
     private JPanel userProcessContainer;
-    private MainOffice organization;
+    private Inventory organization;
     private Enterprise enterprise;
     private UserAccount userAccount;
-    public InventoryManagerWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, MainOffice organization, Enterprise enterprise) {
+    public InventoryManagerWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, Inventory organization, Enterprise enterprise) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.organization = organization;
