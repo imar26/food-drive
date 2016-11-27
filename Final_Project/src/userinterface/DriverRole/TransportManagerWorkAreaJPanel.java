@@ -9,12 +9,12 @@ package userinterface.DriverRole;
  *
  * @author Aadesh Randeria
  */
-public class DriverWorkAreaJPanel extends javax.swing.JPanel {
+public class TransportManagerWorkAreaJPanel extends javax.swing.JPanel {
 
     /**
      * Creates new form DriverWorkAreaJPanel
      */
-    public DriverWorkAreaJPanel() {
+    public TransportManagerWorkAreaJPanel() {
         initComponents();
     }
 
