@@ -5,6 +5,13 @@
  */
 package userinterface;
 
+import Business.Donor.Donor;
+import Business.UserAccount.UserAccount;
+import Business.UserAccount.UserAccountDirectory;
+import Business.Validations;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+
 /**
  *
  * @author Apurva Sawant
@@ -14,8 +21,11 @@ public class SignupJPanel extends javax.swing.JPanel {
     /**
      * Creates new form SignupJPanel
      */
-    public SignupJPanel() {
+    private JPanel jpanel;
+    public SignupJPanel(JPanel container) {
         initComponents();
+        jpanel=container;
+        
     }
 
     /**
@@ -89,6 +99,11 @@ public class SignupJPanel extends javax.swing.JPanel {
         typeComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Individual", "Hotel", "Event" }));
 
         submitButton.setText("Submit");
+        submitButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                submitButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -186,6 +201,56 @@ public class SignupJPanel extends javax.swing.JPanel {
     private void passvordTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passvordTxtActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_passvordTxtActionPerformed
+
+    private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitButtonActionPerformed
+          boolean nameFlag=false;
+          boolean phoneNoFlag=false;
+          boolean emailIdFlag=false; 
+          boolean passFlag=false;
+          if(nameTxt.getText().isEmpty() )
+          {
+            nameFlag=true;
+            JOptionPane.showMessageDialog(null, "Please enter First Name and Last Name");
+          }
+          
+          if(phoneNoTxt.getText().isEmpty() || !Validations.isPhoneNumber(phoneNoTxt.getText()))
+          {
+            phoneNoFlag=true;
+            JOptionPane.showMessageDialog(null, "Please enter a valid phone number");
+          }
+          
+          if(emailTxt.getText().isEmpty() || !Validations.isValidEmailId(emailTxt.getText()))
+          {
+            emailIdFlag=true;
+            JOptionPane.showMessageDialog(null, "Please enter a valid EmailID");
+          }
+//           if(userNameTxt.getText().isEmpty() || !Validations.isUserNameUnique(emailTxt.getText()))
+//          {
+//            Flag=true;
+//            JOptionPane.showMessageDialog(null, "This username is not unique");
+//          }
+
+          if(passvordTxt.getText().isEmpty() )
+          {
+            passFlag=true;
+            JOptionPane.showMessageDialog(null, "Please enter First Name and Last Name");
+          }
+          
+           if (!nameFlag & !phoneNoFlag & !emailIdFlag ){
+             
+              UserAccount user=new UserAccount();
+              user.setEmployee(null);
+              Donor donor=new Donor();
+              donor.setName(nameTxt.getText());
+              donor.setEmailId(emailTxt.getText());
+              donor.setPhoneNo(Long.parseLong(phoneNoTxt.getText()));
+              user.setDonor(donor);
+              user.setUsername(userNameTxt.getText());
+              user.setPassword(passvordTxt.getText());
+              UserAccountDirectory userAccountDirectory=new UserAccountDirectory();
+              userAccountDirectory.addAccount(user);
+           }
+    }//GEN-LAST:event_submitButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

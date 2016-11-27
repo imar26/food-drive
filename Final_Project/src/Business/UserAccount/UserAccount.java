@@ -4,6 +4,7 @@
  */
 package Business.UserAccount;
 
+import Business.Donor.Donor;
 import Business.Employee.Employee;
 import Business.Role.Role;
 import Business.WorkQueue.WorkQueue;
@@ -17,6 +18,7 @@ public class UserAccount {
     private String username;
     private String password;
     private Employee employee;
+    private Donor donor;
     private Role role;
     private WorkQueue workQueue;
 
@@ -60,6 +62,14 @@ public class UserAccount {
 
     public WorkQueue getWorkQueue() {
         return workQueue;
+    }
+
+    public Donor getDonor() {
+        return donor;
+    }
+
+    public void setDonor(Donor donor) {
+        this.donor = donor;
     }
 
     

@@ -13,8 +13,8 @@ import java.util.ArrayList;
  *
  * @author Apurva Sawant
  */
-public class Donor extends Organization{
-    public Donor() {
+public class DonorOrganization extends Organization{
+    public DonorOrganization() {
         super(Organization.Type.Donor.getValue());
     }
     

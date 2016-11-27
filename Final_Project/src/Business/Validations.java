@@ -13,7 +13,7 @@ import java.util.regex.Pattern;
  * @author Apurva Sawant
  */
 public class Validations {
-    private boolean isDigit(String input){
+    public static boolean isDigit(String input){
         
           String regex = "^[0-9]{0,2}$";
           Pattern pattern = Pattern.compile(regex);
@@ -23,7 +23,7 @@ public class Validations {
           return output;
     }
     
-    private boolean isPhoneNumber(String input)
+    public static boolean isPhoneNumber(String input)
     {
 
         String regex = "^([0-9]{3})-([0-9]{3})-[0-9]{4}$";
@@ -34,7 +34,7 @@ public class Validations {
           return output;
     }
     
-    private boolean isValidEmailId(String input){
+    public static boolean isValidEmailId(String input){
         
           String regex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9+_.-]+.[A-Za-z]$";
           Pattern pattern = Pattern.compile(regex);
@@ -44,7 +44,7 @@ public class Validations {
           return output;
     }
     
-//    private boolean isUserNamePresent(String name){
+//    private boolean isUserNameUnique(String name){
 //    
 //        for(UserAccount: getUserAccountDirectory())
 //    }

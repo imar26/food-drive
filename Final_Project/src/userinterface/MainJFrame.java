@@ -223,11 +223,13 @@ public class MainJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_logoutJButtonActionPerformed
 
     private void signUpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signUpButtonActionPerformed
-       SignupJPanel manageOrganizationJPanel = new SignupJPanel(container);
-        container.add("manageOrganizationJPanel", manageOrganizationJPanel);
-        CardLayout layout = (CardLayout) container.getLayout();
+       SignupJPanel signUpJPanel = new SignupJPanel(container);
+       CardLayout layout = (CardLayout) container.getLayout();
+        
+        container.add("signUpJPanel", signUpJPanel);
         layout.next(container);
 
+       
     }//GEN-LAST:event_signUpButtonActionPerformed
 
     /**
