@@ -25,7 +25,34 @@ public class OrganizationDirectory {
     public void setOrganizationList(ArrayList<Organization> organizationList) {
         this.organizationList = organizationList;
     }
-    
+    public Organization createOrganization(Organization.Type type){
+        Organization organization = null;
+        if (type.getValue().equals(Organization.Type.Donor.getValue())){
+            organization = new DonorOrganization();
+            organizationList.add(organization);
+        }
+        else if (type.getValue().equals(Organization.Type.Lab.getValue())){
+            organization = new Lab();
+            organizationList.add(organization);
+        }
+        else if (type.getValue().equals(Organization.Type.MainOffice.getValue())){
+            organization = new MainOffice();
+            organizationList.add(organization);
+        }
+        else if (type.getValue().equals(Organization.Type.Inventory.getValue())){
+            organization = new Inventory();
+            organizationList.add(organization);
+        }
+        else if (type.getValue().equals(Organization.Type.Composting.getValue())){
+            organization = new Composting();
+            organizationList.add(organization);
+        }
+        else if (type.getValue().equals(Organization.Type.Transport.getValue())){
+            organization = new Transport();
+            organizationList.add(organization);
+        }
+        return organization;
+    }
     
     
 }
