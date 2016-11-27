@@ -20,9 +20,9 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="jButton1" linkSize="1" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="jButton2" linkSize="1" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="jButton3" linkSize="1" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnManageLabAssistant" linkSize="1" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnUserAccount" linkSize="1" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnWorkQueue" linkSize="1" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="319" max="32767" attributes="0"/>
           </Group>
@@ -34,11 +34,11 @@
               <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
-              <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+              <Component id="btnManageLabAssistant" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="jButton2" min="-2" max="-2" attributes="0"/>
+              <Component id="btnUserAccount" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="jButton3" min="-2" max="-2" attributes="0"/>
+              <Component id="btnWorkQueue" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="313" max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -53,20 +53,20 @@
         <Property name="text" type="java.lang.String" value="My Work Area - Lab Manager Role"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton1">
+    <Component class="javax.swing.JButton" name="btnManageLabAssistant">
       <Properties>
         <Property name="text" type="java.lang.String" value="Manage Lab Assistant"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnManageLabAssistantActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton2">
+    <Component class="javax.swing.JButton" name="btnUserAccount">
       <Properties>
         <Property name="text" type="java.lang.String" value="Manage User Account"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton3">
+    <Component class="javax.swing.JButton" name="btnWorkQueue">
       <Properties>
         <Property name="text" type="java.lang.String" value="Manage Work Queue"/>
       </Properties>
