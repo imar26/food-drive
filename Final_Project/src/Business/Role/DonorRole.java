@@ -23,6 +23,7 @@ public class DonorRole extends Role{
 
     @Override
     public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, EcoSystem business) {
+        System.out.println("I am here");
         return new DonorWorkAreaJPanel(userProcessContainer, account, (DonorOrganization)organization, enterprise);
     //return null;
     }

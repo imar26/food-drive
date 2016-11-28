@@ -195,6 +195,9 @@ public class MainJFrame extends javax.swing.JFrame {
         return;
         }
         else{
+            System.out.println("role:"+userAccount.getRole());
+            System.out.println("organization:"+inOrganization);
+             System.out.println("inEnterprise:"+inEnterprise);
            CardLayout cardLayout=(CardLayout)container.getLayout();
            container.add("area",userAccount.getRole().createWorkArea(container, userAccount, inOrganization, inEnterprise, system));
            cardLayout.next(container);

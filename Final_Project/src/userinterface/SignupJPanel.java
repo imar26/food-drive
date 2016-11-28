@@ -12,6 +12,8 @@ import Business.Enterprise.MainCenterEnterprise;
 import Business.Network.Network;
 import Business.Organization.DonorOrganization;
 import Business.Organization.Organization;
+import Business.Role.DonorRole;
+import Business.Role.Role;
 import Business.UserAccount.UserAccount;
 import Business.UserAccount.UserAccountDirectory;
 import Business.Validations;
@@ -210,6 +212,8 @@ public class SignupJPanel extends javax.swing.JPanel {
               donor.setPhoneNo(phoneNoTxt.getText());
               donor.setType(String.valueOf(typeComboBox.getSelectedItem()));
               user.setDonor(donor);
+             // Role role=Role.RoleType.Donor;
+              user.setRole(new DonorRole());
               user.setUsername(userNameTxt.getText());
               user.setPassword(String.valueOf(passvordTxt.getPassword()));
              // UserAccountDirectory userAccountDirectory=new UserAccountDirectory();
