@@ -8,6 +8,7 @@ package userinterface.LabManagerRole;
 import Business.Enterprise.Enterprise;
 import Business.Organization.Lab;
 import Business.UserAccount.UserAccount;
+import java.awt.CardLayout;
 import javax.swing.JPanel;
 
 /**
@@ -56,6 +57,11 @@ public class LabManagerWorkAreaJPanel extends javax.swing.JPanel {
         });
 
         btnUserAccount.setText("Manage User Account");
+        btnUserAccount.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUserAccountActionPerformed(evt);
+            }
+        });
 
         btnWorkQueue.setText("Manage Work Queue");
 
@@ -92,7 +98,15 @@ public class LabManagerWorkAreaJPanel extends javax.swing.JPanel {
 
     private void btnManageLabAssistantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageLabAssistantActionPerformed
         // TODO add your handling code here:
+        ManageLabAssistantJPanel mlajp = new ManageLabAssistantJPanel(userProcessContainer, account, organization, enterprise);
+        userProcessContainer.add("ManageLabAssistantJPanel", mlajp);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
     }//GEN-LAST:event_btnManageLabAssistantActionPerformed
+
+    private void btnUserAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUserAccountActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnUserAccountActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
