@@ -5,6 +5,9 @@
  */
 package userinterface.TransportManagerRole;
 
+import Business.Enterprise.Enterprise;
+import Business.Organization.Transport;
+import Business.UserAccount.UserAccount;
 import javax.swing.JPanel;
 import java.awt.CardLayout;
 
@@ -17,10 +20,16 @@ public class ManageDriverJPanel extends javax.swing.JPanel {
     /**
      * Creates new form ManageDriverJPanel
      */
-    JPanel userProcessContainer;
-    public ManageDriverJPanel(JPanel userProcessContainer) {
+    private JPanel userProcessContainer;
+    private Transport organization;
+    private Enterprise enterprise;
+    private UserAccount userAccount;
+    public ManageDriverJPanel(JPanel userProcessContainer, UserAccount userAccount, Transport organization, Enterprise enterprise) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
+        this.userAccount = userAccount;
+        this.organization = organization;
+        this.enterprise = enterprise;
     }
 
     /**

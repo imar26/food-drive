@@ -6,7 +6,10 @@
 package userinterface.LabManagerRole;
 
 import Business.Employee.Employee;
+import Business.Enterprise.Enterprise;
+import Business.Organization.Lab;
 import Business.Organization.Organization;
+import Business.UserAccount.UserAccount;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -20,10 +23,16 @@ public class ManageLabAssistantJPanel extends javax.swing.JPanel {
     /**
      * Creates new form ManageLabAssistantJPanel
      */
-    JPanel userProcessContainer;
-    public ManageLabAssistantJPanel(JPanel userProcessContainer) {
+    private JPanel userProcessContainer;
+    private Lab organization;
+    private Enterprise enterprise;
+    private UserAccount userAccount;
+    public ManageLabAssistantJPanel(JPanel userProcessContainer, UserAccount userAccount, Lab organization, Enterprise enterprise) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
+        this.userAccount = userAccount;
+        this.organization = organization;
+        this.enterprise = enterprise;
     }
     
     public void populateTable(Organization organization) {
