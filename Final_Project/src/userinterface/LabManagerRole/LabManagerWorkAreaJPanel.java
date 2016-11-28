@@ -5,6 +5,11 @@
  */
 package userinterface.LabManagerRole;
 
+import Business.Enterprise.Enterprise;
+import Business.Organization.Lab;
+import Business.UserAccount.UserAccount;
+import javax.swing.JPanel;
+
 /**
  *
  * @author Aadesh Randeria
@@ -14,8 +19,16 @@ public class LabManagerWorkAreaJPanel extends javax.swing.JPanel {
     /**
      * Creates new form LabManagerWorkAreaJPanel
      */
-    public LabManagerWorkAreaJPanel() {
+    private JPanel userProcessContainer;
+    private UserAccount account;
+    private Lab organization;
+    private Enterprise enterprise;
+    public LabManagerWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, Lab organization, Enterprise enterprise) {
         initComponents();
+        this.userProcessContainer = userProcessContainer;
+        this.account = account;
+        this.organization = organization;
+        this.enterprise = enterprise;
     }
 
     /**

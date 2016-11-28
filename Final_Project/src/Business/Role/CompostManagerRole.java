@@ -7,9 +7,11 @@ package Business.Role;
 
 import Business.EcoSystem;
 import Business.Enterprise.Enterprise;
+import Business.Organization.Composting;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
 import javax.swing.JPanel;
+import userinterface.CompostManagerRole.CompostManagerWorkAreaJPanel;
 
 /**
  *
@@ -19,8 +21,7 @@ public class CompostManagerRole extends Role {
 
     @Override
     public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, EcoSystem business) {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        return null;
+        return new CompostManagerWorkAreaJPanel(userProcessContainer, account, (Composting)organization, enterprise);
     }
     
 }

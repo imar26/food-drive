@@ -3,7 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package userinterface.DriverRole;
+package userinterface.TransportManagerRole;
+
+import Business.Enterprise.Enterprise;
+import Business.Organization.Transport;
+import Business.UserAccount.UserAccount;
+import javax.swing.JPanel;
 
 /**
  *
@@ -14,8 +19,16 @@ public class TransportManagerWorkAreaJPanel extends javax.swing.JPanel {
     /**
      * Creates new form DriverWorkAreaJPanel
      */
-    public TransportManagerWorkAreaJPanel() {
+    private JPanel userProcessContainer;
+    private UserAccount account;
+    private Transport organization;
+    private Enterprise enterprise;
+    public TransportManagerWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, Transport organization, Enterprise enterprise) {
         initComponents();
+        this.userProcessContainer = userProcessContainer;
+        this.account = account;
+        this.organization = organization;
+        this.enterprise = enterprise;
     }
 
     /**

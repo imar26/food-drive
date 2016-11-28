@@ -5,6 +5,9 @@
  */
 package userinterface.CompostManagerRole;
 
+import Business.Enterprise.Enterprise;
+import Business.Organization.Composting;
+import Business.UserAccount.UserAccount;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -17,10 +20,16 @@ public class CompostManagerWorkAreaJPanel extends javax.swing.JPanel {
     /**
      * Creates new form CompostManagerWorkAreaJPanel
      */
-    JPanel userProcessContainer;
-    public CompostManagerWorkAreaJPanel(JPanel userProcessContainer) {
+    private JPanel userProcessContainer;
+    private UserAccount account;
+    private Composting organization;
+    private Enterprise enterprise;
+    public CompostManagerWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, Composting organization, Enterprise enterprise) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
+        this.account = account;
+        this.organization = organization;
+        this.enterprise = enterprise;
     }
     /**
      * This method is called from within the constructor to initialize the form.
