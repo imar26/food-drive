@@ -5,7 +5,10 @@
  */
 package userinterface.DonorRole;
 
+import Business.EcoSystem;
 import Business.Enterprise.Enterprise;
+import Business.Enterprise.MainCenterEnterprise;
+import Business.Network.Network;
 import Business.Organization.DonorOrganization;
 import Business.Organization.MainOffice;
 import Business.Organization.Organization;
@@ -23,16 +26,18 @@ public class DonorWorkAreaJPanel extends javax.swing.JPanel {
     private DonorOrganization organization;
     private Enterprise enterprise;
     private UserAccount userAccount;
+    private EcoSystem business;
     
     /**
      * Creates new form DonorWorkAreaJPanel
      */
-    public DonorWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, DonorOrganization organization, Enterprise enterprise) {
+    public DonorWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, DonorOrganization organization, Enterprise enterprise, EcoSystem business) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.organization = organization;
         this.enterprise = enterprise;
         this.userAccount = account;
+        this.business= business;
         if(userAccount.getDonor().getType().equalsIgnoreCase("Individual"))
         {
                locationTxt.setEnabled(false);
@@ -132,20 +137,35 @@ public class DonorWorkAreaJPanel extends javax.swing.JPanel {
         request.setLocation(locationTxt.getText());
         request.setStatus("Sent");
         
-        Organization org = null;
-        for (Organization organization : enterprise.getOrganizationDirectory().getOrganizationList()){
-            if (organization instanceof MainOffice){
-                org = organization;
-                break;
-            }
+        for(Network network : business.getNetworkList()){
+            System.out.println("Network"+ network.getName());
+           Enterprise en=null;
+            for(Enterprise enterprise : network.getEnterpriseDirectory().getEnterpriseList()){
+                System.out.println("Enterprise"+ enterprise.getName());
+                 if(enterprise instanceof MainCenterEnterprise){
+                     System.out.println("Yes");
+                    en = enterprise;
+                    Organization org = null;
+                    for (Organization organization : en.getOrganizationDirectory().getOrganizationList()){
+                        
+                        if (organization instanceof MainOffice){
+                            System.out.println("Yes Organization");
+                            org = organization;
+                            break;
+                        }
+                    }
+                    if (org!=null){
+                        System.out.println("User Account"+userAccount.getUsername());
+                        org.getWorkQueue().getWorkRequestList().add(request);
+                        System.out.println("Orga"+org.getWorkQueue().getWorkRequestList());
+                        userAccount.getWorkQueue().getWorkRequestList().add(request);
+                    }
+                    else{
+                        //send it to a stall specified
+                    }
+                }
+            }   
         }
-        if (org!=null){
-            org.getWorkQueue().getWorkRequestList().add(request);
-            userAccount.getWorkQueue().getWorkRequestList().add(request);
-        }
-        }
-        else{
-        //send it to a stall specified
         }
     }//GEN-LAST:event_donateBtnActionPerformed
 

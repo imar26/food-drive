@@ -40,12 +40,16 @@ public class OfficeManagerWorkAreaJPanel extends javax.swing.JPanel {
         
         model.setRowCount(0);
         for (WorkRequest request : userAccount.getWorkQueue().getWorkRequestList()){
-            Object[] row = new Object[4];
+            Object[] row = new Object[6];
             row[0] = request.getMessage();
             row[1] = request.getReceiver();
             row[2] = request.getStatus();
+            int quantity = ((MainOfficeWorkRequest) request).getQuantity();
+            row[3] = quantity;
+            String location = ((MainOfficeWorkRequest) request).getLocation();
+            row[4]=location;
             String result = ((MainOfficeWorkRequest) request).getTestResult();
-            row[3] = result == null ? "Waiting" : result;
+            row[5] = result == null ? "Waiting" : result;
             
             model.addRow(row);
         }
@@ -70,11 +74,11 @@ public class OfficeManagerWorkAreaJPanel extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Message", "Receiver", "Status", "Result"
+                "Message", "Receiver", "Status", "Quantity", "Location", "Result"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -87,6 +91,8 @@ public class OfficeManagerWorkAreaJPanel extends javax.swing.JPanel {
             mainOfficeJTable.getColumnModel().getColumn(1).setResizable(false);
             mainOfficeJTable.getColumnModel().getColumn(2).setResizable(false);
             mainOfficeJTable.getColumnModel().getColumn(3).setResizable(false);
+            mainOfficeJTable.getColumnModel().getColumn(4).setResizable(false);
+            mainOfficeJTable.getColumnModel().getColumn(5).setResizable(false);
         }
 
         btnRefresh.setText("Refresh");
