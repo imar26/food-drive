@@ -30,15 +30,14 @@
                       </Group>
                       <Group type="102" attributes="0">
                           <EmptySpace min="120" pref="120" max="-2" attributes="0"/>
-                          <Component id="manageOrganizationJButton" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" attributes="0">
-                          <EmptySpace min="120" pref="120" max="-2" attributes="0"/>
-                          <Component id="manageEmployeeJButton" min="-2" pref="150" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" attributes="0">
-                          <EmptySpace min="120" pref="120" max="-2" attributes="0"/>
                           <Component id="userJButton" min="-2" pref="150" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="120" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Component id="manageOrganizationJButton" alignment="1" min="-2" pref="150" max="-2" attributes="0"/>
+                              <Component id="manageEmployeeJButton" min="-2" pref="150" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                   </Group>
                   <EmptySpace min="0" pref="74" max="32767" attributes="0"/>
@@ -98,6 +97,7 @@
     <Component class="javax.swing.JButton" name="manageOrganizationJButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Manage Organization"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="manageOrganizationJButtonActionPerformed"/>

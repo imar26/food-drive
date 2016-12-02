@@ -8,6 +8,7 @@ package userinterface.StoreChainManagerRole;
 import Business.Enterprise.Enterprise;
 import Business.Organization.StoreChain;
 import Business.UserAccount.UserAccount;
+import java.awt.CardLayout;
 import javax.swing.JPanel;
 
 /**
@@ -19,12 +20,21 @@ public class StoreChainWorkAreaJPanel extends javax.swing.JPanel {
     /**
      * Creates new form StoreChainWorkAreaJPanel
      */
-    public StoreChainWorkAreaJPanel() {
-        initComponents();
-    }
-
+//    public StoreChainWorkAreaJPanel() {
+//        initComponents();
+//    }
+    private JPanel userProcessContainer;
+    private UserAccount account;
+    private StoreChain storeChain;
+    private Enterprise enterprise;
+    
     public StoreChainWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, StoreChain storeChain, Enterprise enterprise) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        initComponents();
+        this.userProcessContainer=userProcessContainer;
+        this.account=account;
+        this.storeChain=storeChain;
+        this.enterprise=enterprise;
     }
 
     /**
@@ -36,19 +46,103 @@ public class StoreChainWorkAreaJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
+        manageStoresJButton = new javax.swing.JButton();
+        manageEmployeeJButton = new javax.swing.JButton();
+        userJButton = new javax.swing.JButton();
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel1.setText("My Work Area -StoreChainManager Role");
+
+        manageStoresJButton.setText("Manage Stores");
+        manageStoresJButton.setAutoscrolls(true);
+        manageStoresJButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                manageStoresJButtonActionPerformed(evt);
+            }
+        });
+
+        manageEmployeeJButton.setText("Manage Employee");
+        manageEmployeeJButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                manageEmployeeJButtonActionPerformed(evt);
+            }
+        });
+
+        userJButton.setText("Manage User");
+        userJButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                userJButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(34, 34, 34)
+                .addComponent(jLabel1)
+                .addContainerGap(50, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(194, 194, 194)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(userJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(manageStoresJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(manageEmployeeJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addContainerGap(218, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(44, 44, 44)
+                .addComponent(jLabel1)
+                .addContainerGap(227, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(133, 133, 133)
+                    .addComponent(manageStoresJButton)
+                    .addGap(27, 27, 27)
+                    .addComponent(manageEmployeeJButton)
+                    .addGap(27, 27, 27)
+                    .addComponent(userJButton)
+                    .addContainerGap(44, Short.MAX_VALUE)))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void manageStoresJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageStoresJButtonActionPerformed
+
+        ManageStoresJPanel manageOrganizationJPanel = new ManageStoresJPanel(userProcessContainer, storeChain);
+        userProcessContainer.add("manageOrganizationJPanel", manageOrganizationJPanel);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
+    }//GEN-LAST:event_manageStoresJButtonActionPerformed
+
+    private void manageEmployeeJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageEmployeeJButtonActionPerformed
+
+        ManageEmployeeJPanel manageEmployeeJPanel = new ManageEmployeeJPanel(userProcessContainer, enterprise.getOrganizationDirectory());
+        userProcessContainer.add("manageEmployeeJPanel", manageEmployeeJPanel);
+
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
+    }//GEN-LAST:event_manageEmployeeJButtonActionPerformed
+
+    private void userJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userJButtonActionPerformed
+        // TODO add your handling code here:
+        ManageUserAccountJPanel muajp = new ManageUserAccountJPanel(userProcessContainer, enterprise);
+        userProcessContainer.add("ManageUserAccountJPanel", muajp);
+
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
+    }//GEN-LAST:event_userJButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton manageEmployeeJButton;
+    private javax.swing.JButton manageStoresJButton;
+    private javax.swing.JButton userJButton;
     // End of variables declaration//GEN-END:variables
 }

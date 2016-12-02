@@ -14,12 +14,24 @@ import java.util.ArrayList;
  */
 public class StoreChain extends Organization{
 
-    private ArrayList<Store> store;
+    private ArrayList<Store> storeChain;
     public StoreChain() {
         super(Organization.Type.StoreChain.getValue());
-        store= new ArrayList<>();
+        storeChain= new ArrayList();
     }
 
+    public ArrayList<Store> getStoreChain() {
+        return storeChain;
+    }
+
+    public void setStoreChain(ArrayList<Store> storeChain) {
+        this.storeChain = storeChain;
+    }
+
+    
+    public void addStore(Store store){
+        storeChain.add(store);
+    }
     @Override
     public ArrayList<Role> getSupportedRole() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

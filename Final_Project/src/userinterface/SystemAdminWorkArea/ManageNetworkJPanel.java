@@ -6,7 +6,13 @@
 package userinterface.SystemAdminWorkArea;
 
 import Business.EcoSystem;
+import Business.Enterprise.CompostingCenterEnterprise;
+import Business.Enterprise.Enterprise;
+import Business.Enterprise.InspectionCenterEnterprise;
+import Business.Enterprise.MainCenterEnterprise;
+import Business.Enterprise.TransportAgencyEnterprise;
 import Business.Network.Network;
+import Business.Organization.Organization;
 import java.awt.CardLayout;
 import java.awt.Component;
 import javax.swing.JPanel;
@@ -141,6 +147,34 @@ public class ManageNetworkJPanel extends javax.swing.JPanel {
 
         Network network = system.createAndAddNetwork();
         network.setName(name);
+        network.getEnterpriseDirectory().createAndAddEnterprise("Main Center",Enterprise.EnterpriseType.MainCenter);
+        network.getEnterpriseDirectory().createAndAddEnterprise("Inspection Center",Enterprise.EnterpriseType.InspectionCenter);
+        network.getEnterpriseDirectory().createAndAddEnterprise("Composting Center",Enterprise.EnterpriseType.CompostingCenter);
+        network.getEnterpriseDirectory().createAndAddEnterprise("Transport Agency",Enterprise.EnterpriseType.TransportAgency);
+        
+        for(Enterprise enterprise: network.getEnterpriseDirectory().getEnterpriseList())  
+        {
+            if(enterprise instanceof MainCenterEnterprise)
+            {
+               enterprise.getOrganizationDirectory().createOrganization(Organization.Type.StoreChain);
+               enterprise.getOrganizationDirectory().createOrganization(Organization.Type.Donor);
+               enterprise.getOrganizationDirectory().createOrganization(Organization.Type.MainOffice);
+               enterprise.getOrganizationDirectory().createOrganization(Organization.Type.Inventory);
+            }
+            else if(enterprise instanceof InspectionCenterEnterprise)
+            {
+               enterprise.getOrganizationDirectory().createOrganization(Organization.Type.Lab);
+            } 
+            else if(enterprise instanceof TransportAgencyEnterprise)
+            {
+               enterprise.getOrganizationDirectory().createOrganization(Organization.Type.Transport);
+            } 
+            else if(enterprise instanceof CompostingCenterEnterprise)
+            {
+               enterprise.getOrganizationDirectory().createOrganization(Organization.Type.Composting);
+            } 
+        }    
+      //  MainCenterEnterprise mainCenterEnterprise=
 
         populateNetworkTable();
     }//GEN-LAST:event_submitJButtonActionPerformed
