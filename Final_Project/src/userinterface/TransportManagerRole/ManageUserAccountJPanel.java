@@ -10,8 +10,10 @@ import Business.Employee.Employee;
 import Business.Enterprise.Enterprise;
 import Business.Organization.Organization;
 import Business.Organization.Transport;
+import Business.Role.DriverRole;
 import Business.Role.Role;
 import Business.UserAccount.UserAccount;
+import java.awt.CardLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -50,7 +52,7 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
     public void populateRoleComboBox() {
         comboBoxRole.removeAllItems();
         for(Role role: organization.getSupportedRole()) {
-            if(role.getClass().getName() == "Driver") { 
+            if(role instanceof DriverRole) {
                 comboBoxRole.addItem(role);
             }
         }
@@ -118,6 +120,11 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
         jLabel4.setText("Password:");
 
         btnBack.setText("Back");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
 
         btnCreate.setText("Create");
         btnCreate.addActionListener(new java.awt.event.ActionListener() {
@@ -133,7 +140,6 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
@@ -141,11 +147,12 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
                             .addComponent(jLabel3)
                             .addComponent(jLabel4))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(comboBoxDriver, 0, 97, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(txtUserName)
-                            .addComponent(txtPassword)
-                            .addComponent(comboBoxRole, 0, 97, Short.MAX_VALUE)))
+                            .addComponent(comboBoxDriver, javax.swing.GroupLayout.Alignment.LEADING, 0, 315, Short.MAX_VALUE)
+                            .addComponent(comboBoxRole, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtPassword)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnBack)
                         .addGap(18, 18, 18)
@@ -198,6 +205,13 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
         txtUserName.setText("");
         txtPassword.setText("");
     }//GEN-LAST:event_btnCreateActionPerformed
+
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        // TODO add your handling code here:
+        userProcessContainer.remove(this);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.previous(userProcessContainer);
+    }//GEN-LAST:event_btnBackActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

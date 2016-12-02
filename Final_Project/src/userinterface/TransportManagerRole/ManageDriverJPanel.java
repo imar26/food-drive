@@ -9,6 +9,9 @@ import Business.EcoSystem;
 import Business.Employee.Employee;
 import Business.Enterprise.Enterprise;
 import Business.Organization.Transport;
+import Business.Role.DriverRole;
+import Business.Role.Role;
+import Business.Role.TransportManagerRole;
 import Business.UserAccount.UserAccount;
 import javax.swing.JPanel;
 import java.awt.CardLayout;
@@ -40,12 +43,24 @@ public class ManageDriverJPanel extends javax.swing.JPanel {
         DefaultTableModel model = (DefaultTableModel) tblDriver.getModel();
         model.setRowCount(0);
         
-        for(Employee employee: organization.getEmployeeDirectory().getEmployeeList()) {
-            Object[] row = new Object[2];
-            row[0] = employee.getId();
-            row[1] = employee.getName();
-            model.addRow(row);
-        }
+        
+            for(UserAccount ua: organization.getUserAccountDirectory().getUserAccountList()) {  
+             // DriverRole d=new DriverRole();
+                if (ua.getRole() instanceof DriverRole) {
+//                    Object[] row = new Object[2];
+//                    row[0] = employee.getId();
+//                    row[1] = employee.getName();
+//                    model.addRow(row);
+                    for(Employee employee: organization.getEmployeeDirectory().getEmployeeList()) {
+                        Object[] row = new Object[2];
+                        row[0] = employee.getName();
+                        row[1] = ua.getRole();
+                        model.addRow(row);
+                    }
+                }
+            }
+        
+        
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -104,16 +119,19 @@ public class ManageDriverJPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnBack)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnCreate)))
-                .addContainerGap(138, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnBack)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnCreate)))
+                        .addGap(0, 418, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
