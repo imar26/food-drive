@@ -155,6 +155,7 @@ public class DonorWorkAreaJPanel extends javax.swing.JPanel {
                         }
                     }
                     if (org!=null){
+                        System.out.println("Org"+org.getName());
                         System.out.println("User Account"+userAccount.getUsername());
                         org.getWorkQueue().getWorkRequestList().add(request);
                         System.out.println("Orga"+org.getWorkQueue().getWorkRequestList());
