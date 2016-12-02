@@ -5,9 +5,11 @@
  */
 package userinterface.TransportManagerRole;
 
+import Business.EcoSystem;
 import Business.Enterprise.Enterprise;
 import Business.Organization.Transport;
 import Business.UserAccount.UserAccount;
+import java.awt.CardLayout;
 import javax.swing.JPanel;
 
 /**
@@ -23,12 +25,15 @@ public class TransportManagerWorkAreaJPanel extends javax.swing.JPanel {
     private UserAccount account;
     private Transport organization;
     private Enterprise enterprise;
-    public TransportManagerWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, Transport organization, Enterprise enterprise) {
+    private EcoSystem business;
+   
+    public TransportManagerWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, Transport organization, Enterprise enterprise, EcoSystem business) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.account = account;
         this.organization = organization;
         this.enterprise = enterprise;
+        this.business = business;
     }
 
     /**
@@ -57,8 +62,18 @@ public class TransportManagerWorkAreaJPanel extends javax.swing.JPanel {
         });
 
         btnUserAccount.setText("Manage User Account");
+        btnUserAccount.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUserAccountActionPerformed(evt);
+            }
+        });
 
         btnWorkQueue.setText("Manage Work Queue");
+        btnWorkQueue.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnWorkQueueActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -112,8 +127,28 @@ public class TransportManagerWorkAreaJPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnDriverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDriverActionPerformed
-        // TODO add your handling code here:
+        // TODO add your handling code here: 
+        ManageDriverJPanel mdjp = new ManageDriverJPanel(userProcessContainer, account, organization, enterprise, business);
+        userProcessContainer.add("ManageDriverJPanel", mdjp);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
     }//GEN-LAST:event_btnDriverActionPerformed
+
+    private void btnUserAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUserAccountActionPerformed
+        // TODO add your handling code here:
+        ManageUserAccountJPanel muajp = new ManageUserAccountJPanel(userProcessContainer, account, organization, enterprise, business);
+        userProcessContainer.add("ManageUserAccountJPanel", muajp);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
+    }//GEN-LAST:event_btnUserAccountActionPerformed
+
+    private void btnWorkQueueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnWorkQueueActionPerformed
+        // TODO add your handling code here:
+        ManageWorkQueueJPanel mwqjp = new ManageWorkQueueJPanel(userProcessContainer, account, organization, enterprise, business);
+        userProcessContainer.add("ManageWorkQueueJPanel", mwqjp);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
+    }//GEN-LAST:event_btnWorkQueueActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

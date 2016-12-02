@@ -21,7 +21,7 @@ public class DriverRole extends Role {
 
     @Override
     public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, EcoSystem business) {
-        return new ManageDriverJPanel(userProcessContainer, account, (Transport)organization, enterprise);
+        return new ManageDriverJPanel(userProcessContainer, account, (Transport)organization, enterprise, business);
     }
     
 }

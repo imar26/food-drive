@@ -15,6 +15,7 @@ import Business.Organization.Organization;
 import Business.Organization.Transport;
 import Business.UserAccount.UserAccount;
 import Business.WorkQueue.MainOfficeWorkRequest;
+import Business.WorkQueue.TransportWorkRequest;
 import java.awt.CardLayout;
 import java.awt.Component;
 import javax.swing.JPanel;
@@ -132,8 +133,9 @@ public class RequestWorkJPanel extends javax.swing.JPanel {
     private void btnRequestWorkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRequestWorkActionPerformed
         // TODO add your handling code here:
         
-        MainOfficeWorkRequest request=new MainOfficeWorkRequest();
+        TransportWorkRequest request=new TransportWorkRequest();
         request.setSender(userAccount);
+        request.setMessage(txtMessage.getText());
         request.setQuantity(Integer.valueOf(txtQuantity.getText()));
         request.setLocation(txtLocation.getText());
         request.setStatus("Sent");

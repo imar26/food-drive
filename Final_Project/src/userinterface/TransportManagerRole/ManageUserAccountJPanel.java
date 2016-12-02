@@ -5,17 +5,68 @@
  */
 package userinterface.TransportManagerRole;
 
+import Business.EcoSystem;
+import Business.Employee.Employee;
+import Business.Enterprise.Enterprise;
+import Business.Organization.Organization;
+import Business.Organization.Transport;
+import Business.Role.Role;
+import Business.UserAccount.UserAccount;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Aadesh Randeria
  */
 public class ManageUserAccountJPanel extends javax.swing.JPanel {
-
+    private JPanel userProcessContainer;
+    private Transport organization;
+    private Enterprise enterprise;
+    private UserAccount userAccount;
+    private EcoSystem business;
     /**
      * Creates new form ManageUserAccountJPanel
      */
-    public ManageUserAccountJPanel() {
+    public ManageUserAccountJPanel(JPanel userProcessContainer, UserAccount userAccount, Transport organization, Enterprise enterprise, EcoSystem business) {
         initComponents();
+        this.userProcessContainer = userProcessContainer;
+        this.organization = organization;
+        this.enterprise = enterprise;
+        this.userAccount = userAccount;
+        this.business = business;
+        
+        populateDriverComboBox();     
+        populateRoleComboBox();
+    }
+    
+    public void populateDriverComboBox() {
+        comboBoxDriver.removeAllItems();
+        for(Employee employee: organization.getEmployeeDirectory().getEmployeeList()) {
+            comboBoxDriver.addItem(employee);
+        }
+    }
+    public void populateRoleComboBox() {
+        comboBoxRole.removeAllItems();
+        for(Role role: organization.getSupportedRole()) {
+            if(role.getClass().getName() == "Driver") { 
+                comboBoxRole.addItem(role);
+            }
+        }
+    }
+    public void populateData() {
+        DefaultTableModel model = (DefaultTableModel) tblManageUserAccount.getModel();
+
+        model.setRowCount(0);
+
+        
+            for (UserAccount ua : organization.getUserAccountDirectory().getUserAccountList()) {
+                Object row[] = new Object[2];
+                row[0] = ua;
+                row[1] = ua.getRole();
+                ((DefaultTableModel) tblManageUserAccount.getModel()).addRow(row);
+            }
     }
 
     /**
@@ -30,8 +81,7 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblManageUserAccount = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
-        comboBoxDriver = new javax.swing.JComboBox<>();
-        txtRole = new javax.swing.JTextField();
+        comboBoxDriver = new javax.swing.JComboBox();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         txtUserName = new javax.swing.JTextField();
@@ -39,6 +89,7 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         btnBack = new javax.swing.JButton();
         btnCreate = new javax.swing.JButton();
+        comboBoxRole = new javax.swing.JComboBox();
 
         tblManageUserAccount.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -60,8 +111,6 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
 
         jLabel1.setText("Driver:");
 
-        comboBoxDriver.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         jLabel2.setText("Role:");
 
         jLabel3.setText("User Name:");
@@ -71,6 +120,11 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
         btnBack.setText("Back");
 
         btnCreate.setText("Create");
+        btnCreate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCreateActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -89,9 +143,9 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(comboBoxDriver, 0, 97, Short.MAX_VALUE)
-                            .addComponent(txtRole)
                             .addComponent(txtUserName)
-                            .addComponent(txtPassword)))
+                            .addComponent(txtPassword)
+                            .addComponent(comboBoxRole, 0, 97, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnBack)
                         .addGap(18, 18, 18)
@@ -110,7 +164,7 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(txtRole, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(comboBoxRole, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
@@ -127,11 +181,30 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
+        // TODO add your handling code here:
+        String userName = txtUserName.getText();
+        char[] value = txtPassword.getPassword();
+        String password = new String(value);
+        
+        Employee employee = (Employee) comboBoxDriver.getSelectedItem();
+        Role role = (Role) comboBoxRole.getSelectedItem();
+
+        organization.getUserAccountDirectory().createUserAccount(userName, password, employee, role);
+
+        populateData();
+
+        JOptionPane.showMessageDialog(null, "User Account added successfully.");
+        txtUserName.setText("");
+        txtPassword.setText("");
+    }//GEN-LAST:event_btnCreateActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnCreate;
-    private javax.swing.JComboBox<String> comboBoxDriver;
+    private javax.swing.JComboBox comboBoxDriver;
+    private javax.swing.JComboBox comboBoxRole;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -139,7 +212,6 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblManageUserAccount;
     private javax.swing.JPasswordField txtPassword;
-    private javax.swing.JTextField txtRole;
     private javax.swing.JTextField txtUserName;
     // End of variables declaration//GEN-END:variables
 }

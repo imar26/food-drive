@@ -5,11 +5,14 @@
  */
 package userinterface.TransportManagerRole;
 
+import Business.EcoSystem;
+import Business.Employee.Employee;
 import Business.Enterprise.Enterprise;
 import Business.Organization.Transport;
 import Business.UserAccount.UserAccount;
 import javax.swing.JPanel;
 import java.awt.CardLayout;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -24,14 +27,26 @@ public class ManageDriverJPanel extends javax.swing.JPanel {
     private Transport organization;
     private Enterprise enterprise;
     private UserAccount userAccount;
-    public ManageDriverJPanel(JPanel userProcessContainer, UserAccount userAccount, Transport organization, Enterprise enterprise) {
+    private EcoSystem business;
+    public ManageDriverJPanel(JPanel userProcessContainer, UserAccount userAccount, Transport organization, Enterprise enterprise, EcoSystem business) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.userAccount = userAccount;
         this.organization = organization;
         this.enterprise = enterprise;
+        this.business = business;
     }
-
+    public void populateTable() {
+        DefaultTableModel model = (DefaultTableModel) tblDriver.getModel();
+        model.setRowCount(0);
+        
+        for(Employee employee: organization.getEmployeeDirectory().getEmployeeList()) {
+            Object[] row = new Object[2];
+            row[0] = employee.getId();
+            row[1] = employee.getName();
+            model.addRow(row);
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -76,6 +91,11 @@ public class ManageDriverJPanel extends javax.swing.JPanel {
         });
 
         btnCreate.setText("Create Driver");
+        btnCreate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCreateActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -104,11 +124,11 @@ public class ManageDriverJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(36, 36, 36)
+                .addGap(58, 58, 58)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnBack)
                     .addComponent(btnCreate))
-                .addContainerGap(262, Short.MAX_VALUE))
+                .addContainerGap(240, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -118,6 +138,14 @@ public class ManageDriverJPanel extends javax.swing.JPanel {
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.previous(userProcessContainer);
     }//GEN-LAST:event_btnBackActionPerformed
+
+    private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
+        // TODO add your handling code here:
+        String name = txtName.getText();
+        organization.getEmployeeDirectory().createEmployee(name);
+        
+        populateTable();
+    }//GEN-LAST:event_btnCreateActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -78,11 +78,11 @@ public class ManageWorkQueueJPanel extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Message", "Receiver", "Status", "Result"
+                "Message", "Receiver", "Status", "Quantity", "Location", "Result"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -90,6 +90,9 @@ public class ManageWorkQueueJPanel extends javax.swing.JPanel {
             }
         });
         jScrollPane1.setViewportView(tblManageWorkQueue);
+        if (tblManageWorkQueue.getColumnModel().getColumnCount() > 0) {
+            tblManageWorkQueue.getColumnModel().getColumn(4).setResizable(false);
+        }
 
         btnRefresh.setText("Refresh");
         btnRefresh.addActionListener(new java.awt.event.ActionListener() {
@@ -101,6 +104,11 @@ public class ManageWorkQueueJPanel extends javax.swing.JPanel {
         btnBack.setText("Back");
 
         btnProcess.setText("Process");
+        btnProcess.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnProcessActionPerformed(evt);
+            }
+        });
 
         btnRequest.setText("Request Test");
 
@@ -143,6 +151,10 @@ public class ManageWorkQueueJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         populateRequestTable();
     }//GEN-LAST:event_btnRefreshActionPerformed
+
+    private void btnProcessActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProcessActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnProcessActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

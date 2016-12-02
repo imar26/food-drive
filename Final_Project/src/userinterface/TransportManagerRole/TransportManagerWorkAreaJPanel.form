@@ -93,11 +93,17 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Manage User Account"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnUserAccountActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnWorkQueue">
           <Properties>
             <Property name="text" type="java.lang.String" value="Manage Work Queue"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnWorkQueueActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
