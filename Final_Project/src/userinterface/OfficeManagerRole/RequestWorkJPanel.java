@@ -15,6 +15,8 @@ import Business.Organization.Organization;
 import Business.Organization.Transport;
 import Business.UserAccount.UserAccount;
 import Business.WorkQueue.MainOfficeWorkRequest;
+import java.awt.CardLayout;
+import java.awt.Component;
 import javax.swing.JPanel;
 
 /**
@@ -49,7 +51,7 @@ public class RequestWorkJPanel extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         txtMessage = new javax.swing.JTextField();
         btnRequestWork = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnBack = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         txtQuantity = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
@@ -64,7 +66,12 @@ public class RequestWorkJPanel extends javax.swing.JPanel {
             }
         });
 
-        jButton2.setText("<< Back");
+        btnBack.setText("<< Back");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Quantity:");
 
@@ -96,7 +103,7 @@ public class RequestWorkJPanel extends javax.swing.JPanel {
                                     .addComponent(jLabel1)
                                     .addGap(18, 18, 18)
                                     .addComponent(txtMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(jButton2))
+                            .addComponent(btnBack))
                         .addContainerGap(156, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
@@ -117,7 +124,7 @@ public class RequestWorkJPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
                 .addComponent(btnRequestWork)
                 .addGap(24, 24, 24)
-                .addComponent(jButton2)
+                .addComponent(btnBack)
                 .addGap(42, 42, 42))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -164,10 +171,21 @@ public class RequestWorkJPanel extends javax.swing.JPanel {
         
     }//GEN-LAST:event_btnRequestWorkActionPerformed
 
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        // TODO add your handling code here:
+        userProcessContainer.remove(this);
+        Component[] componentArray = userProcessContainer.getComponents();
+        Component component = componentArray[componentArray.length - 1];
+        OfficeManagerWorkAreaJPanel omwajp = (OfficeManagerWorkAreaJPanel) component;
+        omwajp.populateRequestTable();
+        CardLayout layout = (CardLayout)userProcessContainer.getLayout();
+        layout.previous(userProcessContainer);
+    }//GEN-LAST:event_btnBackActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBack;
     private javax.swing.JButton btnRequestWork;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
