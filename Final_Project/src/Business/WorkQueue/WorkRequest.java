@@ -72,5 +72,8 @@ public abstract class WorkRequest {
     public void setResolveDate(Date resolveDate) {
         this.resolveDate = resolveDate;
     }
+    public String toString(){
+        return this.message;
+    }
 }
 

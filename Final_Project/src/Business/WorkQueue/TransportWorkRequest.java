@@ -9,7 +9,7 @@ package Business.WorkQueue;
  *
  * @author HP
  */
-public class MainOfficeWorkRequest extends WorkRequest{
+public class TransportWorkRequest extends WorkRequest{
     private String testResult;
     private int quantity;
     private String location;
@@ -38,6 +38,5 @@ public class MainOfficeWorkRequest extends WorkRequest{
     public void setLocation(String location) {
         this.location = location;
     }
-    
     
 }

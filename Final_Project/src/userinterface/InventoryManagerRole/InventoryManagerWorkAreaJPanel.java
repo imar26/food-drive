@@ -145,7 +145,7 @@ public class InventoryManagerWorkAreaJPanel extends javax.swing.JPanel {
 
             request.setStatus("Processing");
 
-            userinterface.OfficeManagerRole.ProcessWorkRequestJPanel processWorkRequestJPanel = new userinterface.OfficeManagerRole.ProcessWorkRequestJPanel(userProcessContainer, request);
+            userinterface.OfficeManagerRole.ProcessWorkRequestOfficeJPanel processWorkRequestJPanel = new userinterface.OfficeManagerRole.ProcessWorkRequestOfficeJPanel(userProcessContainer, request);
             userProcessContainer.add("processWorkRequestJPanel", processWorkRequestJPanel);
             CardLayout layout = (CardLayout) userProcessContainer.getLayout();
             layout.next(userProcessContainer);

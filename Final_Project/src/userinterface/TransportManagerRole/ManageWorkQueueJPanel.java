@@ -5,19 +5,58 @@
  */
 package userinterface.TransportManagerRole;
 
+import Business.EcoSystem;
+import Business.Enterprise.Enterprise;
+import Business.Organization.DonorOrganization;
+import Business.Organization.Transport;
+import Business.UserAccount.UserAccount;
+import Business.WorkQueue.MainOfficeWorkRequest;
+import Business.WorkQueue.TransportWorkRequest;
+import Business.WorkQueue.WorkRequest;
+import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Aadesh Randeria
  */
 public class ManageWorkQueueJPanel extends javax.swing.JPanel {
-
+    private JPanel userProcessContainer;
+    private Transport organization;
+    private Enterprise enterprise;
+    private UserAccount userAccount;
+    private EcoSystem business;
     /**
      * Creates new form ManageWorkQueueJPanel
      */
-    public ManageWorkQueueJPanel() {
+    public ManageWorkQueueJPanel(JPanel userProcessContainer, UserAccount account, Transport organization, Enterprise enterprise, EcoSystem business) {
         initComponents();
+        this.userProcessContainer = userProcessContainer;
+        this.organization = organization;
+        this.enterprise = enterprise;
+        this.userAccount = account;
+        this.business= business;
+        populateRequestTable();
     }
-
+    public void populateRequestTable(){
+        DefaultTableModel model = (DefaultTableModel) tblManageWorkQueue.getModel();
+        
+        model.setRowCount(0);
+        for (WorkRequest request : organization.getWorkQueue().getWorkRequestList()){
+            Object[] row = new Object[6];
+            row[0] = request;
+            row[1] = request.getReceiver();
+            row[2] = request.getStatus();
+            int quantity = ((TransportWorkRequest) request).getQuantity();
+            row[3] = quantity;
+            String location = ((TransportWorkRequest) request).getLocation();
+            row[4]=location;
+            String result = ((TransportWorkRequest) request).getTestResult();
+            row[5] = result == null ? "Waiting" : result;
+            
+            model.addRow(row);
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -53,6 +92,11 @@ public class ManageWorkQueueJPanel extends javax.swing.JPanel {
         jScrollPane1.setViewportView(tblManageWorkQueue);
 
         btnRefresh.setText("Refresh");
+        btnRefresh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRefreshActionPerformed(evt);
+            }
+        });
 
         btnBack.setText("Back");
 
@@ -94,6 +138,11 @@ public class ManageWorkQueueJPanel extends javax.swing.JPanel {
                 .addContainerGap(343, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
+        // TODO add your handling code here:
+        populateRequestTable();
+    }//GEN-LAST:event_btnRefreshActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

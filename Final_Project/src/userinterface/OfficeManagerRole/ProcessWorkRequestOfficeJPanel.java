@@ -15,13 +15,13 @@ import javax.swing.JPanel;
  *
  * @author HP
  */
-public class ProcessWorkRequestJPanel extends javax.swing.JPanel {
+public class ProcessWorkRequestOfficeJPanel extends javax.swing.JPanel {
     JPanel userProcessContainer;
     MainOfficeWorkRequest request;
     /**
      * Creates new form ProcessWorkRequestJPanel
      */
-    public ProcessWorkRequestJPanel(JPanel userProcessContainer, MainOfficeWorkRequest request) {
+    public ProcessWorkRequestOfficeJPanel(JPanel userProcessContainer, MainOfficeWorkRequest request) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.request = request;

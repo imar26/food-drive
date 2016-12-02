@@ -5,6 +5,7 @@
  */
 package userinterface.OfficeManagerRole;
 
+import Business.EcoSystem;
 import Business.Enterprise.Enterprise;
 import Business.Organization.MainOffice;
 import Business.UserAccount.UserAccount;
@@ -24,15 +25,17 @@ public class OfficeManagerWorkAreaJPanel extends javax.swing.JPanel {
     private MainOffice organization;
     private Enterprise enterprise;
     private UserAccount userAccount;
+    private EcoSystem business;
     /**
      * Creates new form OfficeManagerWorkAreaJPanel
      */
-    public OfficeManagerWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, MainOffice organization, Enterprise enterprise) {
+    public OfficeManagerWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, MainOffice organization, Enterprise enterprise, EcoSystem business) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.organization = organization;
         this.enterprise = enterprise;
         this.userAccount = account;
+        this.business=business;
         populateRequestTable();
     }
      public void populateRequestTable(){
@@ -41,7 +44,7 @@ public class OfficeManagerWorkAreaJPanel extends javax.swing.JPanel {
         model.setRowCount(0);
         for (WorkRequest request : organization.getWorkQueue().getWorkRequestList()){
             Object[] row = new Object[6];
-            row[0] = request.getMessage();
+            row[0] = request;
             row[1] = request.getReceiver();
             row[2] = request.getStatus();
             int quantity = ((MainOfficeWorkRequest) request).getQuantity();
@@ -153,19 +156,20 @@ public class OfficeManagerWorkAreaJPanel extends javax.swing.JPanel {
     private void btnProcessActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProcessActionPerformed
         // TODO add your handling code here:
         int selectedRow = mainOfficeJTable.getSelectedRow();
-
+        
+        
         if (selectedRow >= 0) {
             MainOfficeWorkRequest request = (MainOfficeWorkRequest) mainOfficeJTable.getValueAt(selectedRow, 0);
 
             request.setStatus("Processing");
 
-            ProcessWorkRequestJPanel processWorkRequestJPanel = new ProcessWorkRequestJPanel(userProcessContainer, request);
-            userProcessContainer.add("processWorkRequestJPanel", processWorkRequestJPanel);
+            ProcessWorkRequestOfficeJPanel processWorkRequestJPanel = new ProcessWorkRequestOfficeJPanel(userProcessContainer, request);
+            userProcessContainer.add("pwrjp", processWorkRequestJPanel);
             CardLayout layout = (CardLayout) userProcessContainer.getLayout();
             layout.next(userProcessContainer);
 
         } else {
-            JOptionPane.showMessageDialog(null, "Please select a request message to process.");
+           JOptionPane.showMessageDialog(null, "Please select a request message to process."); 
             return;
         }
     }//GEN-LAST:event_btnProcessActionPerformed
@@ -178,7 +182,7 @@ public class OfficeManagerWorkAreaJPanel extends javax.swing.JPanel {
     private void btnRequestWorkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRequestWorkActionPerformed
         // TODO add your handling code here:
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
-        userProcessContainer.add("RequestWorkJPanel", new RequestWorkJPanel(userProcessContainer, userAccount, enterprise));
+        userProcessContainer.add("RequestWorkJPanel", new RequestWorkJPanel(userProcessContainer, userAccount, enterprise, business));
         layout.next(userProcessContainer);
     }//GEN-LAST:event_btnRequestWorkActionPerformed
 
