@@ -8,6 +8,7 @@ package userinterface;
 //import Business.ConfigureASystem;
 //import Business.DB4OUtil.DB4OUtil;
 import Business.ConfigureASystem;
+import Business.DB4OUtil.DB4OUtil;
 import Business.EcoSystem;
 import Business.Enterprise.Enterprise;
 import Business.Network.Network;
@@ -27,12 +28,12 @@ public class MainJFrame extends javax.swing.JFrame {
      * Creates new form MainJFrame
      */
     private EcoSystem system;
- //   private DB4OUtil dB4OUtil = DB4OUtil.getInstance();
+    private DB4OUtil dB4OUtil = DB4OUtil.getInstance();
 
     public MainJFrame() {
         initComponents();
-        system= ConfigureASystem.configure();
-    //    system = dB4OUtil.retrieveSystem();
+     //   system= ConfigureASystem.configure();
+        system = dB4OUtil.retrieveSystem();
     }
 
     /**
