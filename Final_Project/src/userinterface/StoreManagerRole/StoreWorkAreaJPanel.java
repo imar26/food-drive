@@ -29,19 +29,18 @@ public class StoreWorkAreaJPanel extends javax.swing.JPanel {
     /**
      * Creates new form StoreWorkAreaJPanel
      */
-    public StoreWorkAreaJPanel() {
-        initComponents();
-    }
+    
 
     public StoreWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, Store organization, Enterprise enterprise, EcoSystem business) {
+        initComponents();
         this.userProcessContainer = userProcessContainer;
         this.organization = organization;
         this.enterprise = enterprise;
         this.userAccount = account;
         this.business=business;
-        txtStock.setText(Integer.toString(organization.getStock()));
+     //   txtStock.setText(Integer.toString(organization.getStock()));
         
-        populateRequestTable();
+    //    populateRequestTable();
     }
     public void populateRequestTable(){
         DefaultTableModel model = (DefaultTableModel) tblStore.getModel();
