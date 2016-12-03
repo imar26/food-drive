@@ -12,8 +12,15 @@ import Business.Organization.Organization;
 import Business.Organization.Store;
 import Business.Organization.StoreChain;
 import Business.UserAccount.UserAccount;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.TreeMap;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -35,8 +42,40 @@ public class RequestFoodJPanel extends javax.swing.JPanel {
         this.enterprise = enterprise;
         this.userAccount = account;
         this.business=business;
+        populateTable();
     }
+    public LinkedHashMap sortHashMapByValuesD(HashMap passedMap) {
+   List mapKeys = new ArrayList(passedMap.keySet());
+   List mapValues = new ArrayList(passedMap.values());
+   Collections.sort(mapValues);
+   Collections.sort(mapKeys);
+
+   LinkedHashMap sortedMap = new LinkedHashMap();
+
+   Iterator valueIt = mapValues.iterator();
+   while (valueIt.hasNext()) {
+       Object val = valueIt.next();
+       Iterator keyIt = mapKeys.iterator();
+
+       while (keyIt.hasNext()) {
+           Object key = keyIt.next();
+           String comp1 = passedMap.get(key).toString();
+           String comp2 = val.toString();
+
+           if (comp1.equals(comp2)){
+               passedMap.remove(key);
+               mapKeys.remove(key);
+               sortedMap.put((String)key, (Double)val);
+               break;
+           }
+
+       }
+
+   }
+   return sortedMap;
+}
     public void populateTable(){
+        HashMap<String, Double> map = new HashMap<String, Double>();
         if(enterprise instanceof MainCenterEnterprise){
             StoreChain org1=null;
             for(Organization org : enterprise.getOrganizationDirectory().getOrganizationList()){
@@ -51,15 +90,25 @@ public class RequestFoodJPanel extends javax.swing.JPanel {
                     int x3 = (x1-x2)*(x1-x2);
                     int y3 = (y1-y2)*(y1-y2);
                     distance = Math.sqrt(x3+y3);
-                    TreeMap t = new TreeMap();
-                    t.put(s.getName(), distance);
+                    
+                    map.put(s.getName(), distance);
                 }
             }
         }
+        LinkedHashMap lmap=new LinkedHashMap();
+        lmap=sortHashMapByValuesD(map);
+        Iterator iterator = lmap.keySet().iterator();
+        DefaultTableModel model = (DefaultTableModel) tblStores.getModel();
         
-                
-            
-          
+        model.setRowCount(0);
+        while (iterator.hasNext()) {
+            String key = iterator.next().toString();
+            String value = lmap.get(key).toString();
+            Object[] row = new Object[2];
+            row[0] = key;
+            row[1] = value;
+            model.addRow(row);
+        }        
         
     }
     /**
