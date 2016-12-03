@@ -82,6 +82,7 @@ public class RequestFoodJPanel extends javax.swing.JPanel {
                 if(org instanceof StoreChain)
                 org1=(StoreChain)org;
                 for(Store s : org1.getStoreChain()){
+                    System.out.println("store"+s);
                     int x1 = organization.getLatitude();
                     int y1 = organization.getLongitude();
                     int x2 = s.getLatitude();
@@ -90,7 +91,7 @@ public class RequestFoodJPanel extends javax.swing.JPanel {
                     int x3 = (x1-x2)*(x1-x2);
                     int y3 = (y1-y2)*(y1-y2);
                     distance = Math.sqrt(x3+y3);
-                    
+                    System.out.println("distance"+distance);
                     map.put(s.getName(), distance);
                 }
             }
@@ -104,10 +105,14 @@ public class RequestFoodJPanel extends javax.swing.JPanel {
         while (iterator.hasNext()) {
             String key = iterator.next().toString();
             String value = lmap.get(key).toString();
-            Object[] row = new Object[2];
-            row[0] = key;
-            row[1] = value;
-            model.addRow(row);
+            if(!value.equals("0.0")){
+            
+                Object[] row = new Object[2];
+                row[0] = key;
+                row[1] = Math.round(Double.parseDouble(value));
+                
+                model.addRow(row);
+            }
         }        
         
     }

@@ -122,7 +122,6 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(userJTable);
 
-        organizationJComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         organizationJComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 organizationJComboBoxActionPerformed(evt);

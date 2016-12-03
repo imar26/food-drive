@@ -12,8 +12,11 @@ import Business.Network.Network;
 import Business.Organization.DonorOrganization;
 import Business.Organization.MainOffice;
 import Business.Organization.Organization;
+import Business.Organization.Store;
+import Business.Organization.StoreChain;
 import Business.UserAccount.UserAccount;
 import Business.WorkQueue.MainOfficeWorkRequest;
+import Business.WorkQueue.StoreWorkRequest;
 import javax.swing.JPanel;
 
 /**
@@ -38,11 +41,15 @@ public class DonorWorkAreaJPanel extends javax.swing.JPanel {
         this.enterprise = enterprise;
         this.userAccount = account;
         this.business= business;
+        populateStore();
         if(userAccount.getDonor().getType().equalsIgnoreCase("Individual"))
         {
                locationTxt.setEnabled(false);
         }
-     
+        if(!userAccount.getDonor().getType().equalsIgnoreCase("Individual"))
+        {
+               storeComboBox.setEnabled(false);
+        }
     }
 
     /**
@@ -61,6 +68,9 @@ public class DonorWorkAreaJPanel extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         quantityTxt = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        storeComboBox = new javax.swing.JComboBox();
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setText("Wish to donate food? Just notify us!");
@@ -79,6 +89,17 @@ public class DonorWorkAreaJPanel extends javax.swing.JPanel {
 
         jLabel4.setText("Location:");
 
+        jLabel5.setText("Store:");
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 8)); // NOI18N
+        jLabel6.setText("(This facility is only available for individuals)");
+
+        storeComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                storeComboBoxActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -92,17 +113,23 @@ public class DonorWorkAreaJPanel extends javax.swing.JPanel {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(10, 10, 10)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel2)
-                                            .addComponent(jLabel4))
-                                        .addGap(46, 46, 46)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(quantityTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(locationTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(jLabel2)
+                                                .addComponent(jLabel4))
+                                            .addGap(46, 46, 46)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(quantityTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(locationTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(jLabel5)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(storeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(jLabel6)
                                     .addComponent(jLabel3)))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(120, 120, 120)
+                        .addGap(122, 122, 122)
                         .addComponent(donateBtn)))
                 .addContainerGap(86, Short.MAX_VALUE))
         );
@@ -121,9 +148,15 @@ public class DonorWorkAreaJPanel extends javax.swing.JPanel {
                     .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(storeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel6)
                 .addGap(18, 18, 18)
                 .addComponent(donateBtn)
-                .addContainerGap(92, Short.MAX_VALUE))
+                .addGap(51, 51, 51))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -141,34 +174,67 @@ public class DonorWorkAreaJPanel extends javax.swing.JPanel {
             System.out.println("Network"+ network.getName());
            Enterprise en=null;
             for(Enterprise enterprise : network.getEnterpriseDirectory().getEnterpriseList()){
-                System.out.println("Enterprise"+ enterprise.getName());
+            //    System.out.println("Enterprise"+ enterprise.getName());
                  if(enterprise instanceof MainCenterEnterprise){
-                     System.out.println("Yes");
+                  //   System.out.println("Yes");
                     en = enterprise;
                     Organization org = null;
                     for (Organization organization : en.getOrganizationDirectory().getOrganizationList()){
                         
                         if (organization instanceof MainOffice){
-                            System.out.println("Yes Organization");
+                   //         System.out.println("Yes Organization");
                             org = organization;
                             break;
                         }
                     }
                     if (org!=null){
-                        System.out.println("Org"+org.getName());
-                        System.out.println("User Account"+userAccount.getUsername());
+                   //     System.out.println("Org"+org.getName());
+                   //     System.out.println("User Account"+userAccount.getUsername());
                         org.getWorkQueue().getWorkRequestList().add(request);
-                        System.out.println("Orga"+org.getWorkQueue().getWorkRequestList());
+                   //     System.out.println("Orga"+org.getWorkQueue().getWorkRequestList());
                         userAccount.getWorkQueue().getWorkRequestList().add(request);
                     }
-                    else{
-                        //send it to a stall specified
-                    }
+                    
                 }
             }   
         }
         }
+        else{
+            //send work request to that particular store
+             StoreWorkRequest request=new StoreWorkRequest();
+             request.setSender(userAccount);
+             request.setQuantity(Integer.parseInt(quantityTxt.getText()));
+             request.setStatus("Dropped at Stall");
+             Store inStore=null;
+             for(Organization org: enterprise.getOrganizationDirectory().getOrganizationList())
+             {
+                if(org instanceof StoreChain)
+               {
+                  for(Store store: ((StoreChain) org).getStoreChain())
+                  {
+                    Store selectedstore=(Store)storeComboBox.getSelectedItem();
+                    if(store.getName().equals(selectedstore.getName()))
+                    {
+                      inStore=store;
+                      break;
+                    }   
+                    
+                  }    
+               } 
+             
+             }
+             if(inStore!=null)
+             {
+               inStore.getWorkQueue().getWorkRequestList().add(request);
+                   //     System.out.println("Orga"+org.getWorkQueue().getWorkRequestList());
+               userAccount.getWorkQueue().getWorkRequestList().add(request);
+             }
+        }
     }//GEN-LAST:event_donateBtnActionPerformed
+
+    private void storeComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_storeComboBoxActionPerformed
+        
+    }//GEN-LAST:event_storeComboBoxActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -177,7 +243,26 @@ public class DonorWorkAreaJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JTextField locationTxt;
     private javax.swing.JTextField quantityTxt;
+    private javax.swing.JComboBox storeComboBox;
     // End of variables declaration//GEN-END:variables
+
+    private void populateStore() {
+       
+        storeComboBox.removeAll();
+        for(Organization org: enterprise.getOrganizationDirectory().getOrganizationList())
+        {
+            if(org instanceof StoreChain)
+            {
+               for(Store store: ((StoreChain) org).getStoreChain())
+               {
+                    storeComboBox.addItem(store);
+                    
+               }    
+            }
+        }
+    }
 }
