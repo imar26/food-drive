@@ -38,9 +38,9 @@ public class StoreWorkAreaJPanel extends javax.swing.JPanel {
         this.enterprise = enterprise;
         this.userAccount = account;
         this.business=business;
-     //   txtStock.setText(Integer.toString(organization.getStock()));
+        txtStock.setText(Integer.toString(organization.getStock()));
         
-    //    populateRequestTable();
+       populateRequestTable();
     }
     public void populateRequestTable(){
         DefaultTableModel model = (DefaultTableModel) tblStore.getModel();

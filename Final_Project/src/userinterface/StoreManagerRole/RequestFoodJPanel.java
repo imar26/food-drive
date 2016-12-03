@@ -7,8 +7,12 @@ package userinterface.StoreManagerRole;
 
 import Business.EcoSystem;
 import Business.Enterprise.Enterprise;
+import Business.Enterprise.MainCenterEnterprise;
+import Business.Organization.Organization;
 import Business.Organization.Store;
+import Business.Organization.StoreChain;
 import Business.UserAccount.UserAccount;
+import java.util.TreeMap;
 import javax.swing.JPanel;
 
 /**
@@ -33,6 +37,29 @@ public class RequestFoodJPanel extends javax.swing.JPanel {
         this.business=business;
     }
     public void populateTable(){
+        if(enterprise instanceof MainCenterEnterprise){
+            StoreChain org1=null;
+            for(Organization org : enterprise.getOrganizationDirectory().getOrganizationList()){
+                if(org instanceof StoreChain)
+                org1=(StoreChain)org;
+                for(Store s : org1.getStoreChain()){
+                    int x1 = organization.getLatitude();
+                    int y1 = organization.getLongitude();
+                    int x2 = s.getLatitude();
+                    int y2 = s.getLongitude();
+                    double distance= 0;
+                    int x3 = (x1-x2)*(x1-x2);
+                    int y3 = (y1-y2)*(y1-y2);
+                    distance = Math.sqrt(x3+y3);
+                    TreeMap t = new TreeMap();
+                    t.put(s.getName(), distance);
+                }
+            }
+        }
+        
+                
+            
+          
         
     }
     /**
