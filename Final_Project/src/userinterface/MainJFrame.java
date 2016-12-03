@@ -13,6 +13,8 @@ import Business.EcoSystem;
 import Business.Enterprise.Enterprise;
 import Business.Network.Network;
 import Business.Organization.Organization;
+import Business.Organization.Store;
+import Business.Organization.StoreChain;
 import Business.UserAccount.UserAccount;
 import java.awt.CardLayout;
 import javax.swing.JOptionPane;
@@ -166,17 +168,41 @@ public class MainJFrame extends javax.swing.JFrame {
         Organization inOrganization=null;
         
         if(userAccount==null){
-        for(Network network:system.getNetworkList()){
+            outer: for(Network network:system.getNetworkList()){
         for(Enterprise enterprise:network.getEnterpriseDirectory().getEnterpriseList()){
             userAccount=enterprise.getUserAccountDirectory().authenticateUser(userName, password);
             if(userAccount==null){
              for(Organization organization:enterprise.getOrganizationDirectory().getOrganizationList()){
+                 if(organization instanceof StoreChain){
+                      userAccount=organization.getUserAccountDirectory().authenticateUser(userName, password);
+                      System.out.println("in storechain");
+                      if(userAccount!=null){
+                         inEnterprise=enterprise;
+                         inOrganization=organization;
+                         break;
+                      }
+                      for(Store store: ((StoreChain) organization).getStoreChain()){
+                         System.out.println("in store"); 
+                      userAccount=store.getUserAccountDirectory().authenticateUser(userName, password);
+                      System.out.println("in store after useraccount");
+                       if(userAccount!=null){
+                           System.out.println("in store useraccount!=null");
+                              inEnterprise=enterprise;
+                               System.out.println("inEnterprise"+inEnterprise);
+                              inOrganization=store;
+                              System.out.println("inorg"+inOrganization);
+                              break outer;
+                    }
+                  }
+                 }
+                 else{
              userAccount=organization.getUserAccountDirectory().authenticateUser(userName, password);
              if(userAccount!=null){
              inEnterprise=enterprise;
              inOrganization=organization;
              break;
              }
+                 }
             }
             }
             else{

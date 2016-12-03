@@ -5,7 +5,9 @@
  */
 package Business.Organization;
 
+import Business.Role.OfficeManagerRole;
 import Business.Role.Role;
+import Business.Role.StoreChainManagerRole;
 import java.util.ArrayList;
 
 /**
@@ -34,7 +36,9 @@ public class StoreChain extends Organization{
     }
     @Override
     public ArrayList<Role> getSupportedRole() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+         ArrayList<Role> roles = new ArrayList();
+        roles.add(new StoreChainManagerRole());
+        return roles;
     }
     
 }
