@@ -141,6 +141,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Request Test"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRequestActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

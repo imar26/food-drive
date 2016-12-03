@@ -13,7 +13,9 @@ import Business.UserAccount.UserAccount;
 import Business.WorkQueue.MainOfficeWorkRequest;
 import Business.WorkQueue.TransportWorkRequest;
 import Business.WorkQueue.WorkRequest;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import java.awt.CardLayout;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -111,6 +113,11 @@ public class ManageWorkQueueJPanel extends javax.swing.JPanel {
         });
 
         btnRequest.setText("Request Test");
+        btnRequest.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRequestActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -155,6 +162,25 @@ public class ManageWorkQueueJPanel extends javax.swing.JPanel {
     private void btnProcessActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProcessActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnProcessActionPerformed
+
+    private void btnRequestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRequestActionPerformed
+        // TODO add your handling code here:
+        int selectedRow = tblManageWorkQueue.getSelectedRow();       
+        
+        if (selectedRow >= 0) {
+            TransportWorkRequest request = (TransportWorkRequest) tblManageWorkQueue.getValueAt(selectedRow, 0);
+            request.setStatus("Processing");
+
+            RequestTestJPanel rtjp = new RequestTestJPanel(userProcessContainer, organization, request, userAccount, business);
+            userProcessContainer.add("RequestTestJPanel", rtjp);
+            CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+            layout.next(userProcessContainer);
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Please select a message to request."); 
+            return;
+        }
+    }//GEN-LAST:event_btnRequestActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

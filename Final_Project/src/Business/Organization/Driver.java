@@ -5,7 +5,7 @@
  */
 package Business.Organization;
 
-import Business.Role.LabManagerRole;
+import Business.Role.DriverRole;
 import Business.Role.Role;
 import java.util.ArrayList;
 
@@ -13,16 +13,16 @@ import java.util.ArrayList;
  *
  * @author Aadesh Randeria
  */
-public class Lab extends Organization {
+public class Driver extends Organization {
 
-    public Lab() {
-        super(Organization.Type.Lab.getValue());
+    public Driver() {
+        super(Organization.Type.Driver.getValue());
     }
 
     @Override
     public ArrayList<Role> getSupportedRole() {
         ArrayList<Role> roles = new ArrayList();
-        roles.add(new LabManagerRole());   
+        roles.add(new DriverRole());   
         return roles;
     }
     
