@@ -7,10 +7,12 @@ package Business.Role;
 
 import Business.EcoSystem;
 import Business.Enterprise.Enterprise;
+import Business.Organization.Driver;
 import Business.Organization.Organization;
 import Business.Organization.Transport;
 import Business.UserAccount.UserAccount;
 import javax.swing.JPanel;
+import userinterface.DriverRole.DriverWorkAreaJPanel;
 import userinterface.TransportManagerRole.ManageDriverJPanel;
 
 /**
@@ -21,7 +23,7 @@ public class DriverRole extends Role {
 
     @Override
     public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, EcoSystem business) {
-        return new ManageDriverJPanel(userProcessContainer, account, (Transport)organization, enterprise, business);
+        return new DriverWorkAreaJPanel(userProcessContainer, account, (Driver)organization, enterprise, business);
     }
     
 }

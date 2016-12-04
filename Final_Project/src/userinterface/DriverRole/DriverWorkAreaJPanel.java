@@ -5,6 +5,12 @@
  */
 package userinterface.DriverRole;
 
+import Business.EcoSystem;
+import Business.Enterprise.Enterprise;
+import Business.Organization.Driver;
+import Business.UserAccount.UserAccount;
+import javax.swing.JPanel;
+
 /**
  *
  * @author Aadesh Randeria
@@ -14,8 +20,18 @@ public class DriverWorkAreaJPanel extends javax.swing.JPanel {
     /**
      * Creates new form DriverWorkAreaJPanel
      */
-    public DriverWorkAreaJPanel() {
+    private JPanel userProcessContainer;
+    private UserAccount account;
+    private Driver driver;
+    private Enterprise enterprise;
+    private EcoSystem business;
+    public DriverWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, Driver driver, Enterprise enterprise, EcoSystem business) {
         initComponents();
+        this.userProcessContainer = userProcessContainer;
+        this.account = account;
+        this.driver = driver;
+        this.enterprise = enterprise;
+        this.business = business;
     }
 
     /**

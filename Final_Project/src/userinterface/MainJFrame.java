@@ -12,9 +12,11 @@ import Business.DB4OUtil.DB4OUtil;
 import Business.EcoSystem;
 import Business.Enterprise.Enterprise;
 import Business.Network.Network;
+import Business.Organization.Driver;
 import Business.Organization.Organization;
 import Business.Organization.Store;
 import Business.Organization.StoreChain;
+import Business.Organization.Transport;
 import Business.UserAccount.UserAccount;
 import java.awt.CardLayout;
 import javax.swing.JOptionPane;
@@ -34,7 +36,7 @@ public class MainJFrame extends javax.swing.JFrame {
 
     public MainJFrame() {
         initComponents();
-     //   system= ConfigureASystem.configure();
+        //   system= ConfigureASystem.configure();
         system = dB4OUtil.retrieveSystem();
     }
 
@@ -163,75 +165,95 @@ public class MainJFrame extends javax.swing.JFrame {
         char[] passwordCharArray = passwordField.getPassword();
         String password = String.valueOf(passwordCharArray);
 
-        UserAccount userAccount=system.getUserAccountDirectory().authenticateUser(userName, password);
-        Enterprise inEnterprise=null;
-        Organization inOrganization=null;
-        
-        if(userAccount==null){
-            outer: for(Network network:system.getNetworkList()){
-        for(Enterprise enterprise:network.getEnterpriseDirectory().getEnterpriseList()){
-            userAccount=enterprise.getUserAccountDirectory().authenticateUser(userName, password);
-            if(userAccount==null){
-             for(Organization organization:enterprise.getOrganizationDirectory().getOrganizationList()){
-                 if(organization instanceof StoreChain){
-                      userAccount=organization.getUserAccountDirectory().authenticateUser(userName, password);
-                      System.out.println("in storechain");
-                      if(userAccount!=null){
-                         inEnterprise=enterprise;
-                         inOrganization=organization;
-                         break;
-                      }
-                      for(Store store: ((StoreChain) organization).getStoreChain()){
-                         System.out.println("in store"); 
-                      userAccount=store.getUserAccountDirectory().authenticateUser(userName, password);
-                      System.out.println("in store after useraccount");
-                       if(userAccount!=null){
-                           System.out.println("in store useraccount!=null");
-                              inEnterprise=enterprise;
-                               System.out.println("inEnterprise"+inEnterprise);
-                              inOrganization=store;
-                              System.out.println("inorg"+inOrganization);
-                              break outer;
+        UserAccount userAccount = system.getUserAccountDirectory().authenticateUser(userName, password);
+        Enterprise inEnterprise = null;
+        Organization inOrganization = null;
+
+        if (userAccount == null) {
+            outer:
+            for (Network network : system.getNetworkList()) {
+                for (Enterprise enterprise : network.getEnterpriseDirectory().getEnterpriseList()) {
+                    userAccount = enterprise.getUserAccountDirectory().authenticateUser(userName, password);
+                    if (userAccount == null) {
+                        for (Organization organization : enterprise.getOrganizationDirectory().getOrganizationList()) {
+                            if (organization instanceof StoreChain) {
+                                userAccount = organization.getUserAccountDirectory().authenticateUser(userName, password);
+                                System.out.println("in storechain");
+                                if (userAccount != null) {
+                                    inEnterprise = enterprise;
+                                    inOrganization = organization;
+                                    break;
+                                }
+                                for (Store store : ((StoreChain) organization).getStoreChain()) {
+                                    System.out.println("in store");
+                                    userAccount = store.getUserAccountDirectory().authenticateUser(userName, password);
+                                    System.out.println("in store after useraccount");
+                                    if (userAccount != null) {
+                                        System.out.println("in store useraccount!=null");
+                                        inEnterprise = enterprise;
+                                        System.out.println("inEnterprise" + inEnterprise);
+                                        inOrganization = store;
+                                        System.out.println("inorg" + inOrganization);
+                                        break outer;
+                                    }
+                                }
+                            } else if (organization instanceof Transport) {
+                                userAccount = organization.getUserAccountDirectory().authenticateUser(userName, password);
+                                System.out.println("in transport");
+                                if (userAccount != null) {
+                                    inEnterprise = enterprise;
+                                    inOrganization = organization;
+                                    break;
+                                }
+                                for (Driver driver : ((Transport) organization).getDriverList()) {
+                                    System.out.println("in transport1");
+                                    userAccount = driver.getUserAccountDirectory().authenticateUser(userName, password);
+                                    System.out.println("in driver after useraccount");
+                                    if (userAccount != null) {
+                                        System.out.println("in driver useraccount!=null");
+                                        inEnterprise = enterprise;
+                                        System.out.println("inEnterprise" + inEnterprise);
+                                        inOrganization = driver;
+                                        System.out.println("inorg" + inOrganization);
+                                        break outer;
+                                    }
+                                }
+                            } else {
+                                userAccount = organization.getUserAccountDirectory().authenticateUser(userName, password);
+                                if (userAccount != null) {
+                                    inEnterprise = enterprise;
+                                    inOrganization = organization;
+                                    break;
+                                }
+                            }
+                        }
+                    } else {
+                        inEnterprise = enterprise;
+                        break;
                     }
-                  }
-                 }
-                 else{
-             userAccount=organization.getUserAccountDirectory().authenticateUser(userName, password);
-             if(userAccount!=null){
-             inEnterprise=enterprise;
-             inOrganization=organization;
-             break;
-             }
-                 }
+                    if (inOrganization != null) {
+                        break;
+                    }
+                }
+                if (inEnterprise != null) {
+                    break;
+                }
             }
-            }
-            else{
-            inEnterprise=enterprise;
-            break;
-            }
-            if(inOrganization!=null)
-                break;
         }
-        if(inEnterprise!=null)
-                break;
+
+        if (userAccount == null) {
+            JOptionPane.showMessageDialog(null, "Invalid credentails");
+            return;
+        } else {
+            System.out.println("role:" + userAccount.getRole());
+            System.out.println("organization:" + inOrganization);
+            System.out.println("inEnterprise:" + inEnterprise);
+            CardLayout cardLayout = (CardLayout) container.getLayout();
+            container.add("area", userAccount.getRole().createWorkArea(container, userAccount, inOrganization, inEnterprise, system));
+            cardLayout.next(container);
         }
-        }
-        
-        if(userAccount==null)
-        {  JOptionPane.showMessageDialog(null, "Invalid credentails");
-        return;
-        }
-        else{
-            System.out.println("role:"+userAccount.getRole());
-            System.out.println("organization:"+inOrganization);
-             System.out.println("inEnterprise:"+inEnterprise);
-           CardLayout cardLayout=(CardLayout)container.getLayout();
-           container.add("area",userAccount.getRole().createWorkArea(container, userAccount, inOrganization, inEnterprise, system));
-           cardLayout.next(container);
-        }
-        
-        
-         loginJButton.setEnabled(false);
+
+        loginJButton.setEnabled(false);
         logoutJButton.setEnabled(true);
         userNameJTextField.setEnabled(false);
         passwordField.setEnabled(false);
@@ -255,13 +277,13 @@ public class MainJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_logoutJButtonActionPerformed
 
     private void signUpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signUpButtonActionPerformed
-       SignupJPanel signUpJPanel = new SignupJPanel(container,system);
-       CardLayout layout = (CardLayout) container.getLayout();
-        
+        SignupJPanel signUpJPanel = new SignupJPanel(container, system);
+        CardLayout layout = (CardLayout) container.getLayout();
+
         container.add("signUpJPanel", signUpJPanel);
         layout.next(container);
 
-       
+
     }//GEN-LAST:event_signUpButtonActionPerformed
 
     /**

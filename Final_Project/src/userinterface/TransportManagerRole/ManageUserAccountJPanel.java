@@ -8,6 +8,7 @@ package userinterface.TransportManagerRole;
 import Business.EcoSystem;
 import Business.Employee.Employee;
 import Business.Enterprise.Enterprise;
+import Business.Organization.Driver;
 import Business.Organization.Organization;
 import Business.Organization.Transport;
 import Business.Role.DriverRole;
@@ -52,9 +53,7 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
     public void populateRoleComboBox() {
         comboBoxRole.removeAllItems();
         for(Role role: organization.getSupportedRole()) {
-            if(role instanceof DriverRole) {
-                comboBoxRole.addItem(role);
-            }
+            comboBoxRole.addItem(role);
         }
     }
     public void populateData() {
