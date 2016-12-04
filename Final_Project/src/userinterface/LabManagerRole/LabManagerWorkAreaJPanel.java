@@ -25,14 +25,12 @@ public class LabManagerWorkAreaJPanel extends javax.swing.JPanel {
     private UserAccount account;
     private Lab organization;
     private Enterprise enterprise;
-    private Network network;
-    public LabManagerWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, Lab organization, Enterprise enterprise, Network network) {
+    public LabManagerWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, Lab organization, Enterprise enterprise) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.account = account;
         this.organization = organization;
         this.enterprise = enterprise;
-        this.network = network;
     }
 
     /**
@@ -101,7 +99,7 @@ public class LabManagerWorkAreaJPanel extends javax.swing.JPanel {
 
     private void btnManageLabAssistantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageLabAssistantActionPerformed
         // TODO add your handling code here:
-        ManageLabAssistantJPanel mlajp = new ManageLabAssistantJPanel(userProcessContainer, account, organization, enterprise, network);
+        ManageLabAssistantJPanel mlajp = new ManageLabAssistantJPanel(userProcessContainer, account, organization, enterprise);
         userProcessContainer.add("ManageLabAssistantJPanel", mlajp);
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);

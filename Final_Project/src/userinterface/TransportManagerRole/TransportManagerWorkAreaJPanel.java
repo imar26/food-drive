@@ -28,15 +28,13 @@ public class TransportManagerWorkAreaJPanel extends javax.swing.JPanel {
     private Transport organization;
     private Enterprise enterprise;
     private EcoSystem business;
-    private Network network;
-    public TransportManagerWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, Transport organization, Enterprise enterprise, EcoSystem business, Network network) {
+    public TransportManagerWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, Transport organization, Enterprise enterprise, EcoSystem business) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.account = account;
         this.organization = organization;
         this.enterprise = enterprise;
         this.business = business;
-        this.network = network;
     }
 
     /**

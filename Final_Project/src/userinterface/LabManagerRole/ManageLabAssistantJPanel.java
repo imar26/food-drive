@@ -28,14 +28,12 @@ public class ManageLabAssistantJPanel extends javax.swing.JPanel {
     private Lab organization;
     private Enterprise enterprise;
     private UserAccount userAccount;
-    private Network network;
-    public ManageLabAssistantJPanel(JPanel userProcessContainer, UserAccount userAccount, Lab organization, Enterprise enterprise, Network network) {
+    public ManageLabAssistantJPanel(JPanel userProcessContainer, UserAccount userAccount, Lab organization, Enterprise enterprise) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.userAccount = userAccount;
         this.organization = organization;
         this.enterprise = enterprise;
-        this.network = network;
     }
     
     public void populateTable(Organization organization) {

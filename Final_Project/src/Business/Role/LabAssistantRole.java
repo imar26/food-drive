@@ -22,7 +22,7 @@ public class LabAssistantRole extends Role {
 
     @Override
     public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, EcoSystem business, Network network) {
-        return new ManageLabAssistantJPanel(userProcessContainer, account, (Lab)organization, enterprise, network);
+        return new ManageLabAssistantJPanel(userProcessContainer, account, (Lab)organization, enterprise);
     }
     
 }

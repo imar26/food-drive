@@ -27,18 +27,16 @@ public class OfficeManagerWorkAreaJPanel extends javax.swing.JPanel {
     private Enterprise enterprise;
     private UserAccount userAccount;
     private EcoSystem business;
-    private Network network;
     /**
      * Creates new form OfficeManagerWorkAreaJPanel
      */
-    public OfficeManagerWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, MainOffice organization, Enterprise enterprise, EcoSystem business, Network network) {
+    public OfficeManagerWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, MainOffice organization, Enterprise enterprise, EcoSystem business) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.organization = organization;
         this.enterprise = enterprise;
         this.userAccount = account;
         this.business=business;
-        this.network = network;
         populateRequestTable();
     }
      public void populateRequestTable(){

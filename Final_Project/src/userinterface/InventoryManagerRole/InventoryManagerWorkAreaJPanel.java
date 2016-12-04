@@ -31,14 +31,12 @@ public class InventoryManagerWorkAreaJPanel extends javax.swing.JPanel {
     private Inventory organization;
     private Enterprise enterprise;
     private UserAccount userAccount;
-    private Network network;
-    public InventoryManagerWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, Inventory organization, Enterprise enterprise, Network network) {
+    public InventoryManagerWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, Inventory organization, Enterprise enterprise) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.organization = organization;
         this.enterprise = enterprise;
         this.userAccount = account;
-        this.network = network;
         populateRequestTable();
     }
     public void populateRequestTable(){

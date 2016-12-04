@@ -25,14 +25,12 @@ public class CompostManagerWorkAreaJPanel extends javax.swing.JPanel {
     private UserAccount account;
     private Composting organization;
     private Enterprise enterprise;
-    private Network network;
-    public CompostManagerWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, Composting organization, Enterprise enterprise, Network network) {
+    public CompostManagerWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, Composting organization, Enterprise enterprise) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.account = account;
         this.organization = organization;
         this.enterprise = enterprise;
-        this.network = network;
     }
     /**
      * This method is called from within the constructor to initialize the form.
