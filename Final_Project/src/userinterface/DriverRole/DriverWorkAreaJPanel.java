@@ -7,6 +7,7 @@ package userinterface.DriverRole;
 
 import Business.EcoSystem;
 import Business.Enterprise.Enterprise;
+import Business.Network.Network;
 import Business.Organization.Driver;
 import Business.UserAccount.UserAccount;
 import javax.swing.JPanel;
@@ -25,13 +26,15 @@ public class DriverWorkAreaJPanel extends javax.swing.JPanel {
     private Driver driver;
     private Enterprise enterprise;
     private EcoSystem business;
-    public DriverWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, Driver driver, Enterprise enterprise, EcoSystem business) {
+    private Network network;
+    public DriverWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, Driver driver, Enterprise enterprise, EcoSystem business, Network network) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.account = account;
         this.driver = driver;
         this.enterprise = enterprise;
         this.business = business;
+        this.network = network;
     }
 
     /**

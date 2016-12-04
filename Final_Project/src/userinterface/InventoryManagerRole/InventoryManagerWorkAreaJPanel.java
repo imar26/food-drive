@@ -6,6 +6,7 @@
 package userinterface.InventoryManagerRole;
 
 import Business.Enterprise.Enterprise;
+import Business.Network.Network;
 import Business.Organization.Inventory;
 import Business.Organization.MainOffice;
 import Business.UserAccount.UserAccount;
@@ -30,12 +31,14 @@ public class InventoryManagerWorkAreaJPanel extends javax.swing.JPanel {
     private Inventory organization;
     private Enterprise enterprise;
     private UserAccount userAccount;
-    public InventoryManagerWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, Inventory organization, Enterprise enterprise) {
+    private Network network;
+    public InventoryManagerWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, Inventory organization, Enterprise enterprise, Network network) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.organization = organization;
         this.enterprise = enterprise;
         this.userAccount = account;
+        this.network = network;
         populateRequestTable();
     }
     public void populateRequestTable(){

@@ -7,6 +7,7 @@ package userinterface.LabManagerRole;
 
 import Business.Employee.Employee;
 import Business.Enterprise.Enterprise;
+import Business.Network.Network;
 import Business.Organization.Lab;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
@@ -27,12 +28,14 @@ public class ManageLabAssistantJPanel extends javax.swing.JPanel {
     private Lab organization;
     private Enterprise enterprise;
     private UserAccount userAccount;
-    public ManageLabAssistantJPanel(JPanel userProcessContainer, UserAccount userAccount, Lab organization, Enterprise enterprise) {
+    private Network network;
+    public ManageLabAssistantJPanel(JPanel userProcessContainer, UserAccount userAccount, Lab organization, Enterprise enterprise, Network network) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.userAccount = userAccount;
         this.organization = organization;
         this.enterprise = enterprise;
+        this.network = network;
     }
     
     public void populateTable(Organization organization) {

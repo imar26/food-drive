@@ -38,6 +38,7 @@ public class Transport extends Organization {
     public ArrayList<Role> getSupportedRole() {
         ArrayList<Role> roles = new ArrayList();
         roles.add(new TransportManagerRole());
+        roles.add(new DriverRole());
         return roles;
     }
     

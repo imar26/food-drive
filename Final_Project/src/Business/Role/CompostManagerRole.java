@@ -7,6 +7,7 @@ package Business.Role;
 
 import Business.EcoSystem;
 import Business.Enterprise.Enterprise;
+import Business.Network.Network;
 import Business.Organization.Composting;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
@@ -20,8 +21,8 @@ import userinterface.CompostManagerRole.CompostManagerWorkAreaJPanel;
 public class CompostManagerRole extends Role {
 
     @Override
-    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, EcoSystem business) {
-        return new CompostManagerWorkAreaJPanel(userProcessContainer, account, (Composting)organization, enterprise);
+    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, EcoSystem business, Network network) {
+        return new CompostManagerWorkAreaJPanel(userProcessContainer, account, (Composting)organization, enterprise, network);
     }
     
 }

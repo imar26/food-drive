@@ -7,6 +7,7 @@ package userinterface.OfficeManagerRole;
 
 import Business.EcoSystem;
 import Business.Enterprise.Enterprise;
+import Business.Network.Network;
 import Business.Organization.MainOffice;
 import Business.UserAccount.UserAccount;
 import Business.WorkQueue.MainOfficeWorkRequest;
@@ -26,16 +27,18 @@ public class OfficeManagerWorkAreaJPanel extends javax.swing.JPanel {
     private Enterprise enterprise;
     private UserAccount userAccount;
     private EcoSystem business;
+    private Network network;
     /**
      * Creates new form OfficeManagerWorkAreaJPanel
      */
-    public OfficeManagerWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, MainOffice organization, Enterprise enterprise, EcoSystem business) {
+    public OfficeManagerWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, MainOffice organization, Enterprise enterprise, EcoSystem business, Network network) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.organization = organization;
         this.enterprise = enterprise;
         this.userAccount = account;
         this.business=business;
+        this.network = network;
         populateRequestTable();
     }
      public void populateRequestTable(){

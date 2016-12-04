@@ -6,6 +6,7 @@
 package userinterface.LabManagerRole;
 
 import Business.Enterprise.Enterprise;
+import Business.Network.Network;
 import Business.Organization.Lab;
 import Business.UserAccount.UserAccount;
 import java.awt.CardLayout;
@@ -24,12 +25,14 @@ public class LabManagerWorkAreaJPanel extends javax.swing.JPanel {
     private UserAccount account;
     private Lab organization;
     private Enterprise enterprise;
-    public LabManagerWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, Lab organization, Enterprise enterprise) {
+    private Network network;
+    public LabManagerWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, Lab organization, Enterprise enterprise, Network network) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.account = account;
         this.organization = organization;
         this.enterprise = enterprise;
+        this.network = network;
     }
 
     /**
@@ -98,7 +101,7 @@ public class LabManagerWorkAreaJPanel extends javax.swing.JPanel {
 
     private void btnManageLabAssistantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageLabAssistantActionPerformed
         // TODO add your handling code here:
-        ManageLabAssistantJPanel mlajp = new ManageLabAssistantJPanel(userProcessContainer, account, organization, enterprise);
+        ManageLabAssistantJPanel mlajp = new ManageLabAssistantJPanel(userProcessContainer, account, organization, enterprise, network);
         userProcessContainer.add("ManageLabAssistantJPanel", mlajp);
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
