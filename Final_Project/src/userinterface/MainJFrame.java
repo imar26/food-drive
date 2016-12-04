@@ -168,6 +168,7 @@ public class MainJFrame extends javax.swing.JFrame {
         UserAccount userAccount = system.getUserAccountDirectory().authenticateUser(userName, password);
         Enterprise inEnterprise = null;
         Organization inOrganization = null;
+        Network inNetwork=null;
 
         if (userAccount == null) {
             outer:
@@ -182,18 +183,17 @@ public class MainJFrame extends javax.swing.JFrame {
                                 if (userAccount != null) {
                                     inEnterprise = enterprise;
                                     inOrganization = organization;
+                                    inNetwork = network;
                                     break;
                                 }
                                 for (Store store : ((StoreChain) organization).getStoreChain()) {
-                                    System.out.println("in store");
+                                    
                                     userAccount = store.getUserAccountDirectory().authenticateUser(userName, password);
-                                    System.out.println("in store after useraccount");
+                                    
                                     if (userAccount != null) {
-                                        System.out.println("in store useraccount!=null");
+                                        inNetwork = network;
                                         inEnterprise = enterprise;
-                                        System.out.println("inEnterprise" + inEnterprise);
                                         inOrganization = store;
-                                        System.out.println("inorg" + inOrganization);
                                         break outer;
                                     }
                                 }
@@ -203,6 +203,7 @@ public class MainJFrame extends javax.swing.JFrame {
                                 if (userAccount != null) {
                                     inEnterprise = enterprise;
                                     inOrganization = organization;
+                                    inNetwork = network;
                                     break;
                                 }
                                 for (Driver driver : ((Transport) organization).getDriverList()) {
@@ -214,6 +215,7 @@ public class MainJFrame extends javax.swing.JFrame {
                                         inEnterprise = enterprise;
                                         System.out.println("inEnterprise" + inEnterprise);
                                         inOrganization = driver;
+                                        inNetwork = network;
                                         System.out.println("inorg" + inOrganization);
                                         break outer;
                                     }
@@ -223,12 +225,14 @@ public class MainJFrame extends javax.swing.JFrame {
                                 if (userAccount != null) {
                                     inEnterprise = enterprise;
                                     inOrganization = organization;
+                                    inNetwork = network;
                                     break;
                                 }
                             }
                         }
                     } else {
                         inEnterprise = enterprise;
+                        inNetwork = network;
                         break;
                     }
                     if (inOrganization != null) {
@@ -248,8 +252,9 @@ public class MainJFrame extends javax.swing.JFrame {
             System.out.println("role:" + userAccount.getRole());
             System.out.println("organization:" + inOrganization);
             System.out.println("inEnterprise:" + inEnterprise);
+            System.out.println("inNetwork:"+ inNetwork);
             CardLayout cardLayout = (CardLayout) container.getLayout();
-            container.add("area", userAccount.getRole().createWorkArea(container, userAccount, inOrganization, inEnterprise, system));
+            container.add("area", userAccount.getRole().createWorkArea(container, userAccount, inOrganization, inEnterprise, system, inNetwork));
             cardLayout.next(container);
         }
 
