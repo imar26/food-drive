@@ -9,6 +9,7 @@ import Business.EcoSystem;
 import Business.Enterprise.Enterprise;
 import Business.Network.Network;
 import Business.Organization.Driver;
+import Business.Organization.Transport;
 import Business.UserAccount.UserAccount;
 import javax.swing.JPanel;
 
@@ -23,10 +24,10 @@ public class DriverWorkAreaJPanel extends javax.swing.JPanel {
      */
     private JPanel userProcessContainer;
     private UserAccount account;
-    private Driver driver;
+    private Transport driver;
     private Enterprise enterprise;
     private EcoSystem business;
-    public DriverWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, Driver driver, Enterprise enterprise, EcoSystem business) {
+    public DriverWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, Transport driver, Enterprise enterprise, EcoSystem business) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.account = account;
