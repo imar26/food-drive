@@ -7,11 +7,14 @@ package Business.Role;
 
 import Business.EcoSystem;
 import Business.Enterprise.Enterprise;
+import Business.Enterprise.TransportAgencyEnterprise;
 import Business.Network.Network;
 import Business.Organization.Organization;
+import Business.Organization.Transport;
 import Business.UserAccount.UserAccount;
 import javax.swing.JPanel;
 import userinterface.AdministrativeRole.AdminWorkAreaJPanel;
+import userinterface.TransportManagerRole.TransportManagerWorkAreaJPanel;
 
 /**
  *
@@ -21,7 +24,11 @@ public class AdminRole extends Role {
 
     @Override
     public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, EcoSystem business, Network network) {
-        return new AdminWorkAreaJPanel(userProcessContainer, enterprise);
+        if (enterprise instanceof TransportAgencyEnterprise) {
+            return new TransportManagerWorkAreaJPanel(userProcessContainer, enterprise);
+        } else {
+            return new AdminWorkAreaJPanel(userProcessContainer, enterprise);
+        }
     }
     
 }

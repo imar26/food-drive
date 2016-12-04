@@ -24,17 +24,11 @@ public class TransportManagerWorkAreaJPanel extends javax.swing.JPanel {
      * Creates new form DriverWorkAreaJPanel
      */
     private JPanel userProcessContainer;
-    private UserAccount account;
-    private Transport organization;
     private Enterprise enterprise;
-    private EcoSystem business;
-    public TransportManagerWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, Transport organization, Enterprise enterprise, EcoSystem business) {
+    public TransportManagerWorkAreaJPanel(JPanel userProcessContainer, Enterprise enterprise) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
-        this.account = account;
-        this.organization = organization;
         this.enterprise = enterprise;
-        this.business = business;
     }
 
     /**
@@ -129,7 +123,7 @@ public class TransportManagerWorkAreaJPanel extends javax.swing.JPanel {
 
     private void btnDriverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDriverActionPerformed
         // TODO add your handling code here: 
-        ManageDriverJPanel mdjp = new ManageDriverJPanel(userProcessContainer, account, organization, enterprise, business);
+        ManageDriverJPanel mdjp = new ManageDriverJPanel(userProcessContainer, enterprise.getOrganizationDirectory());
         userProcessContainer.add("ManageDriverJPanel", mdjp);
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
@@ -137,7 +131,7 @@ public class TransportManagerWorkAreaJPanel extends javax.swing.JPanel {
 
     private void btnUserAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUserAccountActionPerformed
         // TODO add your handling code here:
-        ManageUserAccountJPanel muajp = new ManageUserAccountJPanel(userProcessContainer, account, organization, enterprise, business);
+        ManageUserAccountJPanel muajp = new ManageUserAccountJPanel(userProcessContainer, enterprise);
         userProcessContainer.add("ManageUserAccountJPanel", muajp);
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
@@ -145,10 +139,10 @@ public class TransportManagerWorkAreaJPanel extends javax.swing.JPanel {
 
     private void btnWorkQueueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnWorkQueueActionPerformed
         // TODO add your handling code here:
-        ManageWorkQueueJPanel mwqjp = new ManageWorkQueueJPanel(userProcessContainer, account, organization, enterprise, business);
-        userProcessContainer.add("ManageWorkQueueJPanel", mwqjp);
-        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
-        layout.next(userProcessContainer);
+//        ManageWorkQueueJPanel mwqjp = new ManageWorkQueueJPanel(userProcessContainer, account, organization, enterprise, business);
+//        userProcessContainer.add("ManageWorkQueueJPanel", mwqjp);
+//        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+//        layout.next(userProcessContainer);
     }//GEN-LAST:event_btnWorkQueueActionPerformed
 
 
