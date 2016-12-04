@@ -197,29 +197,6 @@ public class MainJFrame extends javax.swing.JFrame {
                                         break outer;
                                     }
                                 }
-                            } else if (organization instanceof Transport) {
-                                userAccount = organization.getUserAccountDirectory().authenticateUser(userName, password);
-                                System.out.println("in transport");
-                                if (userAccount != null) {
-                                    inEnterprise = enterprise;
-                                    inOrganization = organization;
-                                    inNetwork = network;
-                                    break;
-                                }
-                                for (Driver driver : ((Transport) organization).getDriverList()) {
-                                    System.out.println("in transport1");
-                                    userAccount = driver.getUserAccountDirectory().authenticateUser(userName, password);
-                                    System.out.println("in driver after useraccount");
-                                    if (userAccount != null) {
-                                        System.out.println("in driver useraccount!=null");
-                                        inEnterprise = enterprise;
-                                        System.out.println("inEnterprise" + inEnterprise);
-                                        inOrganization = driver;
-                                        inNetwork = network;
-                                        System.out.println("inorg" + inOrganization);
-                                        break outer;
-                                    }
-                                }
                             } else {
                                 userAccount = organization.getUserAccountDirectory().authenticateUser(userName, password);
                                 if (userAccount != null) {

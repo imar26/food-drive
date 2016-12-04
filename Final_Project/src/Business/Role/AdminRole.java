@@ -24,11 +24,12 @@ public class AdminRole extends Role {
 
     @Override
     public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, EcoSystem business, Network network) {
-        if (enterprise instanceof TransportAgencyEnterprise) {
-            return new TransportManagerWorkAreaJPanel(userProcessContainer, enterprise);
-        } else {
+//        if (enterprise instanceof TransportAgencyEnterprise) {
+//            System.out.println(organization.getName() + "Majha naav aahe");
+//            return new TransportManagerWorkAreaJPanel(userProcessContainer, account, (Transport)organization, enterprise, business);
+//        } else {
             return new AdminWorkAreaJPanel(userProcessContainer, enterprise);
         }
-    }
+    
     
 }

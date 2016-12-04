@@ -25,10 +25,17 @@ public class TransportManagerWorkAreaJPanel extends javax.swing.JPanel {
      */
     private JPanel userProcessContainer;
     private Enterprise enterprise;
-    public TransportManagerWorkAreaJPanel(JPanel userProcessContainer, Enterprise enterprise) {
+    private UserAccount account;
+    private EcoSystem business;
+    private Transport organization;
+    public TransportManagerWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, Transport organization, Enterprise enterprise, EcoSystem business) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.enterprise = enterprise;
+        this.account = account;
+        this.organization = organization;
+        this.business = business;
+        System.out.println(organization.getName() + "Hai mera naam");
     }
 
     /**
@@ -139,10 +146,11 @@ public class TransportManagerWorkAreaJPanel extends javax.swing.JPanel {
 
     private void btnWorkQueueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnWorkQueueActionPerformed
         // TODO add your handling code here:
-//        ManageWorkQueueJPanel mwqjp = new ManageWorkQueueJPanel(userProcessContainer, account, organization, enterprise, business);
-//        userProcessContainer.add("ManageWorkQueueJPanel", mwqjp);
-//        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
-//        layout.next(userProcessContainer);
+        System.out.println(organization.getName() + "is my name");
+        ManageWorkQueueJPanel mwqtjp = new ManageWorkQueueJPanel(userProcessContainer, account, organization, enterprise, business);
+        userProcessContainer.add("ManageWorkQueueJPanel", mwqtjp);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
     }//GEN-LAST:event_btnWorkQueueActionPerformed
 
 
