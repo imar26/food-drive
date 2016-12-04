@@ -7,8 +7,11 @@ package userinterface.StoreManagerRole;
 
 import Business.EcoSystem;
 import Business.Enterprise.Enterprise;
+import Business.Enterprise.TransportAgencyEnterprise;
 import Business.Network.Network;
+import Business.Organization.Organization;
 import Business.Organization.Store;
+import Business.Organization.Transport;
 import Business.UserAccount.UserAccount;
 import Business.WorkQueue.StoreWorkRequest;
 import Business.WorkQueue.TransportWorkRequest;
@@ -28,6 +31,7 @@ public class StoreWorkAreaJPanel extends javax.swing.JPanel {
     private Enterprise enterprise;
     private UserAccount userAccount;
     private EcoSystem business;
+    private Network network;
     /**
      * Creates new form StoreWorkAreaJPanel
      */
@@ -40,6 +44,7 @@ public class StoreWorkAreaJPanel extends javax.swing.JPanel {
         this.enterprise = enterprise;
         this.userAccount = account;
         this.business=business;
+        this.network=network;
         txtStock.setText(Integer.toString(organization.getStock()));
         
        populateRequestTable();
@@ -220,6 +225,30 @@ public class StoreWorkAreaJPanel extends javax.swing.JPanel {
                 trasnportRequest.setQuantity(quantity);
                 trasnportRequest.setLocation(organization.getLocation());
                 
+                Enterprise en=null;
+            for(Enterprise enterprise : network.getEnterpriseDirectory().getEnterpriseList()){
+                System.out.println("Enterprise"+ enterprise.getName());
+                 if(enterprise instanceof TransportAgencyEnterprise){
+                     System.out.println("Yes");
+                    en = enterprise;
+                    Organization org = null;
+                    for (Organization organization : en.getOrganizationDirectory().getOrganizationList()){
+                        
+                        if (organization instanceof Transport){
+                            System.out.println("Yes Organization");
+                            org = organization;
+                            break;
+                        }
+                    }
+                    if (org!=null){
+                        System.out.println("Org"+org.getName());
+                        System.out.println("User Account"+userAccount.getUsername());
+                        org.getWorkQueue().getWorkRequestList().add(request);
+                        System.out.println("Orga"+org.getWorkQueue().getWorkRequestList());
+                        userAccount.getWorkQueue().getWorkRequestList().add(request);
+                    }
+                  }
+            }   
         }
     }//GEN-LAST:event_btnSendActionPerformed
 
