@@ -12,6 +12,7 @@ import Business.Organization.Organization;
 import Business.Organization.Store;
 import Business.Organization.StoreChain;
 import Business.UserAccount.UserAccount;
+import Business.WorkQueue.StoreWorkRequest;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -131,8 +132,8 @@ public class RequestFoodJPanel extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblStores = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        quantityTxt = new javax.swing.JTextField();
+        requestBtn = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         tblStoreWorkQueue = new javax.swing.JTable();
         btnRequestMO = new javax.swing.JButton();
@@ -172,7 +173,18 @@ public class RequestFoodJPanel extends javax.swing.JPanel {
 
         jLabel2.setText("Quantity: ");
 
-        jButton1.setText("Request");
+        quantityTxt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                quantityTxtActionPerformed(evt);
+            }
+        });
+
+        requestBtn.setText("Request");
+        requestBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                requestBtnActionPerformed(evt);
+            }
+        });
 
         tblStoreWorkQueue.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -211,9 +223,9 @@ public class RequestFoodJPanel extends javax.swing.JPanel {
                         .addGap(159, 159, 159)
                         .addComponent(jLabel2)
                         .addGap(18, 18, 18)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(quantityTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1))
+                        .addComponent(requestBtn))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap(154, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -236,8 +248,8 @@ public class RequestFoodJPanel extends javax.swing.JPanel {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(requestBtn)
+                    .addComponent(quantityTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addGap(51, 51, 51)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -247,17 +259,47 @@ public class RequestFoodJPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void requestBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_requestBtnActionPerformed
+        for(Organization org: enterprise.getOrganizationDirectory().getOrganizationList())
+        {
+            if(org instanceof StoreChain)
+            {    
+                for(Store store: ((StoreChain) org).getStoreChain())
+                {
+                    for(int i=0; i<tblStores.getRowCount(); i++)
+                    {    
+                   if(store.getName().equals(tblStores.getValueAt(i, 0)))
+                   {
+                       StoreWorkRequest request=new StoreWorkRequest();
+                       request.setMessage("Request for food");
+                       request.setSender(userAccount);
+                       request.setQuantity(Integer.parseInt(quantityTxt.getText()));
+                       request.setStatus("Sent");
+                       
+                       store.getWorkQueue().getWorkRequestList().add(request);
+                       userAccount.getWorkQueue().getWorkRequestList().add(request);
+                   }    
+                    }
+                }
+             }  
+        }
+    }//GEN-LAST:event_requestBtnActionPerformed
+
+    private void quantityTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quantityTxtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_quantityTxtActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnRequestMO;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField quantityTxt;
+    private javax.swing.JButton requestBtn;
     private javax.swing.JTable tblStoreWorkQueue;
     private javax.swing.JTable tblStores;
     // End of variables declaration//GEN-END:variables
