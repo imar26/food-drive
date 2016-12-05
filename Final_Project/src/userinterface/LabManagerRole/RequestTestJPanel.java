@@ -10,6 +10,7 @@ import Business.Organization.Lab;
 import Business.Role.LabAssistantRole;
 import Business.UserAccount.UserAccount;
 import Business.WorkQueue.InventoryWorkRequest;
+import Business.WorkQueue.LabManagerWorkRequest;
 import javax.swing.JPanel;
 
 /**
@@ -23,10 +24,10 @@ public class RequestTestJPanel extends javax.swing.JPanel {
      */
     private JPanel userProcessContainer;
     private Lab organization;
-    private InventoryWorkRequest request;
+    private LabManagerWorkRequest request;
     private UserAccount account;
     private EcoSystem business;
-    RequestTestJPanel(JPanel userProcessContainer, Lab organization, InventoryWorkRequest request, UserAccount account, EcoSystem business) {
+    RequestTestJPanel(JPanel userProcessContainer, Lab organization, LabManagerWorkRequest request, UserAccount account, EcoSystem business) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.organization = organization;
