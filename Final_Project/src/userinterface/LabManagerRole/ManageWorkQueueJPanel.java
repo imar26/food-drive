@@ -10,6 +10,7 @@ import Business.Enterprise.Enterprise;
 import Business.Organization.Lab;
 import Business.UserAccount.UserAccount;
 import Business.WorkQueue.InventoryWorkRequest;
+import Business.WorkQueue.LabManagerWorkRequest;
 import Business.WorkQueue.WorkRequest;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -37,27 +38,27 @@ public class ManageWorkQueueJPanel extends javax.swing.JPanel {
         this.enterprise = enterprise;
         this.account = account;
         this.business = business;
-//        populateRequestTable();
+        populateRequestTable();
     }
-//    public void populateRequestTable(){
-//        DefaultTableModel model = (DefaultTableModel) tblManageWorkQueue.getModel();
-//        
-//        model.setRowCount(0);
-//        for (WorkRequest request : organization.getWorkQueue().getWorkRequestList()){
-//            Object[] row = new Object[6];
-//            row[0] = request;
-//            row[1] = request.getReceiver();
-//            row[2] = request.getStatus();
-//            int quantity = ((InventoryWorkRequest) request).getQuantity();
-//            row[3] = quantity;
-//            String location = ((InventoryWorkRequest) request).getLocation();
-//            row[4]=location;
-//            String result = ((InventoryWorkRequest) request).getTestResult();
-//            row[5] = result == null ? "Waiting" : result;
-//            
-//            model.addRow(row);
-//        }
-//    }
+    public void populateRequestTable(){
+        DefaultTableModel model = (DefaultTableModel) tblManageWorkQueue.getModel();
+        
+        model.setRowCount(0);
+        for (WorkRequest request : organization.getWorkQueue().getWorkRequestList()){
+            Object[] row = new Object[6];
+            row[0] = request;
+            row[1] = request.getReceiver();
+            row[2] = request.getStatus();
+            int quantity = ((LabManagerWorkRequest) request).getQuantity();
+            row[3] = quantity;
+            String location = ((LabManagerWorkRequest) request).getLocation();
+            row[4]=location;
+            String result = ((LabManagerWorkRequest) request).getTestResult();
+            row[5] = result == null ? "Waiting" : result;
+            
+            model.addRow(row);
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -147,7 +148,7 @@ public class ManageWorkQueueJPanel extends javax.swing.JPanel {
 
     private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
         // TODO add your handling code here:
-//        populateRequestTable();
+        populateRequestTable();
     }//GEN-LAST:event_btnRefreshActionPerformed
 
     private void btnRequestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRequestActionPerformed
@@ -155,7 +156,7 @@ public class ManageWorkQueueJPanel extends javax.swing.JPanel {
         int selectedRow = tblManageWorkQueue.getSelectedRow();       
         
         if (selectedRow >= 0) {
-            InventoryWorkRequest request = (InventoryWorkRequest) tblManageWorkQueue.getValueAt(selectedRow, 0);
+            LabManagerWorkRequest request = (LabManagerWorkRequest) tblManageWorkQueue.getValueAt(selectedRow, 0);
             request.setStatus("Processing");
 
             RequestTestJPanel rtjp = new RequestTestJPanel(userProcessContainer, organization, request, account, business);
