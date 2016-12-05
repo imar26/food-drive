@@ -8,6 +8,7 @@ package userinterface.DriverRole;
 import Business.EcoSystem;
 import Business.Enterprise.Enterprise;
 import Business.Network.Network;
+import Business.Organization.Driver;
 import Business.Organization.Transport;
 import Business.UserAccount.UserAccount;
 import Business.WorkQueue.DriverWorkRequest;
@@ -27,20 +28,23 @@ public class DriverWorkAreaJPanel extends javax.swing.JPanel {
      */
     private JPanel userProcessContainer;
     private UserAccount account;
-    private Transport driver;
+    private Driver driver;
     private Enterprise enterprise;
     private EcoSystem business;
-    public DriverWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, Transport driver, Enterprise enterprise, EcoSystem business) {
+    public DriverWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, Driver driver, Enterprise enterprise, EcoSystem business) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.account = account;
         this.driver = driver;
         this.enterprise = enterprise;
         this.business = business;
+        
         populateRequestTable();
+        System.out.println("In Driver Panel");
     }
     
     public void populateRequestTable() {
+        System.out.println("In Driver Panel Twice");
         DefaultTableModel model = (DefaultTableModel) tblManageWorkQueue.getModel();
         
         model.setRowCount(0);

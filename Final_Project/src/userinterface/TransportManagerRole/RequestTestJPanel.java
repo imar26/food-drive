@@ -10,6 +10,7 @@ import Business.Employee.Employee;
 import Business.Enterprise.Enterprise;
 import Business.Enterprise.TransportAgencyEnterprise;
 import Business.Network.Network;
+import Business.Organization.Driver;
 import Business.Organization.Organization;
 import Business.Organization.Transport;
 import Business.Role.DriverRole;
@@ -50,11 +51,24 @@ public class RequestTestJPanel extends javax.swing.JPanel {
     
     public void populateDriverComboBox() {
         comboBoxDriver.removeAllItems();
-        for(UserAccount ua: organization.getUserAccountDirectory().getUserAccountList()) {
-            if(ua.getRole() instanceof DriverRole) {
-                comboBoxDriver.addItem(ua);
+        for(Network n : business.getNetworkList()){
+            Enterprise en = null;
+            for(Enterprise e : n.getEnterpriseDirectory().getEnterpriseList()){
+                if(e instanceof TransportAgencyEnterprise)
+                {
+                    en=e;
+                    for(Organization o : en.getOrganizationDirectory().getOrganizationList()) {
+                        if(o instanceof Driver){
+                          for(UserAccount ua: o.getUserAccountDirectory().getUserAccountList()) {
+                              comboBoxDriver.addItem(ua);
+                          } 
+                        }
+                    }
+                    
+                }
             }
         }
+        
     }
 
     /**
@@ -171,7 +185,7 @@ public class RequestTestJPanel extends javax.swing.JPanel {
                     Organization org = null;
                     for (Organization organization : en.getOrganizationDirectory().getOrganizationList()){
                         
-                        if (organization instanceof Transport){
+                        if (organization instanceof Driver){
                             System.out.println("Yes Organization");
                             org = organization;
                             break;

@@ -55,6 +55,10 @@ public class OrganizationDirectory {
             organization = new Transport();
             organizationList.add(organization);
         }
+        else if (type.getValue().equals(Organization.Type.Driver.getValue())){
+            organization = new Driver();
+            organizationList.add(organization);
+        }
         return organization;
     }
     
