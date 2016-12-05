@@ -5,6 +5,12 @@
  */
 package userinterface.DriverRole;
 
+import Business.WorkQueue.DriverWorkRequest;
+import java.awt.CardLayout;
+import java.awt.Component;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+
 /**
  *
  * @author Aadesh Randeria
@@ -14,8 +20,12 @@ public class ProcessWorkRequestJPanel extends javax.swing.JPanel {
     /**
      * Creates new form ProcessWorkRequestJPanel
      */
-    public ProcessWorkRequestJPanel() {
+    private JPanel userProcessContainer;
+    private DriverWorkRequest request;
+    public ProcessWorkRequestJPanel(JPanel userProcessContainer, DriverWorkRequest request) {
         initComponents();
+        this.userProcessContainer = userProcessContainer;
+        this.request = request;
     }
 
     /**
@@ -35,8 +45,18 @@ public class ProcessWorkRequestJPanel extends javax.swing.JPanel {
         jLabel1.setText("Result:");
 
         btnSubmitResult.setText("Submit Result");
+        btnSubmitResult.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSubmitResultActionPerformed(evt);
+            }
+        });
 
         btnBack.setText("Back");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -69,6 +89,24 @@ public class ProcessWorkRequestJPanel extends javax.swing.JPanel {
                 .addContainerGap(387, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        // TODO add your handling code here:
+        userProcessContainer.remove(this);
+        Component[] componentArray = userProcessContainer.getComponents();
+        Component component = componentArray[componentArray.length - 1];
+        DriverWorkAreaJPanel dwjp = (DriverWorkAreaJPanel) component;
+        dwjp.populateRequestTable();
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.previous(userProcessContainer);
+    }//GEN-LAST:event_btnBackActionPerformed
+
+    private void btnSubmitResultActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitResultActionPerformed
+        // TODO add your handling code here:
+        request.setTestResult(txtResult.getText());
+        request.setStatus("Completed");
+        JOptionPane.showMessageDialog(null, "Work Completed");
+    }//GEN-LAST:event_btnSubmitResultActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -14,6 +14,8 @@ import Business.UserAccount.UserAccount;
 import Business.WorkQueue.DriverWorkRequest;
 import Business.WorkQueue.TransportWorkRequest;
 import Business.WorkQueue.WorkRequest;
+import javax.swing.JOptionPane;
+import java.awt.CardLayout;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
@@ -148,10 +150,28 @@ public class DriverWorkAreaJPanel extends javax.swing.JPanel {
 
     private void btnProcessActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProcessActionPerformed
         // TODO add your handling code here:
+        int selectedRow = tblManageWorkQueue.getSelectedRow();
+        
+        
+        if (selectedRow >= 0) {
+            DriverWorkRequest request = (DriverWorkRequest) tblManageWorkQueue.getValueAt(selectedRow, 0);
+
+            request.setStatus("Processing");
+
+            ProcessWorkRequestJPanel processWorkRequestJPanel = new ProcessWorkRequestJPanel(userProcessContainer, request);
+            userProcessContainer.add("pwrjp", processWorkRequestJPanel);
+            CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+            layout.next(userProcessContainer);
+
+        } else {
+           JOptionPane.showMessageDialog(null, "Please select a request message to process."); 
+            return;
+        }
     }//GEN-LAST:event_btnProcessActionPerformed
 
     private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
         // TODO add your handling code here:
+        populateRequestTable();
     }//GEN-LAST:event_btnRefreshActionPerformed
 
 
