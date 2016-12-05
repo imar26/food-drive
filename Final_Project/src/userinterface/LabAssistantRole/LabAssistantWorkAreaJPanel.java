@@ -8,6 +8,7 @@ package userinterface.LabAssistantRole;
 import Business.EcoSystem;
 import Business.Enterprise.Enterprise;
 import Business.Organization.Lab;
+import Business.Organization.LabAssistant;
 import Business.UserAccount.UserAccount;
 import javax.swing.JPanel;
 
@@ -22,10 +23,10 @@ public class LabAssistantWorkAreaJPanel extends javax.swing.JPanel {
      */
     private JPanel userProcessContainer;
     private UserAccount account;
-    private Lab lab;
+    private LabAssistant lab;
     private Enterprise enterprise;
     private EcoSystem business;
-    public LabAssistantWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, Lab lab, Enterprise enterprise, EcoSystem business) {
+    public LabAssistantWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, LabAssistant lab, Enterprise enterprise, EcoSystem business) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.account = account;
