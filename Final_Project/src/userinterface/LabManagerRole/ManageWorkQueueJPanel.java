@@ -6,9 +6,14 @@
 package userinterface.LabManagerRole;
 
 import Business.EcoSystem;
+import Business.Enterprise.CompostingCenterEnterprise;
 import Business.Enterprise.Enterprise;
+import Business.Network.Network;
+import Business.Organization.Composting;
 import Business.Organization.Lab;
+import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
+import Business.WorkQueue.CompostManagerWorkRequest;
 import Business.WorkQueue.InventoryWorkRequest;
 import Business.WorkQueue.LabManagerWorkRequest;
 import Business.WorkQueue.WorkRequest;
@@ -31,14 +36,14 @@ public class ManageWorkQueueJPanel extends javax.swing.JPanel {
     private Lab organization;
     private Enterprise enterprise;
     private UserAccount account;
-    private EcoSystem business;
-    ManageWorkQueueJPanel(JPanel userProcessContainer, UserAccount account, Lab organization, Enterprise enterprise, EcoSystem business) {
+    private Network network;
+    ManageWorkQueueJPanel(JPanel userProcessContainer, UserAccount account, Lab organization, Enterprise enterprise, Network network) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.organization = organization;
         this.enterprise = enterprise;
         this.account = account;
-        this.business = business;
+        this.network=network;
         populateRequestTable();
     }
     public void populateRequestTable(){
@@ -180,7 +185,7 @@ public class ManageWorkQueueJPanel extends javax.swing.JPanel {
             LabManagerWorkRequest request = (LabManagerWorkRequest) tblManageWorkQueue.getValueAt(selectedRow, 0);
             request.setStatus("Processing");
 
-            RequestTestJPanel rtjp = new RequestTestJPanel(userProcessContainer, organization, request, account, business);
+            RequestTestJPanel rtjp = new RequestTestJPanel(userProcessContainer, organization, request, account, network);
             userProcessContainer.add("RequestTestJPanel", rtjp);
             CardLayout layout = (CardLayout) userProcessContainer.getLayout();
             layout.next(userProcessContainer);
@@ -209,11 +214,31 @@ public class ManageWorkQueueJPanel extends javax.swing.JPanel {
         if (selectedRow >= 0) {
             LabManagerWorkRequest request = (LabManagerWorkRequest) tblManageWorkQueue.getValueAt(selectedRow, 0);
             request.setStatus("Processing");
-
-            CompostManagerWorkAreaJPanel cmwajp = new CompostManagerWorkAreaJPanel(userProcessContainer, organization, request, account, business);
-            userProcessContainer.add("CompostManagerWorkAreaJPanel", cmwajp);
-            CardLayout layout = (CardLayout) userProcessContainer.getLayout();
-            layout.next(userProcessContainer);
+            CompostManagerWorkRequest compostRequest = new CompostManagerWorkRequest(); 
+            compostRequest.setMessage(request.getMessage());
+            compostRequest.setReceiver(request.getReceiver());
+            compostRequest.setQuantity(request.getQuantity());
+            compostRequest.setStatus("Sent");
+            compostRequest.setTestResult("Waiting");
+            Enterprise en= null;
+            for(Enterprise e : network.getEnterpriseDirectory().getEnterpriseList()){
+                if(e instanceof CompostingCenterEnterprise){
+                    en=e;
+                    Organization org=null;
+                    for(Organization o : en.getOrganizationDirectory().getOrganizationList()){
+                        if(o instanceof Composting){
+                            org=o;
+                            break;
+                            
+                        }
+                    }
+                    if(org!=null){
+                        org.getWorkQueue().getWorkRequestList().add(request);
+                        account.getWorkQueue().getWorkRequestList().add(request);
+                    }
+                }
+            }
+            JOptionPane.showMessageDialog(null, "Request Sent to Composting Manager");
 
         } else {
             JOptionPane.showMessageDialog(null, "Please select a message to send for composting."); 

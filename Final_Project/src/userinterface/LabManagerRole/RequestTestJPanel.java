@@ -33,23 +33,23 @@ public class RequestTestJPanel extends javax.swing.JPanel {
     private Lab organization;
     private LabManagerWorkRequest request;
     private UserAccount account;
-    private EcoSystem business;
-    RequestTestJPanel(JPanel userProcessContainer, Lab organization, LabManagerWorkRequest request, UserAccount account, EcoSystem business) {
+    private Network network;
+    RequestTestJPanel(JPanel userProcessContainer, Lab organization, LabManagerWorkRequest request, UserAccount account, Network network) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.organization = organization;
         this.request = request;
         this.account = account;
-        this.business = business;
+        this.network = network;
         
         populateLabAssistantComboBox();
     }
     
     public void populateLabAssistantComboBox() {
         comboBoxLabAssistant.removeAllItems();
-        for(Network n : business.getNetworkList()){
+        
             Enterprise en = null;
-            for(Enterprise e : n.getEnterpriseDirectory().getEnterpriseList()){
+            for(Enterprise e : network.getEnterpriseDirectory().getEnterpriseList()){
                 if(e instanceof InspectionCenterEnterprise)
                 {
                     en=e;
@@ -63,7 +63,7 @@ public class RequestTestJPanel extends javax.swing.JPanel {
                     
                 }
             }
-        }
+        
     }
 
     /**
@@ -151,8 +151,7 @@ public class RequestTestJPanel extends javax.swing.JPanel {
         request.setMessage(txtMessage.getText());
         request.setStatus("Sent");
         
-        for(Network network : business.getNetworkList()){
-            System.out.println("Network"+ network.getName());
+        
             Enterprise en=null;
             for(Enterprise enterprise : network.getEnterpriseDirectory().getEnterpriseList()){
                 System.out.println("Enterprise"+ enterprise.getName());
@@ -183,7 +182,7 @@ public class RequestTestJPanel extends javax.swing.JPanel {
                     }
                 }
             }   
-        }
+        
     }//GEN-LAST:event_btnRequestActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed

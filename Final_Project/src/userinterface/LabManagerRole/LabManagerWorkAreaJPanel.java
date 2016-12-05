@@ -26,14 +26,14 @@ public class LabManagerWorkAreaJPanel extends javax.swing.JPanel {
     private UserAccount account;
     private Lab organization;
     private Enterprise enterprise;
-    private EcoSystem business;
-    public LabManagerWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, Lab organization, Enterprise enterprise, EcoSystem business) {
+    private Network network;
+    public LabManagerWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, Lab organization, Enterprise enterprise, Network network) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.account = account;
         this.organization = organization;
         this.enterprise = enterprise;
-        this.business = business;
+        this.network=network;
     }
 
     /**
@@ -123,7 +123,7 @@ public class LabManagerWorkAreaJPanel extends javax.swing.JPanel {
 
     private void btnWorkQueueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnWorkQueueActionPerformed
         // TODO add your handling code here:
-        ManageWorkQueueJPanel mwqtjp = new ManageWorkQueueJPanel(userProcessContainer, account, organization, enterprise, business);
+        ManageWorkQueueJPanel mwqtjp = new ManageWorkQueueJPanel(userProcessContainer, account, organization, enterprise, network);
         userProcessContainer.add("ManageWorkQueueJPanel", mwqtjp);
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);

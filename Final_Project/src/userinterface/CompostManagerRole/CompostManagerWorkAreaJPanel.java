@@ -5,12 +5,18 @@
  */
 package userinterface.CompostManagerRole;
 
+import Business.EcoSystem;
 import Business.Enterprise.Enterprise;
 import Business.Network.Network;
 import Business.Organization.Composting;
+import Business.Organization.Lab;
 import Business.UserAccount.UserAccount;
+import Business.WorkQueue.CompostManagerWorkRequest;
+import Business.WorkQueue.LabManagerWorkRequest;
+import Business.WorkQueue.WorkRequest;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -24,13 +30,36 @@ public class CompostManagerWorkAreaJPanel extends javax.swing.JPanel {
     private JPanel userProcessContainer;
     private UserAccount account;
     private Composting organization;
-    private Enterprise enterprise;
-    public CompostManagerWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, Composting organization, Enterprise enterprise) {
+    private EcoSystem business;
+    
+    
+
+    public CompostManagerWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, Composting organization, EcoSystem business) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.account = account;
+       
         this.organization = organization;
-        this.enterprise = enterprise;
+        this.business = business;
+        populateRequestTable();
+    }
+    public void populateRequestTable(){
+        DefaultTableModel model = (DefaultTableModel) tblCompostManager.getModel();
+        
+        model.setRowCount(0);
+        for (WorkRequest request : organization.getWorkQueue().getWorkRequestList()){
+            Object[] row = new Object[5];
+            row[0] = request;
+            row[1] = request.getReceiver();
+            row[2] = request.getStatus();
+            int quantity = ((CompostManagerWorkRequest) request).getQuantity();
+            row[3] = quantity;
+            
+            String result = ((CompostManagerWorkRequest) request).getTestResult();
+            row[4] = result == null ? "Waiting" : result;
+            
+            model.addRow(row);
+        }
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -59,11 +88,11 @@ public class CompostManagerWorkAreaJPanel extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Message", "Receiver", "Status", "Result"
+                "Message", "Receiver", "Status", "Quantity", "Result"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -114,6 +143,7 @@ public class CompostManagerWorkAreaJPanel extends javax.swing.JPanel {
 
     private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
         // TODO add your handling code here:
+        populateRequestTable();
     }//GEN-LAST:event_btnRefreshActionPerformed
 
     private void btnProcessActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProcessActionPerformed
