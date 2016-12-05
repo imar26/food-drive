@@ -168,6 +168,7 @@ public class ManageNetworkJPanel extends javax.swing.JPanel {
             else if(enterprise instanceof TransportAgencyEnterprise)
             {
                enterprise.getOrganizationDirectory().createOrganization(Organization.Type.Transport);
+               enterprise.getOrganizationDirectory().createOrganization(Organization.Type.Driver);
             } 
             else if(enterprise instanceof CompostingCenterEnterprise)
             {
