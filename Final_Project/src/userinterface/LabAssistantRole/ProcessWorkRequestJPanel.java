@@ -5,6 +5,12 @@
  */
 package userinterface.LabAssistantRole;
 
+import Business.WorkQueue.LabAssistantWorkRequest;
+import java.awt.Component;
+import javax.swing.JPanel;
+import java.awt.CardLayout;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Aadesh Randeria
@@ -14,8 +20,12 @@ public class ProcessWorkRequestJPanel extends javax.swing.JPanel {
     /**
      * Creates new form ProcessWorkRequestJPanel
      */
-    public ProcessWorkRequestJPanel() {
+    private JPanel userProcessContainer;
+    private LabAssistantWorkRequest request;
+    ProcessWorkRequestJPanel(JPanel userProcessContainer, LabAssistantWorkRequest request) {
         initComponents();
+        this.userProcessContainer = userProcessContainer;
+        this.request = request;
     }
 
     /**
@@ -36,8 +46,18 @@ public class ProcessWorkRequestJPanel extends javax.swing.JPanel {
         jLabel1.setText("Result:");
 
         btnSubmitResult.setText("Submit Result");
+        btnSubmitResult.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSubmitResultActionPerformed(evt);
+            }
+        });
 
         btnBack.setText("Back");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -91,6 +111,24 @@ public class ProcessWorkRequestJPanel extends javax.swing.JPanel {
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        // TODO add your handling code here:
+        userProcessContainer.remove(this);
+        Component[] componentArray = userProcessContainer.getComponents();
+        Component component = componentArray[componentArray.length - 1];
+        LabAssistantWorkAreaJPanel dwjp = (LabAssistantWorkAreaJPanel) component;
+        dwjp.populateRequestTable();
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.previous(userProcessContainer);
+    }//GEN-LAST:event_btnBackActionPerformed
+
+    private void btnSubmitResultActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitResultActionPerformed
+        // TODO add your handling code here:
+        request.setTestResult(txtResult.getText());
+        request.setStatus("Completed");
+        JOptionPane.showMessageDialog(null, "Work Completed");
+    }//GEN-LAST:event_btnSubmitResultActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

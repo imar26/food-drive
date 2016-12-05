@@ -6,11 +6,18 @@
 package userinterface.LabManagerRole;
 
 import Business.EcoSystem;
+import Business.Enterprise.Enterprise;
+import Business.Enterprise.InspectionCenterEnterprise;
+import Business.Network.Network;
 import Business.Organization.Lab;
+import Business.Organization.LabAssistant;
+import Business.Organization.Organization;
 import Business.Role.LabAssistantRole;
 import Business.UserAccount.UserAccount;
 import Business.WorkQueue.InventoryWorkRequest;
+import Business.WorkQueue.LabAssistantWorkRequest;
 import Business.WorkQueue.LabManagerWorkRequest;
+import java.awt.CardLayout;
 import javax.swing.JPanel;
 
 /**
@@ -40,9 +47,21 @@ public class RequestTestJPanel extends javax.swing.JPanel {
     
     public void populateLabAssistantComboBox() {
         comboBoxLabAssistant.removeAllItems();
-        for(UserAccount ua: organization.getUserAccountDirectory().getUserAccountList()) {
-            if(ua.getRole() instanceof LabAssistantRole) {
-                comboBoxLabAssistant.addItem(ua);
+        for(Network n : business.getNetworkList()){
+            Enterprise en = null;
+            for(Enterprise e : n.getEnterpriseDirectory().getEnterpriseList()){
+                if(e instanceof InspectionCenterEnterprise)
+                {
+                    en=e;
+                    for(Organization o : en.getOrganizationDirectory().getOrganizationList()) {
+                        if(o instanceof LabAssistant){
+                          for(UserAccount ua: o.getUserAccountDirectory().getUserAccountList()) {
+                              comboBoxLabAssistant.addItem(ua);
+                          } 
+                        }
+                    }
+                    
+                }
             }
         }
     }
@@ -66,8 +85,18 @@ public class RequestTestJPanel extends javax.swing.JPanel {
         jLabel1.setText("Message:");
 
         btnBack.setText("Back");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
 
         btnRequest.setText("Request Test");
+        btnRequest.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRequestActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Select Lab Assistant:");
 
@@ -112,6 +141,57 @@ public class RequestTestJPanel extends javax.swing.JPanel {
                 .addContainerGap(167, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnRequestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRequestActionPerformed
+        // TODO add your handling code here:
+        UserAccount ua = (UserAccount)comboBoxLabAssistant.getSelectedItem();
+        LabAssistantWorkRequest request=new LabAssistantWorkRequest();
+        request.setSender(account);
+        request.setLabAssistantName(ua);
+        request.setMessage(txtMessage.getText());
+        request.setStatus("Sent");
+        
+        for(Network network : business.getNetworkList()){
+            System.out.println("Network"+ network.getName());
+            Enterprise en=null;
+            for(Enterprise enterprise : network.getEnterpriseDirectory().getEnterpriseList()){
+                System.out.println("Enterprise"+ enterprise.getName());
+                 if(enterprise instanceof InspectionCenterEnterprise){
+                     System.out.println("Yes");
+                    en = enterprise;
+                    Organization org = null;
+                    UserAccount isLabAssistant = null;
+                    for (Organization organization : en.getOrganizationDirectory().getOrganizationList()){
+                        
+                        if (organization instanceof LabAssistant){
+//                            System.out.println("Yes Organization");
+//                            org = organization;
+//                            break;
+                            
+                            isLabAssistant = ua;
+                        }
+                    }
+                    if (isLabAssistant!=null){
+//                        System.out.println("Driver"+isDriver.getgetName());
+                        System.out.println("User Account"+account.getUsername());
+                        isLabAssistant.getWorkQueue().getWorkRequestList().add(request);
+                        System.out.println("DriverA"+isLabAssistant.getWorkQueue().getWorkRequestList());
+                        account.getWorkQueue().getWorkRequestList().add(request);
+                    }
+                    else{
+                        //send it to a stall specified
+                    }
+                }
+            }   
+        }
+    }//GEN-LAST:event_btnRequestActionPerformed
+
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        // TODO add your handling code here:
+        userProcessContainer.remove(this);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.previous(userProcessContainer);
+    }//GEN-LAST:event_btnBackActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

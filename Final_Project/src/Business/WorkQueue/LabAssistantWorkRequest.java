@@ -11,7 +11,7 @@ import Business.UserAccount.UserAccount;
  *
  * @author Aadesh Randeria
  */
-public class LabAssistantWorkRequest {
+public class LabAssistantWorkRequest extends WorkRequest {
     private String testResult;
     private UserAccount labAssistantName;
     private int quantity;

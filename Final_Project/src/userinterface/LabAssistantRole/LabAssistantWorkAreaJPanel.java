@@ -10,7 +10,12 @@ import Business.Enterprise.Enterprise;
 import Business.Organization.Lab;
 import Business.Organization.LabAssistant;
 import Business.UserAccount.UserAccount;
+import Business.WorkQueue.LabAssistantWorkRequest;
+import Business.WorkQueue.WorkRequest;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
+import java.awt.CardLayout;
 
 /**
  *
@@ -33,6 +38,27 @@ public class LabAssistantWorkAreaJPanel extends javax.swing.JPanel {
         this.lab = lab;
         this.enterprise = enterprise;
         this.business = business;
+        
+        populateRequestTable();
+    }
+    
+    public void populateRequestTable() {
+        DefaultTableModel model = (DefaultTableModel) tblManageWorkQueue.getModel();
+        
+        model.setRowCount(0);
+        for (WorkRequest request : account.getWorkQueue().getWorkRequestList()){
+            Object[] row = new Object[5];
+            row[0] = request;
+            System.out.println("Request"+request.getMessage());
+            row[1] = ((LabAssistantWorkRequest) request).getLabAssistantName();
+            row[2] = request.getStatus();
+            int quantity = ((LabAssistantWorkRequest) request).getQuantity();
+            row[3] = quantity;
+            String result = ((LabAssistantWorkRequest) request).getTestResult();
+            row[4] = result == null ? "Waiting" : result;
+            
+            model.addRow(row);
+        }
     }
 
     /**
@@ -55,11 +81,11 @@ public class LabAssistantWorkAreaJPanel extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Message", "Receiver", "Status", "Quantity", "Location", "Result"
+                "Message", "Receiver", "Status", "Quantity", "Result"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -69,6 +95,11 @@ public class LabAssistantWorkAreaJPanel extends javax.swing.JPanel {
         jScrollPane1.setViewportView(tblManageWorkQueue);
 
         btnBack.setText("Back");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
 
         btnProcess.setText("Process");
         btnProcess.addActionListener(new java.awt.event.ActionListener() {
@@ -118,17 +149,41 @@ public class LabAssistantWorkAreaJPanel extends javax.swing.JPanel {
 
     private void btnProcessActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProcessActionPerformed
         // TODO add your handling code here:
+        int selectedRow = tblManageWorkQueue.getSelectedRow();
+        
+        
+        if (selectedRow >= 0) {
+            LabAssistantWorkRequest request = (LabAssistantWorkRequest) tblManageWorkQueue.getValueAt(selectedRow, 0);
+
+            request.setStatus("Processing");
+
+            ProcessWorkRequestJPanel processWorkRequestJPanel = new ProcessWorkRequestJPanel(userProcessContainer, request);
+            userProcessContainer.add("pwrjp", processWorkRequestJPanel);
+            CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+            layout.next(userProcessContainer);
+
+        } else {
+           JOptionPane.showMessageDialog(null, "Please select a request message to process."); 
+            return;
+        }
     }//GEN-LAST:event_btnProcessActionPerformed
 
     private void btnRefresh1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefresh1ActionPerformed
         // TODO add your handling code here:
+        populateRequestTable();
     }//GEN-LAST:event_btnRefresh1ActionPerformed
+
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        // TODO add your handling code here:
+        userProcessContainer.remove(this);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.previous(userProcessContainer);
+    }//GEN-LAST:event_btnBackActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnProcess;
-    private javax.swing.JButton btnRefresh;
     private javax.swing.JButton btnRefresh1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblManageWorkQueue;
