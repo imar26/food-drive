@@ -16,6 +16,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import java.awt.CardLayout;
 import javax.swing.table.DefaultTableModel;
+import userinterface.CompostManagerRole.CompostManagerWorkAreaJPanel;
 
 /**
  *
@@ -73,6 +74,7 @@ public class ManageWorkQueueJPanel extends javax.swing.JPanel {
         btnBack = new javax.swing.JButton();
         btnProcess = new javax.swing.JButton();
         btnRequest = new javax.swing.JButton();
+        btnComposting = new javax.swing.JButton();
 
         tblManageWorkQueue.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -120,6 +122,13 @@ public class ManageWorkQueueJPanel extends javax.swing.JPanel {
             }
         });
 
+        btnComposting.setText("Send for Composting");
+        btnComposting.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCompostingActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -136,7 +145,9 @@ public class ManageWorkQueueJPanel extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addComponent(btnProcess)
                         .addGap(18, 18, 18)
-                        .addComponent(btnRequest)))
+                        .addComponent(btnRequest)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnComposting)))
                 .addContainerGap(49, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -150,7 +161,8 @@ public class ManageWorkQueueJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnBack)
                     .addComponent(btnProcess)
-                    .addComponent(btnRequest))
+                    .addComponent(btnRequest)
+                    .addComponent(btnComposting))
                 .addContainerGap(343, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -190,9 +202,29 @@ public class ManageWorkQueueJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnProcessActionPerformed
 
+    private void btnCompostingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCompostingActionPerformed
+        // TODO add your handling code here:
+        int selectedRow = tblManageWorkQueue.getSelectedRow();       
+        
+        if (selectedRow >= 0) {
+            LabManagerWorkRequest request = (LabManagerWorkRequest) tblManageWorkQueue.getValueAt(selectedRow, 0);
+            request.setStatus("Processing");
+
+            CompostManagerWorkAreaJPanel cmwajp = new CompostManagerWorkAreaJPanel(userProcessContainer, organization, request, account, business);
+            userProcessContainer.add("CompostManagerWorkAreaJPanel", cmwajp);
+            CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+            layout.next(userProcessContainer);
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Please select a message to send for composting."); 
+            return;
+        }
+    }//GEN-LAST:event_btnCompostingActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
+    private javax.swing.JButton btnComposting;
     private javax.swing.JButton btnProcess;
     private javax.swing.JButton btnRefresh;
     private javax.swing.JButton btnRequest;

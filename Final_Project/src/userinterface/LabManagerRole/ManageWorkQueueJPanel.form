@@ -30,6 +30,8 @@
                       <Component id="btnProcess" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="btnRequest" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="btnComposting" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace pref="49" max="32767" attributes="0"/>
@@ -49,6 +51,7 @@
                   <Component id="btnBack" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnProcess" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnRequest" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnComposting" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="343" max="32767" attributes="0"/>
           </Group>
@@ -140,6 +143,14 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRequestActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnComposting">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Send for Composting"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCompostingActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>
