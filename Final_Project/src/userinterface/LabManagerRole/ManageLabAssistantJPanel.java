@@ -10,6 +10,7 @@ import Business.Enterprise.Enterprise;
 import Business.Network.Network;
 import Business.Organization.Lab;
 import Business.Organization.Organization;
+import Business.Organization.OrganizationDirectory;
 import Business.UserAccount.UserAccount;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
@@ -25,15 +26,13 @@ public class ManageLabAssistantJPanel extends javax.swing.JPanel {
      * Creates new form ManageLabAssistantJPanel
      */
     private JPanel userProcessContainer;
-    private Lab organization;
-    private Enterprise enterprise;
-    private UserAccount userAccount;
-    public ManageLabAssistantJPanel(JPanel userProcessContainer, UserAccount userAccount, Lab organization, Enterprise enterprise) {
+    private OrganizationDirectory organizationDir;
+    public ManageLabAssistantJPanel(JPanel userProcessContainer, OrganizationDirectory organizationDir) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
-        this.userAccount = userAccount;
-        this.organization = organization;
-        this.enterprise = enterprise;
+        this.organizationDir = organizationDir;
+        populateOrganizationJComboBox();
+        populateOrganizationEmpJComboBox();
     }
     
     public void populateTable(Organization organization) {
@@ -62,6 +61,10 @@ public class ManageLabAssistantJPanel extends javax.swing.JPanel {
         txtName = new javax.swing.JTextField();
         btnBack = new javax.swing.JButton();
         btnCreate = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        organizationJComboBox = new javax.swing.JComboBox();
+        jLabel3 = new javax.swing.JLabel();
+        organizationEmpJComboBox = new javax.swing.JComboBox();
 
         tblManageLabAssistant.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -91,6 +94,27 @@ public class ManageLabAssistantJPanel extends javax.swing.JPanel {
         });
 
         btnCreate.setText("Create Lab Assistant");
+        btnCreate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCreateActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setText("Organization:");
+
+        organizationJComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                organizationJComboBoxActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setText("Organization:");
+
+        organizationEmpJComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                organizationEmpJComboBoxActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -107,15 +131,31 @@ public class ManageLabAssistantJPanel extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnBack)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnCreate)))
+                        .addComponent(btnCreate))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(30, 30, 30)
+                        .addComponent(organizationJComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(32, 32, 32)
+                        .addComponent(organizationEmpJComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(138, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(38, 38, 38)
+                .addGap(33, 33, 33)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(organizationJComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
+                .addGap(24, 24, 24)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(organizationEmpJComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -123,7 +163,7 @@ public class ManageLabAssistantJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnBack)
                     .addComponent(btnCreate))
-                .addContainerGap(262, Short.MAX_VALUE))
+                .addContainerGap(204, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -133,13 +173,49 @@ public class ManageLabAssistantJPanel extends javax.swing.JPanel {
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.previous(userProcessContainer);
     }//GEN-LAST:event_btnBackActionPerformed
+    public void populateOrganizationJComboBox() {
+        organizationJComboBox.removeAllItems();
+        for(Organization organization: organizationDir.getOrganizationList()) {
+            organizationJComboBox.addItem(organization);
+        }
+    }  
+    public void populateOrganizationEmpJComboBox() {
+        organizationEmpJComboBox.removeAllItems();
+        for(Organization organization: organizationDir.getOrganizationList()) {
+            organizationEmpJComboBox.addItem(organization);
+        }
+    }
+    private void organizationJComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_organizationJComboBoxActionPerformed
+        // TODO add your handling code here:
+        Organization organization = (Organization) organizationJComboBox.getSelectedItem();
+        if(organization!=null) {
+            populateTable(organization);
+        }
+    }//GEN-LAST:event_organizationJComboBoxActionPerformed
+
+    private void organizationEmpJComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_organizationEmpJComboBoxActionPerformed
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_organizationEmpJComboBoxActionPerformed
+
+    private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
+        // TODO add your handling code here:
+        Organization organization = (Organization) organizationEmpJComboBox.getSelectedItem();
+        String name = txtName.getText();
+        organization.getEmployeeDirectory().createEmployee(name);
+        populateTable(organization);
+    }//GEN-LAST:event_btnCreateActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnCreate;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JComboBox organizationEmpJComboBox;
+    private javax.swing.JComboBox organizationJComboBox;
     private javax.swing.JTable tblManageLabAssistant;
     private javax.swing.JTextField txtName;
     // End of variables declaration//GEN-END:variables

@@ -5,6 +5,13 @@
  */
 package userinterface.LabManagerRole;
 
+import Business.EcoSystem;
+import Business.Organization.Lab;
+import Business.Role.LabAssistantRole;
+import Business.UserAccount.UserAccount;
+import Business.WorkQueue.InventoryWorkRequest;
+import javax.swing.JPanel;
+
 /**
  *
  * @author Aadesh Randeria
@@ -14,8 +21,29 @@ public class RequestTestJPanel extends javax.swing.JPanel {
     /**
      * Creates new form RequestTestJPanel
      */
-    public RequestTestJPanel() {
+    private JPanel userProcessContainer;
+    private Lab organization;
+    private InventoryWorkRequest request;
+    private UserAccount account;
+    private EcoSystem business;
+    RequestTestJPanel(JPanel userProcessContainer, Lab organization, InventoryWorkRequest request, UserAccount account, EcoSystem business) {
         initComponents();
+        this.userProcessContainer = userProcessContainer;
+        this.organization = organization;
+        this.request = request;
+        this.account = account;
+        this.business = business;
+        
+        populateLabAssistantComboBox();
+    }
+    
+    public void populateLabAssistantComboBox() {
+        comboBoxLabAssistant.removeAllItems();
+        for(UserAccount ua: organization.getUserAccountDirectory().getUserAccountList()) {
+            if(ua.getRole() instanceof LabAssistantRole) {
+                comboBoxLabAssistant.addItem(ua);
+            }
+        }
     }
 
     /**
@@ -32,7 +60,7 @@ public class RequestTestJPanel extends javax.swing.JPanel {
         btnBack = new javax.swing.JButton();
         btnRequest = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        comboBoxLabAssistant = new javax.swing.JComboBox<>();
+        comboBoxLabAssistant = new javax.swing.JComboBox();
 
         jLabel1.setText("Message:");
 
@@ -42,7 +70,7 @@ public class RequestTestJPanel extends javax.swing.JPanel {
 
         jLabel2.setText("Select Lab Assistant:");
 
-        comboBoxLabAssistant.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboBoxLabAssistant.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -88,7 +116,7 @@ public class RequestTestJPanel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnRequest;
-    private javax.swing.JComboBox<String> comboBoxLabAssistant;
+    private javax.swing.JComboBox comboBoxLabAssistant;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JTextField txtMessage;
