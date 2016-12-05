@@ -12,6 +12,17 @@ package Business.WorkQueue;
 public class StoreWorkRequest extends WorkRequest{
     private int quantity;
     private String result;
+    private String location;
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+    
+    
 
     public int getQuantity() {
         return quantity;
