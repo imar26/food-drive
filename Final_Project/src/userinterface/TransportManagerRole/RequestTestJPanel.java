@@ -150,8 +150,10 @@ public class RequestTestJPanel extends javax.swing.JPanel {
 
     private void btnRequestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRequestActionPerformed
         // TODO add your handling code here:
+        String driverName = (String)comboBoxDriver.getSelectedItem();
         DriverWorkRequest request=new DriverWorkRequest();
         request.setSender(userAccount);
+        request.setDriverName(driverName);
         request.setMessage(txtMessage.getText());
         request.setQuantity(Integer.valueOf(txtQuantity.getText()));
         request.setLocation(txtLocation.getText());

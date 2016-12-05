@@ -11,8 +11,17 @@ package Business.WorkQueue;
  */
 public class DriverWorkRequest extends WorkRequest {
     private String testResult;
+    private String driverName;
     private int quantity;
     private String location;
+
+    public String getDriverName() {
+        return driverName;
+    }
+
+    public void setDriverName(String driverName) {
+        this.driverName = driverName;
+    }
 
     public String getTestResult() {
         return testResult;

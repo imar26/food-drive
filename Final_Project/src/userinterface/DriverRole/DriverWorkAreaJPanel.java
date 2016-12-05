@@ -8,10 +8,13 @@ package userinterface.DriverRole;
 import Business.EcoSystem;
 import Business.Enterprise.Enterprise;
 import Business.Network.Network;
-import Business.Organization.Driver;
 import Business.Organization.Transport;
 import Business.UserAccount.UserAccount;
+import Business.WorkQueue.DriverWorkRequest;
+import Business.WorkQueue.TransportWorkRequest;
+import Business.WorkQueue.WorkRequest;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -34,6 +37,26 @@ public class DriverWorkAreaJPanel extends javax.swing.JPanel {
         this.driver = driver;
         this.enterprise = enterprise;
         this.business = business;
+    }
+    
+    public void populateRequestTable() {
+        DefaultTableModel model = (DefaultTableModel) tblManageWorkQueue.getModel();
+        
+        model.setRowCount(0);
+        for (WorkRequest request : driver.getWorkQueue().getWorkRequestList()){
+            Object[] row = new Object[6];
+            row[0] = request;
+            row[1] = ((DriverWorkRequest) request).getDriverName();
+            row[2] = request.getStatus();
+            int quantity = ((DriverWorkRequest) request).getQuantity();
+            row[3] = quantity;
+            String location = ((DriverWorkRequest) request).getLocation();
+            row[4]=location;
+            String result = ((DriverWorkRequest) request).getTestResult();
+            row[5] = result == null ? "Waiting" : result;
+            
+            model.addRow(row);
+        }
     }
 
     /**
