@@ -233,8 +233,8 @@ public class ManageWorkQueueJPanel extends javax.swing.JPanel {
                         }
                     }
                     if(org!=null){
-                        org.getWorkQueue().getWorkRequestList().add(request);
-                        account.getWorkQueue().getWorkRequestList().add(request);
+                        org.getWorkQueue().getWorkRequestList().add(compostRequest);
+                        account.getWorkQueue().getWorkRequestList().add(compostRequest);
                     }
                 }
             }

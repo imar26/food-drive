@@ -12,8 +12,10 @@ import Business.Organization.Composting;
 import Business.Organization.Lab;
 import Business.UserAccount.UserAccount;
 import Business.WorkQueue.CompostManagerWorkRequest;
+import Business.WorkQueue.DriverWorkRequest;
 import Business.WorkQueue.LabManagerWorkRequest;
 import Business.WorkQueue.WorkRequest;
+import java.awt.CardLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -148,6 +150,23 @@ public class CompostManagerWorkAreaJPanel extends javax.swing.JPanel {
 
     private void btnProcessActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProcessActionPerformed
         // TODO add your handling code here:
+        int selectedRow = tblCompostManager.getSelectedRow();
+        
+        
+        if (selectedRow >= 0) {
+            CompostManagerWorkRequest request = (CompostManagerWorkRequest) tblCompostManager.getValueAt(selectedRow, 0);
+
+            request.setStatus("Processing");
+
+            ProcessWorkRequestJPanel processWorkRequestJPanel = new ProcessWorkRequestJPanel(userProcessContainer, request);
+            userProcessContainer.add("ProcessWorkRequestJPanel", processWorkRequestJPanel);
+            CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+            layout.next(userProcessContainer);
+
+        } else {
+           JOptionPane.showMessageDialog(null, "Please select a request message to process."); 
+            return;
+        }
     }//GEN-LAST:event_btnProcessActionPerformed
 
 
