@@ -14,6 +14,15 @@ import java.util.ArrayList;
  * @author HP
  */
 public class Inventory extends Organization{
+    private int stock;
+
+    public int getStock() {
+        return stock;
+    }
+
+    public void setStock(int stock) {
+        this.stock = stock;
+    }
     
     public Inventory(){
         super(Organization.Type.Inventory.getValue());

@@ -8,10 +8,13 @@ package userinterface.StoreManagerRole;
 import Business.EcoSystem;
 import Business.Enterprise.Enterprise;
 import Business.Enterprise.MainCenterEnterprise;
+import Business.Network.Network;
+import Business.Organization.Inventory;
 import Business.Organization.Organization;
 import Business.Organization.Store;
 import Business.Organization.StoreChain;
 import Business.UserAccount.UserAccount;
+import Business.WorkQueue.InventoryWorkRequest;
 import Business.WorkQueue.StoreWorkRequest;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -212,6 +215,11 @@ public class RequestFoodJPanel extends javax.swing.JPanel {
         }
 
         btnRequestMO.setText("Request Inventory");
+        btnRequestMO.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRequestMOActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -275,9 +283,12 @@ public class RequestFoodJPanel extends javax.swing.JPanel {
                        request.setSender(userAccount);
                        request.setQuantity(Integer.parseInt(quantityTxt.getText()));
                        request.setStatus("Sent");
+                       request.setLocation(store.getLocation());
+                       
                        
                        store.getWorkQueue().getWorkRequestList().add(request);
                        userAccount.getWorkQueue().getWorkRequestList().add(request);
+                       populateRequestTable(request);
                    }    
                     }
                 }
@@ -289,6 +300,57 @@ public class RequestFoodJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_quantityTxtActionPerformed
 
+    private void btnRequestMOActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRequestMOActionPerformed
+        // TODO add your handling code here:
+        InventoryWorkRequest request=new InventoryWorkRequest();
+        request.setMessage("Request for food");
+        request.setSender(userAccount);
+        request.setQuantity(Integer.parseInt(quantityTxt.getText()));
+        request.setStatus("Sent");
+        request.setLocation(organization.getLocation());
+        Organization org=null;
+        for(Network n : business.getNetworkList()){
+            for(Enterprise e : n.getEnterpriseDirectory().getEnterpriseList()){
+                if(e instanceof MainCenterEnterprise){
+                    for(Organization o : e.getOrganizationDirectory().getOrganizationList()){
+                        if(o instanceof Inventory){
+                            org=o;
+                            break;
+                            
+                        }
+                    }
+                    if(org!=null){
+                        org.getWorkQueue().getWorkRequestList().add(request);
+                        userAccount.getWorkQueue().getWorkRequestList().add(request);
+                        
+                    }
+                }
+            }
+        }
+        
+    }//GEN-LAST:event_btnRequestMOActionPerformed
+    public void populateRequestTable(StoreWorkRequest request){
+           
+                       DefaultTableModel model = (DefaultTableModel) tblStoreWorkQueue.getModel();
+                       model.setRowCount(0);
+                      
+                       Object[] row = new Object[6];
+                       row[0] = request;
+                       //row[1] = store.getName();
+                       row[2] = request.getStatus();
+                       row[3] = request.getQuantity();
+                       row[4] = request.getLocation();
+                       String result = request.getResult();
+                       row[5] = result == null ? "Waiting" : result;
+                
+                       model.addRow(row);
+                      
+         
+                   }    
+                    
+          
+        
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnRequestMO;
