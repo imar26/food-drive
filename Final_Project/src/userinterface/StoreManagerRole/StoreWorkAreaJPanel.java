@@ -218,6 +218,7 @@ public class StoreWorkAreaJPanel extends javax.swing.JPanel {
             int quantity = ((StoreWorkRequest) request).getQuantity();
             int total=stock-quantity;
             organization.setStock(total);
+            
             txtStock.setText(Integer.toString(total));
             JOptionPane.showMessageDialog(null, "Food request accepted"); 
             

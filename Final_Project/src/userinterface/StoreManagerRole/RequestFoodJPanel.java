@@ -194,11 +194,11 @@ public class RequestFoodJPanel extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Message", "Receiver", "Status", "Quantity", "Result"
+                "Message", "Receiver", "Status", "Quantity", "Location", "Result"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -212,6 +212,7 @@ public class RequestFoodJPanel extends javax.swing.JPanel {
             tblStoreWorkQueue.getColumnModel().getColumn(2).setResizable(false);
             tblStoreWorkQueue.getColumnModel().getColumn(3).setResizable(false);
             tblStoreWorkQueue.getColumnModel().getColumn(4).setResizable(false);
+            tblStoreWorkQueue.getColumnModel().getColumn(5).setResizable(false);
         }
 
         btnRequestMO.setText("Request Inventory");
@@ -280,6 +281,7 @@ public class RequestFoodJPanel extends javax.swing.JPanel {
                    {
                        StoreWorkRequest request=new StoreWorkRequest();
                        request.setMessage("Request for food");
+                       
                        request.setSender(userAccount);
                        request.setQuantity(Integer.parseInt(quantityTxt.getText()));
                        request.setStatus("Sent");
@@ -341,7 +343,7 @@ public class RequestFoodJPanel extends javax.swing.JPanel {
                        row[3] = request.getQuantity();
                        row[4] = request.getLocation();
                        String result = request.getResult();
-                       row[5] = result == null ? "Waiting" : result;
+                       row[4] = result == null ? "Waiting" : result;
                 
                        model.addRow(row);
                       

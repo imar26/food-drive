@@ -5,6 +5,8 @@
  */
 package Business.WorkQueue;
 
+import Business.UserAccount.UserAccount;
+
 /**
  *
  * @author HP
@@ -12,8 +14,18 @@ package Business.WorkQueue;
 public class StoreWorkRequest extends WorkRequest{
     private int quantity;
     private String result;
+    private UserAccount name;
     private String location;
 
+    public UserAccount getName() {
+        return name;
+    }
+
+    public void setName(UserAccount name) {
+        this.name = name;
+    }
+    
+    
     public String getLocation() {
         return location;
     }
