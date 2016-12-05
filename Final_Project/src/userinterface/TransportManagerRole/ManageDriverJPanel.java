@@ -8,7 +8,6 @@ package userinterface.TransportManagerRole;
 import Business.EcoSystem;
 import Business.Employee.Employee;
 import Business.Enterprise.Enterprise;
-import Business.Organization.Driver;
 import Business.Organization.Organization;
 import Business.Organization.OrganizationDirectory;
 import Business.Organization.Transport;

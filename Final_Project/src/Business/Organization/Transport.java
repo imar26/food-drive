@@ -16,22 +16,8 @@ import java.util.ArrayList;
  */
 public class Transport extends Organization {
     
-    public ArrayList<Driver> driverList;
     public Transport() {
         super(Organization.Type.Transport.getValue());
-        driverList = new ArrayList();
-    }
-
-    public ArrayList<Driver> getDriverList() {
-        return driverList;
-    }
-
-    public void setDriverList(ArrayList<Driver> driverList) {
-        this.driverList = driverList;
-    }
-    
-    public void addDriver(Driver driver) {
-        driverList.add(driver);
     }
 
     @Override
