@@ -50,7 +50,7 @@ public class DriverWorkAreaJPanel extends javax.swing.JPanel {
         DefaultTableModel model = (DefaultTableModel) tblManageWorkQueue.getModel();
         
         model.setRowCount(0);
-        for (WorkRequest request : driver.getWorkQueue().getWorkRequestList()){
+        for (WorkRequest request : account.getWorkQueue().getWorkRequestList()){
             Object[] row = new Object[6];
             row[0] = request;
             System.out.println("Request"+request.getMessage());
@@ -101,6 +101,11 @@ public class DriverWorkAreaJPanel extends javax.swing.JPanel {
         jScrollPane1.setViewportView(tblManageWorkQueue);
 
         btnBack.setText("Back");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
 
         btnProcess.setText("Process");
         btnProcess.addActionListener(new java.awt.event.ActionListener() {
@@ -173,6 +178,13 @@ public class DriverWorkAreaJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         populateRequestTable();
     }//GEN-LAST:event_btnRefreshActionPerformed
+
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        // TODO add your handling code here:
+        userProcessContainer.remove(this);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.previous(userProcessContainer);
+    }//GEN-LAST:event_btnBackActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

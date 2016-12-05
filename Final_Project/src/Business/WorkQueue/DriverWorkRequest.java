@@ -5,21 +5,24 @@
  */
 package Business.WorkQueue;
 
+import Business.Organization.Driver;
+import Business.UserAccount.UserAccount;
+
 /**
  *
  * @author Aadesh Randeria
  */
 public class DriverWorkRequest extends WorkRequest {
     private String testResult;
-    private String driverName;
+    private UserAccount driverName;
     private int quantity;
     private String location;
 
-    public String getDriverName() {
+    public UserAccount getDriverName() {
         return driverName;
     }
 
-    public void setDriverName(String driverName) {
+    public void setDriverName(UserAccount driverName) {
         this.driverName = driverName;
     }
 

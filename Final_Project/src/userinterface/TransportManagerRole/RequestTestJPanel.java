@@ -18,6 +18,7 @@ import Business.UserAccount.UserAccount;
 import Business.WorkQueue.DriverWorkRequest;
 import Business.WorkQueue.MainOfficeWorkRequest;
 import Business.WorkQueue.TransportWorkRequest;
+import java.awt.CardLayout;
 import javax.swing.JPanel;
 
 /**
@@ -95,8 +96,6 @@ public class RequestTestJPanel extends javax.swing.JPanel {
 
         jLabel2.setText("Select Driver:");
 
-        comboBoxDriver.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         btnRequest.setText("Request Test");
         btnRequest.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -105,6 +104,11 @@ public class RequestTestJPanel extends javax.swing.JPanel {
         });
 
         btnBack.setText("Back");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("Quantity:");
 
@@ -163,12 +167,11 @@ public class RequestTestJPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRequestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRequestActionPerformed
-        // TODO add your handling code here:
-        UserAccount u=(UserAccount)comboBoxDriver.getSelectedItem();
+        // TODO add your handling code here:        
+        UserAccount ua = (UserAccount)comboBoxDriver.getSelectedItem();
         DriverWorkRequest request=new DriverWorkRequest();
         request.setSender(userAccount);
-        String driverName=u.getUsername();
-        request.setDriverName(driverName);
+        request.setDriverName(ua);
         request.setMessage(txtMessage.getText());
         request.setQuantity(Integer.valueOf(txtQuantity.getText()));
         request.setLocation(txtLocation.getText());
@@ -183,19 +186,22 @@ public class RequestTestJPanel extends javax.swing.JPanel {
                      System.out.println("Yes");
                     en = enterprise;
                     Organization org = null;
+                    UserAccount isDriver = null;
                     for (Organization organization : en.getOrganizationDirectory().getOrganizationList()){
                         
                         if (organization instanceof Driver){
-                            System.out.println("Yes Organization");
-                            org = organization;
-                            break;
+//                            System.out.println("Yes Organization");
+//                            org = organization;
+//                            break;
+                            
+                            isDriver = ua;
                         }
                     }
-                    if (org!=null){
-                        System.out.println("Org"+org.getName());
+                    if (isDriver!=null){
+//                        System.out.println("Driver"+isDriver.getgetName());
                         System.out.println("User Account"+userAccount.getUsername());
-                        org.getWorkQueue().getWorkRequestList().add(request);
-                        System.out.println("Orga"+org.getWorkQueue().getWorkRequestList());
+                        isDriver.getWorkQueue().getWorkRequestList().add(request);
+                        System.out.println("DriverA"+isDriver.getWorkQueue().getWorkRequestList());
                         userAccount.getWorkQueue().getWorkRequestList().add(request);
                     }
                     else{
@@ -205,6 +211,13 @@ public class RequestTestJPanel extends javax.swing.JPanel {
             }   
         }
     }//GEN-LAST:event_btnRequestActionPerformed
+
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        // TODO add your handling code here:
+        userProcessContainer.remove(this);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.previous(userProcessContainer);
+    }//GEN-LAST:event_btnBackActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
