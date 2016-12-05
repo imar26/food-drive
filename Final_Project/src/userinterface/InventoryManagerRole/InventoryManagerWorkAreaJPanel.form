@@ -32,7 +32,7 @@
                           <Group type="102" attributes="0">
                               <Component id="btnProcess" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
-                              <Component id="jButton2" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnRequestWork" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Component id="jScrollPane1" min="-2" pref="375" max="-2" attributes="0"/>
                       </Group>
@@ -55,7 +55,7 @@
               <Component id="jScrollPane1" min="-2" pref="127" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jButton2" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnRequestWork" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnProcess" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="59" max="32767" attributes="0"/>
@@ -129,10 +129,13 @@
         <Property name="text" type="java.lang.String" value="Refresh"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton2">
+    <Component class="javax.swing.JButton" name="btnRequestWork">
       <Properties>
         <Property name="text" type="java.lang.String" value="Request Work"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRequestWorkActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnProcess">
       <Properties>

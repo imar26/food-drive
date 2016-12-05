@@ -9,10 +9,10 @@ package Business.WorkQueue;
  *
  * @author Aadesh Randeria
  */
-public class LabManagerWorkRequest {
+public class LabManagerWorkRequest extends WorkRequest {
     private String testResult;
     private int quantity;
-    private String location;
+   
 
     public String getTestResult() {
         return testResult;
@@ -30,11 +30,5 @@ public class LabManagerWorkRequest {
         this.quantity = quantity;
     }
 
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
-    }
+    
 }

@@ -5,6 +5,17 @@
  */
 package userinterface.InventoryManagerRole;
 
+import Business.EcoSystem;
+import Business.Enterprise.Enterprise;
+import Business.Enterprise.InspectionCenterEnterprise;
+import Business.Network.Network;
+import Business.Organization.Inventory;
+import Business.Organization.Lab;
+import Business.Organization.Organization;
+import Business.UserAccount.UserAccount;
+import Business.WorkQueue.LabManagerWorkRequest;
+import javax.swing.JPanel;
+
 /**
  *
  * @author HP
@@ -14,8 +25,18 @@ public class RequestWorkJPanel extends javax.swing.JPanel {
     /**
      * Creates new form RequestWorkJPanel
      */
-    public RequestWorkJPanel() {
+    private JPanel userProcessContainer;
+    private Inventory organization;
+    private Enterprise enterprise;
+    private UserAccount userAccount;
+    private Network network;
+    public RequestWorkJPanel(JPanel userProcessContainer, UserAccount account, Inventory organization, Enterprise enterprise,Network business) {
         initComponents();
+        this.userProcessContainer = userProcessContainer;
+        this.organization = organization;
+        this.enterprise = enterprise;
+        this.userAccount = account;
+        this.network=business;
     }
 
     /**
@@ -29,37 +50,45 @@ public class RequestWorkJPanel extends javax.swing.JPanel {
 
         jLabel1 = new javax.swing.JLabel();
         txtMessage = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        btnRequestWork = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        txtQuantity = new javax.swing.JTextField();
 
         jLabel1.setText("Message: ");
 
-        jButton1.setText("Request Work");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnRequestWork.setText("Request Work");
+        btnRequestWork.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnRequestWorkActionPerformed(evt);
             }
         });
 
         jButton2.setText("<< Back");
+
+        jLabel2.setText("Quantity:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addContainerGap(201, Short.MAX_VALUE)
+                .addComponent(btnRequestWork)
                 .addGap(98, 98, 98))
             .addGroup(layout.createSequentialGroup()
                 .addGap(57, 57, 57)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton2)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2))
                         .addGap(18, 18, 18)
-                        .addComponent(txtMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(156, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtMessage, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
+                            .addComponent(txtQuantity))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -68,23 +97,54 @@ public class RequestWorkJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txtMessage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(44, 44, 44)
-                .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(txtQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(9, 9, 9)
+                .addComponent(btnRequestWork)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
                 .addComponent(jButton2)
                 .addGap(101, 101, 101))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnRequestWorkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRequestWorkActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+        LabManagerWorkRequest request=new LabManagerWorkRequest();
+        request.setMessage(txtMessage.getText());
+        request.setStatus("Sent");
+        request.setQuantity(Integer.parseInt(txtQuantity.getText()));
+        Enterprise en = null;
+        Organization org = null;
+        for(Enterprise e : network.getEnterpriseDirectory().getEnterpriseList()){
+            if(e instanceof InspectionCenterEnterprise){
+                en=e;
+                for(Organization o : en.getOrganizationDirectory().getOrganizationList()){
+                    if(o instanceof Lab){
+                        org=o;
+                        break;
+                    }
+                }
+                if(org!=null){
+                    org.getWorkQueue().getWorkRequestList().add(request);
+                    userAccount.getWorkQueue().getWorkRequestList().add(request);
+                        
+                }
+            }
+        }
+        
+        
+        
+    }//GEN-LAST:event_btnRequestWorkActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnRequestWork;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JTextField txtMessage;
+    private javax.swing.JTextField txtQuantity;
     // End of variables declaration//GEN-END:variables
 }

@@ -5,6 +5,9 @@
  */
 package userinterface.InventoryManagerRole;
 
+import Business.WorkQueue.StoreWorkRequest;
+import javax.swing.JPanel;
+
 /**
  *
  * @author HP
@@ -14,8 +17,14 @@ public class ProcessWorkRequestJPanel extends javax.swing.JPanel {
     /**
      * Creates new form ProcessWorkRequestJPanel
      */
-    public ProcessWorkRequestJPanel() {
+    
+    private JPanel userProcessContainer;
+    private StoreWorkRequest request;
+    public ProcessWorkRequestJPanel(JPanel userProcessContainer, StoreWorkRequest request) {
         initComponents();
+        this.userProcessContainer=userProcessContainer;
+        this.request=request;
+        
     }
 
     /**
@@ -77,6 +86,8 @@ public class ProcessWorkRequestJPanel extends javax.swing.JPanel {
 
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
         // TODO add your handling code here:
+        request.setResult(txtResult.getText());
+        request.setStatus("Completed");
     }//GEN-LAST:event_btnSubmitActionPerformed
 
 

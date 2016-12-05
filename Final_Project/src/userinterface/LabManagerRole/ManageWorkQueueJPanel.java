@@ -45,16 +45,15 @@ public class ManageWorkQueueJPanel extends javax.swing.JPanel {
         
         model.setRowCount(0);
         for (WorkRequest request : organization.getWorkQueue().getWorkRequestList()){
-            Object[] row = new Object[6];
+            Object[] row = new Object[5];
             row[0] = request;
             row[1] = request.getReceiver();
             row[2] = request.getStatus();
             int quantity = ((LabManagerWorkRequest) request).getQuantity();
             row[3] = quantity;
-            String location = ((LabManagerWorkRequest) request).getLocation();
-            row[4]=location;
+            
             String result = ((LabManagerWorkRequest) request).getTestResult();
-            row[5] = result == null ? "Waiting" : result;
+            row[4] = result == null ? "Waiting" : result;
             
             model.addRow(row);
         }
@@ -80,11 +79,11 @@ public class ManageWorkQueueJPanel extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Message", "Receiver", "Status", "Result"
+                "Message", "Receiver", "Status", "Quantity", "Result"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {

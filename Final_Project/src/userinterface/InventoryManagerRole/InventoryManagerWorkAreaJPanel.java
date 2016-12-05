@@ -5,6 +5,7 @@
  */
 package userinterface.InventoryManagerRole;
 
+import Business.EcoSystem;
 import Business.Enterprise.Enterprise;
 import Business.Network.Network;
 import Business.Organization.Inventory;
@@ -12,6 +13,7 @@ import Business.Organization.MainOffice;
 import Business.UserAccount.UserAccount;
 import Business.WorkQueue.InventoryWorkRequest;
 import Business.WorkQueue.MainOfficeWorkRequest;
+import Business.WorkQueue.StoreWorkRequest;
 import Business.WorkQueue.WorkRequest;
 import java.awt.CardLayout;
 import javax.swing.JOptionPane;
@@ -31,12 +33,14 @@ public class InventoryManagerWorkAreaJPanel extends javax.swing.JPanel {
     private Inventory organization;
     private Enterprise enterprise;
     private UserAccount userAccount;
-    public InventoryManagerWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, Inventory organization, Enterprise enterprise) {
+    private Network network;
+    public InventoryManagerWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, Inventory organization, Enterprise enterprise,Network business) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.organization = organization;
         this.enterprise = enterprise;
         this.userAccount = account;
+        this.network=business;
         txtStock.setText(Integer.toString(organization.getStock()));
         populateRequestTable();
     }
@@ -71,7 +75,7 @@ public class InventoryManagerWorkAreaJPanel extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblInventory = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnRequestWork = new javax.swing.JButton();
         btnProcess = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         txtStock = new javax.swing.JTextField();
@@ -104,7 +108,12 @@ public class InventoryManagerWorkAreaJPanel extends javax.swing.JPanel {
 
         jButton1.setText("Refresh");
 
-        jButton2.setText("Request Work");
+        btnRequestWork.setText("Request Work");
+        btnRequestWork.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRequestWorkActionPerformed(evt);
+            }
+        });
 
         btnProcess.setText("Process");
         btnProcess.addActionListener(new java.awt.event.ActionListener() {
@@ -140,7 +149,7 @@ public class InventoryManagerWorkAreaJPanel extends javax.swing.JPanel {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(btnProcess)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton2))
+                                .addComponent(btnRequestWork))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(144, Short.MAX_VALUE))))
         );
@@ -156,7 +165,7 @@ public class InventoryManagerWorkAreaJPanel extends javax.swing.JPanel {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
+                    .addComponent(btnRequestWork)
                     .addComponent(btnProcess))
                 .addContainerGap(59, Short.MAX_VALUE))
         );
@@ -167,12 +176,12 @@ public class InventoryManagerWorkAreaJPanel extends javax.swing.JPanel {
         int selectedRow = tblInventory.getSelectedRow();
 
         if (selectedRow >= 0) {
-            MainOfficeWorkRequest request = (MainOfficeWorkRequest) tblInventory.getValueAt(selectedRow, 0);
+            StoreWorkRequest request = (StoreWorkRequest) tblInventory.getValueAt(selectedRow, 0);
 
             request.setStatus("Processing");
 
-            userinterface.OfficeManagerRole.ProcessWorkRequestOfficeJPanel processWorkRequestJPanel = new userinterface.OfficeManagerRole.ProcessWorkRequestOfficeJPanel(userProcessContainer, request);
-            userProcessContainer.add("processWorkRequestJPanel", processWorkRequestJPanel);
+            ProcessWorkRequestJPanel processWorkRequestJPanel = new ProcessWorkRequestJPanel(userProcessContainer, request);
+            userProcessContainer.add("processWorkRequestIJPanel", processWorkRequestJPanel);
             CardLayout layout = (CardLayout) userProcessContainer.getLayout();
             layout.next(userProcessContainer);
 
@@ -186,11 +195,18 @@ public class InventoryManagerWorkAreaJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtStockActionPerformed
 
+    private void btnRequestWorkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRequestWorkActionPerformed
+        // TODO add your handling code here:
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        userProcessContainer.add("RequestWorkJPanel", new RequestWorkJPanel(userProcessContainer, userAccount,organization, enterprise, network));
+        layout.next(userProcessContainer);
+    }//GEN-LAST:event_btnRequestWorkActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnProcess;
+    private javax.swing.JButton btnRequestWork;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblInventory;
