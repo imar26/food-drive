@@ -37,6 +37,7 @@ public class DriverWorkAreaJPanel extends javax.swing.JPanel {
         this.driver = driver;
         this.enterprise = enterprise;
         this.business = business;
+        populateRequestTable();
     }
     
     public void populateRequestTable() {
@@ -46,6 +47,7 @@ public class DriverWorkAreaJPanel extends javax.swing.JPanel {
         for (WorkRequest request : driver.getWorkQueue().getWorkRequestList()){
             Object[] row = new Object[6];
             row[0] = request;
+            System.out.println("Request"+request.getMessage());
             row[1] = ((DriverWorkRequest) request).getDriverName();
             row[2] = request.getStatus();
             int quantity = ((DriverWorkRequest) request).getQuantity();

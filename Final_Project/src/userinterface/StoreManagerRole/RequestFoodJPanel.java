@@ -211,7 +211,7 @@ public class RequestFoodJPanel extends javax.swing.JPanel {
             tblStoreWorkQueue.getColumnModel().getColumn(4).setResizable(false);
         }
 
-        btnRequestMO.setText("Request Main Office");
+        btnRequestMO.setText("Request Inventory");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

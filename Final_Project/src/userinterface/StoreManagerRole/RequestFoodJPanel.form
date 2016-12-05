@@ -207,7 +207,7 @@
     </Container>
     <Component class="javax.swing.JButton" name="btnRequestMO">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Request Main Office"/>
+        <Property name="text" type="java.lang.String" value="Request Inventory"/>
       </Properties>
     </Component>
   </SubComponents>
