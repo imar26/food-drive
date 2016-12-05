@@ -35,6 +35,10 @@ public class OrganizationDirectory {
             organization = new Lab();
             organizationList.add(organization);
         }
+        else if (type.getValue().equals(Organization.Type.LabAssistant.getValue())){
+            organization = new LabAssistant();
+            organizationList.add(organization);
+        }
         else if (type.getValue().equals(Organization.Type.StoreChain.getValue())){
               organization = new StoreChain();
               organizationList.add(organization);
