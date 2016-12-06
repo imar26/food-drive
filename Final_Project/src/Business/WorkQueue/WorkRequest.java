@@ -14,6 +14,8 @@ import java.util.Date;
  */
 public abstract class WorkRequest {
 
+    private int id;
+    private int count=1;
     private String message;
     private UserAccount sender;
     private UserAccount receiver;
@@ -23,8 +25,14 @@ public abstract class WorkRequest {
     
     public WorkRequest(){
         requestDate = new Date();
+        id=count;
+        count++;
     }
 
+    public int getId() {
+        return id;
+    }    
+    
     public String getMessage() {
         return message;
     }

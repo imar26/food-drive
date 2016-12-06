@@ -36,6 +36,7 @@ public class RequestFoodJPanel extends javax.swing.JPanel {
     private Enterprise enterprise;
     private UserAccount userAccount;
     private EcoSystem business;
+     DefaultTableModel model;
     /**
      * Creates new form RequestFoodJPanel
      */
@@ -47,6 +48,9 @@ public class RequestFoodJPanel extends javax.swing.JPanel {
         this.userAccount = account;
         this.business=business;
         populateTable();
+         model= (DefaultTableModel) tblStoreWorkQueue.getModel();
+                       model.setRowCount(0);
+                      
     }
     public LinkedHashMap sortHashMapByValuesD(HashMap passedMap) {
    List mapKeys = new ArrayList(passedMap.keySet());
@@ -269,6 +273,15 @@ public class RequestFoodJPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void requestBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_requestBtnActionPerformed
+                       StoreWorkRequest request=new StoreWorkRequest();
+                       request.setMessage("Request for food");
+                       
+                       request.setSender(userAccount);
+                       request.setQuantity(Integer.parseInt(quantityTxt.getText()));
+                       request.setStatus("Sent");
+                  //     request.setLocation(store.getLocation());
+
+        
         for(Organization org: enterprise.getOrganizationDirectory().getOrganizationList())
         {
             if(org instanceof StoreChain)
@@ -279,23 +292,24 @@ public class RequestFoodJPanel extends javax.swing.JPanel {
                     {    
                    if(store.getName().equals(tblStores.getValueAt(i, 0)))
                    {
-                       StoreWorkRequest request=new StoreWorkRequest();
-                       request.setMessage("Request for food");
-                       
-                       request.setSender(userAccount);
-                       request.setQuantity(Integer.parseInt(quantityTxt.getText()));
-                       request.setStatus("Sent");
+//                       StoreWorkRequest request=new StoreWorkRequest();
+//                       request.setMessage("Request for food");
+//                       
+//                       request.setSender(userAccount);
+//                       request.setQuantity(Integer.parseInt(quantityTxt.getText()));
+//                       request.setStatus("Sent");
                        request.setLocation(store.getLocation());
                        
                        
                        store.getWorkQueue().getWorkRequestList().add(request);
                        userAccount.getWorkQueue().getWorkRequestList().add(request);
-                       populateRequestTable(request);
+                        populateRequestTable(request, store); 
                    }    
                     }
                 }
              }  
         }
+        
     }//GEN-LAST:event_requestBtnActionPerformed
 
     private void quantityTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quantityTxtActionPerformed
@@ -331,14 +345,15 @@ public class RequestFoodJPanel extends javax.swing.JPanel {
         }
         
     }//GEN-LAST:event_btnRequestMOActionPerformed
-    public void populateRequestTable(StoreWorkRequest request){
+    public void populateRequestTable(StoreWorkRequest request, Store store){
            
-                       DefaultTableModel model = (DefaultTableModel) tblStoreWorkQueue.getModel();
-                       model.setRowCount(0);
+//                       DefaultTableModel model = (DefaultTableModel) tblStoreWorkQueue.getModel();
+//                       model.setRowCount(0);
                       
                        Object[] row = new Object[6];
                        row[0] = request;
-                       //row[1] = store.getName();
+                     //  System.out.println("store:"+store);
+                       row[1] = store;
                        row[2] = request.getStatus();
                        row[3] = request.getQuantity();
                        row[4] = request.getLocation();
