@@ -12,6 +12,7 @@ import Business.Organization.Driver;
 import Business.Organization.Transport;
 import Business.UserAccount.UserAccount;
 import Business.WorkQueue.DriverWorkRequest;
+import Business.WorkQueue.MainOfficeWorkRequest;
 import Business.WorkQueue.TransportWorkRequest;
 import Business.WorkQueue.WorkRequest;
 import javax.swing.JOptionPane;
@@ -54,13 +55,13 @@ public class DriverWorkAreaJPanel extends javax.swing.JPanel {
             Object[] row = new Object[6];
             row[0] = request;
             System.out.println("Request"+request.getMessage());
-            row[1] = ((DriverWorkRequest) request).getDriverName();
+            //row[1] = ((MainOfficeWorkRequest) request).getDriverName();
             row[2] = request.getStatus();
-            int quantity = ((DriverWorkRequest) request).getQuantity();
+            int quantity = ((MainOfficeWorkRequest) request).getQuantity();
             row[3] = quantity;
-            String location = ((DriverWorkRequest) request).getLocation();
+            String location = ((MainOfficeWorkRequest) request).getLocation();
             row[4]=location;
-            String result = ((DriverWorkRequest) request).getTestResult();
+            String result = ((MainOfficeWorkRequest) request).getTestResult();
             row[5] = result == null ? "Waiting" : result;
             
             model.addRow(row);
@@ -159,7 +160,7 @@ public class DriverWorkAreaJPanel extends javax.swing.JPanel {
         
         
         if (selectedRow >= 0) {
-            DriverWorkRequest request = (DriverWorkRequest) tblManageWorkQueue.getValueAt(selectedRow, 0);
+            MainOfficeWorkRequest request = (MainOfficeWorkRequest) tblManageWorkQueue.getValueAt(selectedRow, 0);
 
             request.setStatus("Processing");
 

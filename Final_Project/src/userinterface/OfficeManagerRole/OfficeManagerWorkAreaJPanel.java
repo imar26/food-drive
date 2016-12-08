@@ -182,9 +182,18 @@ public class OfficeManagerWorkAreaJPanel extends javax.swing.JPanel {
 
     private void btnRequestWorkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRequestWorkActionPerformed
         // TODO add your handling code here:
+        int selectedRow = mainOfficeJTable.getSelectedRow();
+        
+        if (selectedRow >= 0) {
+        MainOfficeWorkRequest request = (MainOfficeWorkRequest) mainOfficeJTable.getValueAt(selectedRow, 0);
+        request.setStatus("Processing");
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
-        userProcessContainer.add("RequestWorkJPanel", new RequestWorkJPanel(userProcessContainer, userAccount, enterprise, business));
+        userProcessContainer.add("RequestWorkJPanel", new RequestWorkJPanel(userProcessContainer, userAccount, enterprise, business, request));
         layout.next(userProcessContainer);
+        } else {
+           JOptionPane.showMessageDialog(null, "Please select a request message to process."); 
+            return;
+        }
     }//GEN-LAST:event_btnRequestWorkActionPerformed
 
 

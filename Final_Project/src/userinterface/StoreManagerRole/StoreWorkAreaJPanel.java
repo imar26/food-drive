@@ -215,21 +215,21 @@ public class StoreWorkAreaJPanel extends javax.swing.JPanel {
             if (selectedRow >= 0) {
             StoreWorkRequest request = (StoreWorkRequest) tblStore.getValueAt(selectedRow, 0);
 
-           for(WorkRequest request1: organization.getWorkQueue().getWorkRequestList())
-           {
-               System.out.println("req:"+request.getId());
-               System.out.println("req1:"+request1.getId()+" "+request1.getClass());
-               
-               if(request1.getId()==request.getId())
-               {
-                   
-                request1.setStatus("Food Sent");
-                //organization.getWorkQueue().getWorkRequestList().remove(request1);
-                
-               }
-           
-           }
-            //request.setStatus("Food Sent");
+//           for(WorkRequest request1: organization.getWorkQueue().getWorkRequestList())
+//           {
+//               System.out.println("req:"+request.getId());
+//               System.out.println("req1:"+request1.getId()+" "+request1.getClass());
+//               
+//               if(request1.getId()==request.getId())
+//               {
+//                   
+//                request1.setStatus("Food Sent");
+//                //organization.getWorkQueue().getWorkRequestList().remove(request1);
+//                
+//               }
+//           
+//           }
+            request.setStatus("Food Sent");
             int stock=organization.getStock();
             int quantity = ((StoreWorkRequest) request).getQuantity();
             int total=stock-quantity;

@@ -28,13 +28,13 @@ import javax.swing.JPanel;
 public class RequestTestJPanel extends javax.swing.JPanel {
     private JPanel userProcessContainer;
     private Transport organization;
-    private TransportWorkRequest request;
+    private MainOfficeWorkRequest request;
     private UserAccount userAccount;
     private EcoSystem business;
     /**
      * Creates new form RequestTestJPanel
      */
-    public RequestTestJPanel(JPanel userProcessContainer, Transport organization, TransportWorkRequest request, UserAccount userAccount, EcoSystem business) {
+    public RequestTestJPanel(JPanel userProcessContainer, Transport organization, MainOfficeWorkRequest request, UserAccount userAccount, EcoSystem business) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.organization = organization;
@@ -169,9 +169,9 @@ public class RequestTestJPanel extends javax.swing.JPanel {
     private void btnRequestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRequestActionPerformed
         // TODO add your handling code here:        
         UserAccount ua = (UserAccount)comboBoxDriver.getSelectedItem();
-        DriverWorkRequest request=new DriverWorkRequest();
+        //DriverWorkRequest request=new DriverWorkRequest();
         request.setSender(userAccount);
-        request.setDriverName(ua);
+        //request.setDriverName(ua);
         request.setMessage(txtMessage.getText());
         request.setQuantity(Integer.valueOf(txtQuantity.getText()));
         request.setLocation(txtLocation.getText());

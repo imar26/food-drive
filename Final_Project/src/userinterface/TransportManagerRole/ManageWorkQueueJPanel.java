@@ -50,11 +50,11 @@ public class ManageWorkQueueJPanel extends javax.swing.JPanel {
             row[0] = request;
             row[1] = request.getReceiver();
             row[2] = request.getStatus();
-            int quantity = ((TransportWorkRequest) request).getQuantity();
+            int quantity = ((MainOfficeWorkRequest) request).getQuantity();
             row[3] = quantity;
-            String location = ((TransportWorkRequest) request).getLocation();
+            String location = ((MainOfficeWorkRequest) request).getLocation();
             row[4]=location;
-            String result = ((TransportWorkRequest) request).getTestResult();
+            String result = ((MainOfficeWorkRequest) request).getTestResult();
             row[5] = result == null ? "Waiting" : result;
             
             model.addRow(row);
@@ -174,7 +174,7 @@ public class ManageWorkQueueJPanel extends javax.swing.JPanel {
         int selectedRow = tblManageWorkQueue.getSelectedRow();       
         
         if (selectedRow >= 0) {
-            TransportWorkRequest request = (TransportWorkRequest) tblManageWorkQueue.getValueAt(selectedRow, 0);
+            MainOfficeWorkRequest request = (MainOfficeWorkRequest) tblManageWorkQueue.getValueAt(selectedRow, 0);
             request.setStatus("Processing");
 
             RequestTestJPanel rtjp = new RequestTestJPanel(userProcessContainer, organization, request, userAccount, business);

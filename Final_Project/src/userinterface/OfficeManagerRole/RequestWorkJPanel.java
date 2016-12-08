@@ -29,15 +29,19 @@ public class RequestWorkJPanel extends javax.swing.JPanel {
     private Enterprise enterprise;
     private UserAccount userAccount;
     private EcoSystem business;
+    private MainOfficeWorkRequest request;
     /**
      * Creates new form RequestWorkJPanel
      */
-    public RequestWorkJPanel(JPanel userProcessContainer, UserAccount account, Enterprise enterprise, EcoSystem business) {
+    public RequestWorkJPanel(JPanel userProcessContainer, UserAccount account, Enterprise enterprise, EcoSystem business,MainOfficeWorkRequest request) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.enterprise = enterprise;
         this.userAccount = account;
         this.business=business;
+        this.request=request;
+        txtQuantity.setText(Integer.toString(request.getQuantity()));
+        txtLocation.setText(request.getLocation());
     }
 
     /**
@@ -133,7 +137,7 @@ public class RequestWorkJPanel extends javax.swing.JPanel {
     private void btnRequestWorkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRequestWorkActionPerformed
         // TODO add your handling code here:
         
-        TransportWorkRequest request=new TransportWorkRequest();
+        //TransportWorkRequest request=new TransportWorkRequest();
         request.setSender(userAccount);
         request.setMessage(txtMessage.getText());
         request.setQuantity(Integer.valueOf(txtQuantity.getText()));
