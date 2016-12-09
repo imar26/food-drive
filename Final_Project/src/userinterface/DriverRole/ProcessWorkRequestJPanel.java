@@ -7,6 +7,7 @@ package userinterface.DriverRole;
 
 import Business.UserAccount.UserAccount;
 import Business.WorkQueue.DriverWorkRequest;
+import Business.WorkQueue.FoodWorkRequest;
 import Business.WorkQueue.MainOfficeWorkRequest;
 import java.awt.CardLayout;
 import java.awt.Component;
@@ -23,9 +24,9 @@ public class ProcessWorkRequestJPanel extends javax.swing.JPanel {
      * Creates new form ProcessWorkRequestJPanel
      */
     private JPanel userProcessContainer;
-    private MainOfficeWorkRequest request;
+    private FoodWorkRequest request;
     private UserAccount account;
-    public ProcessWorkRequestJPanel(JPanel userProcessContainer, MainOfficeWorkRequest request, UserAccount account) {
+    public ProcessWorkRequestJPanel(JPanel userProcessContainer, FoodWorkRequest request, UserAccount account) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.request = request;

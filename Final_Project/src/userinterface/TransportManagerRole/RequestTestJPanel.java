@@ -16,6 +16,7 @@ import Business.Organization.Transport;
 import Business.Role.DriverRole;
 import Business.UserAccount.UserAccount;
 import Business.WorkQueue.DriverWorkRequest;
+import Business.WorkQueue.FoodWorkRequest;
 import Business.WorkQueue.MainOfficeWorkRequest;
 import Business.WorkQueue.TransportWorkRequest;
 import java.awt.CardLayout;
@@ -28,13 +29,13 @@ import javax.swing.JPanel;
 public class RequestTestJPanel extends javax.swing.JPanel {
     private JPanel userProcessContainer;
     private Transport organization;
-    private MainOfficeWorkRequest request;
+    private FoodWorkRequest request;
     private UserAccount userAccount;
     private EcoSystem business;
     /**
      * Creates new form RequestTestJPanel
      */
-    public RequestTestJPanel(JPanel userProcessContainer, Transport organization, MainOfficeWorkRequest request, UserAccount userAccount, EcoSystem business) {
+    public RequestTestJPanel(JPanel userProcessContainer, Transport organization, FoodWorkRequest request, UserAccount userAccount, EcoSystem business) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.organization = organization;

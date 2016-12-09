@@ -11,6 +11,7 @@ import Business.Organization.DonorOrganization;
 import Business.Organization.Driver;
 import Business.Organization.Transport;
 import Business.UserAccount.UserAccount;
+import Business.WorkQueue.FoodWorkRequest;
 import Business.WorkQueue.MainOfficeWorkRequest;
 import Business.WorkQueue.TransportWorkRequest;
 import Business.WorkQueue.WorkRequest;
@@ -50,11 +51,11 @@ public class ManageWorkQueueJPanel extends javax.swing.JPanel {
             row[0] = request;
             row[1] = request.getReceiver();
             row[2] = request.getStatus();
-            int quantity = ((MainOfficeWorkRequest) request).getQuantity();
+            int quantity = ((FoodWorkRequest) request).getQuantity();
             row[3] = quantity;
-            String location = ((MainOfficeWorkRequest) request).getLocation();
+            String location = ((FoodWorkRequest) request).getLocation();
             row[4]=location;
-            String result = ((MainOfficeWorkRequest) request).getTestResult();
+            String result = ((FoodWorkRequest) request).getTestResult();
             row[5] = result == null ? "Waiting" : result;
             
             model.addRow(row);
@@ -174,7 +175,7 @@ public class ManageWorkQueueJPanel extends javax.swing.JPanel {
         int selectedRow = tblManageWorkQueue.getSelectedRow();       
         
         if (selectedRow >= 0) {
-            MainOfficeWorkRequest request = (MainOfficeWorkRequest) tblManageWorkQueue.getValueAt(selectedRow, 0);
+            FoodWorkRequest request = (FoodWorkRequest) tblManageWorkQueue.getValueAt(selectedRow, 0);
             request.setStatus("Processing");
 
             RequestTestJPanel rtjp = new RequestTestJPanel(userProcessContainer, organization, request, userAccount, business);
