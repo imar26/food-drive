@@ -15,6 +15,7 @@ import Business.Organization.Organization;
 import Business.Organization.Store;
 import Business.Organization.StoreChain;
 import Business.UserAccount.UserAccount;
+import Business.WorkQueue.FoodWorkRequest;
 import Business.WorkQueue.MainOfficeWorkRequest;
 import Business.WorkQueue.StoreWorkRequest;
 import javax.swing.JPanel;
@@ -30,17 +31,19 @@ public class DonorWorkAreaJPanel extends javax.swing.JPanel {
     private Enterprise enterprise;
     private UserAccount userAccount;
     private EcoSystem business;
+    private Network network;
     
     /**
      * Creates new form DonorWorkAreaJPanel
      */
-    public DonorWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, DonorOrganization organization, Enterprise enterprise, EcoSystem business) {
+    public DonorWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, DonorOrganization organization, Enterprise enterprise, EcoSystem business, Network network) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.organization = organization;
         this.enterprise = enterprise;
         this.userAccount = account;
         this.business= business;
+        this.network=network;
         populateStore();
         if(userAccount.getDonor().getType().equalsIgnoreCase("Individual"))
         {
@@ -164,14 +167,13 @@ public class DonorWorkAreaJPanel extends javax.swing.JPanel {
         
         if(!userAccount.getDonor().getType().equalsIgnoreCase("Individual"))
         {
-        MainOfficeWorkRequest request=new MainOfficeWorkRequest();
+        FoodWorkRequest request=new FoodWorkRequest();
         request.setSender(userAccount);
         request.setQuantity(Integer.valueOf(quantityTxt.getText()));
         request.setLocation(locationTxt.getText());
-        request.setStatus("Sent");
+        request.setStatus("Request Sent");
+        request.setMessage("Food ready for pickup");
         
-        for(Network network : business.getNetworkList()){
-            System.out.println("Network"+ network.getName());
            Enterprise en=null;
             for(Enterprise enterprise : network.getEnterpriseDirectory().getEnterpriseList()){
             //    System.out.println("Enterprise"+ enterprise.getName());
@@ -197,14 +199,15 @@ public class DonorWorkAreaJPanel extends javax.swing.JPanel {
                     
                 }
             }   
-        }
+        
         }
         else{
             //send work request to that particular store
              StoreWorkRequest request=new StoreWorkRequest();
              request.setSender(userAccount);
              request.setQuantity(Integer.parseInt(quantityTxt.getText()));
-             request.setStatus("Dropped at Stall");
+             request.setStatus("Food Received");
+             request.setMessage("Food given at store");
              Store inStore=null;
              for(Organization org: enterprise.getOrganizationDirectory().getOrganizationList())
              {
