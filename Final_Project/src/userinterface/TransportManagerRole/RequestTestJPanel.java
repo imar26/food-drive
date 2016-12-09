@@ -53,7 +53,7 @@ public class RequestTestJPanel extends javax.swing.JPanel {
     public void populateDriverComboBox() {
         comboBoxDriver.removeAllItems();
         for(Network n : business.getNetworkList()){
-            Enterprise en = null;
+            Enterprise en = null;            
             for(Enterprise e : n.getEnterpriseDirectory().getEnterpriseList()){
                 if(e instanceof TransportAgencyEnterprise)
                 {
@@ -61,7 +61,9 @@ public class RequestTestJPanel extends javax.swing.JPanel {
                     for(Organization o : en.getOrganizationDirectory().getOrganizationList()) {
                         if(o instanceof Driver){
                           for(UserAccount ua: o.getUserAccountDirectory().getUserAccountList()) {
-                              comboBoxDriver.addItem(ua);
+                              if(ua.getEmployee().getStatus().equals("Available")) {
+                                comboBoxDriver.addItem(ua);
+                              }
                           } 
                         }
                     }
@@ -95,6 +97,12 @@ public class RequestTestJPanel extends javax.swing.JPanel {
         jLabel1.setText("Message:");
 
         jLabel2.setText("Select Driver:");
+
+        comboBoxDriver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboBoxDriverActionPerformed(evt);
+            }
+        });
 
         btnRequest.setText("Request Test");
         btnRequest.addActionListener(new java.awt.event.ActionListener() {
@@ -195,6 +203,8 @@ public class RequestTestJPanel extends javax.swing.JPanel {
 //                            break;
                             
                             isDriver = ua;
+                            isDriver.getEmployee().setStatus("Busy");
+                            
                         }
                     }
                     if (isDriver!=null){
@@ -218,6 +228,10 @@ public class RequestTestJPanel extends javax.swing.JPanel {
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.previous(userProcessContainer);
     }//GEN-LAST:event_btnBackActionPerformed
+
+    private void comboBoxDriverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxDriverActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboBoxDriverActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

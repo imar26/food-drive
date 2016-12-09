@@ -164,7 +164,7 @@ public class DriverWorkAreaJPanel extends javax.swing.JPanel {
 
             request.setStatus("Processing");
 
-            ProcessWorkRequestJPanel processWorkRequestJPanel = new ProcessWorkRequestJPanel(userProcessContainer, request);
+            ProcessWorkRequestJPanel processWorkRequestJPanel = new ProcessWorkRequestJPanel(userProcessContainer, request, account);
             userProcessContainer.add("pwrjp", processWorkRequestJPanel);
             CardLayout layout = (CardLayout) userProcessContainer.getLayout();
             layout.next(userProcessContainer);

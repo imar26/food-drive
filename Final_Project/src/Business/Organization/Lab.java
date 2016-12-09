@@ -24,7 +24,6 @@ public class Lab extends Organization {
     public ArrayList<Role> getSupportedRole() {
         ArrayList<Role> roles = new ArrayList();
         roles.add(new LabManagerRole());
-        roles.add(new LabAssistantRole());
         return roles;
     }
     

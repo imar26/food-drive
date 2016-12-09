@@ -8,6 +8,7 @@ package userinterface.TransportManagerRole;
 import Business.EcoSystem;
 import Business.Employee.Employee;
 import Business.Enterprise.Enterprise;
+import Business.Organization.Driver;
 import Business.Organization.Organization;
 import Business.Organization.Transport;
 import Business.Role.DriverRole;
@@ -207,13 +208,17 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
-        // TODO add your handling code here:
+        // TODO add youelser handling code here:
         String userName = txtUserName.getText();
         char[] value = txtPassword.getPassword();
         String password = new String(value);
         Organization organization = (Organization) organizationJComboBox.getSelectedItem();
         Employee employee = (Employee) comboBoxDriver.getSelectedItem();
         Role role = (Role) comboBoxRole.getSelectedItem();
+        
+        if(organization instanceof Driver) {
+            employee.setStatus("Available");
+        }
 
         organization.getUserAccountDirectory().createUserAccount(userName, password, employee, role);
 

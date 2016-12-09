@@ -5,6 +5,7 @@
  */
 package userinterface.DriverRole;
 
+import Business.UserAccount.UserAccount;
 import Business.WorkQueue.DriverWorkRequest;
 import Business.WorkQueue.MainOfficeWorkRequest;
 import java.awt.CardLayout;
@@ -23,10 +24,12 @@ public class ProcessWorkRequestJPanel extends javax.swing.JPanel {
      */
     private JPanel userProcessContainer;
     private MainOfficeWorkRequest request;
-    public ProcessWorkRequestJPanel(JPanel userProcessContainer, MainOfficeWorkRequest request) {
+    private UserAccount account;
+    public ProcessWorkRequestJPanel(JPanel userProcessContainer, MainOfficeWorkRequest request, UserAccount account) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.request = request;
+        this.account = account;
     }
 
     /**
@@ -105,7 +108,8 @@ public class ProcessWorkRequestJPanel extends javax.swing.JPanel {
     private void btnSubmitResultActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitResultActionPerformed
         // TODO add your handling code here:
         request.setTestResult(txtResult.getText());
-        request.setStatus("Completed");
+        request.setStatus("Completed");        
+        account.getEmployee().setStatus("Available");
         JOptionPane.showMessageDialog(null, "Work Completed");
     }//GEN-LAST:event_btnSubmitResultActionPerformed
 
