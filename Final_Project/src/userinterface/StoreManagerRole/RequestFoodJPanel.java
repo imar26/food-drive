@@ -158,14 +158,17 @@ public class RequestFoodJPanel extends javax.swing.JPanel {
         ));
         jScrollPane2.setViewportView(jTable1);
 
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
         jLabel1.setText("Nearby Stores:");
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(158, 33, -1, -1));
 
         tblStores.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Name", "Distance"
+                "Name", "Distance(Kms)"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -178,13 +181,17 @@ public class RequestFoodJPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tblStores);
 
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(158, 58, 448, 116));
+
         jLabel2.setText("Quantity: ");
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(159, 207, -1, -1));
 
         quantityTxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 quantityTxtActionPerformed(evt);
             }
         });
+        add(quantityTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(226, 204, 123, -1));
 
         requestBtn.setText("Request");
         requestBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -192,6 +199,7 @@ public class RequestFoodJPanel extends javax.swing.JPanel {
                 requestBtnActionPerformed(evt);
             }
         });
+        add(requestBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(533, 203, -1, -1));
 
         tblStoreWorkQueue.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -219,57 +227,15 @@ public class RequestFoodJPanel extends javax.swing.JPanel {
             tblStoreWorkQueue.getColumnModel().getColumn(5).setResizable(false);
         }
 
+        add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(154, 277, -1, 203));
+
         btnRequestMO.setText("Request Inventory");
         btnRequestMO.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRequestMOActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(159, 159, 159)
-                        .addComponent(jLabel2)
-                        .addGap(18, 18, 18)
-                        .addComponent(quantityTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(requestBtn))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(154, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel1)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 448, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addGap(117, 117, 117))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(btnRequestMO)
-                .addGap(314, 314, 314))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(33, 33, 33)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(requestBtn)
-                    .addComponent(quantityTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addGap(51, 51, 51)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 88, Short.MAX_VALUE)
-                .addComponent(btnRequestMO)
-                .addGap(80, 80, 80))
-        );
+        add(btnRequestMO, new org.netbeans.lib.awtextra.AbsoluteConstraints(286, 568, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void requestBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_requestBtnActionPerformed
