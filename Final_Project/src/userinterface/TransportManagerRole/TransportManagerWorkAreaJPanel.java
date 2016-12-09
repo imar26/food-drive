@@ -27,13 +27,15 @@ public class TransportManagerWorkAreaJPanel extends javax.swing.JPanel {
     private UserAccount account;
     private EcoSystem business;
     private Transport organization;
-    public TransportManagerWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, Transport organization, Enterprise enterprise, EcoSystem business) {
+    private Network network;
+    public TransportManagerWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, Transport organization, Enterprise enterprise, EcoSystem business, Network network) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.enterprise = enterprise;
         this.account = account;
         this.organization = organization;
         this.business = business;
+        this.network=network;
 //        System.out.println(organization.getName() + "Hai mera naam");
     }
 
@@ -146,7 +148,7 @@ public class TransportManagerWorkAreaJPanel extends javax.swing.JPanel {
     private void btnWorkQueueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnWorkQueueActionPerformed
         // TODO add your handling code here:
 //        System.out.println(organization.getName() + "is my name");
-        ManageWorkQueueJPanel mwqtjp = new ManageWorkQueueJPanel(userProcessContainer, account, organization, enterprise, business);
+        ManageWorkQueueJPanel mwqtjp = new ManageWorkQueueJPanel(userProcessContainer, account, organization, enterprise, business, network);
         userProcessContainer.add("ManageWorkQueueJPanel", mwqtjp);
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);

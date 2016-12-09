@@ -7,6 +7,7 @@ package userinterface.TransportManagerRole;
 
 import Business.EcoSystem;
 import Business.Enterprise.Enterprise;
+import Business.Network.Network;
 import Business.Organization.DonorOrganization;
 import Business.Organization.Driver;
 import Business.Organization.Transport;
@@ -30,16 +31,18 @@ public class ManageWorkQueueJPanel extends javax.swing.JPanel {
     private Enterprise enterprise;
     private UserAccount userAccount;
     private EcoSystem business;
+    private Network network;
     /**
      * Creates new form ManageWorkQueueJPanel
      */
-    public ManageWorkQueueJPanel(JPanel userProcessContainer, UserAccount account, Transport organization, Enterprise enterprise, EcoSystem business) {
+    public ManageWorkQueueJPanel(JPanel userProcessContainer, UserAccount account, Transport organization, Enterprise enterprise, EcoSystem business, Network network) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.organization = organization;
         this.enterprise = enterprise;
         this.userAccount = account;
         this.business= business;
+        this.network=network;
         populateRequestTable();
     }
     public void populateRequestTable(){
