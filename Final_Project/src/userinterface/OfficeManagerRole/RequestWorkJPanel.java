@@ -14,6 +14,7 @@ import Business.Organization.MainOffice;
 import Business.Organization.Organization;
 import Business.Organization.Transport;
 import Business.UserAccount.UserAccount;
+import Business.WorkQueue.FoodWorkRequest;
 import Business.WorkQueue.MainOfficeWorkRequest;
 import Business.WorkQueue.TransportWorkRequest;
 import java.awt.CardLayout;
@@ -29,17 +30,19 @@ public class RequestWorkJPanel extends javax.swing.JPanel {
     private Enterprise enterprise;
     private UserAccount userAccount;
     private EcoSystem business;
-    private MainOfficeWorkRequest request;
+    private FoodWorkRequest request;
+    private Network network;
     /**
      * Creates new form RequestWorkJPanel
      */
-    public RequestWorkJPanel(JPanel userProcessContainer, UserAccount account, Enterprise enterprise, EcoSystem business,MainOfficeWorkRequest request) {
+    public RequestWorkJPanel(JPanel userProcessContainer, UserAccount account, Enterprise enterprise, EcoSystem business,FoodWorkRequest request,Network network) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.enterprise = enterprise;
         this.userAccount = account;
         this.business=business;
         this.request=request;
+        this.network=network;
         txtQuantity.setText(Integer.toString(request.getQuantity()));
         txtLocation.setText(request.getLocation());
     }
@@ -142,10 +145,9 @@ public class RequestWorkJPanel extends javax.swing.JPanel {
         request.setMessage(txtMessage.getText());
         request.setQuantity(Integer.valueOf(txtQuantity.getText()));
         request.setLocation(txtLocation.getText());
-        request.setStatus("Sent");
+        request.setStatus("Request sent to transport");
         
-        for(Network network : business.getNetworkList()){
-            System.out.println("Network"+ network.getName());
+        
            Enterprise en=null;
             for(Enterprise enterprise : network.getEnterpriseDirectory().getEnterpriseList()){
                 System.out.println("Enterprise"+ enterprise.getName());
@@ -168,10 +170,8 @@ public class RequestWorkJPanel extends javax.swing.JPanel {
                         System.out.println("Orga"+org.getWorkQueue().getWorkRequestList());
                         userAccount.getWorkQueue().getWorkRequestList().add(request);
                     }
-                    else{
-                        //send it to a stall specified
-                    }
-                }
+                    
+                
             }   
         }
         

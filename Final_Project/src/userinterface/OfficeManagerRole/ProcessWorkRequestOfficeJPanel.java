@@ -5,6 +5,7 @@
  */
 package userinterface.OfficeManagerRole;
 
+import Business.WorkQueue.FoodWorkRequest;
 import Business.WorkQueue.MainOfficeWorkRequest;
 import java.awt.CardLayout;
 import java.awt.Component;
@@ -17,11 +18,11 @@ import javax.swing.JPanel;
  */
 public class ProcessWorkRequestOfficeJPanel extends javax.swing.JPanel {
     JPanel userProcessContainer;
-    MainOfficeWorkRequest request;
+    FoodWorkRequest request;
     /**
      * Creates new form ProcessWorkRequestJPanel
      */
-    public ProcessWorkRequestOfficeJPanel(JPanel userProcessContainer, MainOfficeWorkRequest request) {
+    public ProcessWorkRequestOfficeJPanel(JPanel userProcessContainer, FoodWorkRequest request) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.request = request;

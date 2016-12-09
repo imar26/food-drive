@@ -10,6 +10,7 @@ import Business.Enterprise.Enterprise;
 import Business.Network.Network;
 import Business.Organization.MainOffice;
 import Business.UserAccount.UserAccount;
+import Business.WorkQueue.FoodWorkRequest;
 import Business.WorkQueue.MainOfficeWorkRequest;
 import Business.WorkQueue.WorkRequest;
 import java.awt.CardLayout;
@@ -27,16 +28,18 @@ public class OfficeManagerWorkAreaJPanel extends javax.swing.JPanel {
     private Enterprise enterprise;
     private UserAccount userAccount;
     private EcoSystem business;
+    private Network network;
     /**
      * Creates new form OfficeManagerWorkAreaJPanel
      */
-    public OfficeManagerWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, MainOffice organization, Enterprise enterprise, EcoSystem business) {
+    public OfficeManagerWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, MainOffice organization, Enterprise enterprise, EcoSystem business, Network network) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.organization = organization;
         this.enterprise = enterprise;
         this.userAccount = account;
         this.business=business;
+        this.network=network;
         populateRequestTable();
     }
      public void populateRequestTable(){
@@ -48,11 +51,11 @@ public class OfficeManagerWorkAreaJPanel extends javax.swing.JPanel {
             row[0] = request;
             row[1] = request.getReceiver();
             row[2] = request.getStatus();
-            int quantity = ((MainOfficeWorkRequest) request).getQuantity();
+            int quantity = ((FoodWorkRequest) request).getQuantity();
             row[3] = quantity;
-            String location = ((MainOfficeWorkRequest) request).getLocation();
+            String location = ((FoodWorkRequest) request).getLocation();
             row[4]=location;
-            String result = ((MainOfficeWorkRequest) request).getTestResult();
+            String result = ((FoodWorkRequest) request).getTestResult();
             row[5] = result == null ? "Waiting" : result;
             
             model.addRow(row);
@@ -160,7 +163,7 @@ public class OfficeManagerWorkAreaJPanel extends javax.swing.JPanel {
         
         
         if (selectedRow >= 0) {
-            MainOfficeWorkRequest request = (MainOfficeWorkRequest) mainOfficeJTable.getValueAt(selectedRow, 0);
+            FoodWorkRequest request = (FoodWorkRequest) mainOfficeJTable.getValueAt(selectedRow, 0);
 
             request.setStatus("Processing");
 
@@ -185,10 +188,10 @@ public class OfficeManagerWorkAreaJPanel extends javax.swing.JPanel {
         int selectedRow = mainOfficeJTable.getSelectedRow();
         
         if (selectedRow >= 0) {
-        MainOfficeWorkRequest request = (MainOfficeWorkRequest) mainOfficeJTable.getValueAt(selectedRow, 0);
-        request.setStatus("Processing");
+        FoodWorkRequest request = (FoodWorkRequest) mainOfficeJTable.getValueAt(selectedRow, 0);
+       // request.setStatus("Request sent to transport");
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
-        userProcessContainer.add("RequestWorkJPanel", new RequestWorkJPanel(userProcessContainer, userAccount, enterprise, business, request));
+        userProcessContainer.add("RequestWorkJPanel", new RequestWorkJPanel(userProcessContainer, userAccount, enterprise, business, request,network));
         layout.next(userProcessContainer);
         } else {
            JOptionPane.showMessageDialog(null, "Please select a request message to process."); 
