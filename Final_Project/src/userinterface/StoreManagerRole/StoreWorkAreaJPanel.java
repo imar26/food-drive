@@ -192,6 +192,8 @@ public class StoreWorkAreaJPanel extends javax.swing.JPanel {
         if (selectedRow >= 0) {
             StoreWorkRequest request = (StoreWorkRequest) tblStore.getValueAt(selectedRow, 0);
 
+            if(request.getMessage().equalsIgnoreCase("Food given at store"))
+            {    
             request.setStatus("Added");
             int stock=organization.getStock();
             int quantity = ((StoreWorkRequest) request).getQuantity();
@@ -202,6 +204,10 @@ public class StoreWorkAreaJPanel extends javax.swing.JPanel {
             organization.getWorkQueue().getWorkRequestList().remove(request);
             populateRequestTable();
 
+        }else {
+                JOptionPane.showMessageDialog(null, "Please select a request message to process."); 
+                return;
+              }
         } else {
            JOptionPane.showMessageDialog(null, "Please select a request message to process."); 
             return;
@@ -229,7 +235,14 @@ public class StoreWorkAreaJPanel extends javax.swing.JPanel {
 //               }
 //           
 //           }
-            request.setStatus("Food Sent");
+            
+            if(request.getMessage().equalsIgnoreCase("Request for food"))
+            { 
+                if(request.getStatus().equalsIgnoreCase("Request Sent"))
+                {
+                    if(organization.getStock()>10)
+                    {
+            request.setStatus("Food Sent for delivery");
             int stock=organization.getStock();
             int quantity = ((StoreWorkRequest) request).getQuantity();
             int total=stock-quantity;
@@ -252,21 +265,31 @@ public class StoreWorkAreaJPanel extends javax.swing.JPanel {
                     for (Organization organization : en.getOrganizationDirectory().getOrganizationList()){
                         
                         if (organization instanceof Transport){
-                            System.out.println("Yes Organization");
+                          //  System.out.println("Yes Organization");
                             org = organization;
                             break;
                         }
                     }
                     if (org!=null){
-                        System.out.println("Org"+org.getName());
-                        System.out.println("User Account"+userAccount.getUsername());
+                      //  System.out.println("Org"+org.getName());
+                      //  System.out.println("User Account"+userAccount.getUsername());
                         org.getWorkQueue().getWorkRequestList().add(request);
-                        System.out.println("Orga"+org.getWorkQueue().getWorkRequestList());
+                      //  System.out.println("Orga"+org.getWorkQueue().getWorkRequestList());
                         userAccount.getWorkQueue().getWorkRequestList().add(request);
                     }
                   }
-            }   
-        }
+               }
+              }else{
+                       JOptionPane.showMessageDialog(null, "Stock is below the threshold. Cannot process the request."); 
+                    }
+             }else {
+                       JOptionPane.showMessageDialog(null, "Request already processed by another store."); 
+                   }
+            }
+            else {
+                    JOptionPane.showMessageDialog(null, "Invalid action. You cannot sen food for this request."); 
+                 }
+            }
     }//GEN-LAST:event_btnSendActionPerformed
 
 

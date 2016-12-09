@@ -244,7 +244,7 @@ public class RequestFoodJPanel extends javax.swing.JPanel {
                        
                        request.setSender(userAccount);
                        request.setQuantity(Integer.parseInt(quantityTxt.getText()));
-                       request.setStatus("Sent");
+                       request.setStatus("Request Sent");
                   //     request.setLocation(store.getLocation());
 
         
