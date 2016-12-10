@@ -5,6 +5,18 @@
  */
 package testPackage;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
+import javax.swing.JPanel;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.CategoryPlot;
+import org.jfree.chart.plot.PiePlot;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.data.general.DefaultPieDataset;
+
 /**
  *
  * @author Aadesh Randeria
@@ -14,8 +26,10 @@ public class Tabbed extends javax.swing.JPanel {
     /**
      * Creates new form Tabbed
      */
-    public Tabbed() {
+    private JPanel container;
+    public Tabbed(JPanel container) {
         initComponents();
+        this.container = container;
     }
 
     /**
@@ -28,50 +42,37 @@ public class Tabbed extends javax.swing.JPanel {
     private void initComponents() {
 
         jTabbedPane1 = new javax.swing.JTabbedPane();
-        jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        barPanel = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
+        piePanel = new javax.swing.JPanel();
+        jButton2 = new javax.swing.JButton();
 
-        jLabel1.setText("First Label");
+        barPanel.setLayout(new java.awt.BorderLayout());
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addContainerGap(536, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(39, 39, 39)
-                .addComponent(jLabel1)
-                .addContainerGap(419, Short.MAX_VALUE))
-        );
+        jButton1.setText("Bar Chart");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        barPanel.add(jButton1, java.awt.BorderLayout.PAGE_START);
 
-        jTabbedPane1.addTab("My first Tab", jPanel1);
+        jTabbedPane1.addTab("My first Tab", barPanel);
 
-        jLabel2.setText("Second Tab");
+        jPanel2.setLayout(new java.awt.BorderLayout());
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel2)
-                .addContainerGap(529, Short.MAX_VALUE))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(35, 35, 35)
-                .addComponent(jLabel2)
-                .addContainerGap(423, Short.MAX_VALUE))
-        );
+        piePanel.setLayout(new java.awt.BorderLayout());
+
+        jButton2.setText("Pie Chart");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        piePanel.add(jButton2, java.awt.BorderLayout.PAGE_START);
+
+        jPanel2.add(piePanel, java.awt.BorderLayout.CENTER);
 
         jTabbedPane1.addTab("My second tab", jPanel2);
 
@@ -79,20 +80,53 @@ public class Tabbed extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        DefaultCategoryDataset barChartData = new DefaultCategoryDataset();
+        barChartData.setValue(20000, "Contribution Amount", "Jan");
+        barChartData.setValue(15000, "Contribution Amount", "Feb");
+        barChartData.setValue(30000, "Contribution Amount", "Mar");
+        JFreeChart barChart = ChartFactory.createBarChart("Church Contributions", "Monthly", "Contribution Amount", barChartData, PlotOrientation.VERTICAL, false, true, false);
+        CategoryPlot barchrt = barChart.getCategoryPlot();
+        barchrt.setRangeGridlinePaint(Color.ORANGE);
+        ChartPanel barP = new ChartPanel(barChart);
+        barP.setVisible(true);
+        barPanel.removeAll();
+        barPanel.add(barP, BorderLayout.CENTER);
+        barPanel.validate();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        DefaultPieDataset pieData = new DefaultPieDataset();
+        pieData.setValue("One", new Integer(10));
+        pieData.setValue("Two", new Integer(20));
+        pieData.setValue("Three", new Integer(30));
+        pieData.setValue("Four", new Integer(40));
+        JFreeChart chart = ChartFactory.createPieChart("Pie Chart", pieData, true, true, true);
+        PiePlot p = (PiePlot)chart.getPlot();
+        ChartPanel chartpanel = new ChartPanel(chart);
+        chartpanel.setVisible(true);
+        piePanel.removeAll();
+        piePanel.add(chartpanel, BorderLayout.CENTER);
+        piePanel.validate();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel barPanel;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JPanel piePanel;
     // End of variables declaration//GEN-END:variables
 }
