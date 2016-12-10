@@ -54,10 +54,10 @@ public class CompostManagerWorkAreaJPanel extends javax.swing.JPanel {
             row[0] = request;
             row[1] = request.getReceiver();
             row[2] = request.getStatus();
-            int quantity = ((CompostManagerWorkRequest) request).getQuantity();
+            int quantity = ((LabManagerWorkRequest) request).getQuantity();
             row[3] = quantity;
             
-            String result = ((CompostManagerWorkRequest) request).getTestResult();
+            String result = ((LabManagerWorkRequest) request).getTestResult();
             row[4] = result == null ? "Waiting" : result;
             
             model.addRow(row);
@@ -154,7 +154,7 @@ public class CompostManagerWorkAreaJPanel extends javax.swing.JPanel {
         
         
         if (selectedRow >= 0) {
-            CompostManagerWorkRequest request = (CompostManagerWorkRequest) tblCompostManager.getValueAt(selectedRow, 0);
+            LabManagerWorkRequest request = (LabManagerWorkRequest) tblCompostManager.getValueAt(selectedRow, 0);
 
             request.setStatus("Processing");
 

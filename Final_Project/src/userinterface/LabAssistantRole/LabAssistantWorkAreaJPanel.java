@@ -11,6 +11,7 @@ import Business.Organization.Lab;
 import Business.Organization.LabAssistant;
 import Business.UserAccount.UserAccount;
 import Business.WorkQueue.LabAssistantWorkRequest;
+import Business.WorkQueue.LabManagerWorkRequest;
 import Business.WorkQueue.WorkRequest;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -50,11 +51,11 @@ public class LabAssistantWorkAreaJPanel extends javax.swing.JPanel {
             Object[] row = new Object[5];
             row[0] = request;
             System.out.println("Request"+request.getMessage());
-            row[1] = ((LabAssistantWorkRequest) request).getLabAssistantName();
+           // row[1] = ((LabManagerWorkRequest) request).getLabAssistantName();
             row[2] = request.getStatus();
-            int quantity = ((LabAssistantWorkRequest) request).getQuantity();
+            int quantity = ((LabManagerWorkRequest) request).getQuantity();
             row[3] = quantity;
-            String result = ((LabAssistantWorkRequest) request).getTestResult();
+            String result = ((LabManagerWorkRequest) request).getTestResult();
             row[4] = result == null ? "Waiting" : result;
             
             model.addRow(row);
@@ -153,7 +154,7 @@ public class LabAssistantWorkAreaJPanel extends javax.swing.JPanel {
         
         
         if (selectedRow >= 0) {
-            LabAssistantWorkRequest request = (LabAssistantWorkRequest) tblManageWorkQueue.getValueAt(selectedRow, 0);
+            LabManagerWorkRequest request = (LabManagerWorkRequest) tblManageWorkQueue.getValueAt(selectedRow, 0);
 
             request.setStatus("Processing");
 

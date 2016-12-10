@@ -11,6 +11,7 @@ import Business.Network.Network;
 import Business.Organization.Inventory;
 import Business.Organization.MainOffice;
 import Business.UserAccount.UserAccount;
+import Business.WorkQueue.FoodWorkRequest;
 import Business.WorkQueue.InventoryWorkRequest;
 import Business.WorkQueue.MainOfficeWorkRequest;
 import Business.WorkQueue.StoreWorkRequest;
@@ -53,11 +54,11 @@ public class InventoryManagerWorkAreaJPanel extends javax.swing.JPanel {
             row[0] = request;
             row[1] = request.getReceiver();
             row[2] = request.getStatus();
-            int quantity = ((InventoryWorkRequest) request).getQuantity();
+            int quantity = ((FoodWorkRequest) request).getQuantity();
             row[3] = quantity;
-            String location = ((InventoryWorkRequest) request).getLocation();
+            String location = ((FoodWorkRequest) request).getLocation();
             row[4] = location;
-            String result = ((InventoryWorkRequest) request).getTestResult();
+            String result = ((FoodWorkRequest) request).getTestResult();
             row[5] = result == null ? "Waiting" : result;
             
             model.addRow(row);
@@ -176,7 +177,7 @@ public class InventoryManagerWorkAreaJPanel extends javax.swing.JPanel {
         int selectedRow = tblInventory.getSelectedRow();
 
         if (selectedRow >= 0) {
-            StoreWorkRequest request = (StoreWorkRequest) tblInventory.getValueAt(selectedRow, 0);
+            FoodWorkRequest request = (FoodWorkRequest) tblInventory.getValueAt(selectedRow, 0);
 
             request.setStatus("Processing");
 

@@ -214,12 +214,12 @@ public class ManageWorkQueueJPanel extends javax.swing.JPanel {
         if (selectedRow >= 0) {
             LabManagerWorkRequest request = (LabManagerWorkRequest) tblManageWorkQueue.getValueAt(selectedRow, 0);
             request.setStatus("Processing");
-            CompostManagerWorkRequest compostRequest = new CompostManagerWorkRequest(); 
-            compostRequest.setMessage(request.getMessage());
-            compostRequest.setReceiver(request.getReceiver());
-            compostRequest.setQuantity(request.getQuantity());
-            compostRequest.setStatus("Sent");
-            compostRequest.setTestResult("Waiting");
+            //CompostManagerWorkRequest compostRequest = new CompostManagerWorkRequest(); 
+            request.setMessage(request.getMessage());
+            request.setReceiver(request.getReceiver());
+            request.setQuantity(request.getQuantity());
+            request.setStatus("Sent");
+            request.setTestResult("Waiting");
             Enterprise en= null;
             for(Enterprise e : network.getEnterpriseDirectory().getEnterpriseList()){
                 if(e instanceof CompostingCenterEnterprise){
@@ -233,8 +233,8 @@ public class ManageWorkQueueJPanel extends javax.swing.JPanel {
                         }
                     }
                     if(org!=null){
-                        org.getWorkQueue().getWorkRequestList().add(compostRequest);
-                        account.getWorkQueue().getWorkRequestList().add(compostRequest);
+                        org.getWorkQueue().getWorkRequestList().add(request);
+                        account.getWorkQueue().getWorkRequestList().add(request);
                     }
                 }
             }

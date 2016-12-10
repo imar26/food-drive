@@ -6,6 +6,7 @@
 package userinterface.CompostManagerRole;
 
 import Business.WorkQueue.CompostManagerWorkRequest;
+import Business.WorkQueue.LabManagerWorkRequest;
 import java.awt.CardLayout;
 import java.awt.Component;
 import javax.swing.JOptionPane;
@@ -22,8 +23,8 @@ public class ProcessWorkRequestJPanel extends javax.swing.JPanel {
      * Creates new form ProcessWorkRequestJPanel
      */
     private JPanel userProcessContainer;
-    private CompostManagerWorkRequest request;
-    public ProcessWorkRequestJPanel(JPanel userProcessContainer, CompostManagerWorkRequest request) {
+    private LabManagerWorkRequest request;
+    public ProcessWorkRequestJPanel(JPanel userProcessContainer, LabManagerWorkRequest request) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.request = request;

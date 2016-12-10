@@ -6,6 +6,7 @@
 package userinterface.LabAssistantRole;
 
 import Business.WorkQueue.LabAssistantWorkRequest;
+import Business.WorkQueue.LabManagerWorkRequest;
 import java.awt.Component;
 import javax.swing.JPanel;
 import java.awt.CardLayout;
@@ -21,8 +22,8 @@ public class ProcessWorkRequestJPanel extends javax.swing.JPanel {
      * Creates new form ProcessWorkRequestJPanel
      */
     private JPanel userProcessContainer;
-    private LabAssistantWorkRequest request;
-    ProcessWorkRequestJPanel(JPanel userProcessContainer, LabAssistantWorkRequest request) {
+    private LabManagerWorkRequest request;
+    ProcessWorkRequestJPanel(JPanel userProcessContainer, LabManagerWorkRequest request) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.request = request;

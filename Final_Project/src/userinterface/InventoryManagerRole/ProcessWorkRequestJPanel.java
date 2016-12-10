@@ -5,6 +5,7 @@
  */
 package userinterface.InventoryManagerRole;
 
+import Business.WorkQueue.FoodWorkRequest;
 import Business.WorkQueue.StoreWorkRequest;
 import javax.swing.JPanel;
 
@@ -19,8 +20,8 @@ public class ProcessWorkRequestJPanel extends javax.swing.JPanel {
      */
     
     private JPanel userProcessContainer;
-    private StoreWorkRequest request;
-    public ProcessWorkRequestJPanel(JPanel userProcessContainer, StoreWorkRequest request) {
+    private FoodWorkRequest request;
+    public ProcessWorkRequestJPanel(JPanel userProcessContainer, FoodWorkRequest request) {
         initComponents();
         this.userProcessContainer=userProcessContainer;
         this.request=request;
@@ -86,7 +87,7 @@ public class ProcessWorkRequestJPanel extends javax.swing.JPanel {
 
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
         // TODO add your handling code here:
-        request.setResult(txtResult.getText());
+        request.setTestResult(txtResult.getText());
         request.setStatus("Completed");
     }//GEN-LAST:event_btnSubmitActionPerformed
 
