@@ -13,6 +13,7 @@ import Business.Organization.Organization;
 import Business.Organization.Store;
 import Business.Organization.Transport;
 import Business.UserAccount.UserAccount;
+import Business.WorkQueue.FoodWorkRequest;
 import Business.WorkQueue.StoreWorkRequest;
 import Business.WorkQueue.TransportWorkRequest;
 import Business.WorkQueue.WorkRequest;
@@ -46,7 +47,10 @@ public class StoreWorkAreaJPanel extends javax.swing.JPanel {
         this.business=business;
         this.network=network;
         txtStock.setText(Integer.toString(organization.getStock()));
-        
+        if(Integer.parseInt(txtStock.getText())<5)
+        {
+          btnRequestFood.setEnabled(true);
+        }
        populateRequestTable();
     }
     public void populateRequestTable(){
@@ -58,7 +62,7 @@ public class StoreWorkAreaJPanel extends javax.swing.JPanel {
             row[0] = request;
             row[1] = request.getReceiver();
             row[2] = request.getStatus();
-            int quantity = ((StoreWorkRequest) request).getQuantity();
+            int quantity = ((FoodWorkRequest) request).getQuantity();
             row[3] = quantity;
             
 
@@ -82,6 +86,7 @@ public class StoreWorkAreaJPanel extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         txtStock = new javax.swing.JTextField();
         btnSend = new javax.swing.JButton();
+        btnNoFood = new javax.swing.JButton();
 
         tblStore.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -109,13 +114,14 @@ public class StoreWorkAreaJPanel extends javax.swing.JPanel {
         });
 
         btnRequestFood.setText("Request Food");
+        btnRequestFood.setEnabled(false);
         btnRequestFood.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRequestFoodActionPerformed(evt);
             }
         });
 
-        btnAdd.setText("Add");
+        btnAdd.setText("Add Food");
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAddActionPerformed(evt);
@@ -131,32 +137,42 @@ public class StoreWorkAreaJPanel extends javax.swing.JPanel {
             }
         });
 
+        btnNoFood.setText(" Notify No Food");
+        btnNoFood.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNoFoodActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(29, 29, 29)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtStock, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnRefresh))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addComponent(btnAdd)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnSend)
-                        .addGap(74, 74, 74)
-                        .addComponent(btnRequestFood))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(41, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnRequestFood, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnAdd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 122, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnSend, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnNoFood, javax.swing.GroupLayout.Alignment.TRAILING)))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addComponent(jLabel1)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(txtStock, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnRefresh))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(59, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(40, Short.MAX_VALUE)
+                .addContainerGap(35, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnRefresh)
                     .addComponent(jLabel1)
@@ -165,10 +181,13 @@ public class StoreWorkAreaJPanel extends javax.swing.JPanel {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnRequestFood)
                     .addComponent(btnAdd)
                     .addComponent(btnSend))
-                .addGap(36, 36, 36))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnRequestFood)
+                    .addComponent(btnNoFood))
+                .addGap(7, 7, 7))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -205,7 +224,7 @@ public class StoreWorkAreaJPanel extends javax.swing.JPanel {
             populateRequestTable();
 
         }else {
-                JOptionPane.showMessageDialog(null, "Please select a request message to process."); 
+                JOptionPane.showMessageDialog(null, "Please select a valid request to process."); 
                 return;
               }
         } else {
@@ -219,8 +238,8 @@ public class StoreWorkAreaJPanel extends javax.swing.JPanel {
        int selectedRow = tblStore.getSelectedRow();
         
             if (selectedRow >= 0) {
-            StoreWorkRequest request = (StoreWorkRequest) tblStore.getValueAt(selectedRow, 0);
-
+   //         StoreWorkRequest request = (StoreWorkRequest) tblStore.getValueAt(selectedRow, 0);
+              FoodWorkRequest request = (FoodWorkRequest) tblStore.getValueAt(selectedRow, 0);
 //           for(WorkRequest request1: organization.getWorkQueue().getWorkRequestList())
 //           {
 //               System.out.println("req:"+request.getId());
@@ -240,18 +259,19 @@ public class StoreWorkAreaJPanel extends javax.swing.JPanel {
             { 
                 if(request.getStatus().equalsIgnoreCase("Request Sent"))
                 {
-                    if(organization.getStock()>10)
+                    if((organization.getStock()-request.getQuantity())>10)
                     {
             request.setStatus("Food Sent for delivery");
+         //   request.setResult("Yes");
             int stock=organization.getStock();
-            int quantity = ((StoreWorkRequest) request).getQuantity();
+            int quantity = ((FoodWorkRequest) request).getQuantity();
             int total=stock-quantity;
             organization.setStock(total);
             
             txtStock.setText(Integer.toString(total));
             JOptionPane.showMessageDialog(null, "Food request accepted"); 
-            
-                TransportWorkRequest trasnportRequest=new TransportWorkRequest();
+            populateRequestTable();
+                FoodWorkRequest trasnportRequest=new FoodWorkRequest();
                 trasnportRequest.setQuantity(quantity);
                 trasnportRequest.setLocation(organization.getLocation());
                 
@@ -287,14 +307,37 @@ public class StoreWorkAreaJPanel extends javax.swing.JPanel {
                    }
             }
             else {
-                    JOptionPane.showMessageDialog(null, "Invalid action. You cannot sen food for this request."); 
+                    JOptionPane.showMessageDialog(null, "Invalid action. You cannot send food for this request."); 
                  }
             }
     }//GEN-LAST:event_btnSendActionPerformed
 
+    private void btnNoFoodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNoFoodActionPerformed
+       
+        int selectedRow = tblStore.getSelectedRow();
+       
+        if (selectedRow >= 0) {
+            StoreWorkRequest request = (StoreWorkRequest) tblStore.getValueAt(selectedRow, 0);
+
+        if(request.getMessage().equalsIgnoreCase("Request for food"))
+            { 
+                if(request.getStatus().equalsIgnoreCase("Request Sent"))
+                {
+                    request.setResult("No");
+                }
+                else{
+                       JOptionPane.showMessageDialog(null, "Request already processed by another store."); 
+                    }
+             }else {
+                       JOptionPane.showMessageDialog(null, "Invalid action."); 
+                   }
+        }
+    }//GEN-LAST:event_btnNoFoodActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
+    private javax.swing.JButton btnNoFood;
     private javax.swing.JButton btnRefresh;
     private javax.swing.JButton btnRequestFood;
     private javax.swing.JButton btnSend;

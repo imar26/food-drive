@@ -203,7 +203,7 @@ public class DonorWorkAreaJPanel extends javax.swing.JPanel {
         }
         else{
             //send work request to that particular store
-             StoreWorkRequest request=new StoreWorkRequest();
+             FoodWorkRequest request=new FoodWorkRequest();
              request.setSender(userAccount);
              request.setQuantity(Integer.parseInt(quantityTxt.getText()));
              request.setStatus("Food Received");

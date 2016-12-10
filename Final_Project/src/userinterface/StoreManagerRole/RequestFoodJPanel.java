@@ -14,8 +14,10 @@ import Business.Organization.Organization;
 import Business.Organization.Store;
 import Business.Organization.StoreChain;
 import Business.UserAccount.UserAccount;
+import Business.WorkQueue.FoodWorkRequest;
 import Business.WorkQueue.InventoryWorkRequest;
 import Business.WorkQueue.StoreWorkRequest;
+import Business.WorkQueue.WorkRequest;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -47,10 +49,11 @@ public class RequestFoodJPanel extends javax.swing.JPanel {
         this.enterprise = enterprise;
         this.userAccount = account;
         this.business=business;
+        model= (DefaultTableModel) tblStoreWorkQueue.getModel();
+        model.setRowCount(0);
         populateTable();
-         model= (DefaultTableModel) tblStoreWorkQueue.getModel();
-                       model.setRowCount(0);
-                      
+        populatestoreTable();
+              
     }
     public LinkedHashMap sortHashMapByValuesD(HashMap passedMap) {
    List mapKeys = new ArrayList(passedMap.keySet());
@@ -206,11 +209,11 @@ public class RequestFoodJPanel extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Message", "Receiver", "Status", "Quantity", "Location", "Result"
+                "Message", "Receiver", "Status", "Quantity", "Result"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -224,12 +227,12 @@ public class RequestFoodJPanel extends javax.swing.JPanel {
             tblStoreWorkQueue.getColumnModel().getColumn(2).setResizable(false);
             tblStoreWorkQueue.getColumnModel().getColumn(3).setResizable(false);
             tblStoreWorkQueue.getColumnModel().getColumn(4).setResizable(false);
-            tblStoreWorkQueue.getColumnModel().getColumn(5).setResizable(false);
         }
 
         add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(154, 277, -1, 203));
 
         btnRequestMO.setText("Request Inventory");
+        btnRequestMO.setEnabled(false);
         btnRequestMO.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRequestMOActionPerformed(evt);
@@ -238,11 +241,62 @@ public class RequestFoodJPanel extends javax.swing.JPanel {
         add(btnRequestMO, new org.netbeans.lib.awtextra.AbsoluteConstraints(286, 568, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
+    public void populatestoreTable(){
+    
+//        for(Organization org: enterprise.getOrganizationDirectory().getOrganizationList())
+//        {
+//            if(org instanceof StoreChain)
+//            {    
+//                for(Store store: ((StoreChain) org).getStoreChain())
+//                {
+//                    for(int i=0; i<tblStores.getRowCount(); i++)
+//                    {    
+//                   if(store.getName().equals(tblStores.getValueAt(i, 0)))
+//                   {
+//                       
+//                       model.setRowCount(0);
+//                      
+//                       Object[] row = new Object[6];
+//                       row[0] = request;
+//                   }
+//                    }
+//                }
+//            }
+//        }
+           model.setRowCount(0);
+           for(WorkRequest request: userAccount.getWorkQueue().getWorkRequestList())
+           {
+                       Object[] row = new Object[6];
+                       row[0] = request;
+                       row[1] = request.getReceiver();
+                       row[2] = request.getStatus();
+                       row[3] = ((StoreWorkRequest) request).getQuantity();
+                      
+                       String result = ((StoreWorkRequest) request).getResult();
+                       row[4] = result == null ? "Waiting" : result;
+                
+                       model.addRow(row);
+                      
+           }
+           boolean flag=false;
+           for(int i=0; i<tblStoreWorkQueue.getRowCount();i++)
+           {
+               String result=(String) tblStoreWorkQueue.getValueAt(i, 4);
+               if(!result.equalsIgnoreCase("No"))
+               {
+                  flag=true;
+               }   
+           }
+           if(flag==false)
+               btnRequestMO.setEnabled(true);
+    }
+    
     private void requestBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_requestBtnActionPerformed
                        StoreWorkRequest request=new StoreWorkRequest();
                        request.setMessage("Request for food");
                        
                        request.setSender(userAccount);
+                       request.setSenderOrganization(organization);
                        request.setQuantity(Integer.parseInt(quantityTxt.getText()));
                        request.setStatus("Request Sent");
                   //     request.setLocation(store.getLocation());
@@ -258,15 +312,7 @@ public class RequestFoodJPanel extends javax.swing.JPanel {
                     {    
                    if(store.getName().equals(tblStores.getValueAt(i, 0)))
                    {
-//                       StoreWorkRequest request=new StoreWorkRequest();
-//                       request.setMessage("Request for food");
-//                       
-//                       request.setSender(userAccount);
-//                       request.setQuantity(Integer.parseInt(quantityTxt.getText()));
-//                       request.setStatus("Sent");
                        request.setLocation(store.getLocation());
-                       
-                       
                        store.getWorkQueue().getWorkRequestList().add(request);
                        userAccount.getWorkQueue().getWorkRequestList().add(request);
                         populateRequestTable(request, store); 
@@ -284,7 +330,7 @@ public class RequestFoodJPanel extends javax.swing.JPanel {
 
     private void btnRequestMOActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRequestMOActionPerformed
         // TODO add your handling code here:
-        InventoryWorkRequest request=new InventoryWorkRequest();
+        FoodWorkRequest request=new FoodWorkRequest();
         request.setMessage("Request for food");
         request.setSender(userAccount);
         request.setQuantity(Integer.parseInt(quantityTxt.getText()));

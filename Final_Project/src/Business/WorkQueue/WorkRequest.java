@@ -5,6 +5,7 @@
  */
 package Business.WorkQueue;
 
+import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
 import java.util.Date;
 
@@ -21,7 +22,7 @@ public abstract class WorkRequest {
     private UserAccount receiver;
     private String status;
     private Date requestDate;
-    private Date resolveDate;
+    private Organization senderOrganization;
     
     public WorkRequest(){
         requestDate = new Date();
@@ -37,6 +38,15 @@ public abstract class WorkRequest {
         return message;
     }
 
+    public Organization getSenderOrganization() {
+        return senderOrganization;
+    }
+
+    public void setSenderOrganization(Organization senderOrganization) {
+        this.senderOrganization = senderOrganization;
+    }
+
+    
     public void setMessage(String message) {
         this.message = message;
     }
@@ -73,13 +83,7 @@ public abstract class WorkRequest {
         this.requestDate = requestDate;
     }
 
-    public Date getResolveDate() {
-        return resolveDate;
-    }
-
-    public void setResolveDate(Date resolveDate) {
-        this.resolveDate = resolveDate;
-    }
+    
     public String toString(){
         return this.message;
     }

@@ -11,6 +11,7 @@ import Business.Enterprise.MainCenterEnterprise;
 import Business.Network.Network;
 import Business.Organization.Inventory;
 import Business.Organization.Organization;
+import Business.Organization.Store;
 import Business.UserAccount.UserAccount;
 import Business.WorkQueue.DriverWorkRequest;
 import Business.WorkQueue.FoodWorkRequest;
@@ -128,6 +129,13 @@ public class ProcessWorkRequestJPanel extends javax.swing.JPanel {
                         System.out.println(quantity);
                         int old_qty = ((Inventory)o).getStock();
                         ((Inventory)o).setStock(old_qty+quantity);
+                    }
+                    if(o instanceof Store){
+                        Organization org=request.getSenderOrganization();
+                        int quantity = request.getQuantity();
+                         int old_qty = ((Store)org).getStock();
+                         System.out.println("old qty: "+old_qty);
+                         ((Store)org).setStock(old_qty+quantity);
                     }
                 }
             }
