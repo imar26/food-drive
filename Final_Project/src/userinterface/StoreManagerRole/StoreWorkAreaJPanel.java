@@ -209,13 +209,13 @@ public class StoreWorkAreaJPanel extends javax.swing.JPanel {
         
         
         if (selectedRow >= 0) {
-            StoreWorkRequest request = (StoreWorkRequest) tblStore.getValueAt(selectedRow, 0);
+            FoodWorkRequest request = (FoodWorkRequest) tblStore.getValueAt(selectedRow, 0);
 
             if(request.getMessage().equalsIgnoreCase("Food given at store"))
             {    
             request.setStatus("Added");
             int stock=organization.getStock();
-            int quantity = ((StoreWorkRequest) request).getQuantity();
+            int quantity = ((FoodWorkRequest) request).getQuantity();
             int total=stock+quantity;
             organization.setStock(total);
             txtStock.setText(Integer.toString(total));
@@ -317,13 +317,13 @@ public class StoreWorkAreaJPanel extends javax.swing.JPanel {
         int selectedRow = tblStore.getSelectedRow();
        
         if (selectedRow >= 0) {
-            StoreWorkRequest request = (StoreWorkRequest) tblStore.getValueAt(selectedRow, 0);
+            FoodWorkRequest request = (FoodWorkRequest) tblStore.getValueAt(selectedRow, 0);
 
         if(request.getMessage().equalsIgnoreCase("Request for food"))
             { 
                 if(request.getStatus().equalsIgnoreCase("Request Sent"))
                 {
-                    request.setResult("No");
+             //       request.setResult("No");
                 }
                 else{
                        JOptionPane.showMessageDialog(null, "Request already processed by another store."); 

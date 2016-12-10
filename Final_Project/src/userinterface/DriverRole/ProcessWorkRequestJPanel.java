@@ -12,6 +12,7 @@ import Business.Network.Network;
 import Business.Organization.Inventory;
 import Business.Organization.Organization;
 import Business.Organization.Store;
+import Business.Organization.StoreChain;
 import Business.UserAccount.UserAccount;
 import Business.WorkQueue.DriverWorkRequest;
 import Business.WorkQueue.FoodWorkRequest;
@@ -124,19 +125,37 @@ public class ProcessWorkRequestJPanel extends javax.swing.JPanel {
         for(Enterprise e: network.getEnterpriseDirectory().getEnterpriseList()) {
             if(e instanceof MainCenterEnterprise) {
                 for(Organization o: e.getOrganizationDirectory().getOrganizationList()) {
-                    if(o instanceof Inventory) {
+                 // if(request.getSender().equals(o))
+                    if(o instanceof StoreChain)
+                   {
+                       System.out.println("in sc");
+                       System.out.println("sender"+request.getSenderOrganization());
+                     for (Store store : ((StoreChain) o).getStoreChain()) {
+                         if(store.equals(request.getSenderOrganization()))
+                         {
+                             System.out.println("in store"+request.getSenderOrganization());
+                           Organization org=request.getSenderOrganization();
+                        int quantity = request.getQuantity();
+                         int old_qty = ((Store)org).getStock();
+                         System.out.println("old qty: "+old_qty);
+                         ((Store)org).setStock(old_qty+quantity);
+                         }
+                     }
+                   }
+                    if(o instanceof Inventory && request.getSenderOrganization().equals(o)) {
+                        System.out.println("in inventory");
                         int quantity = request.getQuantity();
                         System.out.println(quantity);
                         int old_qty = ((Inventory)o).getStock();
                         ((Inventory)o).setStock(old_qty+quantity);
                     }
-                    if(o instanceof Store){
-                        Organization org=request.getSenderOrganization();
-                        int quantity = request.getQuantity();
-                         int old_qty = ((Store)org).getStock();
-                         System.out.println("old qty: "+old_qty);
-                         ((Store)org).setStock(old_qty+quantity);
-                    }
+//                    if(o instanceof Store){
+//                        Organization org=request.getSenderOrganization();
+//                        int quantity = request.getQuantity();
+//                         int old_qty = ((Store)org).getStock();
+//                         System.out.println("old qty: "+old_qty);
+//                         ((Store)org).setStock(old_qty+quantity);
+//                    }
                 }
             }
         }

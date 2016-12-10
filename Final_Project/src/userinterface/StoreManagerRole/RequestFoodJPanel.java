@@ -38,6 +38,7 @@ public class RequestFoodJPanel extends javax.swing.JPanel {
     private Enterprise enterprise;
     private UserAccount userAccount;
     private EcoSystem business;
+    
      DefaultTableModel model;
     /**
      * Creates new form RequestFoodJPanel
@@ -48,7 +49,7 @@ public class RequestFoodJPanel extends javax.swing.JPanel {
         this.organization = organization;
         this.enterprise = enterprise;
         this.userAccount = account;
-        this.business=business;
+        this.business=business;       
         model= (DefaultTableModel) tblStoreWorkQueue.getModel();
         model.setRowCount(0);
         populateTable();
@@ -270,9 +271,9 @@ public class RequestFoodJPanel extends javax.swing.JPanel {
                        row[0] = request;
                        row[1] = request.getReceiver();
                        row[2] = request.getStatus();
-                       row[3] = ((StoreWorkRequest) request).getQuantity();
+                       row[3] = ((FoodWorkRequest) request).getQuantity();
                       
-                       String result = ((StoreWorkRequest) request).getResult();
+                       String result = ((FoodWorkRequest) request).getTestResult();
                        row[4] = result == null ? "Waiting" : result;
                 
                        model.addRow(row);
@@ -292,7 +293,7 @@ public class RequestFoodJPanel extends javax.swing.JPanel {
     }
     
     private void requestBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_requestBtnActionPerformed
-                       StoreWorkRequest request=new StoreWorkRequest();
+                       FoodWorkRequest request=new FoodWorkRequest();
                        request.setMessage("Request for food");
                        
                        request.setSender(userAccount);
@@ -357,7 +358,7 @@ public class RequestFoodJPanel extends javax.swing.JPanel {
         }
         
     }//GEN-LAST:event_btnRequestMOActionPerformed
-    public void populateRequestTable(StoreWorkRequest request, Store store){
+    public void populateRequestTable(FoodWorkRequest request, Store store){
            
 //                       DefaultTableModel model = (DefaultTableModel) tblStoreWorkQueue.getModel();
 //                       model.setRowCount(0);
@@ -369,8 +370,8 @@ public class RequestFoodJPanel extends javax.swing.JPanel {
                        row[2] = request.getStatus();
                        row[3] = request.getQuantity();
                        row[4] = request.getLocation();
-                       String result = request.getResult();
-                       row[4] = result == null ? "Waiting" : result;
+                  //     String result = request.getResult();
+                //       row[4] = result == null ? "Waiting" : result;
                 
                        model.addRow(row);
                       
