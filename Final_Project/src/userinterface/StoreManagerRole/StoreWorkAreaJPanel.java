@@ -10,6 +10,8 @@ import Business.Enterprise.Enterprise;
 import Business.Enterprise.TransportAgencyEnterprise;
 import Business.Network.Network;
 import Business.Organization.Organization;
+import Business.Organization.RecordList;
+import Business.Organization.Records;
 import Business.Organization.Store;
 import Business.Organization.Transport;
 import Business.UserAccount.UserAccount;
@@ -21,6 +23,7 @@ import java.awt.CardLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
+import static userinterface.InventoryManagerRole.InventoryManagerWorkAreaJPanel.randInt;
 
 /**
  *
@@ -86,7 +89,10 @@ public class StoreWorkAreaJPanel extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         txtStock = new javax.swing.JTextField();
         btnSend = new javax.swing.JButton();
-        btnNoFood = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        txtGiveAway = new javax.swing.JTextField();
+        btnGiveAway = new javax.swing.JButton();
+        btnDailySub = new javax.swing.JButton();
 
         tblStore.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -137,10 +143,19 @@ public class StoreWorkAreaJPanel extends javax.swing.JPanel {
             }
         });
 
-        btnNoFood.setText(" Notify No Food");
-        btnNoFood.addActionListener(new java.awt.event.ActionListener() {
+        jLabel2.setText("Give Away:");
+
+        btnGiveAway.setText("Give Away");
+        btnGiveAway.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNoFoodActionPerformed(evt);
+                btnGiveAwayActionPerformed(evt);
+            }
+        });
+
+        btnDailySub.setText("Daily Submission");
+        btnDailySub.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDailySubActionPerformed(evt);
             }
         });
 
@@ -150,24 +165,41 @@ public class StoreWorkAreaJPanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(29, 29, 29)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnRequestFood, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnAdd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 122, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnSend, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnNoFood, javax.swing.GroupLayout.Alignment.TRAILING)))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addComponent(jLabel1)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(txtStock, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnRefresh))
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(59, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(134, 134, 134)
+                                        .addComponent(btnRequestFood)
+                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel1)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(txtStock, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabel2)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(txtGiveAway, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(37, 37, 37)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(41, 41, 41)
+                                        .addComponent(btnSend, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(43, 43, 43)
+                                        .addComponent(btnRefresh, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(btnDailySub)))
+                        .addGap(41, 41, 41))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 577, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnGiveAway, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(41, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -176,17 +208,20 @@ public class StoreWorkAreaJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnRefresh)
                     .addComponent(jLabel1)
-                    .addComponent(txtStock, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtStock, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2)
+                    .addComponent(txtGiveAway, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAdd)
-                    .addComponent(btnSend))
+                    .addComponent(btnSend)
+                    .addComponent(btnRequestFood))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnRequestFood)
-                    .addComponent(btnNoFood))
+                    .addComponent(btnGiveAway)
+                    .addComponent(btnDailySub))
                 .addGap(7, 7, 7))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -312,38 +347,50 @@ public class StoreWorkAreaJPanel extends javax.swing.JPanel {
             }
     }//GEN-LAST:event_btnSendActionPerformed
 
-    private void btnNoFoodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNoFoodActionPerformed
-       
-        int selectedRow = tblStore.getSelectedRow();
-       
-        if (selectedRow >= 0) {
-            FoodWorkRequest request = (FoodWorkRequest) tblStore.getValueAt(selectedRow, 0);
+    private void btnGiveAwayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGiveAwayActionPerformed
+        // TODO add your handling code here:
+        int stock=organization.getStock();
+        int giveAway=randInt(1,3);
+        int existingGiveAway=organization.getGiveAway();
+        int total=giveAway+existingGiveAway;
+        organization.setGiveAway(total);
+        int totalStock=stock-giveAway;
+        organization.setStock(totalStock);
+        txtStock.setText(String.valueOf(totalStock));
+        txtGiveAway.setText(String.valueOf(total));
+        JOptionPane.showMessageDialog(null, "Food Successfully donated");
 
-        if(request.getMessage().equalsIgnoreCase("Request for food"))
-            { 
-                if(request.getStatus().equalsIgnoreCase("Request Sent"))
-                {
-             //       request.setResult("No");
-                }
-                else{
-                       JOptionPane.showMessageDialog(null, "Request already processed by another store."); 
-                    }
-             }else {
-                       JOptionPane.showMessageDialog(null, "Invalid action."); 
-                   }
-        }
-    }//GEN-LAST:event_btnNoFoodActionPerformed
+    }//GEN-LAST:event_btnGiveAwayActionPerformed
+
+    private void btnDailySubActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDailySubActionPerformed
+        // TODO add your handling code here:
+        int finalStock=organization.getFinalStock();
+        int giveAwaycount= organization.getGiveAway();
+        Records records=new Records();
+        records.setFoodDonated(finalStock);
+        records.setFoodGiven(giveAwaycount);
+        records.setRequestDate(business.getCurrentDate());
+        System.out.println("current date"+business.getCurrentDate());
+        RecordList list=new RecordList();
+        list.addRecords(records);
+        organization.setRecordList(list);
+        JOptionPane.showMessageDialog(null, "Daily Records Submitted Successfully");
+
+    }//GEN-LAST:event_btnDailySubActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
-    private javax.swing.JButton btnNoFood;
+    private javax.swing.JButton btnDailySub;
+    private javax.swing.JButton btnGiveAway;
     private javax.swing.JButton btnRefresh;
     private javax.swing.JButton btnRequestFood;
     private javax.swing.JButton btnSend;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblStore;
+    private javax.swing.JTextField txtGiveAway;
     private javax.swing.JTextField txtStock;
     // End of variables declaration//GEN-END:variables
 }

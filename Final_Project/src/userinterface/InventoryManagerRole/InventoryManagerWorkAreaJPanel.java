@@ -41,6 +41,7 @@ public class InventoryManagerWorkAreaJPanel extends javax.swing.JPanel {
     private EcoSystem business;
     public InventoryManagerWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, Inventory organization, Enterprise enterprise,Network network, EcoSystem business) {
         initComponents();
+        this.business=business;
         this.userProcessContainer = userProcessContainer;
         this.organization = organization;
         this.enterprise = enterprise;
@@ -280,6 +281,8 @@ public class InventoryManagerWorkAreaJPanel extends javax.swing.JPanel {
         organization.setGiveAway(total);
         int totalStock=stock-giveAway;
         organization.setStock(totalStock);
+        txtStock.setText(String.valueOf(totalStock));
+        txtGiveAway.setText(String.valueOf(total));
         JOptionPane.showMessageDialog(null, "Food Successfully donated to NGOs and Old-Aged Homes");
         
     }//GEN-LAST:event_btnGiveAwayActionPerformed

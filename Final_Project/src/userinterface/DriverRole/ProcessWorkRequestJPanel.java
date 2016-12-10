@@ -10,6 +10,7 @@ import Business.Enterprise.Enterprise;
 import Business.Enterprise.MainCenterEnterprise;
 import Business.Network.Network;
 import Business.Organization.Inventory;
+import Business.Organization.MainOffice;
 import Business.Organization.Organization;
 import Business.Organization.Store;
 import Business.Organization.StoreChain;
@@ -142,7 +143,7 @@ public class ProcessWorkRequestJPanel extends javax.swing.JPanel {
                          }
                      }
                    }
-                    if(o instanceof Inventory && request.getSenderOrganization().equals(o)) {
+                    if(o instanceof Inventory && request.getSenderOrganization() instanceof MainOffice) {
                         System.out.println("in inventory");
                         int quantity = request.getQuantity();
                         System.out.println(quantity);

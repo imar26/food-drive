@@ -32,11 +32,13 @@ public class RequestWorkJPanel extends javax.swing.JPanel {
     private EcoSystem business;
     private FoodWorkRequest request;
     private Network network;
+    private Organization organization;
     /**
      * Creates new form RequestWorkJPanel
      */
-    public RequestWorkJPanel(JPanel userProcessContainer, UserAccount account, Enterprise enterprise, EcoSystem business,FoodWorkRequest request,Network network) {
+    public RequestWorkJPanel(JPanel userProcessContainer, UserAccount account, Enterprise enterprise, Organization organization, EcoSystem business,FoodWorkRequest request,Network network) {
         initComponents();
+        this.organization=organization;
         this.userProcessContainer = userProcessContainer;
         this.enterprise = enterprise;
         this.userAccount = account;
@@ -142,6 +144,7 @@ public class RequestWorkJPanel extends javax.swing.JPanel {
         
         //TransportWorkRequest request=new TransportWorkRequest();
         request.setSender(userAccount);
+        request.setSenderOrganization(organization);
         request.setMessage(txtMessage.getText());
         request.setQuantity(Integer.valueOf(txtQuantity.getText()));
         request.setLocation(txtLocation.getText());

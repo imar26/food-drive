@@ -244,6 +244,7 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
     private void btnSetDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSetDateActionPerformed
         // TODO add your handling code here:
         system.setCurrentDate(txtDate.getDate());
+        System.out.println("date"+system.getCurrentDate());
     }//GEN-LAST:event_btnSetDateActionPerformed
 
 

@@ -191,7 +191,7 @@ public class OfficeManagerWorkAreaJPanel extends javax.swing.JPanel {
         FoodWorkRequest request = (FoodWorkRequest) mainOfficeJTable.getValueAt(selectedRow, 0);
        // request.setStatus("Request sent to transport");
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
-        userProcessContainer.add("RequestWorkJPanel", new RequestWorkJPanel(userProcessContainer, userAccount, enterprise, business, request,network));
+        userProcessContainer.add("RequestWorkJPanel", new RequestWorkJPanel(userProcessContainer, userAccount, enterprise, organization, business, request,network));
         layout.next(userProcessContainer);
         } else {
            JOptionPane.showMessageDialog(null, "Please select a request message to process."); 

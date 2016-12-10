@@ -22,6 +22,9 @@ public class Store extends Organization {
     private int longitude;
     private int latitude;
     private RecordList recordList;
+    private int finalStock;
+    private int giveAway;
+    
     
     public Store() {
         super(Organization.Type.Store.getValue());
@@ -43,6 +46,23 @@ public class Store extends Organization {
         this.location = location;
     }
 
+    public int getFinalStock() {
+        return finalStock;
+    }
+
+    public void setFinalStock(int finalStock) {
+        this.finalStock = finalStock;
+    }
+
+    public int getGiveAway() {
+        return giveAway;
+    }
+
+    public void setGiveAway(int giveAway) {
+        this.giveAway = giveAway;
+    }
+
+    
     public int getStock() {
         return stock;
     }
