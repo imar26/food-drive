@@ -35,13 +35,15 @@ public class DriverWorkAreaJPanel extends javax.swing.JPanel {
     private Driver driver;
     private Enterprise enterprise;
     private EcoSystem business;
-    public DriverWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, Driver driver, Enterprise enterprise, EcoSystem business) {
+    private Network network;
+    public DriverWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, Driver driver, Enterprise enterprise, EcoSystem business, Network network) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.account = account;
         this.driver = driver;
         this.enterprise = enterprise;
         this.business = business;
+        this.network = network;
         
         populateRequestTable();
         System.out.println("In Driver Panel");
@@ -165,7 +167,7 @@ public class DriverWorkAreaJPanel extends javax.swing.JPanel {
 
             request.setStatus("Processing");
 
-            ProcessWorkRequestJPanel processWorkRequestJPanel = new ProcessWorkRequestJPanel(userProcessContainer, request, account);
+            ProcessWorkRequestJPanel processWorkRequestJPanel = new ProcessWorkRequestJPanel(userProcessContainer, request, account, network);
             userProcessContainer.add("pwrjp", processWorkRequestJPanel);
             CardLayout layout = (CardLayout) userProcessContainer.getLayout();
             layout.next(userProcessContainer);

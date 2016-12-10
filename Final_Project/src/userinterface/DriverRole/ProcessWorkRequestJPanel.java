@@ -5,6 +5,12 @@
  */
 package userinterface.DriverRole;
 
+import Business.EcoSystem;
+import Business.Enterprise.Enterprise;
+import Business.Enterprise.MainCenterEnterprise;
+import Business.Network.Network;
+import Business.Organization.Inventory;
+import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
 import Business.WorkQueue.DriverWorkRequest;
 import Business.WorkQueue.FoodWorkRequest;
@@ -26,11 +32,13 @@ public class ProcessWorkRequestJPanel extends javax.swing.JPanel {
     private JPanel userProcessContainer;
     private FoodWorkRequest request;
     private UserAccount account;
-    public ProcessWorkRequestJPanel(JPanel userProcessContainer, FoodWorkRequest request, UserAccount account) {
+    private Network network;
+    public ProcessWorkRequestJPanel(JPanel userProcessContainer, FoodWorkRequest request, UserAccount account, Network network) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.request = request;
         this.account = account;
+        this.network = network;
     }
 
     /**
@@ -109,9 +117,21 @@ public class ProcessWorkRequestJPanel extends javax.swing.JPanel {
     private void btnSubmitResultActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitResultActionPerformed
         // TODO add your handling code here:
         request.setTestResult(txtResult.getText());
-        request.setStatus("Completed");        
+        request.setStatus("Food Delivered");        
         account.getEmployee().setStatus("Available");
         JOptionPane.showMessageDialog(null, "Work Completed");
+        for(Enterprise e: network.getEnterpriseDirectory().getEnterpriseList()) {
+            if(e instanceof MainCenterEnterprise) {
+                for(Organization o: e.getOrganizationDirectory().getOrganizationList()) {
+                    if(o instanceof Inventory) {
+                        int quantity = request.getQuantity();
+                        System.out.println(quantity);
+                        int old_qty = ((Inventory)o).getStock();
+                        ((Inventory)o).setStock(old_qty+quantity);
+                    }
+                }
+            }
+        }
     }//GEN-LAST:event_btnSubmitResultActionPerformed
 
 
