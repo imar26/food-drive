@@ -15,13 +15,40 @@ import java.util.ArrayList;
  */
 public class Inventory extends Organization{
     private int stock;
+    private int finalStock;
+    private int giveAway;
+    private RecordList recordList;
 
+    public int getFinalStock() {
+        return finalStock;
+    }
+
+    public void setFinalStock(int finalStock) {
+        this.finalStock = finalStock;
+    }
+    
     public int getStock() {
         return stock;
     }
 
     public void setStock(int stock) {
         this.stock = stock;
+    }
+
+    public int getGiveAway() {
+        return giveAway;
+    }
+
+    public void setGiveAway(int giveAway) {
+        this.giveAway = giveAway;
+    }
+    
+    public RecordList getRecordList() {
+        return recordList;
+    }
+
+    public void setRecordList(RecordList recordList) {
+        this.recordList = recordList;
     }
     
     public Inventory(){

@@ -5,6 +5,12 @@
  */
 package userinterface.InventoryManagerRole;
 
+import Business.Enterprise.Enterprise;
+import Business.Enterprise.MainCenterEnterprise;
+import Business.Network.Network;
+import Business.Organization.Inventory;
+import Business.Organization.Organization;
+import Business.Organization.Store;
 import Business.WorkQueue.FoodWorkRequest;
 import Business.WorkQueue.StoreWorkRequest;
 import javax.swing.JPanel;
@@ -21,10 +27,12 @@ public class ProcessWorkRequestJPanel extends javax.swing.JPanel {
     
     private JPanel userProcessContainer;
     private FoodWorkRequest request;
-    public ProcessWorkRequestJPanel(JPanel userProcessContainer, FoodWorkRequest request) {
+    private Network network;
+    public ProcessWorkRequestJPanel(JPanel userProcessContainer,Network network, FoodWorkRequest request) {
         initComponents();
         this.userProcessContainer=userProcessContainer;
         this.request=request;
+        this.network=network;
         
     }
 
@@ -89,6 +97,18 @@ public class ProcessWorkRequestJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         request.setTestResult(txtResult.getText());
         request.setStatus("Completed");
+        for(Enterprise e: network.getEnterpriseDirectory().getEnterpriseList()) {
+            if(e instanceof MainCenterEnterprise) {
+                for(Organization o: e.getOrganizationDirectory().getOrganizationList()) {
+                    if(o instanceof Store) {
+                        int quantity = request.getQuantity();
+                        //System.out.println(quantity);
+                        int old_qty = ((Store)o).getStock();
+                        ((Store)o).setStock(old_qty+quantity);
+                    }
+                }
+            }
+        }
     }//GEN-LAST:event_btnSubmitActionPerformed
 
 

@@ -25,6 +25,10 @@ public class RecordList {
     public void setRecordList(ArrayList<Records> recordList) {
         this.recordList = recordList;
     }
-    
+    public void addRecords(Records record){
+        
+        recordList.add(record);
+        
+    }
     
 }
