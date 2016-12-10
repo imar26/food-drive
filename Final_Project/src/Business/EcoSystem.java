@@ -11,6 +11,7 @@ import Business.Role.Role;
 import Business.Role.SystemAdminRole;
 //import Business.Role.SystemAdminRole;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  *
@@ -20,7 +21,8 @@ public class EcoSystem extends Organization {
     
     private static EcoSystem business;
     private ArrayList<Network> networkList;
-
+    private Date currentDate;
+    
     public ArrayList<Network> getNetworkList() {
         return networkList;
     }
@@ -44,6 +46,15 @@ public class EcoSystem extends Organization {
         networkList.add(network);
         return network;
     }
+
+    public Date getCurrentDate() {
+        return currentDate;
+    }
+
+    public void setCurrentDate(Date currentDate) {
+        this.currentDate = currentDate;
+    }
+    
     @Override
     public ArrayList<Role> getSupportedRole() {
         ArrayList<Role> roleList = new ArrayList();

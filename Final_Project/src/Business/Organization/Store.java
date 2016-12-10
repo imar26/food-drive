@@ -21,7 +21,8 @@ public class Store extends Organization {
     private int stock;
     private int longitude;
     private int latitude;
-
+    private RecordList recordList;
+    
     public Store() {
         super(Organization.Type.Store.getValue());
     }
@@ -68,6 +69,14 @@ public class Store extends Organization {
 
     public String toString(){
         return name;
+    }
+
+    public RecordList getRecordList() {
+        return recordList;
+    }
+
+    public void setRecordList(RecordList recordList) {
+        this.recordList = recordList;
     }
     
     
