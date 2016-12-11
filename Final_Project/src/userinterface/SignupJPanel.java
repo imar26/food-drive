@@ -63,76 +63,94 @@ public class SignupJPanel extends javax.swing.JPanel {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(153, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel1.setFont(new java.awt.Font("Lucida Calligraphy", 1, 14)); // NOI18N
         jLabel1.setText("Enter your details:");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(145, 11, -1, -1));
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
 
+        jLabel2.setFont(new java.awt.Font("Lucida Calligraphy", 1, 12)); // NOI18N
         jLabel2.setText("Name:");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 34, -1, -1));
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, -1, -1));
 
+        jLabel3.setFont(new java.awt.Font("Lucida Calligraphy", 1, 12)); // NOI18N
         jLabel3.setText("Phone number:");
-        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 65, -1, -1));
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, -1, -1));
 
+        jLabel4.setFont(new java.awt.Font("Lucida Calligraphy", 1, 12)); // NOI18N
         jLabel4.setText("Email id:");
-        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 96, -1, -1));
+        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, -1, -1));
 
+        jLabel5.setFont(new java.awt.Font("Lucida Calligraphy", 1, 12)); // NOI18N
         jLabel5.setText("UserName:");
-        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 127, -1, -1));
+        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, -1, -1));
 
+        jLabel6.setFont(new java.awt.Font("Lucida Calligraphy", 1, 12)); // NOI18N
         jLabel6.setText("Password:");
-        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 158, -1, -1));
+        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, -1, -1));
 
+        txtName.setFont(new java.awt.Font("Lucida Calligraphy", 0, 12)); // NOI18N
         txtName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNameActionPerformed(evt);
             }
         });
-        add(txtName, new org.netbeans.lib.awtextra.AbsoluteConstraints(155, 31, 117, -1));
+        add(txtName, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 70, 117, -1));
 
+        txtPhoneNo.setFont(new java.awt.Font("Lucida Calligraphy", 0, 12)); // NOI18N
         txtPhoneNo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtPhoneNoActionPerformed(evt);
             }
         });
-        add(txtPhoneNo, new org.netbeans.lib.awtextra.AbsoluteConstraints(155, 62, 117, -1));
+        add(txtPhoneNo, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 130, 117, -1));
 
+        txtEmail.setFont(new java.awt.Font("Lucida Calligraphy", 0, 12)); // NOI18N
         txtEmail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtEmailActionPerformed(evt);
             }
         });
-        add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(155, 93, 117, -1));
+        add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 160, 117, -1));
 
+        userNameTxt.setFont(new java.awt.Font("Lucida Calligraphy", 0, 12)); // NOI18N
         userNameTxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 userNameTxtActionPerformed(evt);
             }
         });
-        add(userNameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(155, 124, 117, -1));
+        add(userNameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 100, 117, -1));
 
+        jLabel7.setFont(new java.awt.Font("Lucida Calligraphy", 1, 12)); // NOI18N
         jLabel7.setText("Type:");
-        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 184, -1, -1));
+        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, -1, -1));
 
+        typeComboBox.setBackground(new java.awt.Color(255, 51, 0));
+        typeComboBox.setFont(new java.awt.Font("Lucida Calligraphy", 0, 12)); // NOI18N
         typeComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Individual", "Hotel", "Event" }));
-        add(typeComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(155, 181, 117, -1));
+        add(typeComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 220, 117, -1));
 
+        submitButton.setBackground(new java.awt.Color(255, 51, 0));
+        submitButton.setFont(new java.awt.Font("Lucida Calligraphy", 0, 12)); // NOI18N
         submitButton.setText("Submit");
         submitButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 submitButtonActionPerformed(evt);
             }
         });
-        add(submitButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(109, 219, -1, -1));
-        add(passvordTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(155, 155, 117, -1));
+        add(submitButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, -1, -1));
 
-        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 8)); // NOI18N
+        passvordTxt.setFont(new java.awt.Font("Lucida Calligraphy", 0, 12)); // NOI18N
+        add(passvordTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 190, 117, -1));
+
+        jLabel8.setFont(new java.awt.Font("Lucida Calligraphy", 1, 12)); // NOI18N
         jLabel8.setText("(example@eg.com)");
-        add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 90, 70, 20));
+        add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 130, 140, 20));
 
-        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 8)); // NOI18N
+        jLabel9.setFont(new java.awt.Font("Lucida Calligraphy", 1, 12)); // NOI18N
         jLabel9.setText("(xxx-xxx-xxxx)");
-        add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 60, 70, 20));
+        add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 100, 120, 20));
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNameActionPerformed
