@@ -85,6 +85,9 @@ public class DriverWorkAreaJPanel extends javax.swing.JPanel {
         btnProcess = new javax.swing.JButton();
         btnRefresh = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(153, 255, 255));
+
+        tblManageWorkQueue.setFont(new java.awt.Font("Lucida Calligraphy", 0, 12)); // NOI18N
         tblManageWorkQueue.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -103,6 +106,8 @@ public class DriverWorkAreaJPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tblManageWorkQueue);
 
+        btnProcess.setBackground(new java.awt.Color(255, 51, 0));
+        btnProcess.setFont(new java.awt.Font("Lucida Calligraphy", 0, 12)); // NOI18N
         btnProcess.setText("Process");
         btnProcess.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -110,6 +115,8 @@ public class DriverWorkAreaJPanel extends javax.swing.JPanel {
             }
         });
 
+        btnRefresh.setBackground(new java.awt.Color(255, 51, 0));
+        btnRefresh.setFont(new java.awt.Font("Lucida Calligraphy", 0, 12)); // NOI18N
         btnRefresh.setText("Refresh");
         btnRefresh.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -129,7 +136,7 @@ public class DriverWorkAreaJPanel extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addComponent(btnRefresh))
                     .addComponent(btnProcess))
-                .addContainerGap(49, Short.MAX_VALUE))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -140,7 +147,7 @@ public class DriverWorkAreaJPanel extends javax.swing.JPanel {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(btnProcess)
-                .addContainerGap(343, Short.MAX_VALUE))
+                .addContainerGap(341, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
