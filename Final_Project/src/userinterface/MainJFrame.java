@@ -19,8 +19,11 @@ import Business.Organization.Transport;
 import Business.UserAccount.UserAccount;
 import java.awt.CardLayout;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import userinterface.AnalysisMode.AnalysisMode;
@@ -41,9 +44,20 @@ public class MainJFrame extends javax.swing.JFrame {
         initComponents();
         //   system= ConfigureASystem.configure();
         system = dB4OUtil.retrieveSystem();
-        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
-        Date date = new Date();
-        system.setCurrentDate(date);
+//        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+//        Date date = new Date();
+       
+        
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+        String dateInString = "2016/09/10";
+        Date date;
+        try {
+            date = sdf.parse(dateInString);
+            system.setCurrentDate(date);
+        } catch (ParseException ex) {
+            Logger.getLogger(MainJFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
 
     /**

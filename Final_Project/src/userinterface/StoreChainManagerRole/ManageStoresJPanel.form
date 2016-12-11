@@ -163,8 +163,14 @@
     <Component class="javax.swing.JTextField" name="locationTxt">
     </Component>
     <Component class="javax.swing.JTextField" name="latitudeTxt">
+      <Properties>
+        <Property name="enabled" type="boolean" value="false"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="longitudeTxt">
+      <Properties>
+        <Property name="enabled" type="boolean" value="false"/>
+      </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="longitudeTxtActionPerformed"/>
       </Events>

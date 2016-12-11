@@ -110,6 +110,9 @@ public class ManageStoresJPanel extends javax.swing.JPanel {
 
         jLabel2.setText("Location:");
 
+        latitudeTxt.setEnabled(false);
+
+        longitudeTxt.setEnabled(false);
         longitudeTxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 longitudeTxtActionPerformed(evt);
@@ -245,8 +248,10 @@ public class ManageStoresJPanel extends javax.swing.JPanel {
             Store store=new Store();
         store.setName(nameTxt.getText());
         store.setLocation(locationTxt.getText());
-        store.setLatitude(Integer.parseInt(loc[0]));
-        store.setLongitude(Integer.parseInt(loc[1]));
+        store.setLatitude(Double.parseDouble(loc[0]));
+        store.setLongitude(Double.parseDouble(loc[1]));
+        latitudeTxt.setText(loc[0]);
+        longitudeTxt.setText(loc[1]);
         storeChain.addStore(store);
         populateTable();
         } catch (Exception ex) {

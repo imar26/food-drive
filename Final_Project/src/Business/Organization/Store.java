@@ -18,9 +18,9 @@ public class Store extends Organization {
    
     private String name;
     private String location;
-    private int stock;
-    private int longitude;
-    private int latitude;
+    private int  stock;
+    private double longitude;
+    private double latitude;
     private RecordList recordList;
     private int finalStock;
     private int giveAway;
@@ -71,19 +71,19 @@ public class Store extends Organization {
         this.stock = stock;
     }
 
-    public int getLongitude() {
+    public double getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(int longitude) {
+    public void setLongitude(double longitude) {
         this.longitude = longitude;
     }
 
-    public int getLatitude() {
+    public double getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(int latitude) {
+    public void setLatitude(double latitude) {
         this.latitude = latitude;
     }
 
