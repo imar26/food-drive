@@ -53,9 +53,9 @@ public class SignupJPanel extends javax.swing.JPanel {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         txtName = new javax.swing.JTextField();
-        txtPhoneNo = new javax.swing.JTextField();
         txtEmail = new javax.swing.JTextField();
-        userNameTxt = new javax.swing.JTextField();
+        userNametxt = new javax.swing.JTextField();
+        txtPhoneno = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         typeComboBox = new javax.swing.JComboBox<>();
         submitButton = new javax.swing.JButton();
@@ -98,29 +98,29 @@ public class SignupJPanel extends javax.swing.JPanel {
         });
         add(txtName, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 70, 117, -1));
 
-        txtPhoneNo.setFont(new java.awt.Font("Lucida Calligraphy", 0, 12)); // NOI18N
-        txtPhoneNo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtPhoneNoActionPerformed(evt);
-            }
-        });
-        add(txtPhoneNo, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 130, 117, -1));
-
         txtEmail.setFont(new java.awt.Font("Lucida Calligraphy", 0, 12)); // NOI18N
         txtEmail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtEmailActionPerformed(evt);
             }
         });
-        add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 160, 117, -1));
+        add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 130, 117, -1));
 
-        userNameTxt.setFont(new java.awt.Font("Lucida Calligraphy", 0, 12)); // NOI18N
-        userNameTxt.addActionListener(new java.awt.event.ActionListener() {
+        userNametxt.setFont(new java.awt.Font("Lucida Calligraphy", 0, 12)); // NOI18N
+        userNametxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                userNameTxtActionPerformed(evt);
+                userNametxtActionPerformed(evt);
             }
         });
-        add(userNameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 100, 117, -1));
+        add(userNametxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 160, 117, -1));
+
+        txtPhoneno.setFont(new java.awt.Font("Lucida Calligraphy", 0, 12)); // NOI18N
+        txtPhoneno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPhonenoActionPerformed(evt);
+            }
+        });
+        add(txtPhoneno, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 100, 117, -1));
 
         jLabel7.setFont(new java.awt.Font("Lucida Calligraphy", 1, 12)); // NOI18N
         jLabel7.setText("Type:");
@@ -157,17 +157,17 @@ public class SignupJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNameActionPerformed
 
-    private void txtPhoneNoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPhoneNoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtPhoneNoActionPerformed
-
     private void txtEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmailActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtEmailActionPerformed
 
-    private void userNameTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userNameTxtActionPerformed
+    private void userNametxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userNametxtActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_userNameTxtActionPerformed
+    }//GEN-LAST:event_userNametxtActionPerformed
+
+    private void txtPhonenoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPhonenoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPhonenoActionPerformed
 
     private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitButtonActionPerformed
           boolean nameFlag=false;
@@ -198,7 +198,7 @@ public class SignupJPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Please enter your full name","Error", JOptionPane.ERROR_MESSAGE);
           }
           
-          if(txtPhoneNo.getText().isEmpty() || !Validations.isPhoneNumber(txtPhoneNo.getText()))
+          if(txtPhoneno.getText().isEmpty() || !Validations.isPhoneNumber(txtPhoneno.getText()))
           {
             phoneNoFlag=true;
             JOptionPane.showMessageDialog(null, "Please enter a valid phone number","Error", JOptionPane.ERROR_MESSAGE);
@@ -209,7 +209,7 @@ public class SignupJPanel extends javax.swing.JPanel {
             emailIdFlag=true;
             JOptionPane.showMessageDialog(null, "Please enter a valid EmailID","Error", JOptionPane.ERROR_MESSAGE);
           }
-           if(userNameTxt.getText().isEmpty())
+           if(userNametxt.getText().isEmpty())
           {
             userFlag=true;
             JOptionPane.showMessageDialog(null, "Please enter your user name","Error", JOptionPane.ERROR_MESSAGE);
@@ -228,22 +228,22 @@ public class SignupJPanel extends javax.swing.JPanel {
               Donor donor=new Donor();
               donor.setName(txtName.getText());
               donor.setEmailId(txtEmail.getText());
-              donor.setPhoneNo(txtPhoneNo.getText());
+              donor.setPhoneNo(txtPhoneno.getText());
               donor.setType(String.valueOf(typeComboBox.getSelectedItem()));
               system.getDonorDiresctory().getDonorList().add(donor);
               user.setDonor(donor);
              // Role role=Role.RoleType.Donor;
               user.setRole(new DonorRole());
-              user.setUsername(userNameTxt.getText());
+              user.setUsername(userNametxt.getText());
               user.setPassword(String.valueOf(passvordTxt.getPassword()));
              // UserAccountDirectory userAccountDirectory=new UserAccountDirectory();
               organization.getUserAccountDirectory().addAccount(user);
              // userAccountDirectory.addAccount(user);
               JOptionPane.showMessageDialog(null, "Details saved successfully. You may login now");
               txtName.setText("");
+              userNametxt.setText("");
               txtEmail.setText("");
-              txtPhoneNo.setText("");
-              userNameTxt.setText("");
+              txtPhoneno.setText("");
               passvordTxt.setText("");
            }
     }//GEN-LAST:event_submitButtonActionPerformed
@@ -263,8 +263,8 @@ public class SignupJPanel extends javax.swing.JPanel {
     private javax.swing.JButton submitButton;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtName;
-    private javax.swing.JTextField txtPhoneNo;
+    private javax.swing.JTextField txtPhoneno;
     private javax.swing.JComboBox<String> typeComboBox;
-    private javax.swing.JTextField userNameTxt;
+    private javax.swing.JTextField userNametxt;
     // End of variables declaration//GEN-END:variables
 }
