@@ -10,6 +10,7 @@ import Business.Enterprise.Enterprise;
 import Business.Organization.Lab;
 import Business.Organization.LabAssistant;
 import Business.UserAccount.UserAccount;
+import Business.WorkQueue.FoodWorkRequest;
 import Business.WorkQueue.LabAssistantWorkRequest;
 import Business.WorkQueue.LabManagerWorkRequest;
 import Business.WorkQueue.WorkRequest;
@@ -54,9 +55,9 @@ public class LabAssistantWorkAreaJPanel extends javax.swing.JPanel {
             System.out.println("Request"+request.getMessage());
            // row[1] = ((LabManagerWorkRequest) request).getLabAssistantName();
             row[2] = request.getStatus();
-            int quantity = ((LabManagerWorkRequest) request).getQuantity();
+            int quantity = ((FoodWorkRequest) request).getQuantity();
             row[3] = quantity;
-            String result = ((LabManagerWorkRequest) request).getTestResult();
+            String result = ((FoodWorkRequest) request).getTestResult();
             row[4] = result == null ? "Waiting" : result;
             
             model.addRow(row);
@@ -148,7 +149,7 @@ public class LabAssistantWorkAreaJPanel extends javax.swing.JPanel {
         int selectedRow = tblManageWorkQueue.getSelectedRow();        
         
         if (selectedRow >= 0) {
-            LabManagerWorkRequest request = (LabManagerWorkRequest) tblManageWorkQueue.getValueAt(selectedRow, 0);
+            FoodWorkRequest request = (FoodWorkRequest) tblManageWorkQueue.getValueAt(selectedRow, 0);
             if(!request.getStatus().equalsIgnoreCase("Food Decomposed")){
                 request.setStatus("Processing");
 

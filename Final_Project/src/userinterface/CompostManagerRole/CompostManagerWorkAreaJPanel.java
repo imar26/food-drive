@@ -15,6 +15,7 @@ import Business.Organization.Records;
 import Business.UserAccount.UserAccount;
 import Business.WorkQueue.CompostManagerWorkRequest;
 import Business.WorkQueue.DriverWorkRequest;
+import Business.WorkQueue.FoodWorkRequest;
 import Business.WorkQueue.LabManagerWorkRequest;
 import Business.WorkQueue.WorkRequest;
 import java.awt.CardLayout;
@@ -55,10 +56,10 @@ public class CompostManagerWorkAreaJPanel extends javax.swing.JPanel {
             row[0] = request;
             row[1] = request.getReceiver();
             row[2] = request.getStatus();
-            int quantity = ((LabManagerWorkRequest) request).getQuantity();
+            int quantity = ((FoodWorkRequest) request).getQuantity();
             row[3] = quantity;
             
-            String result = ((LabManagerWorkRequest) request).getTestResult();
+            String result = ((FoodWorkRequest) request).getTestResult();
             row[4] = result == null ? "Waiting" : result;
             
             model.addRow(row);
@@ -195,7 +196,7 @@ public class CompostManagerWorkAreaJPanel extends javax.swing.JPanel {
         int selectedRow = tblCompostManager.getSelectedRow();        
         
         if (selectedRow >= 0) {
-            LabManagerWorkRequest request = (LabManagerWorkRequest) tblCompostManager.getValueAt(selectedRow, 0);
+            FoodWorkRequest request = (FoodWorkRequest) tblCompostManager.getValueAt(selectedRow, 0);
             if(!request.getStatus().equalsIgnoreCase("Food Decomposed")){
 
                 request.setStatus("Processing");

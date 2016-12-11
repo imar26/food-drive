@@ -14,6 +14,7 @@ import Business.Organization.Lab;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
 import Business.WorkQueue.CompostManagerWorkRequest;
+import Business.WorkQueue.FoodWorkRequest;
 import Business.WorkQueue.InventoryWorkRequest;
 import Business.WorkQueue.LabManagerWorkRequest;
 import Business.WorkQueue.WorkRequest;
@@ -37,7 +38,7 @@ public class ManageWorkQueueJPanel extends javax.swing.JPanel {
     private Enterprise enterprise;
     private UserAccount account;
     private Network network;
-    private LabManagerWorkRequest request;
+//    private FoodWorkRequest request;
     ManageWorkQueueJPanel(JPanel userProcessContainer, UserAccount account, Lab organization, Enterprise enterprise, Network network) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
@@ -56,10 +57,10 @@ public class ManageWorkQueueJPanel extends javax.swing.JPanel {
             row[0] = request;
             row[1] = request.getReceiver();
             row[2] = request.getStatus();
-            int quantity = ((LabManagerWorkRequest) request).getQuantity();
+            int quantity = ((FoodWorkRequest) request).getQuantity();
             row[3] = quantity;
             
-            String result = ((LabManagerWorkRequest) request).getTestResult();
+            String result = ((FoodWorkRequest) request).getTestResult();
             row[4] = result == null ? "Waiting" : result;
          //   this.request=(LabManagerWorkRequest)request;
             
@@ -185,7 +186,7 @@ public class ManageWorkQueueJPanel extends javax.swing.JPanel {
         
         if (selectedRow >= 0) {
             
-            LabManagerWorkRequest request = (LabManagerWorkRequest) tblManageWorkQueue.getValueAt(selectedRow, 0);
+            FoodWorkRequest request = (FoodWorkRequest) tblManageWorkQueue.getValueAt(selectedRow, 0);
             if(!request.getStatus().equalsIgnoreCase("Food Decomposed")){
                 request.setStatus("Processing");
 
@@ -214,7 +215,7 @@ public class ManageWorkQueueJPanel extends javax.swing.JPanel {
         int selectedRow = tblManageWorkQueue.getSelectedRow();       
         
         if (selectedRow >= 0) {
-            LabManagerWorkRequest request = (LabManagerWorkRequest) tblManageWorkQueue.getValueAt(selectedRow, 0);
+            FoodWorkRequest request = (FoodWorkRequest) tblManageWorkQueue.getValueAt(selectedRow, 0);
             if (request.getTestResult().equalsIgnoreCase("Bad Food")) {
                 request.setStatus("Processing");
                 //CompostManagerWorkRequest compostRequest = new CompostManagerWorkRequest(); 

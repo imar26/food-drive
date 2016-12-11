@@ -14,6 +14,7 @@ import Business.Organization.Lab;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
 import Business.Validations;
+import Business.WorkQueue.FoodWorkRequest;
 import Business.WorkQueue.LabManagerWorkRequest;
 import java.awt.CardLayout;
 import javax.swing.JOptionPane;
@@ -145,7 +146,7 @@ public class RequestWorkJPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Please enter quantity as integer", "Error", JOptionPane.ERROR_MESSAGE);
         }
         if (!msgFlag & !qtyFlag){
-            LabManagerWorkRequest request=new LabManagerWorkRequest();
+            FoodWorkRequest request=new FoodWorkRequest();
             request.setMessage(txtMessage.getText());
             request.setStatus("Sent to lab");
             request.setQuantity(Integer.parseInt(txtQuantity.getText()));

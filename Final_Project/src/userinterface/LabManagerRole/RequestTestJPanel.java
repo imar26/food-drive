@@ -14,6 +14,7 @@ import Business.Organization.LabAssistant;
 import Business.Organization.Organization;
 import Business.Role.LabAssistantRole;
 import Business.UserAccount.UserAccount;
+import Business.WorkQueue.FoodWorkRequest;
 import Business.WorkQueue.InventoryWorkRequest;
 import Business.WorkQueue.LabAssistantWorkRequest;
 import Business.WorkQueue.LabManagerWorkRequest;
@@ -32,10 +33,10 @@ public class RequestTestJPanel extends javax.swing.JPanel {
      */
     private JPanel userProcessContainer;
     private Lab organization;
-    private LabManagerWorkRequest request;
+    private FoodWorkRequest request;
     private UserAccount account;
     private Network network;
-    RequestTestJPanel(JPanel userProcessContainer, Lab organization, LabManagerWorkRequest request, UserAccount account, Network network) {
+    RequestTestJPanel(JPanel userProcessContainer, Lab organization, FoodWorkRequest request, UserAccount account, Network network) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.organization = organization;

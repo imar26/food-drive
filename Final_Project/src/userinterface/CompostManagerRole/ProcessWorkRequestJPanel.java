@@ -12,6 +12,7 @@ import Business.Organization.Composting;
 import Business.Organization.Inventory;
 import Business.Organization.Organization;
 import Business.WorkQueue.CompostManagerWorkRequest;
+import Business.WorkQueue.FoodWorkRequest;
 import Business.WorkQueue.LabManagerWorkRequest;
 import java.awt.CardLayout;
 import java.awt.Component;
@@ -29,10 +30,10 @@ public class ProcessWorkRequestJPanel extends javax.swing.JPanel {
      * Creates new form ProcessWorkRequestJPanel
      */
     private JPanel userProcessContainer;
-    private LabManagerWorkRequest request;
+    private FoodWorkRequest request;
     private Composting organization;
     private Network network;
-    ProcessWorkRequestJPanel(JPanel userProcessContainer, LabManagerWorkRequest request, Composting organization, Network network) {
+    ProcessWorkRequestJPanel(JPanel userProcessContainer, FoodWorkRequest request, Composting organization, Network network) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.request = request;
