@@ -14,6 +14,7 @@ import Business.Organization.Organization;
 import Business.Organization.Store;
 import Business.Organization.StoreChain;
 import Business.UserAccount.UserAccount;
+import Business.Validations;
 import Business.WorkQueue.FoodWorkRequest;
 import Business.WorkQueue.InventoryWorkRequest;
 import Business.WorkQueue.StoreWorkRequest;
@@ -26,6 +27,7 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.TreeMap;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
@@ -34,13 +36,15 @@ import javax.swing.table.DefaultTableModel;
  * @author HP
  */
 public class RequestFoodJPanel extends javax.swing.JPanel {
+
     private JPanel userProcessContainer;
     private Store organization;
     private Enterprise enterprise;
     private UserAccount userAccount;
     private EcoSystem business;
-    
-     DefaultTableModel model;
+
+    DefaultTableModel model;
+
     /**
      * Creates new form RequestFoodJPanel
      */
@@ -50,85 +54,89 @@ public class RequestFoodJPanel extends javax.swing.JPanel {
         this.organization = organization;
         this.enterprise = enterprise;
         this.userAccount = account;
-        this.business=business;       
-        model= (DefaultTableModel) tblStoreWorkQueue.getModel();
+        this.business = business;
+        model = (DefaultTableModel) tblStoreWorkQueue.getModel();
         model.setRowCount(0);
         populateTable();
         populatestoreTable();
-              
+
     }
+
     public LinkedHashMap sortHashMapByValuesD(HashMap passedMap) {
-   List mapKeys = new ArrayList(passedMap.keySet());
-   List mapValues = new ArrayList(passedMap.values());
-   Collections.sort(mapValues);
-   Collections.sort(mapKeys);
+        List mapKeys = new ArrayList(passedMap.keySet());
+        List mapValues = new ArrayList(passedMap.values());
+        Collections.sort(mapValues);
+        Collections.sort(mapKeys);
 
-   LinkedHashMap sortedMap = new LinkedHashMap();
+        LinkedHashMap sortedMap = new LinkedHashMap();
 
-   Iterator valueIt = mapValues.iterator();
-   while (valueIt.hasNext()) {
-       Object val = valueIt.next();
-       Iterator keyIt = mapKeys.iterator();
+        Iterator valueIt = mapValues.iterator();
+        while (valueIt.hasNext()) {
+            Object val = valueIt.next();
+            Iterator keyIt = mapKeys.iterator();
 
-       while (keyIt.hasNext()) {
-           Object key = keyIt.next();
-           String comp1 = passedMap.get(key).toString();
-           String comp2 = val.toString();
+            while (keyIt.hasNext()) {
+                Object key = keyIt.next();
+                String comp1 = passedMap.get(key).toString();
+                String comp2 = val.toString();
 
-           if (comp1.equals(comp2)){
-               passedMap.remove(key);
-               mapKeys.remove(key);
-               sortedMap.put((String)key, (Double)val);
-               break;
-           }
+                if (comp1.equals(comp2)) {
+                    passedMap.remove(key);
+                    mapKeys.remove(key);
+                    sortedMap.put((String) key, (Double) val);
+                    break;
+                }
 
-       }
+            }
 
-   }
-   return sortedMap;
-}
-    public void populateTable(){
+        }
+        return sortedMap;
+    }
+
+    public void populateTable() {
         HashMap<String, Double> map = new HashMap<String, Double>();
-        if(enterprise instanceof MainCenterEnterprise){
-            StoreChain org1=null;
-            for(Organization org : enterprise.getOrganizationDirectory().getOrganizationList()){
-                if(org instanceof StoreChain)
-                org1=(StoreChain)org;
-                for(Store s : org1.getStoreChain()){
-                    System.out.println("store"+s);
+        if (enterprise instanceof MainCenterEnterprise) {
+            StoreChain org1 = null;
+            for (Organization org : enterprise.getOrganizationDirectory().getOrganizationList()) {
+                if (org instanceof StoreChain) {
+                    org1 = (StoreChain) org;
+                }
+                for (Store s : org1.getStoreChain()) {
+                    System.out.println("store" + s);
                     double x1 = organization.getLatitude();
                     double y1 = organization.getLongitude();
                     double x2 = s.getLatitude();
                     double y2 = s.getLongitude();
-                    double distance= 0;
-                    double x3 = (x1-x2)*(x1-x2);
-                    double y3 = (y1-y2)*(y1-y2);
-                    distance = Math.sqrt(x3+y3);
-                    System.out.println("distance"+distance);
+                    double distance = 0;
+                    double x3 = (x1 - x2) * (x1 - x2);
+                    double y3 = (y1 - y2) * (y1 - y2);
+                    distance = Math.sqrt(x3 + y3);
+                    System.out.println("distance" + distance);
                     map.put(s.getName(), distance);
                 }
             }
         }
-        LinkedHashMap lmap=new LinkedHashMap();
-        lmap=sortHashMapByValuesD(map);
+        LinkedHashMap lmap = new LinkedHashMap();
+        lmap = sortHashMapByValuesD(map);
         Iterator iterator = lmap.keySet().iterator();
         DefaultTableModel model = (DefaultTableModel) tblStores.getModel();
-        
+
         model.setRowCount(0);
         while (iterator.hasNext()) {
             String key = iterator.next().toString();
             String value = lmap.get(key).toString();
-            if(!value.equals("0.0")){
-            
+            if (!value.equals("0.0")) {
+
                 Object[] row = new Object[2];
                 row[0] = key;
                 row[1] = Double.parseDouble(value);
-                
+
                 model.addRow(row);
             }
-        }        
-        
+        }
+
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -251,8 +259,8 @@ public class RequestFoodJPanel extends javax.swing.JPanel {
         add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 530, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
-    public void populatestoreTable(){
-    
+    public void populatestoreTable() {
+
 //        for(Organization org: enterprise.getOrganizationDirectory().getOrganizationList())
 //        {
 //            if(org instanceof StoreChain)
@@ -273,65 +281,70 @@ public class RequestFoodJPanel extends javax.swing.JPanel {
 //                }
 //            }
 //        }
-           model.setRowCount(0);
-           for(WorkRequest request: userAccount.getWorkQueue().getWorkRequestList())
-           {
-                       Object[] row = new Object[6];
-                       row[0] = request;
-                       row[1] = request.getReceiver();
-                       row[2] = request.getStatus();
-                       row[3] = ((FoodWorkRequest) request).getQuantity();
-                      
-                       String result = ((FoodWorkRequest) request).getTestResult();
-                       row[4] = result == null ? "Waiting" : result;
-                
-                       model.addRow(row);
-                      
-           }
-           boolean flag=false;
-           for(int i=0; i<tblStoreWorkQueue.getRowCount();i++)
-           {
-               String result=(String) tblStoreWorkQueue.getValueAt(i, 4);
-               if(!result.equalsIgnoreCase("No"))
-               {
-                  flag=true;
-               }   
-           }
-           if(flag==false)
-               btnRequestInventory.setEnabled(true);
-    }
-    
-    private void requestBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_requestBtnActionPerformed
-                       FoodWorkRequest request=new FoodWorkRequest();
-                       request.setMessage("Request for food");
-                       
-                       request.setSender(userAccount);
-                       request.setSenderOrganization(organization);
-                       request.setQuantity(Integer.parseInt(quantityTxt.getText()));
-                       request.setStatus("Request Sent");
-                  //     request.setLocation(store.getLocation());
+        model.setRowCount(0);
+        for (WorkRequest request : userAccount.getWorkQueue().getWorkRequestList()) {
+            Object[] row = new Object[6];
+            row[0] = request;
+            row[1] = request.getReceiver();
+            row[2] = request.getStatus();
+            row[3] = ((FoodWorkRequest) request).getQuantity();
 
-        
-        for(Organization org: enterprise.getOrganizationDirectory().getOrganizationList())
-        {
-            if(org instanceof StoreChain)
-            {    
-                for(Store store: ((StoreChain) org).getStoreChain())
-                {
-                    for(int i=0; i<tblStores.getRowCount(); i++)
-                    {    
-                   if(store.getName().equals(tblStores.getValueAt(i, 0)))
-                   {
-                       request.setLocation(store.getLocation());
-                       store.getWorkQueue().getWorkRequestList().add(request);
-                       userAccount.getWorkQueue().getWorkRequestList().add(request);
-                        populateRequestTable(request, store); 
-                   }    
+            String result = ((FoodWorkRequest) request).getTestResult();
+            row[4] = result == null ? "Waiting" : result;
+
+            model.addRow(row);
+
+        }
+        boolean flag = false;
+        for (int i = 0; i < tblStoreWorkQueue.getRowCount(); i++) {
+            String result = (String) tblStoreWorkQueue.getValueAt(i, 4);
+            if (!result.equalsIgnoreCase("No")) {
+                flag = true;
+            }
+        }
+        if (flag == false) {
+            btnRequestInventory.setEnabled(true);
+        }
+    }
+
+    private void requestBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_requestBtnActionPerformed
+        boolean qtyFlag = false;
+        if (quantityTxt.getText().isEmpty()) {
+            qtyFlag = true;
+            JOptionPane.showMessageDialog(null, "Please enter quantity", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        if (!Validations.isDigit(quantityTxt.getText())) {
+            qtyFlag = true;
+            JOptionPane.showMessageDialog(null, "Please enter quantity as integer", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        if (!qtyFlag){
+            FoodWorkRequest request = new FoodWorkRequest();
+            request.setMessage("Request for food");
+
+            request.setSender(userAccount);
+            request.setSenderOrganization(organization);
+            request.setQuantity(Integer.parseInt(quantityTxt.getText()));
+            request.setStatus("Request Sent");
+            //     request.setLocation(store.getLocation());
+
+            for (Organization org : enterprise.getOrganizationDirectory().getOrganizationList()) {
+                if (org instanceof StoreChain) {
+                    for (Store store : ((StoreChain) org).getStoreChain()) {
+                        for (int i = 0; i < tblStores.getRowCount(); i++) {
+                            if (store.getName().equals(tblStores.getValueAt(i, 0))) {
+                                request.setLocation(store.getLocation());
+                                store.getWorkQueue().getWorkRequestList().add(request);
+                                userAccount.getWorkQueue().getWorkRequestList().add(request);
+                                populateRequestTable(request, store);
+                                JOptionPane.showMessageDialog(null, "Request sent successfully.");
+                                quantityTxt.setText("");
+                            }
+                        }
                     }
                 }
-             }  
+            }
         }
-        
+
     }//GEN-LAST:event_requestBtnActionPerformed
 
     private void quantityTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quantityTxtActionPerformed
@@ -340,32 +353,43 @@ public class RequestFoodJPanel extends javax.swing.JPanel {
 
     private void btnRequestInventoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRequestInventoryActionPerformed
         // TODO add your handling code here:
-        FoodWorkRequest request=new FoodWorkRequest();
-        request.setMessage("Request for food");
-        request.setSender(userAccount);
-        request.setQuantity(Integer.parseInt(quantityTxt.getText()));
-        request.setStatus("Sent");
-        request.setLocation(organization.getLocation());
-        Organization org=null;
-        for(Network n : business.getNetworkList()){
-            for(Enterprise e : n.getEnterpriseDirectory().getEnterpriseList()){
-                if(e instanceof MainCenterEnterprise){
-                    for(Organization o : e.getOrganizationDirectory().getOrganizationList()){
-                        if(o instanceof Inventory){
-                            org=o;
-                            break;
-                            
+        boolean qtyFlag = false;
+        if (quantityTxt.getText().isEmpty()) {
+            qtyFlag = true;
+            JOptionPane.showMessageDialog(null, "Please enter quantity", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        if (!Validations.isDigit(quantityTxt.getText())) {
+            qtyFlag = true;
+            JOptionPane.showMessageDialog(null, "Please enter quantity as integer", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        if (!qtyFlag){
+            FoodWorkRequest request = new FoodWorkRequest();
+            request.setMessage("Request for food");
+            request.setSender(userAccount);
+            request.setQuantity(Integer.parseInt(quantityTxt.getText()));
+            request.setStatus("Sent");
+            request.setLocation(organization.getLocation());
+            Organization org = null;
+            for (Network n : business.getNetworkList()) {
+                for (Enterprise e : n.getEnterpriseDirectory().getEnterpriseList()) {
+                    if (e instanceof MainCenterEnterprise) {
+                        for (Organization o : e.getOrganizationDirectory().getOrganizationList()) {
+                            if (o instanceof Inventory) {
+                                org = o;
+                                break;
+
+                            }
                         }
-                    }
-                    if(org!=null){
-                        org.getWorkQueue().getWorkRequestList().add(request);
-                        userAccount.getWorkQueue().getWorkRequestList().add(request);
-                        
+                        if (org != null) {
+                            org.getWorkQueue().getWorkRequestList().add(request);
+                            userAccount.getWorkQueue().getWorkRequestList().add(request);
+                            JOptionPane.showMessageDialog(null, "Request sent successfully.");
+                            quantityTxt.setText("");
+                        }
                     }
                 }
             }
         }
-        
     }//GEN-LAST:event_btnRequestInventoryActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
@@ -374,29 +398,24 @@ public class RequestFoodJPanel extends javax.swing.JPanel {
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.previous(userProcessContainer);
     }//GEN-LAST:event_btnBackActionPerformed
-    public void populateRequestTable(FoodWorkRequest request, Store store){
-           
+    public void populateRequestTable(FoodWorkRequest request, Store store) {
+
 //                       DefaultTableModel model = (DefaultTableModel) tblStoreWorkQueue.getModel();
 //                       model.setRowCount(0);
-                      
-                       Object[] row = new Object[6];
-                       row[0] = request;
-                     //  System.out.println("store:"+store);
-                       row[1] = store;
-                       row[2] = request.getStatus();
-                       row[3] = request.getQuantity();
-                       row[4] = request.getLocation();
-                  //     String result = request.getResult();
-                //       row[4] = result == null ? "Waiting" : result;
-                
-                       model.addRow(row);
-                      
-         
-                   }    
-                    
-          
-        
-    
+        Object[] row = new Object[6];
+        row[0] = request;
+        //  System.out.println("store:"+store);
+        row[1] = store;
+        row[2] = request.getStatus();
+        row[3] = request.getQuantity();
+        row[4] = request.getLocation();
+        //     String result = request.getResult();
+        //       row[4] = result == null ? "Waiting" : result;
+
+        model.addRow(row);
+
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
