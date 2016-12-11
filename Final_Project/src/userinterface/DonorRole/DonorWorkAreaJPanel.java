@@ -48,6 +48,7 @@ public class DonorWorkAreaJPanel extends javax.swing.JPanel {
         this.business = business;
         this.network = network;
         populateStore();
+        populateComboBox();
         if (userAccount.getDonor().getType().equalsIgnoreCase("Individual")) {
             locationTxt.setEnabled(false);
         }
@@ -75,6 +76,8 @@ public class DonorWorkAreaJPanel extends javax.swing.JPanel {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         storeComboBox = new javax.swing.JComboBox();
+        jLabel7 = new javax.swing.JLabel();
+        comboBoxCity = new javax.swing.JComboBox<>();
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setText("Wish to donate food? Just notify us!");
@@ -104,6 +107,8 @@ public class DonorWorkAreaJPanel extends javax.swing.JPanel {
             }
         });
 
+        jLabel7.setText("Network:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -126,14 +131,18 @@ public class DonorWorkAreaJPanel extends javax.swing.JPanel {
                                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                 .addComponent(quantityTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addComponent(locationTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(jLabel5)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(jLabel5)
+                                                .addComponent(jLabel7))
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(storeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                .addComponent(storeComboBox, 0, 110, Short.MAX_VALUE)
+                                                .addComponent(comboBoxCity, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                                     .addComponent(jLabel6)
                                     .addComponent(jLabel3)))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(122, 122, 122)
+                        .addGap(118, 118, 118)
                         .addComponent(donateBtn)))
                 .addContainerGap(86, Short.MAX_VALUE))
         );
@@ -152,15 +161,19 @@ public class DonorWorkAreaJPanel extends javax.swing.JPanel {
                     .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(comboBoxCity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(storeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel6)
-                .addGap(18, 18, 18)
+                .addGap(28, 28, 28)
                 .addComponent(donateBtn)
-                .addGap(51, 51, 51))
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -198,6 +211,9 @@ public class DonorWorkAreaJPanel extends javax.swing.JPanel {
                 request.setMessage("Food ready for pickup");
 
                 Enterprise en = null;
+                for(Network network: business.getNetworkList()){
+                    String net=(String)comboBoxCity.getSelectedItem();
+                    if(network.getName().equalsIgnoreCase(net)){
                 for (Enterprise enterprise : network.getEnterpriseDirectory().getEnterpriseList()) {
                     //    System.out.println("Enterprise"+ enterprise.getName());
                     if (enterprise instanceof MainCenterEnterprise) {
@@ -225,6 +241,8 @@ public class DonorWorkAreaJPanel extends javax.swing.JPanel {
 
                     }
                 }
+                }
+            }
             }
         } else {
             //send work request to that particular store
@@ -252,6 +270,16 @@ public class DonorWorkAreaJPanel extends javax.swing.JPanel {
                 request.setStatus("Food Received");
                 request.setMessage("Food given at store");
                 Store inStore = null;
+                for(Network network: business.getNetworkList()){
+                     String net=(String)comboBoxCity.getSelectedItem();
+                    if(network.getName().equalsIgnoreCase(net)){
+                for (Enterprise enterprise : network.getEnterpriseDirectory().getEnterpriseList()) {
+                    //    System.out.println("Enterprise"+ enterprise.getName());
+                    if (enterprise instanceof MainCenterEnterprise) {
+                        //   System.out.println("Yes");
+                      //  en = enterprise;
+                       
+                   
                 for (Organization org : enterprise.getOrganizationDirectory().getOrganizationList()) {
                     if (org instanceof StoreChain) {
                         for (Store store : ((StoreChain) org).getStoreChain()) {
@@ -263,8 +291,8 @@ public class DonorWorkAreaJPanel extends javax.swing.JPanel {
 
                         }
                     }
-
-                }
+                }}}
+                    }}
                 if (inStore != null) {
                     inStore.getWorkQueue().getWorkRequestList().add(request);
                     //     System.out.println("Orga"+org.getWorkQueue().getWorkRequestList());
@@ -282,6 +310,7 @@ public class DonorWorkAreaJPanel extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> comboBoxCity;
     private javax.swing.JButton donateBtn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -289,11 +318,21 @@ public class DonorWorkAreaJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JTextField locationTxt;
     private javax.swing.JTextField quantityTxt;
     private javax.swing.JComboBox storeComboBox;
     // End of variables declaration//GEN-END:variables
 
+    private void populateComboBox() {
+
+        comboBoxCity.removeAll();
+        
+        for(Network network: business.getNetworkList()){
+          comboBoxCity.addItem(network.getName());
+        }
+    }
+    
     private void populateStore() {
 
         storeComboBox.removeAll();

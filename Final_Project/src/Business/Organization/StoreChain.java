@@ -53,6 +53,7 @@ public class StoreChain extends Organization{
         int totalGiveAway=0;
         for(Store store:storeChain)
         {
+            System.out.println("in store"+store.getName());
          totalGiveAway+=store.getRecordList().totalGiveAway(month);
         }   
         return totalGiveAway;

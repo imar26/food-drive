@@ -75,8 +75,10 @@ public class RecordList {
         int totalGiveAway=0;
         for(Records record: recordList)
         {
+            System.out.println("record.getRequestDate().getMonth() : "+record.getRequestDate().getMonth());
           if(record.getRequestDate().getMonth()==month)
           {
+              System.out.println("in here");
             totalGiveAway+=record.getFoodGiven();
           }
         }   

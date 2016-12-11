@@ -80,7 +80,7 @@ public class AnalysisMode extends javax.swing.JPanel {
         jPanel15 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         btnResultQuestion5 = new javax.swing.JButton();
-        jPanel16 = new javax.swing.JPanel();
+        displayPanel5 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         jSplitPane1 = new javax.swing.JSplitPane();
         jPanel6 = new javax.swing.JPanel();
@@ -352,9 +352,9 @@ public class AnalysisMode extends javax.swing.JPanel {
 
         jSplitPane6.setTopComponent(jPanel15);
 
-        jPanel16.setBackground(new java.awt.Color(13, 25, 37));
-        jPanel16.setLayout(new java.awt.BorderLayout());
-        jSplitPane6.setRightComponent(jPanel16);
+        displayPanel5.setBackground(new java.awt.Color(13, 25, 37));
+        displayPanel5.setLayout(new java.awt.BorderLayout());
+        jSplitPane6.setRightComponent(displayPanel5);
 
         jPanel4.add(jSplitPane6, java.awt.BorderLayout.CENTER);
 
@@ -505,6 +505,13 @@ public class AnalysisMode extends javax.swing.JPanel {
          "Donation Amount",
          line_chart_dataset,PlotOrientation.VERTICAL,
          true,true,false);
+      CategoryPlot barchrt = lineChartObject.getCategoryPlot();
+       // barchrt.setRangeGridlinePaint(Color.ORANGE);
+        ChartPanel barP = new ChartPanel(lineChartObject);
+        barP.setVisible(true);
+        displayPanel5.removeAll();
+        displayPanel5.add(barP, BorderLayout.CENTER);
+        displayPanel5.validate();
     }//GEN-LAST:event_btnResultQuestion5ActionPerformed
 
     private void btnResultQuestion6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResultQuestion6ActionPerformed
@@ -516,9 +523,9 @@ public class AnalysisMode extends javax.swing.JPanel {
         PiePlot p = (PiePlot)chart.getPlot();
         ChartPanel chartpanel = new ChartPanel(chart);
         chartpanel.setVisible(true);
-        piePanel.removeAll();
-        piePanel.add(chartpanel, BorderLayout.CENTER);
-        piePanel.validate();
+        displayPanelno6.removeAll();
+        displayPanelno6.add(chartpanel, BorderLayout.CENTER);
+        displayPanelno6.validate();
     }//GEN-LAST:event_btnResultQuestion6ActionPerformed
 
                                    
@@ -534,6 +541,7 @@ public class AnalysisMode extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> comboBoxCity;
     private javax.swing.JPanel displayPanel3;
     private javax.swing.JPanel displayPanel4;
+    private javax.swing.JPanel displayPanel5;
     private javax.swing.JPanel displayPanelno6;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -546,7 +554,6 @@ public class AnalysisMode extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel15;
-    private javax.swing.JPanel jPanel16;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
