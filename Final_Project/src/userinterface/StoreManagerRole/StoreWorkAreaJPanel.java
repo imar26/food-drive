@@ -404,6 +404,8 @@ public class StoreWorkAreaJPanel extends javax.swing.JPanel {
         organization.setFinalStock(0);
         organization.setGiveAway(0);
         organization.setStock(0);
+        txtGiveAway.setText(String.valueOf(organization.getGiveAway()));
+        txtStock.setText(String.valueOf(organization.getStock()));
         JOptionPane.showMessageDialog(null, "Daily Records Submitted Successfully");
 
     }//GEN-LAST:event_btnDailySubActionPerformed
