@@ -35,36 +35,39 @@ public class CompostManagerWorkAreaJPanel extends javax.swing.JPanel {
     private JPanel userProcessContainer;
     private UserAccount account;
     private Composting organization;
-    private EcoSystem business;    
+    private EcoSystem business;
     private Network network;
+
     public CompostManagerWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, Composting organization, EcoSystem business, Network network) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
-        this.account = account;       
+        this.account = account;
         this.organization = organization;
         this.business = business;
         this.network = network;
         txtItemsComposed.setText(Integer.toString(organization.getItemsComposed()));
         populateRequestTable();
     }
-    public void populateRequestTable(){
+
+    public void populateRequestTable() {
         DefaultTableModel model = (DefaultTableModel) tblCompostManager.getModel();
-        
+
         model.setRowCount(0);
-        for (WorkRequest request : organization.getWorkQueue().getWorkRequestList()){
+        for (WorkRequest request : organization.getWorkQueue().getWorkRequestList()) {
             Object[] row = new Object[5];
             row[0] = request;
             row[1] = request.getReceiver();
             row[2] = request.getStatus();
             int quantity = ((FoodWorkRequest) request).getQuantity();
             row[3] = quantity;
-            
+
             String result = ((FoodWorkRequest) request).getTestResult();
             row[4] = result == null ? "Waiting" : result;
-            
+
             model.addRow(row);
         }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -193,11 +196,11 @@ public class CompostManagerWorkAreaJPanel extends javax.swing.JPanel {
 
     private void btnProcessActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProcessActionPerformed
         // TODO add your handling code here:
-        int selectedRow = tblCompostManager.getSelectedRow();        
-        
+        int selectedRow = tblCompostManager.getSelectedRow();
+
         if (selectedRow >= 0) {
             FoodWorkRequest request = (FoodWorkRequest) tblCompostManager.getValueAt(selectedRow, 0);
-            if(!request.getStatus().equalsIgnoreCase("Food Decomposed")){
+            if (!request.getStatus().equalsIgnoreCase("Food Decomposed")) {
 
                 request.setStatus("Processing");
 
@@ -206,26 +209,32 @@ public class CompostManagerWorkAreaJPanel extends javax.swing.JPanel {
                 CardLayout layout = (CardLayout) userProcessContainer.getLayout();
                 layout.next(userProcessContainer);
             } else {
-                JOptionPane.showMessageDialog(null, "Invalid request"); 
+                JOptionPane.showMessageDialog(null, "Invalid request");
             }
 
         } else {
-           JOptionPane.showMessageDialog(null, "Please select a request message to process."); 
+            JOptionPane.showMessageDialog(null, "Please select a request message to process.");
             return;
         }
     }//GEN-LAST:event_btnProcessActionPerformed
 
     private void btnDailyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDailyActionPerformed
         // TODO add your handling code here:
-        int finalItemsDecomposed = organization.getItemsComposed();
-        Records records=new Records();
-        records.setFoodDecomposed(finalItemsDecomposed);
-        records.setRequestDate(business.getCurrentDate());
-        System.out.println("current date"+business.getCurrentDate());
-        RecordList list=new RecordList();
-        list.addRecords(records);
-        organization.setRecordList(list);
-        JOptionPane.showMessageDialog(null, "Daily Records Submitted Successfully");
+        int ans = JOptionPane.showConfirmDialog(null, "Really want to add?", "Warning", JOptionPane.YES_NO_OPTION);
+        if (ans == 0) {
+            int finalItemsDecomposed = organization.getItemsComposed();
+            Records records = new Records();
+            records.setFoodDecomposed(finalItemsDecomposed);
+            records.setRequestDate(business.getCurrentDate());
+            System.out.println("current date" + business.getCurrentDate());
+            //            RecordList list=new RecordList();
+            //            list.addRecords(records);
+            //            organization.setRecordList(list);
+            organization.getRecordList().addRecords(records);
+            organization.setItemsComposed(0);
+            txtItemsComposed.setText(String.valueOf(organization.getItemsComposed()));
+            JOptionPane.showMessageDialog(null, "Daily Records Submitted Successfully");
+        }
     }//GEN-LAST:event_btnDailyActionPerformed
 
 

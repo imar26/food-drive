@@ -146,27 +146,31 @@ public class RequestWorkJPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Please enter quantity as integer", "Error", JOptionPane.ERROR_MESSAGE);
         }
         if (!msgFlag & !qtyFlag){
-            FoodWorkRequest request=new FoodWorkRequest();
-            request.setMessage(txtMessage.getText());
-            request.setStatus("Sent to lab");
-            request.setQuantity(Integer.parseInt(txtQuantity.getText()));
-            Enterprise en = null;
-            Organization org = null;
-            for(Enterprise e : network.getEnterpriseDirectory().getEnterpriseList()){
-                if(e instanceof InspectionCenterEnterprise){
-                    en=e;
-                    for(Organization o : en.getOrganizationDirectory().getOrganizationList()){
-                        if(o instanceof Lab){
-                            org=o;
-                            break;
+            if(Integer.parseInt(txtQuantity.getText())>organization.getStock()) {
+                JOptionPane.showMessageDialog(null, "Stock does not contain number of items entered", "Error", JOptionPane.ERROR_MESSAGE);
+            } else {
+                FoodWorkRequest request=new FoodWorkRequest();
+                request.setMessage(txtMessage.getText());
+                request.setStatus("Sent to lab");
+                request.setQuantity(Integer.parseInt(txtQuantity.getText()));
+                Enterprise en = null;
+                Organization org = null;
+                for(Enterprise e : network.getEnterpriseDirectory().getEnterpriseList()){
+                    if(e instanceof InspectionCenterEnterprise){
+                        en=e;
+                        for(Organization o : en.getOrganizationDirectory().getOrganizationList()){
+                            if(o instanceof Lab){
+                                org=o;
+                                break;
+                            }
                         }
-                    }
-                    if(org!=null){
-                        org.getWorkQueue().getWorkRequestList().add(request);
-                        userAccount.getWorkQueue().getWorkRequestList().add(request);
-                        JOptionPane.showMessageDialog(null, "Request sent successfully.");
-                        txtMessage.setText("");
-                        txtQuantity.setText("");
+                        if(org!=null){
+                            org.getWorkQueue().getWorkRequestList().add(request);
+                            userAccount.getWorkQueue().getWorkRequestList().add(request);
+                            JOptionPane.showMessageDialog(null, "Request sent successfully.");
+                            txtMessage.setText("");
+                            txtQuantity.setText("");
+                        }
                     }
                 }
             }

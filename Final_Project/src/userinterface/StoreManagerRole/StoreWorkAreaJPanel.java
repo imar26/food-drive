@@ -411,24 +411,26 @@ public class StoreWorkAreaJPanel extends javax.swing.JPanel {
 
     private void btnDailySubActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDailySubActionPerformed
         // TODO add your handling code here:
-        int finalStock=organization.getFinalStock();
-        int giveAwaycount= organization.getGiveAway();
-        Records records=new Records();
-        records.setFoodDonated(finalStock);
-        records.setFoodGiven(giveAwaycount);
-        records.setRequestDate(business.getCurrentDate());
-        System.out.println("current date"+business.getCurrentDate());
-        //RecordList list=new RecordList();
-        organization.getRecordList().addRecords(records);
-      //  list.addRecords(records);
-      //  organization.setRecordList(list);
-        organization.setFinalStock(0);
-        organization.setGiveAway(0);
-        organization.setStock(0);
-        txtGiveAway.setText(String.valueOf(organization.getGiveAway()));
-        txtStock.setText(String.valueOf(organization.getStock()));
-        JOptionPane.showMessageDialog(null, "Daily Records Submitted Successfully");
-
+        int ans = JOptionPane.showConfirmDialog(null, "Really want to add?","Warning", JOptionPane.YES_NO_OPTION);
+        if (ans == 0) {
+            int finalStock=organization.getFinalStock();
+            int giveAwaycount= organization.getGiveAway();
+            Records records=new Records();
+            records.setFoodDonated(finalStock);
+            records.setFoodGiven(giveAwaycount);
+            records.setRequestDate(business.getCurrentDate());
+            System.out.println("current date"+business.getCurrentDate());
+            //RecordList list=new RecordList();
+            organization.getRecordList().addRecords(records);
+          //  list.addRecords(records);
+          //  organization.setRecordList(list);
+            organization.setFinalStock(0);
+            organization.setGiveAway(0);
+            organization.setStock(0);
+            txtGiveAway.setText(String.valueOf(organization.getGiveAway()));
+            txtStock.setText(String.valueOf(organization.getStock()));
+            JOptionPane.showMessageDialog(null, "Daily Records Submitted Successfully");
+        }
     }//GEN-LAST:event_btnDailySubActionPerformed
 
 

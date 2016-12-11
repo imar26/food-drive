@@ -259,20 +259,20 @@ public class InventoryManagerWorkAreaJPanel extends javax.swing.JPanel {
 
     private void btnDailySubActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDailySubActionPerformed
         // TODO add your handling code here:
-        int finalStock=organization.getFinalStock();
-        int giveAwaycount= organization.getGiveAway();
-        Records records=new Records();
-        records.setFoodDonated(finalStock);
-        records.setFoodGiven(giveAwaycount);
-        records.setRequestDate(business.getCurrentDate());
-//        RecordList list=new RecordList();
-//        list.addRecords(records);
-//        organization.setRecordList(list);
-        organization.getRecordList().addRecords(records);
-        JOptionPane.showMessageDialog(null, "Daily Records Submitted Successfully");
-        
-        
-        
+        int ans = JOptionPane.showConfirmDialog(null, "Really want to add?","Warning", JOptionPane.YES_NO_OPTION);
+        if (ans == 0) {
+            int finalStock=organization.getFinalStock();
+            int giveAwaycount= organization.getGiveAway();
+            Records records=new Records();
+            records.setFoodDonated(finalStock);
+            records.setFoodGiven(giveAwaycount);
+            records.setRequestDate(business.getCurrentDate());
+    //        RecordList list=new RecordList();
+    //        list.addRecords(records);
+    //        organization.setRecordList(list);
+            organization.getRecordList().addRecords(records);
+            JOptionPane.showMessageDialog(null, "Daily Records Submitted Successfully");
+        }                   
     }//GEN-LAST:event_btnDailySubActionPerformed
     public static int randInt(int min, int max) {
 
