@@ -15,6 +15,7 @@ import Business.Network.Network;
 import Business.Organization.Organization;
 import java.awt.CardLayout;
 import java.awt.Component;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
@@ -142,43 +143,48 @@ public class ManageNetworkJPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void submitJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitJButtonActionPerformed
-
+        boolean nameFlag=false;
         String name = nameJTextField.getText();
+        if(name.isEmpty() ) {
+            nameFlag=true;
+            JOptionPane.showMessageDialog(null, "Please enter network name","Error",JOptionPane.ERROR_MESSAGE);
+        }
+        if (!nameFlag){
+            Network network = system.createAndAddNetwork();
+            network.setName(name);
+            network.getEnterpriseDirectory().createAndAddEnterprise("Main Center",Enterprise.EnterpriseType.MainCenter);
+            network.getEnterpriseDirectory().createAndAddEnterprise("Inspection Center",Enterprise.EnterpriseType.InspectionCenter);
+            network.getEnterpriseDirectory().createAndAddEnterprise("Composting Center",Enterprise.EnterpriseType.CompostingCenter);
+            network.getEnterpriseDirectory().createAndAddEnterprise("Transport Agency",Enterprise.EnterpriseType.TransportAgency);
 
-        Network network = system.createAndAddNetwork();
-        network.setName(name);
-        network.getEnterpriseDirectory().createAndAddEnterprise("Main Center",Enterprise.EnterpriseType.MainCenter);
-        network.getEnterpriseDirectory().createAndAddEnterprise("Inspection Center",Enterprise.EnterpriseType.InspectionCenter);
-        network.getEnterpriseDirectory().createAndAddEnterprise("Composting Center",Enterprise.EnterpriseType.CompostingCenter);
-        network.getEnterpriseDirectory().createAndAddEnterprise("Transport Agency",Enterprise.EnterpriseType.TransportAgency);
-        
-        for(Enterprise enterprise: network.getEnterpriseDirectory().getEnterpriseList())  
-        {
-            if(enterprise instanceof MainCenterEnterprise)
+            for(Enterprise enterprise: network.getEnterpriseDirectory().getEnterpriseList())  
             {
-               enterprise.getOrganizationDirectory().createOrganization(Organization.Type.StoreChain);
-               enterprise.getOrganizationDirectory().createOrganization(Organization.Type.Donor);
-               enterprise.getOrganizationDirectory().createOrganization(Organization.Type.MainOffice);
-               enterprise.getOrganizationDirectory().createOrganization(Organization.Type.Inventory);
+                if(enterprise instanceof MainCenterEnterprise)
+                {
+                   enterprise.getOrganizationDirectory().createOrganization(Organization.Type.StoreChain);
+                   enterprise.getOrganizationDirectory().createOrganization(Organization.Type.Donor);
+                   enterprise.getOrganizationDirectory().createOrganization(Organization.Type.MainOffice);
+                   enterprise.getOrganizationDirectory().createOrganization(Organization.Type.Inventory);
+                }
+                else if(enterprise instanceof InspectionCenterEnterprise)
+                {
+                   enterprise.getOrganizationDirectory().createOrganization(Organization.Type.Lab);
+                   enterprise.getOrganizationDirectory().createOrganization(Organization.Type.LabAssistant);
+                } 
+                else if(enterprise instanceof TransportAgencyEnterprise)
+                {
+                   enterprise.getOrganizationDirectory().createOrganization(Organization.Type.Transport);
+                   enterprise.getOrganizationDirectory().createOrganization(Organization.Type.Driver);
+                } 
+                else if(enterprise instanceof CompostingCenterEnterprise)
+                {
+                   enterprise.getOrganizationDirectory().createOrganization(Organization.Type.Composting);
+                } 
             }
-            else if(enterprise instanceof InspectionCenterEnterprise)
-            {
-               enterprise.getOrganizationDirectory().createOrganization(Organization.Type.Lab);
-               enterprise.getOrganizationDirectory().createOrganization(Organization.Type.LabAssistant);
-            } 
-            else if(enterprise instanceof TransportAgencyEnterprise)
-            {
-               enterprise.getOrganizationDirectory().createOrganization(Organization.Type.Transport);
-               enterprise.getOrganizationDirectory().createOrganization(Organization.Type.Driver);
-            } 
-            else if(enterprise instanceof CompostingCenterEnterprise)
-            {
-               enterprise.getOrganizationDirectory().createOrganization(Organization.Type.Composting);
-            } 
-        }    
-      //  MainCenterEnterprise mainCenterEnterprise=
-
-        populateNetworkTable();
+            JOptionPane.showMessageDialog(null, "Network added successfully.");
+            nameJTextField.setText("");
+            populateNetworkTable();
+        }      
     }//GEN-LAST:event_submitJButtonActionPerformed
 
     private void backJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backJButtonActionPerformed

@@ -177,30 +177,30 @@ public class SignupJPanel extends javax.swing.JPanel {
           if(nameTxt.getText().isEmpty() )
           {
             nameFlag=true;
-            JOptionPane.showMessageDialog(null, "Please enter your full name");
+            JOptionPane.showMessageDialog(null, "Please enter your full name","Error", JOptionPane.ERROR_MESSAGE);
           }
           
           if(phoneNoTxt.getText().isEmpty() || !Validations.isPhoneNumber(phoneNoTxt.getText()))
           {
             phoneNoFlag=true;
-            JOptionPane.showMessageDialog(null, "Please enter a valid phone number");
+            JOptionPane.showMessageDialog(null, "Please enter a valid phone number","Error", JOptionPane.ERROR_MESSAGE);
           }
           
           if(emailTxt.getText().isEmpty() || !Validations.isValidEmailId(emailTxt.getText()))
           {
             emailIdFlag=true;
-            JOptionPane.showMessageDialog(null, "Please enter a valid EmailID");
+            JOptionPane.showMessageDialog(null, "Please enter a valid EmailID","Error", JOptionPane.ERROR_MESSAGE);
           }
            if(userNameTxt.getText().isEmpty())
           {
             userFlag=true;
-            JOptionPane.showMessageDialog(null, "Please enter your user name");
+            JOptionPane.showMessageDialog(null, "Please enter your user name","Error", JOptionPane.ERROR_MESSAGE);
           }
 
           if(passvordTxt.getText().isEmpty() )
           {
             passFlag=true;
-            JOptionPane.showMessageDialog(null, "Please enter a password");
+            JOptionPane.showMessageDialog(null, "Please enter a password","Error", JOptionPane.ERROR_MESSAGE);
           }
           
            if (!nameFlag & !phoneNoFlag & !emailIdFlag & !userFlag & !passFlag){
