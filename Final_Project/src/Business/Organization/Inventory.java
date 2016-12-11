@@ -51,6 +51,26 @@ public class Inventory extends Organization{
         this.recordList = recordList;
     }
     
+    public int totalFoodDonated(int month){
+        int donation=recordList.totalDonation(month);
+        return donation;
+    }
+            
+    public int totalFoodDonated(){
+        int donation=recordList.totalDonation();
+        return donation;
+    }
+    
+    public int totalFoodGivenAway(int month){
+        int donation=recordList.totalGiveAway(month);
+        return donation;
+    }
+            
+    public int totalFoodGivenAway(){
+        int donation=recordList.totalGiveAway();
+        return donation;
+    }
+    
     public Inventory(){
         super(Organization.Type.Inventory.getValue());
     }

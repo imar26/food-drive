@@ -5,13 +5,18 @@
  */
 package Business;
 
+import Business.Enterprise.Enterprise;
+import Business.Enterprise.MainCenterEnterprise;
 import Business.Network.Network;
 import Business.Organization.Organization;
+import Business.Organization.Store;
+import Business.Organization.StoreChain;
 import Business.Role.Role;
 import Business.Role.SystemAdminRole;
 //import Business.Role.SystemAdminRole;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 
 /**
  *
@@ -47,6 +52,41 @@ public class EcoSystem extends Organization {
         return network;
     }
 
+    public int getDonation(int month){
+        int totalDonation=0;
+        for(Network network: networkList){
+             totalDonation+=network.donationByNetwork(month);
+          }
+        return totalDonation;
+    }
+    
+    public int getDonation(String city){
+        int totalDonation=0;
+        for(Network network: networkList){
+            if(network.getName().equalsIgnoreCase(city))
+             totalDonation+=network.donationByNetwork();
+          }
+        return totalDonation;
+    }
+    
+    public HashMap<String, Integer> giveAcrossStores(String city){
+        HashMap<String, Integer> hmap=null;
+        
+         for(Network network: networkList){
+            if(network.getName().equalsIgnoreCase(city)){
+//              for(Enterprise enterprise: network.getEnterpriseDirectory().getEnterpriseList()){
+//                 if(enterprise instanceof MainCenterEnterprise)
+//                     for(Organization org: enterprise.getOrganizationDirectory().getOrganizationList()){
+//                        if(org instanceof StoreChain){
+//                          for(Store store:((StoreChain) org).getStoreChain()){
+//                            store.
+                hmap=network.giveAwayByNetwork();
+
+              }
+         }
+         return hmap;
+      }
+                 
     public Date getCurrentDate() {
         return currentDate;
     }

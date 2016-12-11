@@ -5,8 +5,13 @@
  */
 package testPackage;
 
+import Business.EcoSystem;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
 import javax.swing.JPanel;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
@@ -27,9 +32,12 @@ public class Tabbed extends javax.swing.JPanel {
      * Creates new form Tabbed
      */
     private JPanel container;
-    public Tabbed(JPanel container) {
+    private EcoSystem business;
+    public Tabbed(JPanel container, EcoSystem business) {
         initComponents();
         this.container = container;
+        this.business = business;
+                
     }
 
     /**
@@ -43,20 +51,25 @@ public class Tabbed extends javax.swing.JPanel {
 
         jTabbedPane1 = new javax.swing.JTabbedPane();
         barPanel = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        btnQue1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         piePanel = new javax.swing.JPanel();
-        jButton2 = new javax.swing.JButton();
+        btnQue2 = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        btnQue3 = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
+        jPanel4 = new javax.swing.JPanel();
+        jPanel5 = new javax.swing.JPanel();
 
         barPanel.setLayout(new java.awt.BorderLayout());
 
-        jButton1.setText("Bar Chart");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnQue1.setText("Bar Chart");
+        btnQue1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnQue1ActionPerformed(evt);
             }
         });
-        barPanel.add(jButton1, java.awt.BorderLayout.PAGE_START);
+        barPanel.add(btnQue1, java.awt.BorderLayout.PAGE_START);
 
         jTabbedPane1.addTab("My first Tab", barPanel);
 
@@ -64,17 +77,38 @@ public class Tabbed extends javax.swing.JPanel {
 
         piePanel.setLayout(new java.awt.BorderLayout());
 
-        jButton2.setText("Pie Chart");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnQue2.setText("Pie Chart");
+        btnQue2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnQue2ActionPerformed(evt);
             }
         });
-        piePanel.add(jButton2, java.awt.BorderLayout.PAGE_START);
+        piePanel.add(btnQue2, java.awt.BorderLayout.PAGE_START);
 
         jPanel2.add(piePanel, java.awt.BorderLayout.CENTER);
 
         jTabbedPane1.addTab("My second tab", jPanel2);
+
+        jPanel1.setLayout(new java.awt.BorderLayout());
+
+        btnQue3.setText("Bar Chart");
+        btnQue3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnQue3ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnQue3, java.awt.BorderLayout.PAGE_START);
+
+        jTabbedPane1.addTab("tab3", jPanel1);
+
+        jPanel3.setLayout(new java.awt.BorderLayout());
+        jTabbedPane1.addTab("tab4", jPanel3);
+
+        jPanel4.setLayout(new java.awt.BorderLayout());
+        jTabbedPane1.addTab("tab5", jPanel4);
+
+        jPanel5.setLayout(new java.awt.BorderLayout());
+        jTabbedPane1.addTab("tab6", jPanel5);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -88,13 +122,13 @@ public class Tabbed extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnQue1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQue1ActionPerformed
         // TODO add your handling code here:
         DefaultCategoryDataset barChartData = new DefaultCategoryDataset();
-        barChartData.setValue(20000, "Contribution Amount", "Jan");
-        barChartData.setValue(15000, "Contribution Amount", "Feb");
-        barChartData.setValue(30000, "Contribution Amount", "Mar");
-        JFreeChart barChart = ChartFactory.createBarChart("Church Contributions", "Monthly", "Contribution Amount", barChartData, PlotOrientation.VERTICAL, false, true, false);
+        barChartData.setValue(business.getDonation(9), "Donation Amount", "Sept");
+        barChartData.setValue(business.getDonation(10), "Donation Amount", "Oct");
+        barChartData.setValue(business.getDonation(11), "Donation Amount", "Nov");
+        JFreeChart barChart = ChartFactory.createBarChart("Food Donation", "Monthly", "Donation Amount", barChartData, PlotOrientation.VERTICAL, false, true, false);
         CategoryPlot barchrt = barChart.getCategoryPlot();
         barchrt.setRangeGridlinePaint(Color.ORANGE);
         ChartPanel barP = new ChartPanel(barChart);
@@ -102,15 +136,15 @@ public class Tabbed extends javax.swing.JPanel {
         barPanel.removeAll();
         barPanel.add(barP, BorderLayout.CENTER);
         barPanel.validate();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnQue1ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnQue2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQue2ActionPerformed
         // TODO add your handling code here:
         DefaultPieDataset pieData = new DefaultPieDataset();
-        pieData.setValue("One", new Integer(10));
-        pieData.setValue("Two", new Integer(20));
-        pieData.setValue("Three", new Integer(30));
-        pieData.setValue("Four", new Integer(40));
+        pieData.setValue("Boston", business.getDonation("Boston"));
+        pieData.setValue("Cambridge", business.getDonation("Cambridge"));
+        pieData.setValue("Worchester", business.getDonation("Worchester"));
+       // pieData.setValue("Four", new Integer(40));
         JFreeChart chart = ChartFactory.createPieChart("Pie Chart", pieData, true, true, true);
         PiePlot p = (PiePlot)chart.getPlot();
         ChartPanel chartpanel = new ChartPanel(chart);
@@ -118,14 +152,41 @@ public class Tabbed extends javax.swing.JPanel {
         piePanel.removeAll();
         piePanel.add(chartpanel, BorderLayout.CENTER);
         piePanel.validate();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnQue2ActionPerformed
 
+    private void btnQue3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQue3ActionPerformed
+         DefaultCategoryDataset barChartData = new DefaultCategoryDataset();
+         HashMap<String, Integer> hmap=business.giveAcrossStores("Boston");//from combobox
+         Set set = hmap.entrySet();
+         Iterator iterator = set.iterator();
+         while(iterator.hasNext()) {
+         Map.Entry mentry = (Map.Entry)iterator.next();
+         barChartData.setValue((Integer) mentry.getValue(), "Donation Amount", String.valueOf(mentry.getKey()));
+         System.out.print("key is: "+ mentry.getKey() + " & Value is: ");
+         System.out.println(mentry.getValue());
+      }
+        JFreeChart barChart = ChartFactory.createBarChart("Food Donation", "Store-wise", "Donation Amount", barChartData, PlotOrientation.VERTICAL, false, true, false);
+        CategoryPlot barchrt = barChart.getCategoryPlot();
+        barchrt.setRangeGridlinePaint(Color.ORANGE);
+        ChartPanel barP = new ChartPanel(barChart);
+        barP.setVisible(true);
+        barPanel.removeAll();
+        barPanel.add(barP, BorderLayout.CENTER);
+        barPanel.validate();
+    }//GEN-LAST:event_btnQue3ActionPerformed
+
+                                   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel barPanel;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton btnQue1;
+    private javax.swing.JButton btnQue2;
+    private javax.swing.JButton btnQue3;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JPanel piePanel;
     // End of variables declaration//GEN-END:variables

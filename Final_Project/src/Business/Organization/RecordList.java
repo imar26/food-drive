@@ -31,4 +31,57 @@ public class RecordList {
         
     }
     
+    //returns the amount of food donated by the donors for a particular month
+    public int totalDonation(int month){
+    
+        int totalDonation=0;
+        for(Records record: recordList)
+        {
+          if(record.getRequestDate().getMonth()==month)
+          {
+            totalDonation+=record.getFoodDonated();
+          }
+        }   
+        
+        return totalDonation;
+    }
+    
+    //returns the amount of food donated by the donors
+    public int totalDonation(){
+    
+        int totalDonation=0;
+        for(Records record: recordList)
+        {
+           totalDonation+=record.getFoodDonated();
+        }   
+        
+        return totalDonation;
+    }
+    
+    //returns the amount of food given avay to needy for a particular month
+    public int totalGiveAway(int month){
+    
+        int totalGiveAway=0;
+        for(Records record: recordList)
+        {
+          if(record.getRequestDate().getMonth()==month)
+          {
+            totalGiveAway+=record.getFoodGiven();
+          }
+        }   
+        
+        return totalGiveAway;
+    }
+    
+    //returns the amount of food donated by the donors
+    public int totalGiveAway(){
+    
+        int totalGiveAway=0;
+        for(Records record: recordList)
+        {
+           totalGiveAway+=record.getFoodGiven();
+        }   
+        
+        return totalGiveAway;
+    }
 }
