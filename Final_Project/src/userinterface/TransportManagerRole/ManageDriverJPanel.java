@@ -17,6 +17,7 @@ import Business.Role.TransportManagerRole;
 import Business.UserAccount.UserAccount;
 import javax.swing.JPanel;
 import java.awt.CardLayout;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -181,10 +182,20 @@ public class ManageDriverJPanel extends javax.swing.JPanel {
 
     private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
         // TODO add your handling code here:
-        Organization organization = (Organization) organizationEmpJComboBox.getSelectedItem();
-        String name = txtName.getText();
-        organization.getEmployeeDirectory().createEmployee(name);
-        populateTable(organization);
+        boolean nameFlag=false;
+        if(txtName.getText().isEmpty() )
+        {
+            nameFlag=true;
+            JOptionPane.showMessageDialog(null, "Please enter your full name","Error", JOptionPane.ERROR_MESSAGE);
+        }
+        if (!nameFlag){
+            Organization organization = (Organization) organizationEmpJComboBox.getSelectedItem();
+            String name = txtName.getText();
+            organization.getEmployeeDirectory().createEmployee(name);
+            populateTable(organization);
+            JOptionPane.showMessageDialog(null, "Driver created successfully.");
+            txtName.setText("");
+        }
     }//GEN-LAST:event_btnCreateActionPerformed
     public void populateOrganizationJComboBox() {
         organizationJComboBox.removeAllItems();
