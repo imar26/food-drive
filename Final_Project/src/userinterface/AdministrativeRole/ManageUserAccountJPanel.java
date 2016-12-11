@@ -26,15 +26,17 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
      */
     private JPanel container;
     private Enterprise enterprise;
+
     public ManageUserAccountJPanel(JPanel container, Enterprise enterprise) {
         initComponents();
         this.enterprise = enterprise;
         this.container = container;
 
         popOrganizationComboBox();
-       // employeeJComboBox.removeAllItems();
+        // employeeJComboBox.removeAllItems();
         popData();
     }
+
     public void popOrganizationComboBox() {
         organizationJComboBox.removeAllItems();
 
@@ -42,18 +44,18 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
             organizationJComboBox.addItem(organization);
         }
     }
-    
-    public void populateEmployeeComboBox(Organization organization){
+
+    public void populateEmployeeComboBox(Organization organization) {
         employeeJComboBox.removeAllItems();
-        
-        for (Employee employee : organization.getEmployeeDirectory().getEmployeeList()){
+
+        for (Employee employee : organization.getEmployeeDirectory().getEmployeeList()) {
             employeeJComboBox.addItem(employee);
         }
     }
-    
-    private void populateRoleComboBox(Organization organization){
+
+    private void populateRoleComboBox(Organization organization) {
         roleJComboBox.removeAllItems();
-        for (Role role : organization.getSupportedRole()){
+        for (Role role : organization.getSupportedRole()) {
             roleJComboBox.addItem(role);
         }
     }
@@ -73,6 +75,7 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
             }
         }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -239,26 +242,39 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
 
     private void organizationJComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_organizationJComboBoxActionPerformed
         Organization organization = (Organization) organizationJComboBox.getSelectedItem();
-        if (organization != null){
+        if (organization != null) {
             populateEmployeeComboBox(organization);
             populateRoleComboBox(organization);
         }
     }//GEN-LAST:event_organizationJComboBoxActionPerformed
 
     private void createUserJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createUserJButtonActionPerformed
-        String userName = nameJTextField.getText();
-        String password = passwordJTextField.getText();
-        Organization organization = (Organization) organizationJComboBox.getSelectedItem();
-        Employee employee = (Employee) employeeJComboBox.getSelectedItem();
-        Role role = (Role) roleJComboBox.getSelectedItem();
+        boolean userFlag = false;
+        boolean passFlag = false;
+        if (nameJTextField.getText().isEmpty()) {
+            userFlag = true;
+            JOptionPane.showMessageDialog(null, "Please enter your user name", "Error", JOptionPane.ERROR_MESSAGE);
+        }
 
-        organization.getUserAccountDirectory().createUserAccount(userName, password, employee, role);
+        if (passwordJTextField.getText().isEmpty()) {
+            passFlag = true;
+            JOptionPane.showMessageDialog(null, "Please enter a password", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        if (!userFlag & !passFlag){
+            String userName = nameJTextField.getText();
+            String password = passwordJTextField.getText();
+            Organization organization = (Organization) organizationJComboBox.getSelectedItem();
+            Employee employee = (Employee) employeeJComboBox.getSelectedItem();
+            Role role = (Role) roleJComboBox.getSelectedItem();
 
-        popData();
+            organization.getUserAccountDirectory().createUserAccount(userName, password, employee, role);            
 
-        JOptionPane.showMessageDialog(null, "User Account added successfully.");
-        nameJTextField.setText("");
-        passwordJTextField.setText("");
+            JOptionPane.showMessageDialog(null, "User Account added successfully.");
+            nameJTextField.setText("");
+            passwordJTextField.setText("");
+            
+            popData();
+        }
     }//GEN-LAST:event_createUserJButtonActionPerformed
 
     private void backjButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backjButton1ActionPerformed
