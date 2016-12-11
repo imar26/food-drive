@@ -88,7 +88,7 @@ public class AnalysisMode extends javax.swing.JPanel {
         btnResultQuestion6 = new javax.swing.JButton();
         displayPanelno6 = new javax.swing.JPanel();
 
-        setBackground(new java.awt.Color(153, 255, 255));
+        setBackground(new java.awt.Color(0, 102, 102));
 
         tab6.setBackground(new java.awt.Color(255, 51, 0));
         tab6.setToolTipText("");
@@ -98,9 +98,10 @@ public class AnalysisMode extends javax.swing.JPanel {
 
         jSplitPane2.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
 
-        jPanel7.setBackground(new java.awt.Color(153, 255, 255));
+        jPanel7.setBackground(new java.awt.Color(0, 102, 102));
 
         jLabel2.setFont(new java.awt.Font("Lucida Calligraphy", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("My first question is:");
 
         btnResultQuestion1.setBackground(new java.awt.Color(255, 51, 0));
@@ -149,9 +150,10 @@ public class AnalysisMode extends javax.swing.JPanel {
 
         jSplitPane3.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
 
-        jPanel9.setBackground(new java.awt.Color(153, 255, 255));
+        jPanel9.setBackground(new java.awt.Color(0, 102, 102));
 
         jLabel3.setFont(new java.awt.Font("Lucida Calligraphy", 1, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("My Second question is:");
 
         btnResultQuestion2.setBackground(new java.awt.Color(255, 51, 0));
@@ -200,9 +202,10 @@ public class AnalysisMode extends javax.swing.JPanel {
 
         jSplitPane4.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
 
-        jPanel11.setBackground(new java.awt.Color(153, 255, 255));
+        jPanel11.setBackground(new java.awt.Color(0, 102, 102));
 
         jLabel4.setFont(new java.awt.Font("Lucida Calligraphy", 1, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("My Third question is:");
 
         btnResultQuestion3.setBackground(new java.awt.Color(255, 51, 0));
@@ -256,9 +259,10 @@ public class AnalysisMode extends javax.swing.JPanel {
 
         jSplitPane5.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
 
-        jPanel13.setBackground(new java.awt.Color(153, 255, 255));
+        jPanel13.setBackground(new java.awt.Color(0, 102, 102));
 
         jLabel5.setFont(new java.awt.Font("Lucida Calligraphy", 1, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("My Fourth question is:");
 
         btnResultQuestion4.setBackground(new java.awt.Color(255, 51, 0));
@@ -305,9 +309,10 @@ public class AnalysisMode extends javax.swing.JPanel {
 
         jSplitPane6.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
 
-        jPanel15.setBackground(new java.awt.Color(153, 255, 255));
+        jPanel15.setBackground(new java.awt.Color(0, 102, 102));
 
         jLabel6.setFont(new java.awt.Font("Lucida Calligraphy", 1, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("My Fifth question is:");
 
         btnResultQuestion5.setBackground(new java.awt.Color(255, 51, 0));
@@ -354,9 +359,10 @@ public class AnalysisMode extends javax.swing.JPanel {
 
         jSplitPane1.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
 
-        jPanel6.setBackground(new java.awt.Color(153, 255, 255));
+        jPanel6.setBackground(new java.awt.Color(0, 102, 102));
 
         jLabel7.setFont(new java.awt.Font("Lucida Calligraphy", 1, 14)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("My Sixth question is:");
 
         btnResultQuestion6.setBackground(new java.awt.Color(255, 51, 0));

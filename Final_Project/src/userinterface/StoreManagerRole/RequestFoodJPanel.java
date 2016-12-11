@@ -57,7 +57,7 @@ public class RequestFoodJPanel extends javax.swing.JPanel {
         this.userAccount = account;
         this.business = business;
         this.network=network;
-        model = (DefaultTableModel) tblStoreWorkQueue.getModel();
+        model = (DefaultTableModel) tblStores.getModel();
         model.setRowCount(0);
         populateTable();
         populatestoreTable();
