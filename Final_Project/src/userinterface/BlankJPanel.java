@@ -34,7 +34,7 @@ public class BlankJPanel extends javax.swing.JPanel {
 
         jLabel1.setFont(new java.awt.Font("Lucida Calligraphy", 3, 18)); // NOI18N
         jLabel1.setText("Welcome to food drive..!!");
-        add(jLabel1, java.awt.BorderLayout.LINE_START);
+        add(jLabel1, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
 
