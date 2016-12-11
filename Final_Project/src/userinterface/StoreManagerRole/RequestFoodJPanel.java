@@ -124,16 +124,18 @@ public class RequestFoodJPanel extends javax.swing.JPanel {
         DefaultTableModel model = (DefaultTableModel) tblStores.getModel();
 
         model.setRowCount(0);
+        int count=0;
         while (iterator.hasNext()) {
             String key = iterator.next().toString();
             String value = lmap.get(key).toString();
-            if (!value.equals("0.0")) {
+            if (!value.equals("0.0") && count<4) {
 
                 Object[] row = new Object[2];
                 row[0] = key;
                 row[1] = Double.parseDouble(value);
 
                 model.addRow(row);
+                count++;
             }
         }
 
