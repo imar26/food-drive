@@ -77,7 +77,6 @@ public class ManageWorkQueueJPanel extends javax.swing.JPanel {
         tblManageWorkQueue = new javax.swing.JTable();
         btnRefresh = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
-        btnProcess = new javax.swing.JButton();
         btnRequest = new javax.swing.JButton();
 
         tblManageWorkQueue.setModel(new javax.swing.table.DefaultTableModel(
@@ -115,13 +114,6 @@ public class ManageWorkQueueJPanel extends javax.swing.JPanel {
             }
         });
 
-        btnProcess.setText("Process");
-        btnProcess.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnProcessActionPerformed(evt);
-            }
-        });
-
         btnRequest.setText("Request Test");
         btnRequest.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -142,9 +134,7 @@ public class ManageWorkQueueJPanel extends javax.swing.JPanel {
                         .addComponent(btnRefresh))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnBack)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnProcess)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnRequest)))
                 .addContainerGap(49, Short.MAX_VALUE))
         );
@@ -158,7 +148,6 @@ public class ManageWorkQueueJPanel extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnBack)
-                    .addComponent(btnProcess)
                     .addComponent(btnRequest))
                 .addContainerGap(343, Short.MAX_VALUE))
         );
@@ -168,10 +157,6 @@ public class ManageWorkQueueJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         populateRequestTable();
     }//GEN-LAST:event_btnRefreshActionPerformed
-
-    private void btnProcessActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProcessActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnProcessActionPerformed
 
     private void btnRequestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRequestActionPerformed
         // TODO add your handling code here:
@@ -202,7 +187,6 @@ public class ManageWorkQueueJPanel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
-    private javax.swing.JButton btnProcess;
     private javax.swing.JButton btnRefresh;
     private javax.swing.JButton btnRequest;
     private javax.swing.JScrollPane jScrollPane1;
