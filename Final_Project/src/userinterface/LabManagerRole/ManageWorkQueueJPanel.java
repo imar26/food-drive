@@ -37,6 +37,7 @@ public class ManageWorkQueueJPanel extends javax.swing.JPanel {
     private Enterprise enterprise;
     private UserAccount account;
     private Network network;
+    private LabManagerWorkRequest request;
     ManageWorkQueueJPanel(JPanel userProcessContainer, UserAccount account, Lab organization, Enterprise enterprise, Network network) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
@@ -60,6 +61,7 @@ public class ManageWorkQueueJPanel extends javax.swing.JPanel {
             
             String result = ((LabManagerWorkRequest) request).getTestResult();
             row[4] = result == null ? "Waiting" : result;
+         //   this.request=(LabManagerWorkRequest)request;
             
             model.addRow(row);
         }
@@ -213,33 +215,36 @@ public class ManageWorkQueueJPanel extends javax.swing.JPanel {
         
         if (selectedRow >= 0) {
             LabManagerWorkRequest request = (LabManagerWorkRequest) tblManageWorkQueue.getValueAt(selectedRow, 0);
-            request.setStatus("Processing");
-            //CompostManagerWorkRequest compostRequest = new CompostManagerWorkRequest(); 
-            request.setMessage(request.getMessage());
-            request.setReceiver(request.getReceiver());
-            request.setQuantity(request.getQuantity());
-            request.setStatus("Sent");
-            request.setTestResult("Waiting");
-            Enterprise en= null;
-            for(Enterprise e : network.getEnterpriseDirectory().getEnterpriseList()){
-                if(e instanceof CompostingCenterEnterprise){
-                    en=e;
-                    Organization org=null;
-                    for(Organization o : en.getOrganizationDirectory().getOrganizationList()){
-                        if(o instanceof Composting){
-                            org=o;
-                            break;
-                            
+            if (request.getTestResult().equalsIgnoreCase("Bad Food")) {
+                request.setStatus("Processing");
+                //CompostManagerWorkRequest compostRequest = new CompostManagerWorkRequest(); 
+                request.setMessage(request.getMessage());
+                request.setReceiver(request.getReceiver());
+                request.setQuantity(request.getQuantity());
+                request.setStatus("Sent");
+                request.setTestResult("Waiting");
+                Enterprise en= null;
+                for(Enterprise e : network.getEnterpriseDirectory().getEnterpriseList()){
+                    if(e instanceof CompostingCenterEnterprise){
+                        en=e;
+                        Organization org=null;
+                        for(Organization o : en.getOrganizationDirectory().getOrganizationList()){
+                            if(o instanceof Composting){
+                                org=o;
+                                break;
+
+                            }
+                        }
+                        if(org!=null){
+                            org.getWorkQueue().getWorkRequestList().add(request);
+                            account.getWorkQueue().getWorkRequestList().add(request);
                         }
                     }
-                    if(org!=null){
-                        org.getWorkQueue().getWorkRequestList().add(request);
-                        account.getWorkQueue().getWorkRequestList().add(request);
-                    }
                 }
-            }
-            JOptionPane.showMessageDialog(null, "Request Sent to Composting Manager");
-
+                JOptionPane.showMessageDialog(null, "Request Sent to Composting Manager");
+            } else {
+                JOptionPane.showMessageDialog(null, "Invalid Request");
+            }        
         } else {
             JOptionPane.showMessageDialog(null, "Please select a message to send for composting."); 
             return;

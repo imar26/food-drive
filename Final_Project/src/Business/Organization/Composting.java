@@ -14,11 +14,28 @@ import java.util.ArrayList;
  * @author Aadesh Randeria
  */
 public class Composting extends Organization {
-
+    private int itemsComposed;
+    private RecordList recordList;
     public Composting() {
         super(Organization.Type.Composting.getValue());
     }
 
+    public RecordList getRecordList() {
+        return recordList;
+    }
+
+    public void setRecordList(RecordList recordList) {
+        this.recordList = recordList;
+    }
+    
+    public int getItemsComposed() {
+        return itemsComposed;
+    }
+
+    public void setItemsComposed(int itemsComposed) {
+        this.itemsComposed = itemsComposed;
+    }
+    
     @Override
     public ArrayList<Role> getSupportedRole() {
         ArrayList<Role> roles = new ArrayList();

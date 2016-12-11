@@ -22,7 +22,7 @@ public class CompostManagerRole extends Role {
 
     @Override
     public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, EcoSystem business, Network network) {
-        return new CompostManagerWorkAreaJPanel(userProcessContainer, account, (Composting)organization, business);
+        return new CompostManagerWorkAreaJPanel(userProcessContainer, account, (Composting)organization, business, network);
     }
     
 }

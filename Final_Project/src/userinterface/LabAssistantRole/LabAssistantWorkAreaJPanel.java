@@ -32,6 +32,7 @@ public class LabAssistantWorkAreaJPanel extends javax.swing.JPanel {
     private LabAssistant lab;
     private Enterprise enterprise;
     private EcoSystem business;
+    LabManagerWorkRequest request; 
     public LabAssistantWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, LabAssistant lab, Enterprise enterprise, EcoSystem business) {
         initComponents();
         this.userProcessContainer = userProcessContainer;

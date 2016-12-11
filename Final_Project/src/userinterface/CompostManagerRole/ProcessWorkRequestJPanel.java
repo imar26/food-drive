@@ -5,6 +5,12 @@
  */
 package userinterface.CompostManagerRole;
 
+import Business.Enterprise.Enterprise;
+import Business.Enterprise.MainCenterEnterprise;
+import Business.Network.Network;
+import Business.Organization.Composting;
+import Business.Organization.Inventory;
+import Business.Organization.Organization;
 import Business.WorkQueue.CompostManagerWorkRequest;
 import Business.WorkQueue.LabManagerWorkRequest;
 import java.awt.CardLayout;
@@ -24,10 +30,14 @@ public class ProcessWorkRequestJPanel extends javax.swing.JPanel {
      */
     private JPanel userProcessContainer;
     private LabManagerWorkRequest request;
-    public ProcessWorkRequestJPanel(JPanel userProcessContainer, LabManagerWorkRequest request) {
+    private Composting organization;
+    private Network network;
+    ProcessWorkRequestJPanel(JPanel userProcessContainer, LabManagerWorkRequest request, Composting organization, Network network) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.request = request;
+        this.organization = organization;
+        this.network = network;
     }
 
     /**
@@ -108,6 +118,25 @@ public class ProcessWorkRequestJPanel extends javax.swing.JPanel {
         request.setTestResult(txtResult.getText());
         request.setStatus("Completed");
         JOptionPane.showMessageDialog(null, "Work Completed");
+        
+        int itemsComposed = request.getQuantity();
+        int old_qty = organization.getItemsComposed();
+        organization.setItemsComposed(old_qty+itemsComposed);        
+        
+        for(Enterprise e: network.getEnterpriseDirectory().getEnterpriseList()) {
+            if(e instanceof MainCenterEnterprise) {
+                for(Organization o: e.getOrganizationDirectory().getOrganizationList()) {
+                    if(o instanceof Inventory) {
+                        System.out.println("in inventory");
+                        int quantity = request.getQuantity();
+                        System.out.println(quantity);
+                        int old_quantity = ((Inventory)o).getStock();
+                        ((Inventory)o).setStock(old_quantity-itemsComposed);
+                    }
+                }
+            }
+        }
+        
     }//GEN-LAST:event_btnSubmitResultActionPerformed
 
 

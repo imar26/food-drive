@@ -40,9 +40,9 @@ public class ProcessWorkRequestJPanel extends javax.swing.JPanel {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        txtResult = new javax.swing.JTextField();
         btnSubmitResult = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
+        resultComboBox = new javax.swing.JComboBox<>();
 
         jLabel1.setText("Result:");
 
@@ -60,6 +60,8 @@ public class ProcessWorkRequestJPanel extends javax.swing.JPanel {
             }
         });
 
+        resultComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Good Food", "Bad Food" }));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -74,8 +76,8 @@ public class ProcessWorkRequestJPanel extends javax.swing.JPanel {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtResult, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(349, Short.MAX_VALUE))
+                        .addComponent(resultComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(270, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -83,7 +85,7 @@ public class ProcessWorkRequestJPanel extends javax.swing.JPanel {
                 .addGap(44, 44, 44)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(txtResult, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(resultComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnBack)
@@ -126,7 +128,8 @@ public class ProcessWorkRequestJPanel extends javax.swing.JPanel {
 
     private void btnSubmitResultActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitResultActionPerformed
         // TODO add your handling code here:
-        request.setTestResult(txtResult.getText());
+        String result = (String) resultComboBox.getSelectedItem();
+        request.setTestResult(result);
         request.setStatus("Completed");
         JOptionPane.showMessageDialog(null, "Work Completed");
     }//GEN-LAST:event_btnSubmitResultActionPerformed
@@ -137,6 +140,6 @@ public class ProcessWorkRequestJPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnSubmitResult;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField txtResult;
+    private javax.swing.JComboBox<String> resultComboBox;
     // End of variables declaration//GEN-END:variables
 }

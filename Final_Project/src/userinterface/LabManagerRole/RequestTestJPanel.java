@@ -145,7 +145,7 @@ public class RequestTestJPanel extends javax.swing.JPanel {
     private void btnRequestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRequestActionPerformed
         // TODO add your handling code here:
         UserAccount ua = (UserAccount)comboBoxLabAssistant.getSelectedItem();
-        LabManagerWorkRequest request=new LabManagerWorkRequest();
+       // LabManagerWorkRequest request=new LabManagerWorkRequest();
         request.setSender(account);
         //request.setLabAssistantName(ua);
         request.setMessage(txtMessage.getText());
@@ -174,7 +174,7 @@ public class RequestTestJPanel extends javax.swing.JPanel {
 //                        System.out.println("Driver"+isDriver.getgetName());
                         System.out.println("User Account"+account.getUsername());
                         isLabAssistant.getWorkQueue().getWorkRequestList().add(request);
-                        System.out.println("DriverA"+isLabAssistant.getWorkQueue().getWorkRequestList());
+                        System.out.println("LabAssistant"+isLabAssistant.getWorkQueue().getWorkRequestList());
                         account.getWorkQueue().getWorkRequestList().add(request);
                     }
                     

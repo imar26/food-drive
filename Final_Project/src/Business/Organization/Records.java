@@ -15,7 +15,8 @@ public class Records {
     private Date requestDate;
     private int foodDonated;
     private int foodGiven;
-
+    private int foodDecomposed;
+    
     public Date getRequestDate() {
         return requestDate;
     }
@@ -27,6 +28,15 @@ public class Records {
     public int getFoodDonated() {
         return foodDonated;
     }
+
+    public int getFoodDecomposed() {
+        return foodDecomposed;
+    }
+
+    public void setFoodDecomposed(int foodDecomposed) {
+        this.foodDecomposed = foodDecomposed;
+    }
+    
 
     public void setFoodDonated(int foodDonated) {
         this.foodDonated = foodDonated;
