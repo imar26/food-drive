@@ -41,6 +41,7 @@ public class ManageStoresJPanel extends javax.swing.JPanel {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.storeChain = storeChain;
+        populateTable();
     }
 
     /**
@@ -199,12 +200,50 @@ public class ManageStoresJPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void addJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addJButtonActionPerformed
+        boolean nameFlag = false;
+        boolean locFlag = false;
+        if (nameTxt.getText().isEmpty()) {
+            nameFlag = true;
+            JOptionPane.showMessageDialog(null, "Please enter name", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        if (locationTxt.getText().isEmpty()) {
+            locFlag = true;
+            JOptionPane.showMessageDialog(null, "Please enter location", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        if (!nameFlag & !locFlag){
+            try {
+                String loc[] = getLatLongPositions(locationTxt.getText());
+                Store store = new Store();
+                store.setName(nameTxt.getText());
+                store.setLocation(locationTxt.getText());
+                store.setLatitude(Double.parseDouble(loc[0]));
+                store.setLongitude(Double.parseDouble(loc[1]));
+                latitudeTxt.setText(loc[0]);
+                longitudeTxt.setText(loc[1]);
+                storeChain.addStore(store);
+                JOptionPane.showMessageDialog(null, "Store added successfully.");
+                nameTxt.setText("");
+                locationTxt.setText("");
+                latitudeTxt.setText("");
+                longitudeTxt.setText("");
+                populateTable();
+            } catch (Exception ex) {
+                Logger.getLogger(ManageStoresJPanel.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_addJButtonActionPerformed
+
     private void backJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backJButtonActionPerformed
 
         userProcessContainer.remove(this);
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.previous(userProcessContainer);
     }//GEN-LAST:event_backJButtonActionPerformed
+
+    private void longitudeTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_longitudeTxtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_longitudeTxtActionPerformed
 
     private void populateTable() {
         DefaultTableModel model = (DefaultTableModel) storesJTable.getModel();
@@ -245,45 +284,6 @@ public class ManageStoresJPanel extends javax.swing.JPanel {
         }
         return null;
     }
-
-    private void addJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addJButtonActionPerformed
-        boolean nameFlag = false;
-        boolean locFlag = false;
-        if (nameTxt.getText().isEmpty()) {
-            nameFlag = true;
-            JOptionPane.showMessageDialog(null, "Please enter name", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-        if (locationTxt.getText().isEmpty()) {
-            locFlag = true;
-            JOptionPane.showMessageDialog(null, "Please enter location", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-        if (!nameFlag & !locFlag){
-            try {
-                String loc[] = getLatLongPositions(locationTxt.getText());
-                Store store = new Store();
-                store.setName(nameTxt.getText());
-                store.setLocation(locationTxt.getText());
-                store.setLatitude(Double.parseDouble(loc[0]));
-                store.setLongitude(Double.parseDouble(loc[1]));
-                latitudeTxt.setText(loc[0]);
-                longitudeTxt.setText(loc[1]);
-                storeChain.addStore(store);
-                JOptionPane.showMessageDialog(null, "Store added successfully.");
-                nameTxt.setText("");
-                locationTxt.setText("");
-                latitudeTxt.setText("");
-                longitudeTxt.setText("");
-                populateTable();
-            } catch (Exception ex) {
-                Logger.getLogger(ManageStoresJPanel.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-
-    }//GEN-LAST:event_addJButtonActionPerformed
-
-    private void longitudeTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_longitudeTxtActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_longitudeTxtActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
