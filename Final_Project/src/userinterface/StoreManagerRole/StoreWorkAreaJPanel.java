@@ -398,9 +398,10 @@ public class StoreWorkAreaJPanel extends javax.swing.JPanel {
         records.setFoodGiven(giveAwaycount);
         records.setRequestDate(business.getCurrentDate());
         System.out.println("current date"+business.getCurrentDate());
-        RecordList list=new RecordList();
-        list.addRecords(records);
-        organization.setRecordList(list);
+        //RecordList list=new RecordList();
+        organization.getRecordList().addRecords(records);
+      //  list.addRecords(records);
+      //  organization.setRecordList(list);
         organization.setFinalStock(0);
         organization.setGiveAway(0);
         organization.setStock(0);

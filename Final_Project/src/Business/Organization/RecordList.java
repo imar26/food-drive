@@ -75,14 +75,14 @@ public class RecordList {
         int totalGiveAway=0;
         for(Records record: recordList)
         {
-            System.out.println("record.getRequestDate().getMonth() : "+record.getRequestDate().getMonth());
+          //  System.out.println("record.getRequestDate().getMonth() : "+record.getRequestDate().getMonth());
           if(record.getRequestDate().getMonth()==month)
           {
-              System.out.println("in here");
+              System.out.println("Business.Organization.RecordList.totalGiveAway()");
             totalGiveAway+=record.getFoodGiven();
           }
         }   
-        
+            System.out.println("give aay"+totalGiveAway);
         return totalGiveAway;
     }
     
