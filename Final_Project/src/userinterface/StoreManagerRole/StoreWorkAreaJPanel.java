@@ -253,8 +253,11 @@ public class StoreWorkAreaJPanel extends javax.swing.JPanel {
             {    
             request.setStatus("Added");
             int stock=organization.getStock();
+            int finalStock=organization.getFinalStock();
             int quantity = ((FoodWorkRequest) request).getQuantity();
             int total=stock+quantity;
+            int finalTotal=finalStock+quantity;
+            organization.setFinalStock(finalTotal);
             organization.setStock(total);
             txtStock.setText(Integer.toString(total));
             JOptionPane.showMessageDialog(null, "Stock Updated Successfully."); 
@@ -398,6 +401,9 @@ public class StoreWorkAreaJPanel extends javax.swing.JPanel {
         RecordList list=new RecordList();
         list.addRecords(records);
         organization.setRecordList(list);
+        organization.setFinalStock(0);
+        organization.setGiveAway(0);
+        organization.setStock(0);
         JOptionPane.showMessageDialog(null, "Daily Records Submitted Successfully");
 
     }//GEN-LAST:event_btnDailySubActionPerformed
