@@ -151,11 +151,6 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
         employeeJComboBox.setBackground(new java.awt.Color(255, 51, 0));
         employeeJComboBox.setFont(new java.awt.Font("Lucida Calligraphy", 0, 12)); // NOI18N
         employeeJComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        employeeJComboBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                employeeJComboBoxActionPerformed(evt);
-            }
-        });
         add(employeeJComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 250, 170, -1));
 
         roleJComboBox.setBackground(new java.awt.Color(255, 51, 0));
@@ -245,10 +240,6 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
         CardLayout layout = (CardLayout) container.getLayout();
         layout.previous(container);
     }//GEN-LAST:event_btnBackActionPerformed
-
-    private void employeeJComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_employeeJComboBoxActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_employeeJComboBoxActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
