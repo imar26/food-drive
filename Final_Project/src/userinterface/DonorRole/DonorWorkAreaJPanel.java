@@ -297,6 +297,8 @@ public class DonorWorkAreaJPanel extends javax.swing.JPanel {
     private void populateStore() {
 
         storeComboBox.removeAll();
+        for(Network network: business.getNetworkList()){
+        for(Enterprise enterprise: network.getEnterpriseDirectory().getEnterpriseList()){    
         for (Organization org : enterprise.getOrganizationDirectory().getOrganizationList()) {
             if (org instanceof StoreChain) {
                 for (Store store : ((StoreChain) org).getStoreChain()) {
@@ -304,6 +306,8 @@ public class DonorWorkAreaJPanel extends javax.swing.JPanel {
 
                 }
             }
+        }
+        }
         }
     }
 }
