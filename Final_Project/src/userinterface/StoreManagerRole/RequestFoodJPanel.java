@@ -18,6 +18,7 @@ import Business.WorkQueue.FoodWorkRequest;
 import Business.WorkQueue.InventoryWorkRequest;
 import Business.WorkQueue.StoreWorkRequest;
 import Business.WorkQueue.WorkRequest;
+import java.awt.CardLayout;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -147,7 +148,8 @@ public class RequestFoodJPanel extends javax.swing.JPanel {
         requestBtn = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         tblStoreWorkQueue = new javax.swing.JTable();
-        btnRequestMO = new javax.swing.JButton();
+        btnRequestInventory = new javax.swing.JButton();
+        btnBack = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -232,14 +234,21 @@ public class RequestFoodJPanel extends javax.swing.JPanel {
 
         add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(154, 277, -1, 203));
 
-        btnRequestMO.setText("Request Inventory");
-        btnRequestMO.setEnabled(false);
-        btnRequestMO.addActionListener(new java.awt.event.ActionListener() {
+        btnRequestInventory.setText("Request Inventory");
+        btnRequestInventory.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRequestMOActionPerformed(evt);
+                btnRequestInventoryActionPerformed(evt);
             }
         });
-        add(btnRequestMO, new org.netbeans.lib.awtextra.AbsoluteConstraints(286, 568, -1, -1));
+        add(btnRequestInventory, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 530, -1, -1));
+
+        btnBack.setText("<< Back");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
+        add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 530, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     public void populatestoreTable(){
@@ -289,7 +298,7 @@ public class RequestFoodJPanel extends javax.swing.JPanel {
                }   
            }
            if(flag==false)
-               btnRequestMO.setEnabled(true);
+               btnRequestInventory.setEnabled(true);
     }
     
     private void requestBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_requestBtnActionPerformed
@@ -329,7 +338,7 @@ public class RequestFoodJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_quantityTxtActionPerformed
 
-    private void btnRequestMOActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRequestMOActionPerformed
+    private void btnRequestInventoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRequestInventoryActionPerformed
         // TODO add your handling code here:
         FoodWorkRequest request=new FoodWorkRequest();
         request.setMessage("Request for food");
@@ -357,7 +366,14 @@ public class RequestFoodJPanel extends javax.swing.JPanel {
             }
         }
         
-    }//GEN-LAST:event_btnRequestMOActionPerformed
+    }//GEN-LAST:event_btnRequestInventoryActionPerformed
+
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        // TODO add your handling code here:
+        userProcessContainer.remove(this);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.previous(userProcessContainer);
+    }//GEN-LAST:event_btnBackActionPerformed
     public void populateRequestTable(FoodWorkRequest request, Store store){
            
 //                       DefaultTableModel model = (DefaultTableModel) tblStoreWorkQueue.getModel();
@@ -383,7 +399,8 @@ public class RequestFoodJPanel extends javax.swing.JPanel {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnRequestMO;
+    private javax.swing.JButton btnBack;
+    private javax.swing.JButton btnRequestInventory;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
