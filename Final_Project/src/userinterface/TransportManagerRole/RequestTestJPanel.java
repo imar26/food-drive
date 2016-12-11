@@ -15,11 +15,13 @@ import Business.Organization.Organization;
 import Business.Organization.Transport;
 import Business.Role.DriverRole;
 import Business.UserAccount.UserAccount;
+import Business.Validations;
 import Business.WorkQueue.DriverWorkRequest;
 import Business.WorkQueue.FoodWorkRequest;
 import Business.WorkQueue.MainOfficeWorkRequest;
 import Business.WorkQueue.TransportWorkRequest;
 import java.awt.CardLayout;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -176,50 +178,75 @@ public class RequestTestJPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRequestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRequestActionPerformed
-        // TODO add your handling code here:        
-        UserAccount ua = (UserAccount)comboBoxDriver.getSelectedItem();
-        //DriverWorkRequest request=new DriverWorkRequest();
-        request.setSender(userAccount);
-        //request.setDriverName(ua);
-        request.setMessage(txtMessage.getText());
-        request.setQuantity(Integer.valueOf(txtQuantity.getText()));
-        request.setLocation(txtLocation.getText());
-        request.setStatus("Sent");
+        // TODO add your handling code here:
+        boolean msgFlag = false;
+        boolean qtyFlag = false;
+        boolean locFlag = false;
+        if (txtMessage.getText().isEmpty()) {
+            msgFlag = true;
+            JOptionPane.showMessageDialog(null, "Please enter your message", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        if (txtQuantity.getText().isEmpty()) {
+            qtyFlag = true;
+            JOptionPane.showMessageDialog(null, "Please enter quantity", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        if (!Validations.isDigit(txtQuantity.getText())) {
+            qtyFlag = true;
+            JOptionPane.showMessageDialog(null, "Please enter quantity as integer", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        if (txtLocation.getText().isEmpty()) {
+            locFlag = true;
+            JOptionPane.showMessageDialog(null, "Please enter location", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        if (!msgFlag & !qtyFlag & !locFlag){
+            UserAccount ua = (UserAccount)comboBoxDriver.getSelectedItem();
+            //DriverWorkRequest request=new DriverWorkRequest();
+            request.setSender(userAccount);
+            //request.setDriverName(ua);
+            request.setMessage(txtMessage.getText());
+            request.setQuantity(Integer.valueOf(txtQuantity.getText()));
+            request.setLocation(txtLocation.getText());
+            request.setStatus("Sent");
         
-        for(Network network : business.getNetworkList()){
-            System.out.println("Network"+ network.getName());
-            Enterprise en=null;
-            for(Enterprise enterprise : network.getEnterpriseDirectory().getEnterpriseList()){
-                System.out.println("Enterprise"+ enterprise.getName());
-                 if(enterprise instanceof TransportAgencyEnterprise){
-                     System.out.println("Yes");
-                    en = enterprise;
-                    Organization org = null;
-                    UserAccount isDriver = null;
-                    for (Organization organization : en.getOrganizationDirectory().getOrganizationList()){
-                        
-                        if (organization instanceof Driver){
-//                            System.out.println("Yes Organization");
-//                            org = organization;
-//                            break;
-                            
-                            isDriver = ua;
-                            isDriver.getEmployee().setStatus("Busy");
-                            
+            for(Network network : business.getNetworkList()){
+                System.out.println("Network"+ network.getName());
+                Enterprise en=null;
+                for(Enterprise enterprise : network.getEnterpriseDirectory().getEnterpriseList()){
+                    System.out.println("Enterprise"+ enterprise.getName());
+                     if(enterprise instanceof TransportAgencyEnterprise){
+                         System.out.println("Yes");
+                        en = enterprise;
+                        Organization org = null;
+                        UserAccount isDriver = null;
+                        for (Organization organization : en.getOrganizationDirectory().getOrganizationList()){
+
+                            if (organization instanceof Driver){
+    //                            System.out.println("Yes Organization");
+    //                            org = organization;
+    //                            break;
+
+                                isDriver = ua;
+                                isDriver.getEmployee().setStatus("Busy");
+
+                            }
+                        }
+                        if (isDriver!=null){
+    //                        System.out.println("Driver"+isDriver.getgetName());
+                            System.out.println("User Account"+userAccount.getUsername());
+                            isDriver.getWorkQueue().getWorkRequestList().add(request);
+                            System.out.println("DriverA"+isDriver.getWorkQueue().getWorkRequestList());
+                            userAccount.getWorkQueue().getWorkRequestList().add(request);
+                            JOptionPane.showMessageDialog(null, "Request sent successfully.");
+                            txtMessage.setText("");
+                            txtQuantity.setText("");
+                            txtLocation.setText("");
+                        }
+                        else{
+                            //send it to a stall specified
                         }
                     }
-                    if (isDriver!=null){
-//                        System.out.println("Driver"+isDriver.getgetName());
-                        System.out.println("User Account"+userAccount.getUsername());
-                        isDriver.getWorkQueue().getWorkRequestList().add(request);
-                        System.out.println("DriverA"+isDriver.getWorkQueue().getWorkRequestList());
-                        userAccount.getWorkQueue().getWorkRequestList().add(request);
-                    }
-                    else{
-                        //send it to a stall specified
-                    }
-                }
-            }   
+                }   
+            }
         }
     }//GEN-LAST:event_btnRequestActionPerformed
 
