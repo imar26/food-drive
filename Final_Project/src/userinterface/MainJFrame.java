@@ -256,6 +256,7 @@ public class MainJFrame extends javax.swing.JFrame {
 
         loginJButton.setEnabled(false);
         logoutJButton.setEnabled(true);
+        signUpButton.setEnabled(false);
         userNameJTextField.setEnabled(false);
         passwordField.setEnabled(false);
     }//GEN-LAST:event_loginJButtonActionPerformed
@@ -265,6 +266,7 @@ public class MainJFrame extends javax.swing.JFrame {
         userNameJTextField.setEnabled(true);
         passwordField.setEnabled(true);
         loginJButton.setEnabled(true);
+        signUpButton.setEnabled(true);
 
         userNameJTextField.setText("");
         passwordField.setText("");

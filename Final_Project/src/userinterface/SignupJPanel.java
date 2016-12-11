@@ -155,6 +155,7 @@ public class SignupJPanel extends javax.swing.JPanel {
           boolean nameFlag=false;
           boolean phoneNoFlag=false;
           boolean emailIdFlag=false; 
+          boolean userFlag=false;
           boolean passFlag=false;
           Organization organization=null;
           for(Network network:system.getNetworkList())
@@ -190,11 +191,11 @@ public class SignupJPanel extends javax.swing.JPanel {
             emailIdFlag=true;
             JOptionPane.showMessageDialog(null, "Please enter a valid EmailID");
           }
-//           if(userNameTxt.getText().isEmpty() || !Validations.isUserNameUnique(emailTxt.getText()))
-//          {
-//            Flag=true;
-//            JOptionPane.showMessageDialog(null, "This username is not unique");
-//          }
+           if(userNameTxt.getText().isEmpty())
+          {
+            userFlag=true;
+            JOptionPane.showMessageDialog(null, "Please enter your user name");
+          }
 
           if(passvordTxt.getText().isEmpty() )
           {
@@ -202,7 +203,7 @@ public class SignupJPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Please enter a password");
           }
           
-           if (!nameFlag & !phoneNoFlag & !emailIdFlag ){
+           if (!nameFlag & !phoneNoFlag & !emailIdFlag & !userFlag & !passFlag){
              
               UserAccount user=new UserAccount();
               user.setEmployee(null);
@@ -220,6 +221,11 @@ public class SignupJPanel extends javax.swing.JPanel {
               organization.getUserAccountDirectory().addAccount(user);
              // userAccountDirectory.addAccount(user);
               JOptionPane.showMessageDialog(null, "Details saved successfully. You may login now");
+              nameTxt.setText("");
+              emailTxt.setText("");
+              phoneNoTxt.setText("");
+              userNameTxt.setText("");
+              passvordTxt.setText("");
            }
     }//GEN-LAST:event_submitButtonActionPerformed
 
