@@ -13,7 +13,10 @@ import Business.Organization.Inventory;
 import Business.Organization.Lab;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
+import Business.Validations;
 import Business.WorkQueue.LabManagerWorkRequest;
+import java.awt.CardLayout;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -65,6 +68,11 @@ public class RequestWorkJPanel extends javax.swing.JPanel {
         });
 
         jButton2.setText("<< Back");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Quantity:");
 
@@ -111,32 +119,54 @@ public class RequestWorkJPanel extends javax.swing.JPanel {
 
     private void btnRequestWorkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRequestWorkActionPerformed
         // TODO add your handling code here:
-        LabManagerWorkRequest request=new LabManagerWorkRequest();
-        request.setMessage(txtMessage.getText());
-        request.setStatus("Sent");
-        request.setQuantity(Integer.parseInt(txtQuantity.getText()));
-        Enterprise en = null;
-        Organization org = null;
-        for(Enterprise e : network.getEnterpriseDirectory().getEnterpriseList()){
-            if(e instanceof InspectionCenterEnterprise){
-                en=e;
-                for(Organization o : en.getOrganizationDirectory().getOrganizationList()){
-                    if(o instanceof Lab){
-                        org=o;
-                        break;
+        boolean msgFlag = false;
+        boolean qtyFlag = false;
+        if (txtMessage.getText().isEmpty()) {
+            msgFlag = true;
+            JOptionPane.showMessageDialog(null, "Please enter your message", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        if (txtQuantity.getText().isEmpty()) {
+            qtyFlag = true;
+            JOptionPane.showMessageDialog(null, "Please enter quantity", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        if (!Validations.isDigit(txtQuantity.getText())) {
+            qtyFlag = true;
+            JOptionPane.showMessageDialog(null, "Please enter quantity as integer", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        if (!msgFlag & !qtyFlag){
+            LabManagerWorkRequest request=new LabManagerWorkRequest();
+            request.setMessage(txtMessage.getText());
+            request.setStatus("Sent to lab");
+            request.setQuantity(Integer.parseInt(txtQuantity.getText()));
+            Enterprise en = null;
+            Organization org = null;
+            for(Enterprise e : network.getEnterpriseDirectory().getEnterpriseList()){
+                if(e instanceof InspectionCenterEnterprise){
+                    en=e;
+                    for(Organization o : en.getOrganizationDirectory().getOrganizationList()){
+                        if(o instanceof Lab){
+                            org=o;
+                            break;
+                        }
                     }
-                }
-                if(org!=null){
-                    org.getWorkQueue().getWorkRequestList().add(request);
-                    userAccount.getWorkQueue().getWorkRequestList().add(request);
-                        
+                    if(org!=null){
+                        org.getWorkQueue().getWorkRequestList().add(request);
+                        userAccount.getWorkQueue().getWorkRequestList().add(request);
+                        JOptionPane.showMessageDialog(null, "Request sent successfully.");
+                        txtMessage.setText("");
+                        txtQuantity.setText("");
+                    }
                 }
             }
         }
-        
-        
-        
     }//GEN-LAST:event_btnRequestWorkActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        userProcessContainer.remove(this);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.previous(userProcessContainer);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

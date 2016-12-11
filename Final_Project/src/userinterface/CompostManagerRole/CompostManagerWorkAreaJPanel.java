@@ -178,18 +178,21 @@ public class CompostManagerWorkAreaJPanel extends javax.swing.JPanel {
 
     private void btnProcessActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProcessActionPerformed
         // TODO add your handling code here:
-        int selectedRow = tblCompostManager.getSelectedRow();
-        
+        int selectedRow = tblCompostManager.getSelectedRow();        
         
         if (selectedRow >= 0) {
             LabManagerWorkRequest request = (LabManagerWorkRequest) tblCompostManager.getValueAt(selectedRow, 0);
+            if(!request.getStatus().equalsIgnoreCase("Food Decomposed")){
 
-            request.setStatus("Processing");
+                request.setStatus("Processing");
 
-            ProcessWorkRequestJPanel processWorkRequestJPanel = new ProcessWorkRequestJPanel(userProcessContainer, request, organization, network);
-            userProcessContainer.add("ProcessWorkRequestJPanel", processWorkRequestJPanel);
-            CardLayout layout = (CardLayout) userProcessContainer.getLayout();
-            layout.next(userProcessContainer);
+                ProcessWorkRequestJPanel processWorkRequestJPanel = new ProcessWorkRequestJPanel(userProcessContainer, request, organization, network);
+                userProcessContainer.add("ProcessWorkRequestJPanel", processWorkRequestJPanel);
+                CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+                layout.next(userProcessContainer);
+            } else {
+                JOptionPane.showMessageDialog(null, "Invalid request"); 
+            }
 
         } else {
            JOptionPane.showMessageDialog(null, "Please select a request message to process."); 

@@ -213,20 +213,33 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
 
     private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
         // TODO add your handling code here:
-        String userName = txtUserName.getText();
-        char[] value = txtPassword.getPassword();
-        String password = new String(value);
-        Organization organization = (Organization) organizationJComboBox.getSelectedItem();
-        Employee employee = (Employee) comboBoxLabAssistant.getSelectedItem();
-        Role role = (Role) comboBoxRole.getSelectedItem();
+        boolean userFlag = false;
+        boolean passFlag = false;
+        if (txtUserName.getText().isEmpty()) {
+            userFlag = true;
+            JOptionPane.showMessageDialog(null, "Please enter your user name", "Error", JOptionPane.ERROR_MESSAGE);
+        }
 
-        organization.getUserAccountDirectory().createUserAccount(userName, password, employee, role);
+        if (txtPassword.getText().isEmpty()) {
+            passFlag = true;
+            JOptionPane.showMessageDialog(null, "Please enter a password", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        if (!userFlag & !passFlag) {
+            String userName = txtUserName.getText();
+            char[] value = txtPassword.getPassword();
+            String password = new String(value);
+            Organization organization = (Organization) organizationJComboBox.getSelectedItem();
+            Employee employee = (Employee) comboBoxLabAssistant.getSelectedItem();
+            Role role = (Role) comboBoxRole.getSelectedItem();
 
-        populateData();
+            organization.getUserAccountDirectory().createUserAccount(userName, password, employee, role);
 
-        JOptionPane.showMessageDialog(null, "User Account added successfully.");
-        txtUserName.setText("");
-        txtPassword.setText("");
+            populateData();
+
+            JOptionPane.showMessageDialog(null, "User Account added successfully.");
+            txtUserName.setText("");
+            txtPassword.setText("");
+        }
     }//GEN-LAST:event_btnCreateActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed

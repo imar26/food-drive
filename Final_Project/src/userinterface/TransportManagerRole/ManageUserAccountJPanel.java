@@ -24,43 +24,49 @@ import javax.swing.table.DefaultTableModel;
  * @author Aadesh Randeria
  */
 public class ManageUserAccountJPanel extends javax.swing.JPanel {
+
     private JPanel userProcessContainer;
     private Enterprise enterprise;
+
     /**
      * Creates new form ManageUserAccountJPanel
      */
     public ManageUserAccountJPanel(JPanel userProcessContainer, Enterprise enterprise) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
-        this.enterprise = enterprise;    
+        this.enterprise = enterprise;
         populateOrganizationComboBox();
-        
+
         populateData();
     }
+
     public void populateOrganizationComboBox() {
         organizationJComboBox.removeAllItems();
-        for(Organization organization: enterprise.getOrganizationDirectory().getOrganizationList()) {
+        for (Organization organization : enterprise.getOrganizationDirectory().getOrganizationList()) {
             organizationJComboBox.addItem(organization);
         }
     }
+
     public void populateDriverComboBox(Organization organization) {
         comboBoxDriver.removeAllItems();
-        for(Employee employee: organization.getEmployeeDirectory().getEmployeeList()) {
+        for (Employee employee : organization.getEmployeeDirectory().getEmployeeList()) {
             comboBoxDriver.addItem(employee);
         }
     }
+
     public void populateRoleComboBox(Organization organization) {
         comboBoxRole.removeAllItems();
-        for(Role role: organization.getSupportedRole()) {
+        for (Role role : organization.getSupportedRole()) {
             comboBoxRole.addItem(role);
         }
     }
+
     public void populateData() {
         DefaultTableModel model = (DefaultTableModel) tblManageUserAccount.getModel();
 
         model.setRowCount(0);
 
-        for(Organization organization: enterprise.getOrganizationDirectory().getOrganizationList()) {
+        for (Organization organization : enterprise.getOrganizationDirectory().getOrganizationList()) {
             for (UserAccount ua : organization.getUserAccountDirectory().getUserAccountList()) {
                 Object row[] = new Object[2];
                 row[0] = ua;
@@ -209,24 +215,37 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
 
     private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
         // TODO add youelser handling code here:
-        String userName = txtUserName.getText();
-        char[] value = txtPassword.getPassword();
-        String password = new String(value);
-        Organization organization = (Organization) organizationJComboBox.getSelectedItem();
-        Employee employee = (Employee) comboBoxDriver.getSelectedItem();
-        Role role = (Role) comboBoxRole.getSelectedItem();
-        
-        if(organization instanceof Driver) {
-            employee.setStatus("Available");
+        boolean userFlag = false;
+        boolean passFlag = false;
+        if (txtUserName.getText().isEmpty()) {
+            userFlag = true;
+            JOptionPane.showMessageDialog(null, "Please enter your user name", "Error", JOptionPane.ERROR_MESSAGE);
         }
 
-        organization.getUserAccountDirectory().createUserAccount(userName, password, employee, role);
+        if (txtPassword.getText().isEmpty()) {
+            passFlag = true;
+            JOptionPane.showMessageDialog(null, "Please enter a password", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        if (!userFlag & !passFlag) {
+            String userName = txtUserName.getText();
+            char[] value = txtPassword.getPassword();
+            String password = new String(value);
+            Organization organization = (Organization) organizationJComboBox.getSelectedItem();
+            Employee employee = (Employee) comboBoxDriver.getSelectedItem();
+            Role role = (Role) comboBoxRole.getSelectedItem();
 
-        populateData();
+            if (organization instanceof Driver) {
+                employee.setStatus("Available");
+            }
 
-        JOptionPane.showMessageDialog(null, "User Account added successfully.");
-        txtUserName.setText("");
-        txtPassword.setText("");
+            organization.getUserAccountDirectory().createUserAccount(userName, password, employee, role);
+
+            populateData();
+
+            JOptionPane.showMessageDialog(null, "User Account added successfully.");
+            txtUserName.setText("");
+            txtPassword.setText("");
+        }
     }//GEN-LAST:event_btnCreateActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
@@ -238,7 +257,7 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
 
     private void organizationJComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_organizationJComboBoxActionPerformed
         Organization organization = (Organization) organizationJComboBox.getSelectedItem();
-        if (organization != null){
+        if (organization != null) {
             populateDriverComboBox(organization);
             populateRoleComboBox(organization);
         }

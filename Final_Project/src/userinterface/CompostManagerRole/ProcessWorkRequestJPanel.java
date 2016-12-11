@@ -115,23 +115,30 @@ public class ProcessWorkRequestJPanel extends javax.swing.JPanel {
 
     private void btnSubmitResultActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitResultActionPerformed
         // TODO add your handling code here:
-        request.setTestResult(txtResult.getText());
-        request.setStatus("Completed");
-        JOptionPane.showMessageDialog(null, "Work Completed");
-        
-        int itemsComposed = request.getQuantity();
-        int old_qty = organization.getItemsComposed();
-        organization.setItemsComposed(old_qty+itemsComposed);        
-        
-        for(Enterprise e: network.getEnterpriseDirectory().getEnterpriseList()) {
-            if(e instanceof MainCenterEnterprise) {
-                for(Organization o: e.getOrganizationDirectory().getOrganizationList()) {
-                    if(o instanceof Inventory) {
-                        System.out.println("in inventory");
-                        int quantity = request.getQuantity();
-                        System.out.println(quantity);
-                        int old_quantity = ((Inventory)o).getStock();
-                        ((Inventory)o).setStock(old_quantity-itemsComposed);
+        boolean msgFlag = false;
+        if (txtResult.getText().isEmpty()) {
+            msgFlag = true;
+            JOptionPane.showMessageDialog(null, "Please enter your message", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        if (!msgFlag) {
+            request.setTestResult(txtResult.getText());
+            request.setStatus("Food Decomposed");
+            JOptionPane.showMessageDialog(null, "Work Completed");
+            txtResult.setText("");
+            int itemsComposed = request.getQuantity();
+            int old_qty = organization.getItemsComposed();
+            organization.setItemsComposed(old_qty+itemsComposed);        
+
+            for(Enterprise e: network.getEnterpriseDirectory().getEnterpriseList()) {
+                if(e instanceof MainCenterEnterprise) {
+                    for(Organization o: e.getOrganizationDirectory().getOrganizationList()) {
+                        if(o instanceof Inventory) {
+                            System.out.println("in inventory");
+                            int quantity = request.getQuantity();
+                            System.out.println(quantity);
+                            int old_quantity = ((Inventory)o).getStock();
+                            ((Inventory)o).setStock(old_quantity-itemsComposed);
+                        }
                     }
                 }
             }

@@ -18,6 +18,7 @@ import Business.WorkQueue.InventoryWorkRequest;
 import Business.WorkQueue.LabAssistantWorkRequest;
 import Business.WorkQueue.LabManagerWorkRequest;
 import java.awt.CardLayout;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -144,14 +145,18 @@ public class RequestTestJPanel extends javax.swing.JPanel {
 
     private void btnRequestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRequestActionPerformed
         // TODO add your handling code here:
-        UserAccount ua = (UserAccount)comboBoxLabAssistant.getSelectedItem();
-       // LabManagerWorkRequest request=new LabManagerWorkRequest();
-        request.setSender(account);
-        //request.setLabAssistantName(ua);
-        request.setMessage(txtMessage.getText());
-        request.setStatus("Sent");
-        
-        
+        boolean msgFlag = false;
+        if (txtMessage.getText().isEmpty()) {
+            msgFlag = true;
+            JOptionPane.showMessageDialog(null, "Please enter your message", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        if (!msgFlag) {
+            UserAccount ua = (UserAccount)comboBoxLabAssistant.getSelectedItem();
+           // LabManagerWorkRequest request=new LabManagerWorkRequest();
+            request.setSender(account);
+            //request.setLabAssistantName(ua);
+            request.setMessage(txtMessage.getText());
+            request.setStatus("Sent to lab assistant");
             Enterprise en=null;
             for(Enterprise enterprise : network.getEnterpriseDirectory().getEnterpriseList()){
                 System.out.println("Enterprise"+ enterprise.getName());
@@ -176,11 +181,13 @@ public class RequestTestJPanel extends javax.swing.JPanel {
                         isLabAssistant.getWorkQueue().getWorkRequestList().add(request);
                         System.out.println("LabAssistant"+isLabAssistant.getWorkQueue().getWorkRequestList());
                         account.getWorkQueue().getWorkRequestList().add(request);
+                        JOptionPane.showMessageDialog(null, "Request sent successfully.");
+                        txtMessage.setText("");
                     }
                     
                 }
             }   
-        
+        }      
     }//GEN-LAST:event_btnRequestActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed

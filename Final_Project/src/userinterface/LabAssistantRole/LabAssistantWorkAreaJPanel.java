@@ -74,7 +74,6 @@ public class LabAssistantWorkAreaJPanel extends javax.swing.JPanel {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         tblManageWorkQueue = new javax.swing.JTable();
-        btnBack = new javax.swing.JButton();
         btnProcess = new javax.swing.JButton();
         btnRefresh1 = new javax.swing.JButton();
 
@@ -95,13 +94,6 @@ public class LabAssistantWorkAreaJPanel extends javax.swing.JPanel {
             }
         });
         jScrollPane1.setViewportView(tblManageWorkQueue);
-
-        btnBack.setText("Back");
-        btnBack.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBackActionPerformed(evt);
-            }
-        });
 
         btnProcess.setText("Process");
         btnProcess.addActionListener(new java.awt.event.ActionListener() {
@@ -128,10 +120,7 @@ public class LabAssistantWorkAreaJPanel extends javax.swing.JPanel {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btnRefresh1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnBack)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnProcess)))
+                    .addComponent(btnProcess))
                 .addContainerGap(49, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -142,28 +131,27 @@ public class LabAssistantWorkAreaJPanel extends javax.swing.JPanel {
                     .addComponent(btnRefresh1)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnBack)
-                    .addComponent(btnProcess))
+                .addComponent(btnProcess)
                 .addContainerGap(343, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnProcessActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProcessActionPerformed
         // TODO add your handling code here:
-        int selectedRow = tblManageWorkQueue.getSelectedRow();
-        
+        int selectedRow = tblManageWorkQueue.getSelectedRow();        
         
         if (selectedRow >= 0) {
             LabManagerWorkRequest request = (LabManagerWorkRequest) tblManageWorkQueue.getValueAt(selectedRow, 0);
+            if(!request.getStatus().equalsIgnoreCase("Food Decomposed")){
+                request.setStatus("Processing");
 
-            request.setStatus("Processing");
-
-            ProcessWorkRequestJPanel processWorkRequestJPanel = new ProcessWorkRequestJPanel(userProcessContainer, request);
-            userProcessContainer.add("pwrjp", processWorkRequestJPanel);
-            CardLayout layout = (CardLayout) userProcessContainer.getLayout();
-            layout.next(userProcessContainer);
-
+                ProcessWorkRequestJPanel processWorkRequestJPanel = new ProcessWorkRequestJPanel(userProcessContainer, request);
+                userProcessContainer.add("pwrjp", processWorkRequestJPanel);
+                CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+                layout.next(userProcessContainer);
+            } else {
+                JOptionPane.showMessageDialog(null, "Invalid request"); 
+            }
         } else {
            JOptionPane.showMessageDialog(null, "Please select a request message to process."); 
             return;
@@ -175,16 +163,8 @@ public class LabAssistantWorkAreaJPanel extends javax.swing.JPanel {
         populateRequestTable();
     }//GEN-LAST:event_btnRefresh1ActionPerformed
 
-    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-        // TODO add your handling code here:
-        userProcessContainer.remove(this);
-        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
-        layout.previous(userProcessContainer);
-    }//GEN-LAST:event_btnBackActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnBack;
     private javax.swing.JButton btnProcess;
     private javax.swing.JButton btnRefresh1;
     private javax.swing.JScrollPane jScrollPane1;

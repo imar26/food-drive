@@ -79,7 +79,6 @@ public class ManageWorkQueueJPanel extends javax.swing.JPanel {
         tblManageWorkQueue = new javax.swing.JTable();
         btnRefresh = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
-        btnProcess = new javax.swing.JButton();
         btnRequest = new javax.swing.JButton();
         btnComposting = new javax.swing.JButton();
 
@@ -115,13 +114,6 @@ public class ManageWorkQueueJPanel extends javax.swing.JPanel {
             }
         });
 
-        btnProcess.setText("Process");
-        btnProcess.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnProcessActionPerformed(evt);
-            }
-        });
-
         btnRequest.setText("Request Test");
         btnRequest.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -149,11 +141,9 @@ public class ManageWorkQueueJPanel extends javax.swing.JPanel {
                         .addComponent(btnRefresh))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnBack)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnProcess)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnRequest)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnComposting)))
                 .addContainerGap(49, Short.MAX_VALUE))
         );
@@ -167,7 +157,6 @@ public class ManageWorkQueueJPanel extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnBack)
-                    .addComponent(btnProcess)
                     .addComponent(btnRequest)
                     .addComponent(btnComposting))
                 .addContainerGap(343, Short.MAX_VALUE))
@@ -184,14 +173,18 @@ public class ManageWorkQueueJPanel extends javax.swing.JPanel {
         int selectedRow = tblManageWorkQueue.getSelectedRow();       
         
         if (selectedRow >= 0) {
+            
             LabManagerWorkRequest request = (LabManagerWorkRequest) tblManageWorkQueue.getValueAt(selectedRow, 0);
-            request.setStatus("Processing");
+            if(!request.getStatus().equalsIgnoreCase("Food Decomposed")){
+                request.setStatus("Processing");
 
-            RequestTestJPanel rtjp = new RequestTestJPanel(userProcessContainer, organization, request, account, network);
-            userProcessContainer.add("RequestTestJPanel", rtjp);
-            CardLayout layout = (CardLayout) userProcessContainer.getLayout();
-            layout.next(userProcessContainer);
-
+                RequestTestJPanel rtjp = new RequestTestJPanel(userProcessContainer, organization, request, account, network);
+                userProcessContainer.add("RequestTestJPanel", rtjp);
+                CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+                layout.next(userProcessContainer);
+            } else {
+                JOptionPane.showMessageDialog(null, "Invalid request"); 
+            }
         } else {
             JOptionPane.showMessageDialog(null, "Please select a message to request."); 
             return;
@@ -204,10 +197,6 @@ public class ManageWorkQueueJPanel extends javax.swing.JPanel {
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.previous(userProcessContainer);
     }//GEN-LAST:event_btnBackActionPerformed
-
-    private void btnProcessActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProcessActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnProcessActionPerformed
 
     private void btnCompostingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCompostingActionPerformed
         // TODO add your handling code here:
@@ -255,7 +244,6 @@ public class ManageWorkQueueJPanel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnComposting;
-    private javax.swing.JButton btnProcess;
     private javax.swing.JButton btnRefresh;
     private javax.swing.JButton btnRequest;
     private javax.swing.JScrollPane jScrollPane1;
