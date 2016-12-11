@@ -5,6 +5,8 @@
  */
 package Business;
 
+import Business.Donor.Donor;
+import Business.Donor.DonorDirectory;
 import Business.Enterprise.Enterprise;
 import Business.Enterprise.MainCenterEnterprise;
 import Business.Network.Network;
@@ -27,6 +29,7 @@ public class EcoSystem extends Organization {
     private static EcoSystem business;
     private ArrayList<Network> networkList;
     private Date currentDate;
+    private DonorDirectory donorDiresctory;
     
     public ArrayList<Network> getNetworkList() {
         return networkList;
@@ -42,9 +45,20 @@ public class EcoSystem extends Organization {
         }
         return business;
     }
+
+    public DonorDirectory getDonorDiresctory() {
+        return donorDiresctory;
+    }
+
+    public void setDonorDiresctory(DonorDirectory donorDiresctory) {
+        this.donorDiresctory = donorDiresctory;
+    }
+    
+    
     private EcoSystem(){
         super(null);
         networkList=new ArrayList();
+        donorDiresctory=new DonorDirectory();
     }
     public Network createAndAddNetwork(){
         Network network=new Network();
@@ -86,7 +100,36 @@ public class EcoSystem extends Organization {
          }
          return hmap;
       }
-                 
+    
+    public int getGiveAwayAmount(int month){
+        int totalDonation=0;
+        for(Network network: networkList){
+             totalDonation+=network.giveAwayByNetwork(month);
+          }
+        return totalDonation;
+    }
+    
+     public int getDecomposition(){
+        int totalDonation=0;
+        for(Network network: networkList){
+             totalDonation+=network.decompositionByNetwork();
+          }
+        return totalDonation;
+    }
+    
+    public int calculatePercentGiveAway(){
+        int totalDonation=donorTypeDonation("Individual")+donorTypeDonation("Hotel")+donorTypeDonation("Event");
+        int totalGiveAway=getGiveAwayAmount(9)+getGiveAwayAmount(10)+getGiveAwayAmount(11);
+        return (totalGiveAway*100)/totalDonation;
+    }
+    
+    public int calculatePercentDecomposition(){
+        int totalDonation=donorTypeDonation("Individual")+donorTypeDonation("Hotel")+donorTypeDonation("Event");
+        int totalDecomposition=getDecomposition();
+        return (totalDecomposition*100)/totalDonation;
+    }
+    
+    
     public Date getCurrentDate() {
         return currentDate;
     }
@@ -101,14 +144,15 @@ public class EcoSystem extends Organization {
         roleList.add(new SystemAdminRole());
         return roleList;
     }
-//    public boolean checkIfUserNameIsUnique(String userName){
-//        if(! this.getUserAccountDirectory().checkIfUsernameIsUnique(userName)){
-//            return false;
-//        }
-//        for(Network network: networkList){
-//            
-//        }
-//        return true;
-//    }
-    
+
+    public int donorTypeDonation(String type){
+        int donation=0;
+        for(Donor donor: donorDiresctory.getDonorList()){
+            if(donor.getType().equalsIgnoreCase(type)){
+               donation+= donor.getDonationAmount();
+            }
+            
+        }
+        return donation;
+    }
 }

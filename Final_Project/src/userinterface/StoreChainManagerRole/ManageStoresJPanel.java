@@ -9,8 +9,20 @@ import Business.Organization.Organization;
 import Business.Organization.Store;
 import Business.Organization.StoreChain;
 import java.awt.CardLayout;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathExpression;
+import javax.xml.xpath.XPathFactory;
+import org.w3c.dom.Document;
 
 /**
  *
@@ -193,17 +205,54 @@ public class ManageStoresJPanel extends javax.swing.JPanel {
             model.addRow(row);
         }
     }
+    
+     public static String[] getLatLongPositions(String address) throws Exception
+  {
+    int responseCode = 0;
+    String api = "http://maps.googleapis.com/maps/api/geocode/xml?address=" + URLEncoder.encode(address, "UTF-8") + "&sensor=true";
+    URL url = new URL(api);
+    HttpURLConnection httpConnection = (HttpURLConnection)url.openConnection();
+    httpConnection.connect();
+    responseCode = httpConnection.getResponseCode();
+    if(responseCode == 200)
+    {
+      DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();;
+      Document document = builder.parse(httpConnection.getInputStream());
+      XPathFactory xPathfactory = XPathFactory.newInstance();
+      XPath xpath = xPathfactory.newXPath();
+      XPathExpression expr = xpath.compile("/GeocodeResponse/status");
+      String status = (String)expr.evaluate(document, XPathConstants.STRING);
+      if(status.equals("OK"))
+      {
+         expr = xpath.compile("//geometry/location/lat");
+         String latitude = (String)expr.evaluate(document, XPathConstants.STRING);
+         expr = xpath.compile("//geometry/location/lng");
+         String longitude = (String)expr.evaluate(document, XPathConstants.STRING);
+         return new String[] {latitude, longitude};
+      }
+      else
+      {
+         throw new Exception("Error from the API - response status: "+status);
+      }
+    }
+    return null;
+  }
+    
     private void addJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addJButtonActionPerformed
 
-        Store store=new Store();
+        try {
+            String loc[]=getLatLongPositions(locationTxt.getText());
+            Store store=new Store();
         store.setName(nameTxt.getText());
         store.setLocation(locationTxt.getText());
-        store.setLatitude(Integer.parseInt(latitudeTxt.getText()));
-        store.setLongitude(Integer.parseInt(longitudeTxt.getText()));
+        store.setLatitude(Integer.parseInt(loc[0]));
+        store.setLongitude(Integer.parseInt(loc[1]));
         storeChain.addStore(store);
-//        Type type = (Type) organizationJComboBox.getSelectedItem();
-//        directory.createOrganization(type);
         populateTable();
+        } catch (Exception ex) {
+            Logger.getLogger(ManageStoresJPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }//GEN-LAST:event_addJButtonActionPerformed
 
     private void longitudeTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_longitudeTxtActionPerformed

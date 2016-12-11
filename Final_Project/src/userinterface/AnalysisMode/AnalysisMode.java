@@ -294,6 +294,11 @@ public class AnalysisMode extends javax.swing.JPanel {
         btnResultQuestion4.setFont(new java.awt.Font("Lucida Calligraphy", 1, 14)); // NOI18N
         btnResultQuestion4.setForeground(new java.awt.Color(255, 255, 255));
         btnResultQuestion4.setText("View Result");
+        btnResultQuestion4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnResultQuestion4ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
         jPanel13.setLayout(jPanel13Layout);
@@ -351,6 +356,11 @@ public class AnalysisMode extends javax.swing.JPanel {
         btnResultQuestion5.setFont(new java.awt.Font("Lucida Calligraphy", 1, 14)); // NOI18N
         btnResultQuestion5.setForeground(new java.awt.Color(255, 255, 255));
         btnResultQuestion5.setText("View Result");
+        btnResultQuestion5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnResultQuestion5ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
         jPanel15.setLayout(jPanel15Layout);
@@ -408,6 +418,11 @@ public class AnalysisMode extends javax.swing.JPanel {
         btnResultQuestion6.setFont(new java.awt.Font("Lucida Calligraphy", 1, 14)); // NOI18N
         btnResultQuestion6.setForeground(new java.awt.Color(255, 255, 255));
         btnResultQuestion6.setText("View Result");
+        btnResultQuestion6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnResultQuestion6ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -505,6 +520,49 @@ public class AnalysisMode extends javax.swing.JPanel {
         barPanel.add(barP, BorderLayout.CENTER);
         barPanel.validate();
     }//GEN-LAST:event_btnResultQuestion3ActionPerformed
+
+    private void btnResultQuestion4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResultQuestion4ActionPerformed
+      //  business.donorTypeDonation(TOOL_TIP_TEXT_KEY)
+        DefaultCategoryDataset barChartData = new DefaultCategoryDataset();
+        barChartData.setValue(business.donorTypeDonation("Individual"), "Donation Amount", "Individual");
+        barChartData.setValue(business.donorTypeDonation("Hotel"), "Donation Amount", "Hotel");
+        barChartData.setValue(business.donorTypeDonation("Event"), "Donation Amount", "Event");
+        JFreeChart barChart = ChartFactory.createBarChart("Food Donation", "Donor-Type", "Donation Amount", barChartData, PlotOrientation.VERTICAL, false, true, false);
+        CategoryPlot barchrt = barChart.getCategoryPlot();
+        barchrt.setRangeGridlinePaint(Color.ORANGE);
+        ChartPanel barP = new ChartPanel(barChart);
+        barP.setVisible(true);
+        barPanel.removeAll();
+        barPanel.add(barP, BorderLayout.CENTER);
+        barPanel.validate();
+    }//GEN-LAST:event_btnResultQuestion4ActionPerformed
+
+    private void btnResultQuestion5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResultQuestion5ActionPerformed
+        DefaultCategoryDataset line_chart_dataset = new DefaultCategoryDataset();
+        line_chart_dataset.addValue( business.getGiveAwayAmount(9) , "Donation Amount" , "Sept" );
+        line_chart_dataset.addValue( business.getGiveAwayAmount(10) , "Donation Amount" , "Oct" );
+        line_chart_dataset.addValue( business.getGiveAwayAmount(11) , "Donation Amount" , "Nov" );
+        
+      JFreeChart lineChartObject = ChartFactory.createLineChart(
+         "Food Donation","Monthly",
+         "Donation Amount",
+         line_chart_dataset,PlotOrientation.VERTICAL,
+         true,true,false);
+    }//GEN-LAST:event_btnResultQuestion5ActionPerformed
+
+    private void btnResultQuestion6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResultQuestion6ActionPerformed
+        DefaultPieDataset pieData = new DefaultPieDataset();
+        pieData.setValue("Food Given Away", business.calculatePercentGiveAway());
+        pieData.setValue("Food Decomposed", business.calculatePercentDecomposition());
+       
+        JFreeChart chart = ChartFactory.createPieChart("Pie Chart", pieData, true, true, true);
+        PiePlot p = (PiePlot)chart.getPlot();
+        ChartPanel chartpanel = new ChartPanel(chart);
+        chartpanel.setVisible(true);
+        piePanel.removeAll();
+        piePanel.add(chartpanel, BorderLayout.CENTER);
+        piePanel.validate();
+    }//GEN-LAST:event_btnResultQuestion6ActionPerformed
 
                                    
 

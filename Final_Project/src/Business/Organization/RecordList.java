@@ -58,6 +58,17 @@ public class RecordList {
         return totalDonation;
     }
     
+    public int totalDecomposition(){
+    
+        int totalDecomposition=0;
+        for(Records record: recordList)
+        {
+           totalDecomposition+=record.getFoodDecomposed();
+        }   
+        
+        return totalDecomposition;
+    }
+    
     //returns the amount of food given avay to needy for a particular month
     public int totalGiveAway(int month){
     

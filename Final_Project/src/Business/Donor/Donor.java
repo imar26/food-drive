@@ -14,6 +14,7 @@ public class Donor {
      private String emailId;
      private String phoneNo;
      private String type;
+     private int donationAmount;
      
     private int id;
     private static int count = 1;
@@ -33,6 +34,14 @@ public class Donor {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public int getDonationAmount() {
+        return donationAmount;
+    }
+
+    public void setDonationAmount(int donationAmount) {
+        this.donationAmount = donationAmount;
     }
 
     

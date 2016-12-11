@@ -36,6 +36,11 @@ public class Composting extends Organization {
         this.itemsComposed = itemsComposed;
     }
     
+    public int totalFoodDecomposed(){
+        int donation=recordList.totalDecomposition();
+        return donation;
+    }
+    
     @Override
     public ArrayList<Role> getSupportedRole() {
         ArrayList<Role> roles = new ArrayList();

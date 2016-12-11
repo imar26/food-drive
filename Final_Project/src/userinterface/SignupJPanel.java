@@ -212,6 +212,7 @@ public class SignupJPanel extends javax.swing.JPanel {
               donor.setEmailId(emailTxt.getText());
               donor.setPhoneNo(phoneNoTxt.getText());
               donor.setType(String.valueOf(typeComboBox.getSelectedItem()));
+              system.getDonorDiresctory().getDonorList().add(donor);
               user.setDonor(donor);
              // Role role=Role.RoleType.Donor;
               user.setRole(new DonorRole());

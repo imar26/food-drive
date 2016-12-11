@@ -5,6 +5,7 @@
  */
 package userinterface.DonorRole;
 
+import Business.Donor.Donor;
 import Business.EcoSystem;
 import Business.Enterprise.Enterprise;
 import Business.Enterprise.MainCenterEnterprise;
@@ -165,8 +166,17 @@ public class DonorWorkAreaJPanel extends javax.swing.JPanel {
 
     private void donateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_donateBtnActionPerformed
         
+        for(Donor donor: business.getDonorDiresctory().getDonorList()){
+            if(userAccount.getDonor().equals(donor)){
+                int old_quantity=donor.getDonationAmount();
+                int quantity=Integer.valueOf(quantityTxt.getText());
+              donor.setDonationAmount(old_quantity+quantity);
+            }
+                
+        }
         if(!userAccount.getDonor().getType().equalsIgnoreCase("Individual"))
         {
+            
         FoodWorkRequest request=new FoodWorkRequest();
         request.setSender(userAccount);
         request.setQuantity(Integer.valueOf(quantityTxt.getText()));

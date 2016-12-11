@@ -5,9 +5,11 @@
  */
 package Business.Network;
 
+import Business.Enterprise.CompostingCenterEnterprise;
 import Business.Enterprise.Enterprise;
 import Business.Enterprise.EnterpriseDirectory;
 import Business.Enterprise.MainCenterEnterprise;
+import Business.Organization.Composting;
 import Business.Organization.Inventory;
 import Business.Organization.Organization;
 import Business.Organization.StoreChain;
@@ -71,6 +73,18 @@ public class Network {
            }
         }
         return donation;
+    }
+    
+    public int decompositionByNetwork(){
+        int decomposition=0;
+        for(Enterprise enterprise:enterpriseDirectory.getEnterpriseList()){
+           if(enterprise instanceof CompostingCenterEnterprise){
+             for(Organization org: enterprise.getOrganizationDirectory().getOrganizationList()){
+                 decomposition+=((Composting)org).totalFoodDecomposed();
+             }
+           }
+        }
+        return decomposition;
     }
     
     public int giveAwayByNetwork(int month){

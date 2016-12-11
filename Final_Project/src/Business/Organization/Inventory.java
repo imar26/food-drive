@@ -71,6 +71,8 @@ public class Inventory extends Organization{
         return donation;
     }
     
+    
+    
     public Inventory(){
         super(Organization.Type.Inventory.getValue());
     }
