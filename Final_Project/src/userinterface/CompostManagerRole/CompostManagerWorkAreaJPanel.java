@@ -10,6 +10,8 @@ import Business.Enterprise.Enterprise;
 import Business.Network.Network;
 import Business.Organization.Composting;
 import Business.Organization.Lab;
+import Business.Organization.RecordList;
+import Business.Organization.Records;
 import Business.UserAccount.UserAccount;
 import Business.WorkQueue.CompostManagerWorkRequest;
 import Business.WorkQueue.DriverWorkRequest;
@@ -78,6 +80,7 @@ public class CompostManagerWorkAreaJPanel extends javax.swing.JPanel {
         btnBack = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         txtItemsComposed = new javax.swing.JTextField();
+        btnDaily = new javax.swing.JButton();
 
         btnRefresh.setText("Refresh");
         btnRefresh.addActionListener(new java.awt.event.ActionListener() {
@@ -115,6 +118,13 @@ public class CompostManagerWorkAreaJPanel extends javax.swing.JPanel {
 
         jLabel1.setText("Items Composed: ");
 
+        btnDaily.setText("Daily Submission");
+        btnDaily.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDailyActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -127,11 +137,13 @@ public class CompostManagerWorkAreaJPanel extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtItemsComposed, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(layout.createSequentialGroup()
                                 .addComponent(btnBack)
                                 .addGap(18, 18, 18)
-                                .addComponent(btnProcess))
+                                .addComponent(btnProcess)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnDaily))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(28, 28, 28)
                         .addComponent(btnRefresh)))
@@ -144,15 +156,16 @@ public class CompostManagerWorkAreaJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txtItemsComposed, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnRefresh))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnBack)
-                    .addComponent(btnProcess))
-                .addContainerGap(254, Short.MAX_VALUE))
+                    .addComponent(btnProcess)
+                    .addComponent(btnDaily))
+                .addContainerGap(261, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -183,9 +196,23 @@ public class CompostManagerWorkAreaJPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnProcessActionPerformed
 
+    private void btnDailyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDailyActionPerformed
+        // TODO add your handling code here:
+        int finalItemsDecomposed = organization.getItemsComposed();
+        Records records=new Records();
+        records.setFoodDecomposed(finalItemsDecomposed);
+        records.setRequestDate(business.getCurrentDate());
+        System.out.println("current date"+business.getCurrentDate());
+        RecordList list=new RecordList();
+        list.addRecords(records);
+        organization.setRecordList(list);
+        JOptionPane.showMessageDialog(null, "Daily Records Submitted Successfully");
+    }//GEN-LAST:event_btnDailyActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
+    private javax.swing.JButton btnDaily;
     private javax.swing.JButton btnProcess;
     private javax.swing.JButton btnRefresh;
     private javax.swing.JLabel jLabel1;
