@@ -11,8 +11,12 @@ import Business.Network.Network;
 import Business.Organization.Inventory;
 import Business.Organization.Organization;
 import Business.Organization.Store;
+import Business.Organization.StoreChain;
 import Business.WorkQueue.FoodWorkRequest;
 import Business.WorkQueue.StoreWorkRequest;
+import java.awt.CardLayout;
+import java.awt.Component;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -53,6 +57,11 @@ public class ProcessWorkRequestJPanel extends javax.swing.JPanel {
         jLabel1.setText("Result:");
 
         btnBack.setText("<< Back");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
 
         btnSubmit.setText("Submit Result");
         btnSubmit.addActionListener(new java.awt.event.ActionListener() {
@@ -100,16 +109,33 @@ public class ProcessWorkRequestJPanel extends javax.swing.JPanel {
         for(Enterprise e: network.getEnterpriseDirectory().getEnterpriseList()) {
             if(e instanceof MainCenterEnterprise) {
                 for(Organization o: e.getOrganizationDirectory().getOrganizationList()) {
-                    if(o instanceof Store) {
-                        int quantity = request.getQuantity();
-                        //System.out.println(quantity);
-                        int old_qty = ((Store)o).getStock();
-                        ((Store)o).setStock(old_qty+quantity);
-                    }
+                    for (Store store : ((StoreChain) o).getStoreChain()) {
+                             if(store.equals(request.getSenderOrganization()))
+                             {
+                                 System.out.println("in store"+request.getSenderOrganization());
+                               Organization org=request.getSenderOrganization();
+                            int quantity = request.getQuantity();
+                             int old_qty = ((Store)org).getStock();
+                             System.out.println("old qty: "+old_qty);
+                             ((Store)org).setStock(old_qty+quantity);
+                             JOptionPane.showMessageDialog(null, "Request Completed Successfully");
+                             }
+                         }
                 }
             }
         }
     }//GEN-LAST:event_btnSubmitActionPerformed
+
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        // TODO add your handling code here:
+        userProcessContainer.remove(this);
+        Component[] componentArray = userProcessContainer.getComponents();
+        Component component = componentArray[componentArray.length - 1];
+        InventoryManagerWorkAreaJPanel imwjp = (InventoryManagerWorkAreaJPanel) component;
+        imwjp.populateRequestTable();
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.previous(userProcessContainer);
+    }//GEN-LAST:event_btnBackActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
