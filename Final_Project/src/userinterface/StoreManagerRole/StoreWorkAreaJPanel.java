@@ -303,6 +303,7 @@ public class StoreWorkAreaJPanel extends javax.swing.JPanel {
                     {
             //request.setStatus("Food Sent for delivery");
          //   request.setResult("Yes");
+            Organization senderorg=request.getSenderOrganization();
             int stock=organization.getStock();
             int quantity = Integer.parseInt(txtQuantity.getText());
             int total=stock-quantity;
@@ -321,6 +322,7 @@ public class StoreWorkAreaJPanel extends javax.swing.JPanel {
                 FoodWorkRequest trasnportRequest=new FoodWorkRequest();
                 trasnportRequest.setQuantity(quantity);
                 trasnportRequest.setLocation(organization.getLocation());
+                trasnportRequest.setSenderOrganization(senderorg);
                 
                 Enterprise en=null;
             for(Enterprise enterprise : network.getEnterpriseDirectory().getEnterpriseList()){
@@ -340,9 +342,9 @@ public class StoreWorkAreaJPanel extends javax.swing.JPanel {
                     if (org!=null){
                       //  System.out.println("Org"+org.getName());
                       //  System.out.println("User Account"+userAccount.getUsername());
-                        org.getWorkQueue().getWorkRequestList().add(request);
+                        org.getWorkQueue().getWorkRequestList().add(trasnportRequest);
                       //  System.out.println("Orga"+org.getWorkQueue().getWorkRequestList());
-                        userAccount.getWorkQueue().getWorkRequestList().add(request);
+                        userAccount.getWorkQueue().getWorkRequestList().add(trasnportRequest);
                     }
                   }
                }
@@ -368,15 +370,20 @@ public class StoreWorkAreaJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         int stock=organization.getStock();
         int giveAway=randInt(1,3);
-        int existingGiveAway=organization.getGiveAway();
-        int total=giveAway+existingGiveAway;
-        organization.setGiveAway(total);
-        int totalStock=stock-giveAway;
-        organization.setStock(totalStock);
-        txtStock.setText(String.valueOf(totalStock));
-        txtGiveAway.setText(String.valueOf(total));
-        JOptionPane.showMessageDialog(null, "Food Successfully donated");
-
+        int count= stock-giveAway;
+        if(count<0){
+            JOptionPane.showMessageDialog(null, "Not enough stock available for give away");
+        }
+        else{
+            int existingGiveAway=organization.getGiveAway();
+            int total=giveAway+existingGiveAway;
+            organization.setGiveAway(total);
+            int totalStock=stock-giveAway;
+            organization.setStock(totalStock);
+            txtStock.setText(String.valueOf(totalStock));
+            txtGiveAway.setText(String.valueOf(total));
+            JOptionPane.showMessageDialog(null, "Food Successfully donated");
+        }
     }//GEN-LAST:event_btnGiveAwayActionPerformed
 
     private void btnDailySubActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDailySubActionPerformed
