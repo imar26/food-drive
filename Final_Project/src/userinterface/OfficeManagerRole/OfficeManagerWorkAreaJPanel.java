@@ -74,7 +74,6 @@ public class OfficeManagerWorkAreaJPanel extends javax.swing.JPanel {
         mainOfficeJTable = new javax.swing.JTable();
         btnRefresh = new javax.swing.JButton();
         btnRequestWork = new javax.swing.JButton();
-        btnProcess = new javax.swing.JButton();
 
         mainOfficeJTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -116,29 +115,19 @@ public class OfficeManagerWorkAreaJPanel extends javax.swing.JPanel {
             }
         });
 
-        btnProcess.setText("Process");
-        btnProcess.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnProcessActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(103, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(90, 90, 90))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnProcess)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnRequestWork))
+                            .addComponent(btnRequestWork)
                             .addComponent(btnRefresh))
                         .addGap(61, 61, 61))))
         );
@@ -150,33 +139,10 @@ public class OfficeManagerWorkAreaJPanel extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnRequestWork)
-                    .addComponent(btnProcess))
+                .addComponent(btnRequestWork)
                 .addContainerGap(45, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnProcessActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProcessActionPerformed
-        // TODO add your handling code here:
-        int selectedRow = mainOfficeJTable.getSelectedRow();
-        
-        
-        if (selectedRow >= 0) {
-            FoodWorkRequest request = (FoodWorkRequest) mainOfficeJTable.getValueAt(selectedRow, 0);
-
-            request.setStatus("Processing");
-
-            ProcessWorkRequestOfficeJPanel processWorkRequestJPanel = new ProcessWorkRequestOfficeJPanel(userProcessContainer, request);
-            userProcessContainer.add("pwrjp", processWorkRequestJPanel);
-            CardLayout layout = (CardLayout) userProcessContainer.getLayout();
-            layout.next(userProcessContainer);
-
-        } else {
-           JOptionPane.showMessageDialog(null, "Please select a request message to process."); 
-            return;
-        }
-    }//GEN-LAST:event_btnProcessActionPerformed
 
     private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
         // TODO add your handling code here:
@@ -201,7 +167,6 @@ public class OfficeManagerWorkAreaJPanel extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnProcess;
     private javax.swing.JButton btnRefresh;
     private javax.swing.JButton btnRequestWork;
     private javax.swing.JScrollPane jScrollPane1;
