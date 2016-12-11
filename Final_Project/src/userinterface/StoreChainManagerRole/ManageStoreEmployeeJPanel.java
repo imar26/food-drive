@@ -9,6 +9,7 @@ import Business.Employee.Employee;
 import Business.Organization.Store;
 import Business.Organization.StoreChain;
 import java.awt.CardLayout;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
@@ -21,14 +22,14 @@ public class ManageStoreEmployeeJPanel extends javax.swing.JPanel {
     /**
      * Creates new form ManageStoreEmployeeJPanel
      */
-   
     private JPanel userProcessContainer;
     private StoreChain storeChain;
+
     ManageStoreEmployeeJPanel(JPanel userProcessContainer, StoreChain storeChain) {
-         initComponents();
-         this.userProcessContainer=userProcessContainer;
-         this.storeChain=storeChain;
-         populateComboBox();
+        initComponents();
+        this.userProcessContainer = userProcessContainer;
+        this.storeChain = storeChain;
+        populateComboBox();
     }
 
     /**
@@ -153,13 +154,21 @@ public class ManageStoreEmployeeJPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void addJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addJButtonActionPerformed
+        boolean nameFlag = false;
+        if (nameJTextField.getText().isEmpty()) {
+            nameFlag = true;
+            JOptionPane.showMessageDialog(null, "Please enter your full name", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        if (!nameFlag) {
+            Store store = (Store) storesJComboBox.getSelectedItem();
 
-        Store store = (Store) storesJComboBox.getSelectedItem();
+            String name = nameJTextField.getText();
 
-        String name = nameJTextField.getText();
-
-        store.getEmployeeDirectory().createEmployee(name);
-        populateTable();
+            store.getEmployeeDirectory().createEmployee(name);
+            populateTable();
+            JOptionPane.showMessageDialog(null, "Store employee added successfully.");
+            nameJTextField.setText("");
+        }
     }//GEN-LAST:event_addJButtonActionPerformed
 
     private void backJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backJButtonActionPerformed
@@ -182,20 +191,20 @@ public class ManageStoreEmployeeJPanel extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     private void populateComboBox() {
-        
+
         storesJComboBox.removeAll();
-       for(Store store: storeChain.getStoreChain()){
-           storesJComboBox.addItem(store);
-       }
+        for (Store store : storeChain.getStoreChain()) {
+            storesJComboBox.addItem(store);
+        }
     }
 
     private void populateTable() {
         DefaultTableModel model = (DefaultTableModel) storesJTable.getModel();
-        
-        model.setRowCount(0);
-         Store store = (Store) storesJComboBox.getSelectedItem();
 
-        for (Employee employee : store.getEmployeeDirectory().getEmployeeList()){
+        model.setRowCount(0);
+        Store store = (Store) storesJComboBox.getSelectedItem();
+
+        for (Employee employee : store.getEmployeeDirectory().getEmployeeList()) {
             Object[] row = new Object[2];
             row[0] = employee.getId();
             row[1] = employee.getName();

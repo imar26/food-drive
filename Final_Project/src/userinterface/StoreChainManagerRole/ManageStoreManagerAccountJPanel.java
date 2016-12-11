@@ -29,8 +29,8 @@ public class ManageStoreManagerAccountJPanel extends javax.swing.JPanel {
 
     ManageStoreManagerAccountJPanel(JPanel userProcessContainer, StoreChain storeChain) {
         initComponents();
-        this.userProcessContainer=userProcessContainer;
-        this.storeChain=storeChain;
+        this.userProcessContainer = userProcessContainer;
+        this.storeChain = storeChain;
         popStoreComboBox();
         popData();
     }
@@ -224,26 +224,26 @@ public class ManageStoreManagerAccountJPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-     public void popStoreComboBox() {
+    public void popStoreComboBox() {
         storeJComboBox.removeAllItems();
 
         for (Store store : storeChain.getStoreChain()) {
-            System.out.println("store"+store.getName());
+            System.out.println("store" + store.getName());
             storeJComboBox.addItem(store);
         }
     }
-    
-    public void populateEmployeeComboBox(Store store){
+
+    public void populateEmployeeComboBox(Store store) {
         employeeJComboBox.removeAllItems();
-        
-        for (Employee employee : store.getEmployeeDirectory().getEmployeeList()){
+
+        for (Employee employee : store.getEmployeeDirectory().getEmployeeList()) {
             employeeJComboBox.addItem(employee);
         }
     }
-    
-    private void populateRoleComboBox(Store store){
+
+    private void populateRoleComboBox(Store store) {
         roleJComboBox.removeAllItems();
-        for (Role role : store.getSupportedRole()){
+        for (Role role : store.getSupportedRole()) {
             roleJComboBox.addItem(role);
         }
     }
@@ -263,30 +263,43 @@ public class ManageStoreManagerAccountJPanel extends javax.swing.JPanel {
             }
         }
     }
-   
-    
+
+
     private void storeJComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_storeJComboBoxActionPerformed
         Store store = (Store) storeJComboBox.getSelectedItem();
-        if (store != null){
+        if (store != null) {
             populateEmployeeComboBox(store);
             populateRoleComboBox(store);
         }
     }//GEN-LAST:event_storeJComboBoxActionPerformed
 
     private void createUserJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createUserJButtonActionPerformed
-        String userName = nameJTextField.getText();
-        String password = passwordJTextField.getText();
-        Store store = (Store) storeJComboBox.getSelectedItem();
-        Employee employee = (Employee) employeeJComboBox.getSelectedItem();
-        Role role = (Role) roleJComboBox.getSelectedItem();
+        boolean userFlag = false;
+        boolean passFlag = false;
+        if (nameJTextField.getText().isEmpty()) {
+            userFlag = true;
+            JOptionPane.showMessageDialog(null, "Please enter your user name", "Error", JOptionPane.ERROR_MESSAGE);
+        }
 
-        store.getUserAccountDirectory().createUserAccount(userName, password, employee, role);
+        if (passwordJTextField.getText().isEmpty()) {
+            passFlag = true;
+            JOptionPane.showMessageDialog(null, "Please enter a password", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        if (!userFlag & !passFlag){
+            String userName = nameJTextField.getText();
+            String password = passwordJTextField.getText();
+            Store store = (Store) storeJComboBox.getSelectedItem();
+            Employee employee = (Employee) employeeJComboBox.getSelectedItem();
+            Role role = (Role) roleJComboBox.getSelectedItem();
 
-        popData();
+            store.getUserAccountDirectory().createUserAccount(userName, password, employee, role);
 
-        JOptionPane.showMessageDialog(null, "User Account added successfully.");
-        nameJTextField.setText("");
-        passwordJTextField.setText("");
+            popData();
+
+            JOptionPane.showMessageDialog(null, "User Account added successfully.");
+            nameJTextField.setText("");
+            passwordJTextField.setText("");
+        }
     }//GEN-LAST:event_createUserJButtonActionPerformed
 
     private void backjButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backjButton1ActionPerformed
