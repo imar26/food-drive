@@ -23,12 +23,14 @@ import javax.swing.table.DefaultTableModel;
  * @author HP
  */
 public class OfficeManagerWorkAreaJPanel extends javax.swing.JPanel {
+
     private JPanel userProcessContainer;
     private MainOffice organization;
     private Enterprise enterprise;
     private UserAccount userAccount;
     private EcoSystem business;
     private Network network;
+
     /**
      * Creates new form OfficeManagerWorkAreaJPanel
      */
@@ -38,15 +40,16 @@ public class OfficeManagerWorkAreaJPanel extends javax.swing.JPanel {
         this.organization = organization;
         this.enterprise = enterprise;
         this.userAccount = account;
-        this.business=business;
-        this.network=network;
+        this.business = business;
+        this.network = network;
         populateRequestTable();
     }
-     public void populateRequestTable(){
+
+    public void populateRequestTable() {
         DefaultTableModel model = (DefaultTableModel) mainOfficeJTable.getModel();
-        
+
         model.setRowCount(0);
-        for (WorkRequest request : organization.getWorkQueue().getWorkRequestList()){
+        for (WorkRequest request : organization.getWorkQueue().getWorkRequestList()) {
             Object[] row = new Object[6];
             row[0] = request;
             row[1] = request.getReceiver();
@@ -54,13 +57,14 @@ public class OfficeManagerWorkAreaJPanel extends javax.swing.JPanel {
             int quantity = ((FoodWorkRequest) request).getQuantity();
             row[3] = quantity;
             String location = ((FoodWorkRequest) request).getLocation();
-            row[4]=location;
+            row[4] = location;
             String result = ((FoodWorkRequest) request).getTestResult();
             row[5] = result == null ? "Waiting" : result;
-            
+
             model.addRow(row);
         }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -152,15 +156,19 @@ public class OfficeManagerWorkAreaJPanel extends javax.swing.JPanel {
     private void btnRequestWorkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRequestWorkActionPerformed
         // TODO add your handling code here:
         int selectedRow = mainOfficeJTable.getSelectedRow();
-        
+
         if (selectedRow >= 0) {
-        FoodWorkRequest request = (FoodWorkRequest) mainOfficeJTable.getValueAt(selectedRow, 0);
-       // request.setStatus("Request sent to transport");
-        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
-        userProcessContainer.add("RequestWorkJPanel", new RequestWorkJPanel(userProcessContainer, userAccount, enterprise, organization, business, request,network));
-        layout.next(userProcessContainer);
+            FoodWorkRequest request = (FoodWorkRequest) mainOfficeJTable.getValueAt(selectedRow, 0);
+            if(!request.getStatus().equalsIgnoreCase("Food Delivered")){
+                // request.setStatus("Request sent to transport");
+                CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+                userProcessContainer.add("RequestWorkJPanel", new RequestWorkJPanel(userProcessContainer, userAccount, enterprise, organization, business, request, network));
+                layout.next(userProcessContainer);
+            } else {
+                JOptionPane.showMessageDialog(null, "Invalid request"); 
+            } 
         } else {
-           JOptionPane.showMessageDialog(null, "Please select a request message to process."); 
+            JOptionPane.showMessageDialog(null, "Please select a request message to process.");
             return;
         }
     }//GEN-LAST:event_btnRequestWorkActionPerformed

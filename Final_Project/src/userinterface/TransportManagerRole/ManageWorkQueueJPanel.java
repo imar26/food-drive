@@ -164,13 +164,16 @@ public class ManageWorkQueueJPanel extends javax.swing.JPanel {
         
         if (selectedRow >= 0) {
             FoodWorkRequest request = (FoodWorkRequest) tblManageWorkQueue.getValueAt(selectedRow, 0);
-            request.setStatus("Processing");
+            if(!request.getStatus().equalsIgnoreCase("Food Delivered")){
+                request.setStatus("Processing");
 
-            RequestTestJPanel rtjp = new RequestTestJPanel(userProcessContainer, organization, request, userAccount, business);
-            userProcessContainer.add("RequestTestJPanel", rtjp);
-            CardLayout layout = (CardLayout) userProcessContainer.getLayout();
-            layout.next(userProcessContainer);
-
+                RequestTestJPanel rtjp = new RequestTestJPanel(userProcessContainer, organization, request, userAccount, business);
+                userProcessContainer.add("RequestTestJPanel", rtjp);
+                CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+                layout.next(userProcessContainer);
+            } else {
+                JOptionPane.showMessageDialog(null, "Invalid request"); 
+            } 
         } else {
             JOptionPane.showMessageDialog(null, "Please select a message to request."); 
             return;

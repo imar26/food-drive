@@ -210,7 +210,7 @@ public class RequestTestJPanel extends javax.swing.JPanel {
                 request.setMessage(txtMessage.getText());
                 request.setQuantity(Integer.valueOf(txtQuantity.getText()));
                 request.setLocation(txtLocation.getText());
-                request.setStatus("Sent");
+                request.setStatus("Sent to driver");
 
                 for(Network network : business.getNetworkList()){
                     System.out.println("Network"+ network.getName());
