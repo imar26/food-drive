@@ -47,7 +47,7 @@ public class DonorWorkAreaJPanel extends javax.swing.JPanel {
         this.userAccount = account;
         this.business = business;
         this.network = network;
-        populateStore();
+        
         populateComboBox();
         if (userAccount.getDonor().getType().equalsIgnoreCase("Individual")) {
             locationTxt.setEnabled(false);
@@ -77,7 +77,7 @@ public class DonorWorkAreaJPanel extends javax.swing.JPanel {
         jLabel6 = new javax.swing.JLabel();
         storeComboBox = new javax.swing.JComboBox();
         jLabel7 = new javax.swing.JLabel();
-        comboBoxCity = new javax.swing.JComboBox<>();
+        comboBoxCity = new javax.swing.JComboBox();
 
         setBackground(new java.awt.Color(153, 255, 255));
 
@@ -125,6 +125,11 @@ public class DonorWorkAreaJPanel extends javax.swing.JPanel {
 
         comboBoxCity.setBackground(new java.awt.Color(255, 51, 0));
         comboBoxCity.setFont(new java.awt.Font("Lucida Calligraphy", 0, 12)); // NOI18N
+        comboBoxCity.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboBoxCityActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -178,14 +183,14 @@ public class DonorWorkAreaJPanel extends javax.swing.JPanel {
                     .addComponent(jLabel7)
                     .addComponent(comboBoxCity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(storeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(9, 9, 9)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(donateBtn)
-                .addContainerGap(237, Short.MAX_VALUE))
+                .addContainerGap(234, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -318,11 +323,18 @@ public class DonorWorkAreaJPanel extends javax.swing.JPanel {
 
     private void storeComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_storeComboBoxActionPerformed
 
+        
     }//GEN-LAST:event_storeComboBoxActionPerformed
+
+    private void comboBoxCityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxCityActionPerformed
+        Network network=(Network)comboBoxCity.getSelectedItem();
+                populateStore(network);
+
+    }//GEN-LAST:event_comboBoxCityActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> comboBoxCity;
+    private javax.swing.JComboBox comboBoxCity;
     private javax.swing.JButton donateBtn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -343,20 +355,24 @@ public class DonorWorkAreaJPanel extends javax.swing.JPanel {
         for(Network network: business.getNetworkList()){
           comboBoxCity.addItem(network.getName());
         }
+       
     }
     
-    private void populateStore() {
+    private void populateStore(Network network) {
 
         storeComboBox.removeAll();
-        for(Network network: business.getNetworkList()){
+       // for(Network net: business.getNetworkList()){
+          //  String inNet=(String)comboBoxCity.getSelectedItem();
+           // if(network.getName().equalsIgnoreCase(inNet)){
         for(Enterprise enterprise: network.getEnterpriseDirectory().getEnterpriseList()){    
         for (Organization org : enterprise.getOrganizationDirectory().getOrganizationList()) {
             if (org instanceof StoreChain) {
                 for (Store store : ((StoreChain) org).getStoreChain()) {
                     storeComboBox.addItem(store);
 
-                }
-            }
+                //}
+           // }
+        }
         }
         }
         }
