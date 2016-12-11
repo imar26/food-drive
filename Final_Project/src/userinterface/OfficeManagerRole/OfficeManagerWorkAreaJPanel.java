@@ -99,14 +99,6 @@ public class OfficeManagerWorkAreaJPanel extends javax.swing.JPanel {
             }
         });
         jScrollPane1.setViewportView(mainOfficeJTable);
-        if (mainOfficeJTable.getColumnModel().getColumnCount() > 0) {
-            mainOfficeJTable.getColumnModel().getColumn(0).setResizable(false);
-            mainOfficeJTable.getColumnModel().getColumn(1).setResizable(false);
-            mainOfficeJTable.getColumnModel().getColumn(2).setResizable(false);
-            mainOfficeJTable.getColumnModel().getColumn(3).setResizable(false);
-            mainOfficeJTable.getColumnModel().getColumn(4).setResizable(false);
-            mainOfficeJTable.getColumnModel().getColumn(5).setResizable(false);
-        }
 
         btnRefresh.setBackground(new java.awt.Color(255, 51, 0));
         btnRefresh.setFont(new java.awt.Font("Lucida Calligraphy", 0, 12)); // NOI18N

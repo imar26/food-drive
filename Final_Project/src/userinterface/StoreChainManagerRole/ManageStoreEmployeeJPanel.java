@@ -55,10 +55,7 @@ public class ManageStoreEmployeeJPanel extends javax.swing.JPanel {
         storesJTable.setFont(new java.awt.Font("Lucida Calligraphy", 0, 12)); // NOI18N
         storesJTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+
             },
             new String [] {
                 "ID", "Name"

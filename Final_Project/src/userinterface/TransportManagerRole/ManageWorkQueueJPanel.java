@@ -99,9 +99,6 @@ public class ManageWorkQueueJPanel extends javax.swing.JPanel {
             }
         });
         jScrollPane1.setViewportView(tblManageWorkQueue);
-        if (tblManageWorkQueue.getColumnModel().getColumnCount() > 0) {
-            tblManageWorkQueue.getColumnModel().getColumn(4).setResizable(false);
-        }
 
         btnRefresh.setBackground(new java.awt.Color(255, 51, 0));
         btnRefresh.setFont(new java.awt.Font("Lucida Calligraphy", 0, 12)); // NOI18N

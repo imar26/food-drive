@@ -114,14 +114,6 @@ public class InventoryManagerWorkAreaJPanel extends javax.swing.JPanel {
             }
         });
         jScrollPane1.setViewportView(tblInventory);
-        if (tblInventory.getColumnModel().getColumnCount() > 0) {
-            tblInventory.getColumnModel().getColumn(0).setResizable(false);
-            tblInventory.getColumnModel().getColumn(1).setResizable(false);
-            tblInventory.getColumnModel().getColumn(2).setResizable(false);
-            tblInventory.getColumnModel().getColumn(3).setResizable(false);
-            tblInventory.getColumnModel().getColumn(4).setResizable(false);
-            tblInventory.getColumnModel().getColumn(5).setResizable(false);
-        }
 
         jButton1.setBackground(new java.awt.Color(255, 51, 0));
         jButton1.setFont(new java.awt.Font("Lucida Calligraphy", 0, 12)); // NOI18N

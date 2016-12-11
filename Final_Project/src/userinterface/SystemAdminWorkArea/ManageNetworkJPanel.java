@@ -69,10 +69,7 @@ public class ManageNetworkJPanel extends javax.swing.JPanel {
         networkJTable.setFont(new java.awt.Font("Lucida Calligraphy", 0, 12)); // NOI18N
         networkJTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null},
-                {null},
-                {null},
-                {null}
+
             },
             new String [] {
                 "Name"
