@@ -237,7 +237,7 @@ public class StoreWorkAreaJPanel extends javax.swing.JPanel {
     private void btnRequestFoodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRequestFoodActionPerformed
         // TODO add your handling code here:
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
-        userProcessContainer.add("RequestFoodJPanel", new RequestFoodJPanel(userProcessContainer, userAccount,organization, enterprise, business));
+        userProcessContainer.add("RequestFoodJPanel", new RequestFoodJPanel(userProcessContainer, userAccount,organization, enterprise, business, network));
         layout.next(userProcessContainer);
     }//GEN-LAST:event_btnRequestFoodActionPerformed
 

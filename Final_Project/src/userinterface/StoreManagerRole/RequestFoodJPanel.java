@@ -42,19 +42,21 @@ public class RequestFoodJPanel extends javax.swing.JPanel {
     private Enterprise enterprise;
     private UserAccount userAccount;
     private EcoSystem business;
+    private Network network;
 
     DefaultTableModel model;
 
     /**
      * Creates new form RequestFoodJPanel
      */
-    public RequestFoodJPanel(JPanel userProcessContainer, UserAccount account, Store organization, Enterprise enterprise, EcoSystem business) {
+    public RequestFoodJPanel(JPanel userProcessContainer, UserAccount account, Store organization, Enterprise enterprise, EcoSystem business, Network network) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.organization = organization;
         this.enterprise = enterprise;
         this.userAccount = account;
         this.business = business;
+        this.network=network;
         model = (DefaultTableModel) tblStoreWorkQueue.getModel();
         model.setRowCount(0);
         populateTable();
@@ -368,10 +370,11 @@ public class RequestFoodJPanel extends javax.swing.JPanel {
             request.setSender(userAccount);
             request.setQuantity(Integer.parseInt(quantityTxt.getText()));
             request.setStatus("Sent");
+            request.setSenderOrganization(organization);
             request.setLocation(organization.getLocation());
             Organization org = null;
-            for (Network n : business.getNetworkList()) {
-                for (Enterprise e : n.getEnterpriseDirectory().getEnterpriseList()) {
+            
+                for (Enterprise e : network.getEnterpriseDirectory().getEnterpriseList()) {
                     if (e instanceof MainCenterEnterprise) {
                         for (Organization o : e.getOrganizationDirectory().getOrganizationList()) {
                             if (o instanceof Inventory) {
@@ -388,7 +391,7 @@ public class RequestFoodJPanel extends javax.swing.JPanel {
                         }
                     }
                 }
-            }
+            
         }
     }//GEN-LAST:event_btnRequestInventoryActionPerformed
 
