@@ -273,9 +273,10 @@ public class InventoryManagerWorkAreaJPanel extends javax.swing.JPanel {
         records.setFoodDonated(finalStock);
         records.setFoodGiven(giveAwaycount);
         records.setRequestDate(business.getCurrentDate());
-        RecordList list=new RecordList();
-        list.addRecords(records);
-        organization.setRecordList(list);
+//        RecordList list=new RecordList();
+//        list.addRecords(records);
+//        organization.setRecordList(list);
+        organization.getRecordList().addRecords(records);
         JOptionPane.showMessageDialog(null, "Daily Records Submitted Successfully");
         
         

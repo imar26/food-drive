@@ -447,7 +447,7 @@ public class AnalysisMode extends javax.swing.JPanel {
         // TODO add your handling code here:
         DefaultCategoryDataset barChartData = new DefaultCategoryDataset();
         String city=(String)comboBoxCity.getSelectedItem();
-         HashMap<String, Integer> hmap=business.giveAcrossStores("Worchester");//from combobox
+         HashMap<String, Integer> hmap=business.giveAcrossStores(city);//from combobox
          Set set = hmap.entrySet();
          Iterator iterator = set.iterator();
          while(iterator.hasNext()) {
