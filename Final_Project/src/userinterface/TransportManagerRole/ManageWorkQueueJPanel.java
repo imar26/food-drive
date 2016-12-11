@@ -79,6 +79,9 @@ public class ManageWorkQueueJPanel extends javax.swing.JPanel {
         btnBack = new javax.swing.JButton();
         btnRequest = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(173, 255, 255));
+
+        tblManageWorkQueue.setFont(new java.awt.Font("Lucida Calligraphy", 0, 12)); // NOI18N
         tblManageWorkQueue.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -100,6 +103,8 @@ public class ManageWorkQueueJPanel extends javax.swing.JPanel {
             tblManageWorkQueue.getColumnModel().getColumn(4).setResizable(false);
         }
 
+        btnRefresh.setBackground(new java.awt.Color(255, 51, 0));
+        btnRefresh.setFont(new java.awt.Font("Lucida Calligraphy", 0, 12)); // NOI18N
         btnRefresh.setText("Refresh");
         btnRefresh.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -107,6 +112,8 @@ public class ManageWorkQueueJPanel extends javax.swing.JPanel {
             }
         });
 
+        btnBack.setBackground(new java.awt.Color(255, 51, 0));
+        btnBack.setFont(new java.awt.Font("Lucida Calligraphy", 0, 12)); // NOI18N
         btnBack.setText("Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -114,6 +121,8 @@ public class ManageWorkQueueJPanel extends javax.swing.JPanel {
             }
         });
 
+        btnRequest.setBackground(new java.awt.Color(255, 51, 0));
+        btnRequest.setFont(new java.awt.Font("Lucida Calligraphy", 0, 12)); // NOI18N
         btnRequest.setText("Request Test");
         btnRequest.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -136,7 +145,7 @@ public class ManageWorkQueueJPanel extends javax.swing.JPanel {
                         .addComponent(btnBack)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnRequest)))
-                .addContainerGap(49, Short.MAX_VALUE))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -149,7 +158,7 @@ public class ManageWorkQueueJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnBack)
                     .addComponent(btnRequest))
-                .addContainerGap(343, Short.MAX_VALUE))
+                .addContainerGap(341, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

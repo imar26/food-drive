@@ -97,16 +97,26 @@ public class RequestTestJPanel extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         txtLocation = new javax.swing.JTextField();
 
+        setBackground(new java.awt.Color(173, 255, 255));
+
+        jLabel1.setFont(new java.awt.Font("Lucida Calligraphy", 1, 12)); // NOI18N
         jLabel1.setText("Message:");
 
+        txtMessage.setFont(new java.awt.Font("Lucida Calligraphy", 0, 12)); // NOI18N
+
+        jLabel2.setFont(new java.awt.Font("Lucida Calligraphy", 1, 12)); // NOI18N
         jLabel2.setText("Select Driver:");
 
+        comboBoxDriver.setBackground(new java.awt.Color(255, 51, 0));
+        comboBoxDriver.setFont(new java.awt.Font("Lucida Calligraphy", 0, 12)); // NOI18N
         comboBoxDriver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboBoxDriverActionPerformed(evt);
             }
         });
 
+        btnRequest.setBackground(new java.awt.Color(255, 51, 0));
+        btnRequest.setFont(new java.awt.Font("Lucida Calligraphy", 0, 12)); // NOI18N
         btnRequest.setText("Request Test");
         btnRequest.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -114,6 +124,8 @@ public class RequestTestJPanel extends javax.swing.JPanel {
             }
         });
 
+        btnBack.setBackground(new java.awt.Color(255, 51, 0));
+        btnBack.setFont(new java.awt.Font("Lucida Calligraphy", 0, 12)); // NOI18N
         btnBack.setText("Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -121,9 +133,15 @@ public class RequestTestJPanel extends javax.swing.JPanel {
             }
         });
 
+        jLabel3.setFont(new java.awt.Font("Lucida Calligraphy", 1, 12)); // NOI18N
         jLabel3.setText("Quantity:");
 
+        txtQuantity.setFont(new java.awt.Font("Lucida Calligraphy", 0, 12)); // NOI18N
+
+        jLabel4.setFont(new java.awt.Font("Lucida Calligraphy", 1, 12)); // NOI18N
         jLabel4.setText("Location:");
+
+        txtLocation.setFont(new java.awt.Font("Lucida Calligraphy", 0, 12)); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -138,17 +156,18 @@ public class RequestTestJPanel extends javax.swing.JPanel {
                             .addComponent(jLabel1)
                             .addComponent(jLabel3)
                             .addComponent(jLabel4))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtMessage)
-                            .addComponent(comboBoxDriver, 0, 309, Short.MAX_VALUE)
-                            .addComponent(txtQuantity)
-                            .addComponent(txtLocation)))
+                        .addGap(17, 17, 17)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtLocation, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(txtQuantity, javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(txtMessage, javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(comboBoxDriver, javax.swing.GroupLayout.Alignment.TRAILING, 0, 296, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnBack)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnRequest)))
-                .addContainerGap(212, Short.MAX_VALUE))
+                .addContainerGap(173, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -173,7 +192,7 @@ public class RequestTestJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnBack)
                     .addComponent(btnRequest))
-                .addContainerGap(283, Short.MAX_VALUE))
+                .addContainerGap(269, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
