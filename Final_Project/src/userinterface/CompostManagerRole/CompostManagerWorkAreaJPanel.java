@@ -82,6 +82,10 @@ public class CompostManagerWorkAreaJPanel extends javax.swing.JPanel {
         txtItemsComposed = new javax.swing.JTextField();
         btnDaily = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(153, 255, 255));
+
+        btnRefresh.setBackground(new java.awt.Color(255, 51, 0));
+        btnRefresh.setFont(new java.awt.Font("Lucida Calligraphy", 0, 12)); // NOI18N
         btnRefresh.setText("Refresh");
         btnRefresh.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -89,6 +93,7 @@ public class CompostManagerWorkAreaJPanel extends javax.swing.JPanel {
             }
         });
 
+        tblCompostManager.setFont(new java.awt.Font("Lucida Calligraphy", 0, 12)); // NOI18N
         tblCompostManager.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -107,6 +112,8 @@ public class CompostManagerWorkAreaJPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tblCompostManager);
 
+        btnProcess.setBackground(new java.awt.Color(255, 51, 0));
+        btnProcess.setFont(new java.awt.Font("Lucida Calligraphy", 0, 12)); // NOI18N
         btnProcess.setText("Process");
         btnProcess.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -114,10 +121,17 @@ public class CompostManagerWorkAreaJPanel extends javax.swing.JPanel {
             }
         });
 
+        btnBack.setBackground(new java.awt.Color(255, 51, 0));
+        btnBack.setFont(new java.awt.Font("Lucida Calligraphy", 0, 12)); // NOI18N
         btnBack.setText("Back");
 
+        jLabel1.setFont(new java.awt.Font("Lucida Calligraphy", 1, 12)); // NOI18N
         jLabel1.setText("Items Composed: ");
 
+        txtItemsComposed.setFont(new java.awt.Font("Lucida Calligraphy", 0, 12)); // NOI18N
+
+        btnDaily.setBackground(new java.awt.Color(255, 51, 0));
+        btnDaily.setFont(new java.awt.Font("Lucida Calligraphy", 0, 12)); // NOI18N
         btnDaily.setText("Daily Submission");
         btnDaily.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -134,8 +148,8 @@ public class CompostManagerWorkAreaJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtItemsComposed, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(txtItemsComposed, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(layout.createSequentialGroup()
@@ -147,7 +161,7 @@ public class CompostManagerWorkAreaJPanel extends javax.swing.JPanel {
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(28, 28, 28)
                         .addComponent(btnRefresh)))
-                .addContainerGap(98, Short.MAX_VALUE))
+                .addContainerGap(86, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -166,7 +180,7 @@ public class CompostManagerWorkAreaJPanel extends javax.swing.JPanel {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btnBack)
                         .addComponent(btnProcess)))
-                .addContainerGap(261, Short.MAX_VALUE))
+                .addContainerGap(256, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

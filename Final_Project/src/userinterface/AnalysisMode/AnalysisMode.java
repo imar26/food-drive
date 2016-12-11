@@ -88,7 +88,7 @@ public class AnalysisMode extends javax.swing.JPanel {
         btnResultQuestion6 = new javax.swing.JButton();
         displayPanelno6 = new javax.swing.JPanel();
 
-        setBackground(new java.awt.Color(19, 25, 37));
+        setBackground(new java.awt.Color(153, 255, 255));
 
         tab6.setBackground(new java.awt.Color(255, 51, 0));
         tab6.setToolTipText("");
@@ -98,15 +98,13 @@ public class AnalysisMode extends javax.swing.JPanel {
 
         jSplitPane2.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
 
-        jPanel7.setBackground(new java.awt.Color(13, 25, 37));
+        jPanel7.setBackground(new java.awt.Color(153, 255, 255));
 
-        jLabel2.setFont(new java.awt.Font("Lucida Calligraphy", 1, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setFont(new java.awt.Font("Lucida Calligraphy", 1, 14)); // NOI18N
         jLabel2.setText("My first question is:");
 
         btnResultQuestion1.setBackground(new java.awt.Color(255, 51, 0));
-        btnResultQuestion1.setFont(new java.awt.Font("Lucida Calligraphy", 1, 14)); // NOI18N
-        btnResultQuestion1.setForeground(new java.awt.Color(255, 255, 255));
+        btnResultQuestion1.setFont(new java.awt.Font("Lucida Calligraphy", 0, 12)); // NOI18N
         btnResultQuestion1.setText("View Result");
         btnResultQuestion1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -121,7 +119,7 @@ public class AnalysisMode extends javax.swing.JPanel {
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 228, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 292, Short.MAX_VALUE)
                 .addComponent(btnResultQuestion1)
                 .addContainerGap())
         );
@@ -132,12 +130,12 @@ public class AnalysisMode extends javax.swing.JPanel {
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(btnResultQuestion1))
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
 
         jSplitPane2.setTopComponent(jPanel7);
 
-        jPanel8.setBackground(new java.awt.Color(13, 25, 37));
+        jPanel8.setBackground(new java.awt.Color(153, 255, 255));
         jPanel8.setLayout(new java.awt.BorderLayout());
         jSplitPane2.setRightComponent(jPanel8);
 
@@ -151,15 +149,13 @@ public class AnalysisMode extends javax.swing.JPanel {
 
         jSplitPane3.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
 
-        jPanel9.setBackground(new java.awt.Color(13, 25, 37));
+        jPanel9.setBackground(new java.awt.Color(153, 255, 255));
 
-        jLabel3.setFont(new java.awt.Font("Lucida Calligraphy", 1, 18)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setFont(new java.awt.Font("Lucida Calligraphy", 1, 14)); // NOI18N
         jLabel3.setText("My Second question is:");
 
         btnResultQuestion2.setBackground(new java.awt.Color(255, 51, 0));
-        btnResultQuestion2.setFont(new java.awt.Font("Lucida Calligraphy", 1, 14)); // NOI18N
-        btnResultQuestion2.setForeground(new java.awt.Color(255, 255, 255));
+        btnResultQuestion2.setFont(new java.awt.Font("Lucida Calligraphy", 0, 12)); // NOI18N
         btnResultQuestion2.setText("View Result");
         btnResultQuestion2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -174,7 +170,7 @@ public class AnalysisMode extends javax.swing.JPanel {
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 202, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 271, Short.MAX_VALUE)
                 .addComponent(btnResultQuestion2)
                 .addContainerGap())
         );
@@ -185,12 +181,12 @@ public class AnalysisMode extends javax.swing.JPanel {
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(btnResultQuestion2))
-                .addContainerGap(38, Short.MAX_VALUE))
+                .addContainerGap(42, Short.MAX_VALUE))
         );
 
         jSplitPane3.setTopComponent(jPanel9);
 
-        jPanel10.setBackground(new java.awt.Color(13, 25, 37));
+        jPanel10.setBackground(new java.awt.Color(153, 255, 255));
         jPanel10.setLayout(new java.awt.BorderLayout());
         jSplitPane3.setRightComponent(jPanel10);
 
@@ -204,15 +200,13 @@ public class AnalysisMode extends javax.swing.JPanel {
 
         jSplitPane4.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
 
-        jPanel11.setBackground(new java.awt.Color(13, 25, 37));
+        jPanel11.setBackground(new java.awt.Color(153, 255, 255));
 
-        jLabel4.setFont(new java.awt.Font("Lucida Calligraphy", 1, 18)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setFont(new java.awt.Font("Lucida Calligraphy", 1, 14)); // NOI18N
         jLabel4.setText("My Third question is:");
 
         btnResultQuestion3.setBackground(new java.awt.Color(255, 51, 0));
-        btnResultQuestion3.setFont(new java.awt.Font("Lucida Calligraphy", 1, 14)); // NOI18N
-        btnResultQuestion3.setForeground(new java.awt.Color(255, 255, 255));
+        btnResultQuestion3.setFont(new java.awt.Font("Lucida Calligraphy", 0, 12)); // NOI18N
         btnResultQuestion3.setText("View Result");
         btnResultQuestion3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -220,8 +214,8 @@ public class AnalysisMode extends javax.swing.JPanel {
             }
         });
 
-        comboBoxCity.setFont(new java.awt.Font("Lucida Calligraphy", 1, 14)); // NOI18N
-        comboBoxCity.setForeground(new java.awt.Color(255, 255, 255));
+        comboBoxCity.setBackground(new java.awt.Color(255, 51, 0));
+        comboBoxCity.setFont(new java.awt.Font("Lucida Calligraphy", 0, 12)); // NOI18N
         comboBoxCity.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Boston", "Cambridge", "Worcester" }));
 
         javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
@@ -231,7 +225,7 @@ public class AnalysisMode extends javax.swing.JPanel {
             .addGroup(jPanel11Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 121, Short.MAX_VALUE)
                 .addComponent(comboBoxCity, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnResultQuestion3)
@@ -245,12 +239,12 @@ public class AnalysisMode extends javax.swing.JPanel {
                     .addComponent(jLabel4)
                     .addComponent(btnResultQuestion3)
                     .addComponent(comboBoxCity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
 
         jSplitPane4.setTopComponent(jPanel11);
 
-        displayPanel3.setBackground(new java.awt.Color(13, 25, 37));
+        displayPanel3.setBackground(new java.awt.Color(153, 255, 255));
         displayPanel3.setLayout(new java.awt.BorderLayout());
         jSplitPane4.setRightComponent(displayPanel3);
 
@@ -262,15 +256,13 @@ public class AnalysisMode extends javax.swing.JPanel {
 
         jSplitPane5.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
 
-        jPanel13.setBackground(new java.awt.Color(13, 25, 37));
+        jPanel13.setBackground(new java.awt.Color(153, 255, 255));
 
-        jLabel5.setFont(new java.awt.Font("Lucida Calligraphy", 1, 18)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setFont(new java.awt.Font("Lucida Calligraphy", 1, 14)); // NOI18N
         jLabel5.setText("My Fourth question is:");
 
         btnResultQuestion4.setBackground(new java.awt.Color(255, 51, 0));
-        btnResultQuestion4.setFont(new java.awt.Font("Lucida Calligraphy", 1, 14)); // NOI18N
-        btnResultQuestion4.setForeground(new java.awt.Color(255, 255, 255));
+        btnResultQuestion4.setFont(new java.awt.Font("Lucida Calligraphy", 0, 12)); // NOI18N
         btnResultQuestion4.setText("View Result");
         btnResultQuestion4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -285,7 +277,7 @@ public class AnalysisMode extends javax.swing.JPanel {
             .addGroup(jPanel13Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 200, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 270, Short.MAX_VALUE)
                 .addComponent(btnResultQuestion4)
                 .addContainerGap())
         );
@@ -296,12 +288,12 @@ public class AnalysisMode extends javax.swing.JPanel {
                 .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnResultQuestion4)
                     .addComponent(jLabel5))
-                .addContainerGap(39, Short.MAX_VALUE))
+                .addContainerGap(43, Short.MAX_VALUE))
         );
 
         jSplitPane5.setTopComponent(jPanel13);
 
-        displayPanel4.setBackground(new java.awt.Color(13, 25, 37));
+        displayPanel4.setBackground(new java.awt.Color(153, 255, 255));
         displayPanel4.setLayout(new java.awt.BorderLayout());
         jSplitPane5.setRightComponent(displayPanel4);
 
@@ -313,15 +305,13 @@ public class AnalysisMode extends javax.swing.JPanel {
 
         jSplitPane6.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
 
-        jPanel15.setBackground(new java.awt.Color(13, 25, 37));
+        jPanel15.setBackground(new java.awt.Color(153, 255, 255));
 
-        jLabel6.setFont(new java.awt.Font("Lucida Calligraphy", 1, 18)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setFont(new java.awt.Font("Lucida Calligraphy", 1, 14)); // NOI18N
         jLabel6.setText("My Fifth question is:");
 
         btnResultQuestion5.setBackground(new java.awt.Color(255, 51, 0));
-        btnResultQuestion5.setFont(new java.awt.Font("Lucida Calligraphy", 1, 14)); // NOI18N
-        btnResultQuestion5.setForeground(new java.awt.Color(255, 255, 255));
+        btnResultQuestion5.setFont(new java.awt.Font("Lucida Calligraphy", 0, 12)); // NOI18N
         btnResultQuestion5.setText("View Result");
         btnResultQuestion5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -336,7 +326,7 @@ public class AnalysisMode extends javax.swing.JPanel {
             .addGroup(jPanel15Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 220, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 286, Short.MAX_VALUE)
                 .addComponent(btnResultQuestion5)
                 .addContainerGap())
         );
@@ -347,12 +337,12 @@ public class AnalysisMode extends javax.swing.JPanel {
                 .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnResultQuestion5)
                     .addComponent(jLabel6))
-                .addContainerGap(39, Short.MAX_VALUE))
+                .addContainerGap(43, Short.MAX_VALUE))
         );
 
         jSplitPane6.setTopComponent(jPanel15);
 
-        displayPanel5.setBackground(new java.awt.Color(13, 25, 37));
+        displayPanel5.setBackground(new java.awt.Color(153, 255, 255));
         displayPanel5.setLayout(new java.awt.BorderLayout());
         jSplitPane6.setRightComponent(displayPanel5);
 
@@ -364,15 +354,13 @@ public class AnalysisMode extends javax.swing.JPanel {
 
         jSplitPane1.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
 
-        jPanel6.setBackground(new java.awt.Color(19, 25, 37));
+        jPanel6.setBackground(new java.awt.Color(153, 255, 255));
 
-        jLabel7.setFont(new java.awt.Font("Lucida Calligraphy", 1, 18)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setFont(new java.awt.Font("Lucida Calligraphy", 1, 14)); // NOI18N
         jLabel7.setText("My Sixth question is:");
 
         btnResultQuestion6.setBackground(new java.awt.Color(255, 51, 0));
-        btnResultQuestion6.setFont(new java.awt.Font("Lucida Calligraphy", 1, 14)); // NOI18N
-        btnResultQuestion6.setForeground(new java.awt.Color(255, 255, 255));
+        btnResultQuestion6.setFont(new java.awt.Font("Lucida Calligraphy", 0, 12)); // NOI18N
         btnResultQuestion6.setText("View Result");
         btnResultQuestion6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -387,7 +375,7 @@ public class AnalysisMode extends javax.swing.JPanel {
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 218, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 285, Short.MAX_VALUE)
                 .addComponent(btnResultQuestion6)
                 .addContainerGap())
         );
@@ -398,12 +386,12 @@ public class AnalysisMode extends javax.swing.JPanel {
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(btnResultQuestion6))
-                .addContainerGap(37, Short.MAX_VALUE))
+                .addContainerGap(41, Short.MAX_VALUE))
         );
 
         jSplitPane1.setTopComponent(jPanel6);
 
-        displayPanelno6.setBackground(new java.awt.Color(19, 25, 37));
+        displayPanelno6.setBackground(new java.awt.Color(153, 255, 255));
         displayPanelno6.setLayout(new java.awt.BorderLayout());
         jSplitPane1.setRightComponent(displayPanelno6);
 
