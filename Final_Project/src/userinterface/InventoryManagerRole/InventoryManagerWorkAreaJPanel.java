@@ -276,6 +276,11 @@ public class InventoryManagerWorkAreaJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         int stock=organization.getStock();
         int giveAway=randInt(1,stock-20);
+        int count= stock-giveAway;
+        if(count<0){
+            JOptionPane.showMessageDialog(null, "Not enough stock available for give away");
+        }
+        else{
         int existingGiveAway=organization.getGiveAway();
         int total=giveAway+existingGiveAway;
         organization.setGiveAway(total);
@@ -284,7 +289,7 @@ public class InventoryManagerWorkAreaJPanel extends javax.swing.JPanel {
         txtStock.setText(String.valueOf(totalStock));
         txtGiveAway.setText(String.valueOf(total));
         JOptionPane.showMessageDialog(null, "Food Successfully donated to NGOs and Old-Aged Homes");
-        
+        }
     }//GEN-LAST:event_btnGiveAwayActionPerformed
 
 
