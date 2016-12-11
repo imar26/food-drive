@@ -200,53 +200,58 @@ public class RequestTestJPanel extends javax.swing.JPanel {
         }
         if (!msgFlag & !qtyFlag & !locFlag){
             UserAccount ua = (UserAccount)comboBoxDriver.getSelectedItem();
-            //DriverWorkRequest request=new DriverWorkRequest();
-            request.setSender(userAccount);
-            //request.setDriverName(ua);
-            request.setMessage(txtMessage.getText());
-            request.setQuantity(Integer.valueOf(txtQuantity.getText()));
-            request.setLocation(txtLocation.getText());
-            request.setStatus("Sent");
-        
-            for(Network network : business.getNetworkList()){
-                System.out.println("Network"+ network.getName());
-                Enterprise en=null;
-                for(Enterprise enterprise : network.getEnterpriseDirectory().getEnterpriseList()){
-                    System.out.println("Enterprise"+ enterprise.getName());
-                     if(enterprise instanceof TransportAgencyEnterprise){
-                         System.out.println("Yes");
-                        en = enterprise;
-                        Organization org = null;
-                        UserAccount isDriver = null;
-                        for (Organization organization : en.getOrganizationDirectory().getOrganizationList()){
+            if(ua == null) {
+                JOptionPane.showMessageDialog(null, "Drivers are busy at the moment. Please try again after some time.");
+                txtMessage.setText("");
+                txtQuantity.setText("");
+                txtLocation.setText("");
+            } else {
+                request.setSender(userAccount);
+                request.setMessage(txtMessage.getText());
+                request.setQuantity(Integer.valueOf(txtQuantity.getText()));
+                request.setLocation(txtLocation.getText());
+                request.setStatus("Sent");
 
-                            if (organization instanceof Driver){
-    //                            System.out.println("Yes Organization");
-    //                            org = organization;
-    //                            break;
+                for(Network network : business.getNetworkList()){
+                    System.out.println("Network"+ network.getName());
+                    Enterprise en=null;
+                    for(Enterprise enterprise : network.getEnterpriseDirectory().getEnterpriseList()){
+                        System.out.println("Enterprise"+ enterprise.getName());
+                         if(enterprise instanceof TransportAgencyEnterprise){
+                             System.out.println("Yes");
+                            en = enterprise;
+                            Organization org = null;
+                            UserAccount isDriver = null;
+                            for (Organization organization : en.getOrganizationDirectory().getOrganizationList()){
 
-                                isDriver = ua;
-                                isDriver.getEmployee().setStatus("Busy");
+                                if (organization instanceof Driver){
+        //                            System.out.println("Yes Organization");
+        //                            org = organization;
+        //                            break;
 
+                                    isDriver = ua;
+                                    isDriver.getEmployee().setStatus("Busy");
+
+                                }
+                            }
+                            if (isDriver!=null){
+        //                        System.out.println("Driver"+isDriver.getgetName());
+                                System.out.println("User Account"+userAccount.getUsername());
+                                isDriver.getWorkQueue().getWorkRequestList().add(request);
+                                System.out.println("DriverA"+isDriver.getWorkQueue().getWorkRequestList());
+                                userAccount.getWorkQueue().getWorkRequestList().add(request);
+                                JOptionPane.showMessageDialog(null, "Request sent successfully.");
+                                txtMessage.setText("");
+                                txtQuantity.setText("");
+                                txtLocation.setText("");
+                            }
+                            else{
+                                //send it to a stall specified
                             }
                         }
-                        if (isDriver!=null){
-    //                        System.out.println("Driver"+isDriver.getgetName());
-                            System.out.println("User Account"+userAccount.getUsername());
-                            isDriver.getWorkQueue().getWorkRequestList().add(request);
-                            System.out.println("DriverA"+isDriver.getWorkQueue().getWorkRequestList());
-                            userAccount.getWorkQueue().getWorkRequestList().add(request);
-                            JOptionPane.showMessageDialog(null, "Request sent successfully.");
-                            txtMessage.setText("");
-                            txtQuantity.setText("");
-                            txtLocation.setText("");
-                        }
-                        else{
-                            //send it to a stall specified
-                        }
-                    }
-                }   
-            }
+                    }   
+                }
+            }            
         }
     }//GEN-LAST:event_btnRequestActionPerformed
 
