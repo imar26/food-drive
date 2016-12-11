@@ -68,13 +68,13 @@ public class AnalysisMode extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         btnResultQuestion3 = new javax.swing.JButton();
         comboBoxCity = new javax.swing.JComboBox<>();
-        jPanel12 = new javax.swing.JPanel();
+        displayPanel3 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jSplitPane5 = new javax.swing.JSplitPane();
         jPanel13 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         btnResultQuestion4 = new javax.swing.JButton();
-        jPanel14 = new javax.swing.JPanel();
+        displayPanel4 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jSplitPane6 = new javax.swing.JSplitPane();
         jPanel15 = new javax.swing.JPanel();
@@ -191,18 +191,7 @@ public class AnalysisMode extends javax.swing.JPanel {
         jSplitPane3.setTopComponent(jPanel9);
 
         jPanel10.setBackground(new java.awt.Color(13, 25, 37));
-
-        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
-        jPanel10.setLayout(jPanel10Layout);
-        jPanel10Layout.setHorizontalGroup(
-            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 593, Short.MAX_VALUE)
-        );
-        jPanel10Layout.setVerticalGroup(
-            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 365, Short.MAX_VALUE)
-        );
-
+        jPanel10.setLayout(new java.awt.BorderLayout());
         jSplitPane3.setRightComponent(jPanel10);
 
         piePanel.add(jSplitPane3, java.awt.BorderLayout.CENTER);
@@ -261,20 +250,9 @@ public class AnalysisMode extends javax.swing.JPanel {
 
         jSplitPane4.setTopComponent(jPanel11);
 
-        jPanel12.setBackground(new java.awt.Color(13, 25, 37));
-
-        javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
-        jPanel12.setLayout(jPanel12Layout);
-        jPanel12Layout.setHorizontalGroup(
-            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 593, Short.MAX_VALUE)
-        );
-        jPanel12Layout.setVerticalGroup(
-            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 365, Short.MAX_VALUE)
-        );
-
-        jSplitPane4.setRightComponent(jPanel12);
+        displayPanel3.setBackground(new java.awt.Color(13, 25, 37));
+        displayPanel3.setLayout(new java.awt.BorderLayout());
+        jSplitPane4.setRightComponent(displayPanel3);
 
         jPanel1.add(jSplitPane4, java.awt.BorderLayout.CENTER);
 
@@ -323,20 +301,9 @@ public class AnalysisMode extends javax.swing.JPanel {
 
         jSplitPane5.setTopComponent(jPanel13);
 
-        jPanel14.setBackground(new java.awt.Color(13, 25, 37));
-
-        javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
-        jPanel14.setLayout(jPanel14Layout);
-        jPanel14Layout.setHorizontalGroup(
-            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 593, Short.MAX_VALUE)
-        );
-        jPanel14Layout.setVerticalGroup(
-            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 365, Short.MAX_VALUE)
-        );
-
-        jSplitPane5.setRightComponent(jPanel14);
+        displayPanel4.setBackground(new java.awt.Color(13, 25, 37));
+        displayPanel4.setLayout(new java.awt.BorderLayout());
+        jSplitPane5.setRightComponent(displayPanel4);
 
         jPanel3.add(jSplitPane5, java.awt.BorderLayout.CENTER);
 
@@ -386,18 +353,7 @@ public class AnalysisMode extends javax.swing.JPanel {
         jSplitPane6.setTopComponent(jPanel15);
 
         jPanel16.setBackground(new java.awt.Color(13, 25, 37));
-
-        javax.swing.GroupLayout jPanel16Layout = new javax.swing.GroupLayout(jPanel16);
-        jPanel16.setLayout(jPanel16Layout);
-        jPanel16Layout.setHorizontalGroup(
-            jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 593, Short.MAX_VALUE)
-        );
-        jPanel16Layout.setVerticalGroup(
-            jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 365, Short.MAX_VALUE)
-        );
-
+        jPanel16.setLayout(new java.awt.BorderLayout());
         jSplitPane6.setRightComponent(jPanel16);
 
         jPanel4.add(jSplitPane6, java.awt.BorderLayout.CENTER);
@@ -502,7 +458,8 @@ public class AnalysisMode extends javax.swing.JPanel {
     private void btnResultQuestion3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResultQuestion3ActionPerformed
         // TODO add your handling code here:
         DefaultCategoryDataset barChartData = new DefaultCategoryDataset();
-         HashMap<String, Integer> hmap=business.giveAcrossStores("Boston");//from combobox
+        String city=(String)comboBoxCity.getSelectedItem();
+         HashMap<String, Integer> hmap=business.giveAcrossStores("Worchester");//from combobox
          Set set = hmap.entrySet();
          Iterator iterator = set.iterator();
          while(iterator.hasNext()) {
@@ -516,9 +473,9 @@ public class AnalysisMode extends javax.swing.JPanel {
         barchrt.setRangeGridlinePaint(Color.ORANGE);
         ChartPanel barP = new ChartPanel(barChart);
         barP.setVisible(true);
-        barPanel.removeAll();
-        barPanel.add(barP, BorderLayout.CENTER);
-        barPanel.validate();
+        displayPanel3.removeAll();
+        displayPanel3.add(barP, BorderLayout.CENTER);
+        displayPanel3.validate();
     }//GEN-LAST:event_btnResultQuestion3ActionPerformed
 
     private void btnResultQuestion4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResultQuestion4ActionPerformed
@@ -532,9 +489,9 @@ public class AnalysisMode extends javax.swing.JPanel {
         barchrt.setRangeGridlinePaint(Color.ORANGE);
         ChartPanel barP = new ChartPanel(barChart);
         barP.setVisible(true);
-        barPanel.removeAll();
-        barPanel.add(barP, BorderLayout.CENTER);
-        barPanel.validate();
+        displayPanel4.removeAll();
+        displayPanel4.add(barP, BorderLayout.CENTER);
+        displayPanel4.validate();
     }//GEN-LAST:event_btnResultQuestion4ActionPerformed
 
     private void btnResultQuestion5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResultQuestion5ActionPerformed
@@ -575,6 +532,8 @@ public class AnalysisMode extends javax.swing.JPanel {
     private javax.swing.JButton btnResultQuestion5;
     private javax.swing.JButton btnResultQuestion6;
     private javax.swing.JComboBox<String> comboBoxCity;
+    private javax.swing.JPanel displayPanel3;
+    private javax.swing.JPanel displayPanel4;
     private javax.swing.JPanel displayPanelno6;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -585,9 +544,7 @@ public class AnalysisMode extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
-    private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel13;
-    private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel16;
     private javax.swing.JPanel jPanel2;

@@ -49,7 +49,7 @@ public class MainJFrame extends javax.swing.JFrame {
        
         
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
-        String dateInString = "2016/09/10";
+        String dateInString = "2016/11/16";
         Date date;
         try {
             date = sdf.parse(dateInString);

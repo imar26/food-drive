@@ -297,16 +297,16 @@ public class RequestFoodJPanel extends javax.swing.JPanel {
             model.addRow(row);
 
         }
-        boolean flag = false;
-        for (int i = 0; i < tblStoreWorkQueue.getRowCount(); i++) {
-            String result = (String) tblStoreWorkQueue.getValueAt(i, 4);
-            if (!result.equalsIgnoreCase("No")) {
-                flag = true;
-            }
-        }
-        if (flag == false) {
-            btnRequestInventory.setEnabled(true);
-        }
+//        boolean flag = false;
+//        for (int i = 0; i < tblStoreWorkQueue.getRowCount(); i++) {
+//            String result = (String) tblStoreWorkQueue.getValueAt(i, 4);
+//            if (!result.equalsIgnoreCase("No")) {
+//                flag = true;
+//            }
+//        }
+//        if (flag == false) {
+//            btnRequestInventory.setEnabled(true);
+//        }
     }
 
     private void requestBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_requestBtnActionPerformed
