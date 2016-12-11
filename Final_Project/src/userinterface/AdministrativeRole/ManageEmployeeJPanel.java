@@ -101,10 +101,7 @@ public class ManageEmployeeJPanel extends javax.swing.JPanel {
         organizationJTable.setFont(new java.awt.Font("Lucida Calligraphy", 0, 12)); // NOI18N
         organizationJTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+
             },
             new String [] {
                 "ID", "Name"
