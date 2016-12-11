@@ -101,6 +101,9 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
 
         jButton2.setText("jButton2");
 
+        jPanel1.setBackground(new java.awt.Color(153, 255, 255));
+
+        jTree1.setFont(new java.awt.Font("Lucida Calligraphy", 3, 12)); // NOI18N
         jTree1.addTreeSelectionListener(new javax.swing.event.TreeSelectionListener() {
             public void valueChanged(javax.swing.event.TreeSelectionEvent evt) {
                 jTree1ValueChanged(evt);
@@ -114,7 +117,7 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
                 .addGap(16, 16, 16))
         );
         jPanel1Layout.setVerticalGroup(
@@ -127,10 +130,17 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
 
         jSplitPane.setLeftComponent(jPanel1);
 
+        jPanel2.setBackground(new java.awt.Color(153, 255, 255));
+        jPanel2.setFont(new java.awt.Font("Lucida Calligraphy", 0, 12)); // NOI18N
+
+        jLabel1.setFont(new java.awt.Font("Lucida Calligraphy", 1, 14)); // NOI18N
         jLabel1.setText("Selected Node:");
 
+        labelViewSelectedNode.setFont(new java.awt.Font("Lucida Calligraphy", 1, 14)); // NOI18N
         labelViewSelectedNode.setText("<view_selected_node>");
 
+        btnMangeNetwork.setBackground(new java.awt.Color(255, 51, 0));
+        btnMangeNetwork.setFont(new java.awt.Font("Lucida Calligraphy", 0, 12)); // NOI18N
         btnMangeNetwork.setText("Manage Network");
         btnMangeNetwork.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -138,6 +148,8 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
             }
         });
 
+        jButton1.setBackground(new java.awt.Color(255, 51, 0));
+        jButton1.setFont(new java.awt.Font("Lucida Calligraphy", 0, 12)); // NOI18N
         jButton1.setText("Manage Enterprise Admin");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -150,19 +162,19 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(94, 94, 94)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnMangeNetwork, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(29, 29, 29)
                         .addComponent(jLabel1)
-                        .addGap(37, 37, 37)
-                        .addComponent(labelViewSelectedNode)))
-                .addContainerGap(304, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(labelViewSelectedNode))
+                    .addComponent(btnMangeNetwork, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1))
+                .addContainerGap(234, Short.MAX_VALUE))
         );
+
+        jPanel2Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnMangeNetwork, jButton1});
+
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
@@ -170,11 +182,11 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(labelViewSelectedNode))
-                .addGap(34, 34, 34)
+                .addGap(18, 18, 18)
                 .addComponent(btnMangeNetwork)
-                .addGap(40, 40, 40)
+                .addGap(18, 18, 18)
                 .addComponent(jButton1)
-                .addContainerGap(331, Short.MAX_VALUE))
+                .addContainerGap(359, Short.MAX_VALUE))
         );
 
         jSplitPane.setRightComponent(jPanel2);
