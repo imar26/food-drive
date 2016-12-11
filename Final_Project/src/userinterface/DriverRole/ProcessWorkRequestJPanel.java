@@ -119,44 +119,53 @@ public class ProcessWorkRequestJPanel extends javax.swing.JPanel {
 
     private void btnSubmitResultActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitResultActionPerformed
         // TODO add your handling code here:
-        request.setTestResult(txtResult.getText());
-        request.setStatus("Food Delivered");        
-        account.getEmployee().setStatus("Available");
-        JOptionPane.showMessageDialog(null, "Work Completed");
-        for(Enterprise e: network.getEnterpriseDirectory().getEnterpriseList()) {
-            if(e instanceof MainCenterEnterprise) {
-                for(Organization o: e.getOrganizationDirectory().getOrganizationList()) {
-                 // if(request.getSender().equals(o))
-                    if(o instanceof StoreChain)
-                   {
-                       System.out.println("in sc");
-                       System.out.println("sender"+request.getSenderOrganization());
-                     for (Store store : ((StoreChain) o).getStoreChain()) {
-                         if(store.equals(request.getSenderOrganization()))
-                         {
-                             System.out.println("in store"+request.getSenderOrganization());
-                           Organization org=request.getSenderOrganization();
-                        int quantity = request.getQuantity();
-                         int old_qty = ((Store)org).getStock();
-                         System.out.println("old qty: "+old_qty);
-                         ((Store)org).setStock(old_qty+quantity);
+        boolean resFlag=false;
+        if(txtResult.getText().isEmpty() )
+        {
+            resFlag=true;
+            JOptionPane.showMessageDialog(null, "Please enter your process message.","Error", JOptionPane.ERROR_MESSAGE);
+        }
+        if (!resFlag){
+            request.setTestResult(txtResult.getText());
+            request.setStatus("Food Delivered");        
+            account.getEmployee().setStatus("Available");
+            JOptionPane.showMessageDialog(null, "Work Completed");
+            txtResult.setText("");
+            for(Enterprise e: network.getEnterpriseDirectory().getEnterpriseList()) {
+                if(e instanceof MainCenterEnterprise) {
+                    for(Organization o: e.getOrganizationDirectory().getOrganizationList()) {
+                     // if(request.getSender().equals(o))
+                        if(o instanceof StoreChain)
+                       {
+                           System.out.println("in sc");
+                           System.out.println("sender"+request.getSenderOrganization());
+                         for (Store store : ((StoreChain) o).getStoreChain()) {
+                             if(store.equals(request.getSenderOrganization()))
+                             {
+                                 System.out.println("in store"+request.getSenderOrganization());
+                               Organization org=request.getSenderOrganization();
+                            int quantity = request.getQuantity();
+                             int old_qty = ((Store)org).getStock();
+                             System.out.println("old qty: "+old_qty);
+                             ((Store)org).setStock(old_qty+quantity);
+                             }
                          }
-                     }
-                   }
-                    if(o instanceof Inventory && request.getSenderOrganization() instanceof MainOffice) {
-                        System.out.println("in inventory");
-                        int quantity = request.getQuantity();
-                        System.out.println(quantity);
-                        int old_qty = ((Inventory)o).getStock();
-                        ((Inventory)o).setStock(old_qty+quantity);
+                       }
+                        if(o instanceof Inventory && request.getSenderOrganization() instanceof MainOffice) {
+                            System.out.println("in inventory");
+                            int quantity = request.getQuantity();
+                            System.out.println(quantity);
+                            int old_qty = ((Inventory)o).getStock();
+                            ((Inventory)o).setStock(old_qty+quantity);
+                        }
+    //                    if(o instanceof Store){
+    //                        Organization org=request.getSenderOrganization();
+    //                        int quantity = request.getQuantity();
+    //                         int old_qty = ((Store)org).getStock();
+    //                         System.out.println("old qty: "+old_qty);
+    //                         ((Store)org).setStock(old_qty+quantity);
+    //                    }
                     }
-//                    if(o instanceof Store){
-//                        Organization org=request.getSenderOrganization();
-//                        int quantity = request.getQuantity();
-//                         int old_qty = ((Store)org).getStock();
-//                         System.out.println("old qty: "+old_qty);
-//                         ((Store)org).setStock(old_qty+quantity);
-//                    }
                 }
             }
         }
