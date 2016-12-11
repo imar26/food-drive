@@ -16,9 +16,11 @@ import Business.Organization.Organization;
 import Business.Organization.Store;
 import Business.Organization.StoreChain;
 import Business.UserAccount.UserAccount;
+import Business.Validations;
 import Business.WorkQueue.FoodWorkRequest;
 import Business.WorkQueue.MainOfficeWorkRequest;
 import Business.WorkQueue.StoreWorkRequest;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -33,7 +35,7 @@ public class DonorWorkAreaJPanel extends javax.swing.JPanel {
     private UserAccount userAccount;
     private EcoSystem business;
     private Network network;
-    
+
     /**
      * Creates new form DonorWorkAreaJPanel
      */
@@ -43,16 +45,14 @@ public class DonorWorkAreaJPanel extends javax.swing.JPanel {
         this.organization = organization;
         this.enterprise = enterprise;
         this.userAccount = account;
-        this.business= business;
-        this.network=network;
+        this.business = business;
+        this.network = network;
         populateStore();
-        if(userAccount.getDonor().getType().equalsIgnoreCase("Individual"))
-        {
-               locationTxt.setEnabled(false);
+        if (userAccount.getDonor().getType().equalsIgnoreCase("Individual")) {
+            locationTxt.setEnabled(false);
         }
-        if(!userAccount.getDonor().getType().equalsIgnoreCase("Individual"))
-        {
-               storeComboBox.setEnabled(false);
+        if (!userAccount.getDonor().getType().equalsIgnoreCase("Individual")) {
+            storeComboBox.setEnabled(false);
         }
     }
 
@@ -165,88 +165,119 @@ public class DonorWorkAreaJPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void donateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_donateBtnActionPerformed
-        
-        for(Donor donor: business.getDonorDiresctory().getDonorList()){
-            if(userAccount.getDonor().equals(donor)){
-                int old_quantity=donor.getDonationAmount();
-                int quantity=Integer.valueOf(quantityTxt.getText());
-              donor.setDonationAmount(old_quantity+quantity);
+
+        if (!userAccount.getDonor().getType().equalsIgnoreCase("Individual")) {
+            boolean qtyFlag = false;
+            boolean locFlag = false;
+            if (quantityTxt.getText().isEmpty()) {
+                qtyFlag = true;
+                JOptionPane.showMessageDialog(null, "Please enter quantity", "Error", JOptionPane.ERROR_MESSAGE);
             }
-                
-        }
-        if(!userAccount.getDonor().getType().equalsIgnoreCase("Individual"))
-        {
-            
-        FoodWorkRequest request=new FoodWorkRequest();
-        request.setSender(userAccount);
-        request.setQuantity(Integer.valueOf(quantityTxt.getText()));
-        request.setLocation(locationTxt.getText());
-        request.setStatus("Request Sent");
-        request.setMessage("Food ready for pickup");
-        
-           Enterprise en=null;
-            for(Enterprise enterprise : network.getEnterpriseDirectory().getEnterpriseList()){
-            //    System.out.println("Enterprise"+ enterprise.getName());
-                 if(enterprise instanceof MainCenterEnterprise){
-                  //   System.out.println("Yes");
-                    en = enterprise;
-                    Organization org = null;
-                    for (Organization organization : en.getOrganizationDirectory().getOrganizationList()){
-                        
-                        if (organization instanceof MainOffice){
-                   //         System.out.println("Yes Organization");
-                            org = organization;
-                            break;
+            if (!Validations.isDigit(quantityTxt.getText())) {
+                qtyFlag = true;
+                JOptionPane.showMessageDialog(null, "Please enter quantity as integer", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+            if (locationTxt.getText().isEmpty()) {
+                locFlag = true;
+                JOptionPane.showMessageDialog(null, "Please enter location", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+            if (!qtyFlag & !locFlag){
+                for (Donor donor : business.getDonorDiresctory().getDonorList()) {
+                    if (userAccount.getDonor().equals(donor)) {
+                        int old_quantity = donor.getDonationAmount();
+                        int quantity = Integer.valueOf(quantityTxt.getText());
+                        donor.setDonationAmount(old_quantity + quantity);
+                    }
+
+                }
+                FoodWorkRequest request = new FoodWorkRequest();
+                request.setSender(userAccount);
+                request.setQuantity(Integer.valueOf(quantityTxt.getText()));
+                request.setLocation(locationTxt.getText());
+                request.setStatus("Request Sent");
+                request.setMessage("Food ready for pickup");
+
+                Enterprise en = null;
+                for (Enterprise enterprise : network.getEnterpriseDirectory().getEnterpriseList()) {
+                    //    System.out.println("Enterprise"+ enterprise.getName());
+                    if (enterprise instanceof MainCenterEnterprise) {
+                        //   System.out.println("Yes");
+                        en = enterprise;
+                        Organization org = null;
+                        for (Organization organization : en.getOrganizationDirectory().getOrganizationList()) {
+
+                            if (organization instanceof MainOffice) {
+                                //         System.out.println("Yes Organization");
+                                org = organization;
+                                break;
+                            }
+                        }
+                        if (org != null) {
+                            //     System.out.println("Org"+org.getName());
+                            //     System.out.println("User Account"+userAccount.getUsername());
+                            org.getWorkQueue().getWorkRequestList().add(request);
+                            //     System.out.println("Orga"+org.getWorkQueue().getWorkRequestList());
+                            userAccount.getWorkQueue().getWorkRequestList().add(request);
+                            JOptionPane.showMessageDialog(null, "Food donated successfully.");
+                            quantityTxt.setText("");
+                            locationTxt.setText("");
+                        }
+
+                    }
+                }
+            }
+        } else {
+            //send work request to that particular store
+            boolean qtyFlag = false;
+            if (quantityTxt.getText().isEmpty()) {
+                qtyFlag = true;
+                JOptionPane.showMessageDialog(null, "Please enter quantity", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+            if (!Validations.isDigit(quantityTxt.getText())) {
+                qtyFlag = true;
+                JOptionPane.showMessageDialog(null, "Please enter quantity as integer", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+            if (!qtyFlag){
+                for (Donor donor : business.getDonorDiresctory().getDonorList()) {
+                    if (userAccount.getDonor().equals(donor)) {
+                        int old_quantity = donor.getDonationAmount();
+                        int quantity = Integer.valueOf(quantityTxt.getText());
+                        donor.setDonationAmount(old_quantity + quantity);
+                    }
+
+                }
+                FoodWorkRequest request = new FoodWorkRequest();
+                request.setSender(userAccount);
+                request.setQuantity(Integer.parseInt(quantityTxt.getText()));
+                request.setStatus("Food Received");
+                request.setMessage("Food given at store");
+                Store inStore = null;
+                for (Organization org : enterprise.getOrganizationDirectory().getOrganizationList()) {
+                    if (org instanceof StoreChain) {
+                        for (Store store : ((StoreChain) org).getStoreChain()) {
+                            Store selectedstore = (Store) storeComboBox.getSelectedItem();
+                            if (store.getName().equals(selectedstore.getName())) {
+                                inStore = store;
+                                break;
+                            }
+
                         }
                     }
-                    if (org!=null){
-                   //     System.out.println("Org"+org.getName());
-                   //     System.out.println("User Account"+userAccount.getUsername());
-                        org.getWorkQueue().getWorkRequestList().add(request);
-                   //     System.out.println("Orga"+org.getWorkQueue().getWorkRequestList());
-                        userAccount.getWorkQueue().getWorkRequestList().add(request);
-                    }
-                    
+
                 }
-            }   
-        
-        }
-        else{
-            //send work request to that particular store
-             FoodWorkRequest request=new FoodWorkRequest();
-             request.setSender(userAccount);
-             request.setQuantity(Integer.parseInt(quantityTxt.getText()));
-             request.setStatus("Food Received");
-             request.setMessage("Food given at store");
-             Store inStore=null;
-             for(Organization org: enterprise.getOrganizationDirectory().getOrganizationList())
-             {
-                if(org instanceof StoreChain)
-               {
-                  for(Store store: ((StoreChain) org).getStoreChain())
-                  {
-                    Store selectedstore=(Store)storeComboBox.getSelectedItem();
-                    if(store.getName().equals(selectedstore.getName()))
-                    {
-                      inStore=store;
-                      break;
-                    }   
-                    
-                  }    
-               } 
-             
-             }
-             if(inStore!=null)
-             {
-               inStore.getWorkQueue().getWorkRequestList().add(request);
-                   //     System.out.println("Orga"+org.getWorkQueue().getWorkRequestList());
-               userAccount.getWorkQueue().getWorkRequestList().add(request);
-             }
+                if (inStore != null) {
+                    inStore.getWorkQueue().getWorkRequestList().add(request);
+                    //     System.out.println("Orga"+org.getWorkQueue().getWorkRequestList());
+                    userAccount.getWorkQueue().getWorkRequestList().add(request);
+                    JOptionPane.showMessageDialog(null, "Food donated successfully.");
+                    quantityTxt.setText("");
+                }
+            }
         }
     }//GEN-LAST:event_donateBtnActionPerformed
 
     private void storeComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_storeComboBoxActionPerformed
-        
+
     }//GEN-LAST:event_storeComboBoxActionPerformed
 
 
@@ -264,17 +295,14 @@ public class DonorWorkAreaJPanel extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     private void populateStore() {
-       
+
         storeComboBox.removeAll();
-        for(Organization org: enterprise.getOrganizationDirectory().getOrganizationList())
-        {
-            if(org instanceof StoreChain)
-            {
-               for(Store store: ((StoreChain) org).getStoreChain())
-               {
+        for (Organization org : enterprise.getOrganizationDirectory().getOrganizationList()) {
+            if (org instanceof StoreChain) {
+                for (Store store : ((StoreChain) org).getStoreChain()) {
                     storeComboBox.addItem(store);
-                    
-               }    
+
+                }
             }
         }
     }

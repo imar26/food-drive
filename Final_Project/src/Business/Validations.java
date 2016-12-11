@@ -15,7 +15,7 @@ import java.util.regex.Pattern;
 public class Validations {
     public static boolean isDigit(String input){
         
-          String regex = "^[0-9]{0,2}$";
+          String regex = "^[0-9]{0,9}$";
           Pattern pattern = Pattern.compile(regex);
           Matcher matcher = pattern.matcher(input);
           boolean output=matcher.matches();

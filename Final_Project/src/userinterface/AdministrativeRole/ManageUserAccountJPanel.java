@@ -96,9 +96,9 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         nameJTextField = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        passwordJTextField = new javax.swing.JTextField();
         createUserJButton = new javax.swing.JButton();
         backjButton1 = new javax.swing.JButton();
+        passwordJTextField = new javax.swing.JPasswordField();
 
         userJTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -192,10 +192,10 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
                                                 .addComponent(jLabel1))
                                             .addComponent(jLabel4))
                                         .addGap(18, 18, 18)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(roleJComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(nameJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(passwordJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(roleJComboBox, 0, 146, Short.MAX_VALUE)
+                                            .addComponent(nameJTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
+                                            .addComponent(passwordJTextField))))
                                 .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(66, 66, 66)
@@ -262,7 +262,7 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
         }
         if (!userFlag & !passFlag){
             String userName = nameJTextField.getText();
-            String password = passwordJTextField.getText();
+            String password = String.valueOf(passwordJTextField.getPassword());
             Organization organization = (Organization) organizationJComboBox.getSelectedItem();
             Employee employee = (Employee) employeeJComboBox.getSelectedItem();
             Role role = (Role) roleJComboBox.getSelectedItem();
@@ -297,7 +297,7 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField nameJTextField;
     private javax.swing.JComboBox organizationJComboBox;
-    private javax.swing.JTextField passwordJTextField;
+    private javax.swing.JPasswordField passwordJTextField;
     private javax.swing.JComboBox roleJComboBox;
     private javax.swing.JTable userJTable;
     // End of variables declaration//GEN-END:variables
