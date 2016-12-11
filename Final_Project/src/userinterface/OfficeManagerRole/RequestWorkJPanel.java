@@ -14,11 +14,13 @@ import Business.Organization.MainOffice;
 import Business.Organization.Organization;
 import Business.Organization.Transport;
 import Business.UserAccount.UserAccount;
+import Business.Validations;
 import Business.WorkQueue.FoodWorkRequest;
 import Business.WorkQueue.MainOfficeWorkRequest;
 import Business.WorkQueue.TransportWorkRequest;
 import java.awt.CardLayout;
 import java.awt.Component;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -26,6 +28,7 @@ import javax.swing.JPanel;
  * @author HP
  */
 public class RequestWorkJPanel extends javax.swing.JPanel {
+
     private JPanel userProcessContainer;
     private Enterprise enterprise;
     private UserAccount userAccount;
@@ -33,18 +36,19 @@ public class RequestWorkJPanel extends javax.swing.JPanel {
     private FoodWorkRequest request;
     private Network network;
     private Organization organization;
+
     /**
      * Creates new form RequestWorkJPanel
      */
-    public RequestWorkJPanel(JPanel userProcessContainer, UserAccount account, Enterprise enterprise, Organization organization, EcoSystem business,FoodWorkRequest request,Network network) {
+    public RequestWorkJPanel(JPanel userProcessContainer, UserAccount account, Enterprise enterprise, Organization organization, EcoSystem business, FoodWorkRequest request, Network network) {
         initComponents();
-        this.organization=organization;
+        this.organization = organization;
         this.userProcessContainer = userProcessContainer;
         this.enterprise = enterprise;
         this.userAccount = account;
-        this.business=business;
-        this.request=request;
-        this.network=network;
+        this.business = business;
+        this.request = request;
+        this.network = network;
         txtQuantity.setText(Integer.toString(request.getQuantity()));
         txtLocation.setText(request.getLocation());
     }
@@ -141,43 +145,64 @@ public class RequestWorkJPanel extends javax.swing.JPanel {
 
     private void btnRequestWorkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRequestWorkActionPerformed
         // TODO add your handling code here:
-        
-        //TransportWorkRequest request=new TransportWorkRequest();
-        request.setSender(userAccount);
-        request.setSenderOrganization(organization);
-        request.setMessage(txtMessage.getText());
-        request.setQuantity(Integer.valueOf(txtQuantity.getText()));
-        request.setLocation(txtLocation.getText());
-        request.setStatus("Request sent to transport");
-        
-        
-           Enterprise en=null;
-            for(Enterprise enterprise : network.getEnterpriseDirectory().getEnterpriseList()){
-                System.out.println("Enterprise"+ enterprise.getName());
-                 if(enterprise instanceof TransportAgencyEnterprise){
-                     System.out.println("Yes");
+        boolean msgFlag = false;
+        boolean qtyFlag = false;
+        boolean locFlag = false;
+        if (txtMessage.getText().isEmpty()) {
+            msgFlag = true;
+            JOptionPane.showMessageDialog(null, "Please enter your message", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        if (txtQuantity.getText().isEmpty()) {
+            qtyFlag = true;
+            JOptionPane.showMessageDialog(null, "Please enter quantity", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        if (!Validations.isDigit(txtQuantity.getText())) {
+            qtyFlag = true;
+            JOptionPane.showMessageDialog(null, "Please enter quantity as integer", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        if (txtLocation.getText().isEmpty()) {
+            locFlag = true;
+            JOptionPane.showMessageDialog(null, "Please enter location", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        if (!msgFlag & !qtyFlag & !locFlag){
+            //TransportWorkRequest request=new TransportWorkRequest();
+            request.setSender(userAccount);
+            request.setSenderOrganization(organization);
+            request.setMessage(txtMessage.getText());
+            request.setQuantity(Integer.valueOf(txtQuantity.getText()));
+            request.setLocation(txtLocation.getText());
+            request.setStatus("Request sent to transport");
+
+            Enterprise en = null;
+            for (Enterprise enterprise : network.getEnterpriseDirectory().getEnterpriseList()) {
+                System.out.println("Enterprise" + enterprise.getName());
+                if (enterprise instanceof TransportAgencyEnterprise) {
+                    System.out.println("Yes");
                     en = enterprise;
                     Organization org = null;
-                    for (Organization organization : en.getOrganizationDirectory().getOrganizationList()){
-                        
-                        if (organization instanceof Transport){
+                    for (Organization organization : en.getOrganizationDirectory().getOrganizationList()) {
+
+                        if (organization instanceof Transport) {
                             System.out.println("Yes Organization");
                             org = organization;
                             break;
                         }
                     }
-                    if (org!=null){
-                        System.out.println("Org"+org.getName());
-                        System.out.println("User Account"+userAccount.getUsername());
+                    if (org != null) {
+                        System.out.println("Org" + org.getName());
+                        System.out.println("User Account" + userAccount.getUsername());
                         org.getWorkQueue().getWorkRequestList().add(request);
-                        System.out.println("Orga"+org.getWorkQueue().getWorkRequestList());
+                        System.out.println("Orga" + org.getWorkQueue().getWorkRequestList());
                         userAccount.getWorkQueue().getWorkRequestList().add(request);
+                        JOptionPane.showMessageDialog(null, "Request sent successfully.");
+                        txtMessage.setText("");
+                        txtQuantity.setText("");
+                        txtLocation.setText("");
                     }
-                    
-                
-            }   
+
+                }
+            }
         }
-        
     }//GEN-LAST:event_btnRequestWorkActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
@@ -187,7 +212,7 @@ public class RequestWorkJPanel extends javax.swing.JPanel {
         Component component = componentArray[componentArray.length - 1];
         OfficeManagerWorkAreaJPanel omwajp = (OfficeManagerWorkAreaJPanel) component;
         omwajp.populateRequestTable();
-        CardLayout layout = (CardLayout)userProcessContainer.getLayout();
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.previous(userProcessContainer);
     }//GEN-LAST:event_btnBackActionPerformed
 
