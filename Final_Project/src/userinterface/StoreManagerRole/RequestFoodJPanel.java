@@ -156,8 +156,6 @@ public class RequestFoodJPanel extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         quantityTxt = new javax.swing.JTextField();
         requestBtn = new javax.swing.JButton();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        tblStoreWorkQueue = new javax.swing.JTable();
         btnRequestInventory = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
 
@@ -174,11 +172,14 @@ public class RequestFoodJPanel extends javax.swing.JPanel {
         ));
         jScrollPane2.setViewportView(jTable1);
 
+        setBackground(new java.awt.Color(173, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel1.setFont(new java.awt.Font("Lucida Calligraphy", 1, 12)); // NOI18N
         jLabel1.setText("Nearby Stores:");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(158, 33, -1, -1));
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, -1));
 
+        tblStores.setFont(new java.awt.Font("Lucida Calligraphy", 0, 12)); // NOI18N
         tblStores.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -197,68 +198,49 @@ public class RequestFoodJPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tblStores);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(158, 58, 448, 116));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 448, 116));
 
+        jLabel2.setFont(new java.awt.Font("Lucida Calligraphy", 1, 12)); // NOI18N
         jLabel2.setText("Quantity: ");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(159, 207, -1, -1));
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, -1, -1));
 
+        quantityTxt.setFont(new java.awt.Font("Lucida Calligraphy", 0, 12)); // NOI18N
         quantityTxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 quantityTxtActionPerformed(evt);
             }
         });
-        add(quantityTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(226, 204, 123, -1));
+        add(quantityTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 170, 123, -1));
 
+        requestBtn.setBackground(new java.awt.Color(255, 51, 0));
+        requestBtn.setFont(new java.awt.Font("Lucida Calligraphy", 0, 12)); // NOI18N
         requestBtn.setText("Request");
         requestBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 requestBtnActionPerformed(evt);
             }
         });
-        add(requestBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(533, 203, -1, -1));
+        add(requestBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 170, -1, -1));
 
-        tblStoreWorkQueue.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Message", "Receiver", "Status", "Quantity", "Result"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane3.setViewportView(tblStoreWorkQueue);
-        if (tblStoreWorkQueue.getColumnModel().getColumnCount() > 0) {
-            tblStoreWorkQueue.getColumnModel().getColumn(0).setResizable(false);
-            tblStoreWorkQueue.getColumnModel().getColumn(1).setResizable(false);
-            tblStoreWorkQueue.getColumnModel().getColumn(2).setResizable(false);
-            tblStoreWorkQueue.getColumnModel().getColumn(3).setResizable(false);
-            tblStoreWorkQueue.getColumnModel().getColumn(4).setResizable(false);
-        }
-
-        add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(154, 277, -1, 203));
-
+        btnRequestInventory.setBackground(new java.awt.Color(255, 51, 0));
+        btnRequestInventory.setFont(new java.awt.Font("Lucida Calligraphy", 0, 12)); // NOI18N
         btnRequestInventory.setText("Request Inventory");
         btnRequestInventory.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRequestInventoryActionPerformed(evt);
             }
         });
-        add(btnRequestInventory, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 530, -1, -1));
+        add(btnRequestInventory, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 210, -1, -1));
 
+        btnBack.setBackground(new java.awt.Color(255, 51, 0));
+        btnBack.setFont(new java.awt.Font("Lucida Calligraphy", 0, 12)); // NOI18N
         btnBack.setText("<< Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBackActionPerformed(evt);
             }
         });
-        add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 530, -1, -1));
+        add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     public void populatestoreTable() {
@@ -427,11 +409,9 @@ public class RequestFoodJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField quantityTxt;
     private javax.swing.JButton requestBtn;
-    private javax.swing.JTable tblStoreWorkQueue;
     private javax.swing.JTable tblStores;
     // End of variables declaration//GEN-END:variables
 }

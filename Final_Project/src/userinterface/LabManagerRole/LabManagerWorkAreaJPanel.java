@@ -50,9 +50,13 @@ public class LabManagerWorkAreaJPanel extends javax.swing.JPanel {
         btnUserAccount = new javax.swing.JButton();
         btnWorkQueue = new javax.swing.JButton();
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        setBackground(new java.awt.Color(153, 255, 255));
+
+        jLabel1.setFont(new java.awt.Font("Lucida Calligraphy", 1, 14)); // NOI18N
         jLabel1.setText("My Work Area - Lab Manager Role");
 
+        btnManageLabAssistant.setBackground(new java.awt.Color(255, 51, 0));
+        btnManageLabAssistant.setFont(new java.awt.Font("Lucida Calligraphy", 0, 12)); // NOI18N
         btnManageLabAssistant.setText("Manage Lab Assistant");
         btnManageLabAssistant.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -60,6 +64,8 @@ public class LabManagerWorkAreaJPanel extends javax.swing.JPanel {
             }
         });
 
+        btnUserAccount.setBackground(new java.awt.Color(255, 51, 0));
+        btnUserAccount.setFont(new java.awt.Font("Lucida Calligraphy", 0, 12)); // NOI18N
         btnUserAccount.setText("Manage User Account");
         btnUserAccount.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -67,6 +73,8 @@ public class LabManagerWorkAreaJPanel extends javax.swing.JPanel {
             }
         });
 
+        btnWorkQueue.setBackground(new java.awt.Color(255, 51, 0));
+        btnWorkQueue.setFont(new java.awt.Font("Lucida Calligraphy", 0, 12)); // NOI18N
         btnWorkQueue.setText("Manage Work Queue");
         btnWorkQueue.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -85,7 +93,7 @@ public class LabManagerWorkAreaJPanel extends javax.swing.JPanel {
                     .addComponent(btnManageLabAssistant)
                     .addComponent(btnUserAccount)
                     .addComponent(btnWorkQueue))
-                .addContainerGap(319, Short.MAX_VALUE))
+                .addContainerGap(290, Short.MAX_VALUE))
         );
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnManageLabAssistant, btnUserAccount, btnWorkQueue});
@@ -101,7 +109,7 @@ public class LabManagerWorkAreaJPanel extends javax.swing.JPanel {
                 .addComponent(btnUserAccount)
                 .addGap(18, 18, 18)
                 .addComponent(btnWorkQueue)
-                .addContainerGap(313, Short.MAX_VALUE))
+                .addContainerGap(309, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
