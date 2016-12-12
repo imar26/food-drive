@@ -21,7 +21,7 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="tab6" alignment="0" max="32767" attributes="0"/>
+          <Component id="tab6" alignment="0" pref="948" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -85,7 +85,7 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="292" max="32767" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
                               <Component id="btnResultQuestion1" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
@@ -113,7 +113,7 @@
                         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="ff" green="ff" red="ff" type="rgb"/>
                         </Property>
-                        <Property name="text" type="java.lang.String" value="My first question is:"/>
+                        <Property name="text" type="java.lang.String" value="Analyze amount of growth in donation on monthly basis"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JButton" name="btnResultQuestion1">
@@ -200,7 +200,7 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace pref="271" max="32767" attributes="0"/>
+                                  <EmptySpace pref="427" max="32767" attributes="0"/>
                                   <Component id="btnResultQuestion2" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                               </Group>
@@ -228,7 +228,7 @@
                             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                               <Color blue="ff" green="ff" red="ff" type="rgb"/>
                             </Property>
-                            <Property name="text" type="java.lang.String" value="My Second question is:"/>
+                            <Property name="text" type="java.lang.String" value="Analyze amount of food donated across cities"/>
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JButton" name="btnResultQuestion2">
@@ -308,7 +308,7 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="121" max="32767" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
                               <Component id="comboBoxCity" min="-2" pref="143" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="btnResultQuestion3" min="-2" max="-2" attributes="0"/>
@@ -339,7 +339,7 @@
                         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="ff" green="ff" red="ff" type="rgb"/>
                         </Property>
-                        <Property name="text" type="java.lang.String" value="My Third question is:"/>
+                        <Property name="text" type="java.lang.String" value="Store comparison that fed maximum number of people across different cities"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JButton" name="btnResultQuestion3">
@@ -437,7 +437,7 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="270" max="32767" attributes="0"/>
+                              <EmptySpace pref="357" max="32767" attributes="0"/>
                               <Component id="btnResultQuestion4" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
@@ -465,7 +465,7 @@
                         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="ff" green="ff" red="ff" type="rgb"/>
                         </Property>
-                        <Property name="text" type="java.lang.String" value="My Fourth question is:"/>
+                        <Property name="text" type="java.lang.String" value="Comparison of donation received from Hotel vs Event"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JButton" name="btnResultQuestion4">
@@ -543,7 +543,7 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="286" max="32767" attributes="0"/>
+                              <EmptySpace pref="394" max="32767" attributes="0"/>
                               <Component id="btnResultQuestion5" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
@@ -571,7 +571,7 @@
                         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="ff" green="ff" red="ff" type="rgb"/>
                         </Property>
-                        <Property name="text" type="java.lang.String" value="My Fifth question is:"/>
+                        <Property name="text" type="java.lang.String" value="Compare total number of people fed over months:"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JButton" name="btnResultQuestion5">
@@ -649,7 +649,7 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="285" max="32767" attributes="0"/>
+                              <EmptySpace pref="181" max="32767" attributes="0"/>
                               <Component id="btnResultQuestion6" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
@@ -677,7 +677,7 @@
                         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="ff" green="ff" red="ff" type="rgb"/>
                         </Property>
-                        <Property name="text" type="java.lang.String" value="My Sixth question is:"/>
+                        <Property name="text" type="java.lang.String" value="Analyze ratio of food donated to need people / food sent for decomposition"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JButton" name="btnResultQuestion6">
