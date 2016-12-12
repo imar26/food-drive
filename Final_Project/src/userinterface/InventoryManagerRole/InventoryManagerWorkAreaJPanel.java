@@ -59,7 +59,7 @@ public class InventoryManagerWorkAreaJPanel extends javax.swing.JPanel {
         
         model.setRowCount(0);
         for (WorkRequest request : organization.getWorkQueue().getWorkRequestList()){
-            Object[] row = new Object[6];
+            Object[] row = new Object[5];
             row[0] = request;
             row[1] = request.getStatus();
             int quantity = ((FoodWorkRequest) request).getQuantity();
