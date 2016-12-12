@@ -57,9 +57,9 @@ public class RequestTestJPanel extends javax.swing.JPanel {
     
     public void populateDriverComboBox() {
         comboBoxDriver.removeAllItems();
-        for(Network n : business.getNetworkList()){
+       // for(Network n : business.getNetworkList()){
             Enterprise en = null;            
-            for(Enterprise e : n.getEnterpriseDirectory().getEnterpriseList()){
+            for(Enterprise e : network.getEnterpriseDirectory().getEnterpriseList()){
                 if(e instanceof TransportAgencyEnterprise)
                 {
                     en=e;
@@ -77,7 +77,7 @@ public class RequestTestJPanel extends javax.swing.JPanel {
             }
         }
         
-    }
+    //}
 
     /**
      * This method is called from within the constructor to initialize the form.

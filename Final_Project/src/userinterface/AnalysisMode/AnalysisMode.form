@@ -21,7 +21,7 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="tab6" alignment="0" pref="948" max="32767" attributes="0"/>
+          <Component id="tab6" alignment="0" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -368,7 +368,7 @@
                           <StringArray count="3">
                             <StringItem index="0" value="Boston"/>
                             <StringItem index="1" value="Cambridge"/>
-                            <StringItem index="2" value="Worcester"/>
+                            <StringItem index="2" value="Worchester"/>
                           </StringArray>
                         </Property>
                       </Properties>

@@ -219,7 +219,7 @@ public class AnalysisMode extends javax.swing.JPanel {
 
         comboBoxCity.setBackground(new java.awt.Color(255, 51, 0));
         comboBoxCity.setFont(new java.awt.Font("Lucida Calligraphy", 0, 12)); // NOI18N
-        comboBoxCity.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Boston", "Cambridge", "Worcester" }));
+        comboBoxCity.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Boston", "Cambridge", "Worchester" }));
 
         javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
         jPanel11.setLayout(jPanel11Layout);
@@ -409,7 +409,7 @@ public class AnalysisMode extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tab6, javax.swing.GroupLayout.DEFAULT_SIZE, 948, Short.MAX_VALUE)
+            .addComponent(tab6)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
