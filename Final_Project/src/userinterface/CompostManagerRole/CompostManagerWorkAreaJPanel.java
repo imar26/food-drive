@@ -54,15 +54,14 @@ public class CompostManagerWorkAreaJPanel extends javax.swing.JPanel {
 
         model.setRowCount(0);
         for (WorkRequest request : organization.getWorkQueue().getWorkRequestList()) {
-            Object[] row = new Object[5];
+            Object[] row = new Object[4];
             row[0] = request;
-            row[1] = request.getReceiver();
-            row[2] = request.getStatus();
+            row[1] = request.getStatus();
             int quantity = ((FoodWorkRequest) request).getQuantity();
-            row[3] = quantity;
+            row[2] = quantity;
 
             String result = ((FoodWorkRequest) request).getTestResult();
-            row[4] = result == null ? "Waiting" : result;
+            row[3] = result == null ? "Waiting" : result;
 
             model.addRow(row);
         }
@@ -103,11 +102,11 @@ public class CompostManagerWorkAreaJPanel extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Message", "Receiver", "Status", "Quantity", "Result"
+                "Message", "Status", "Quantity", "Result"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {

@@ -63,12 +63,11 @@ public class StoreWorkAreaJPanel extends javax.swing.JPanel {
 
         model.setRowCount(0);
         for (WorkRequest request : organization.getWorkQueue().getWorkRequestList()) {
-            Object[] row = new Object[6];
+            Object[] row = new Object[3];
             row[0] = request;
-            row[1] = request.getReceiver();
-            row[2] = request.getStatus();
+            row[1] = request.getStatus();
             int quantity = ((FoodWorkRequest) request).getQuantity();
-            row[3] = quantity;
+            row[2] = quantity;
 
             model.addRow(row);
         }
@@ -106,11 +105,11 @@ public class StoreWorkAreaJPanel extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Message", "Receiver", "Status", "Quantity"
+                "Message", "Status", "Quantity"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {

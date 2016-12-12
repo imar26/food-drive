@@ -46,26 +46,26 @@ public class DriverWorkAreaJPanel extends javax.swing.JPanel {
         this.network = network;
         
         populateRequestTable();
-        System.out.println("In Driver Panel");
+//        System.out.println("In Driver Panel");
     }
     
     public void populateRequestTable() {
-        System.out.println("In Driver Panel Twice");
+//        System.out.println("In Driver Panel Twice");
         DefaultTableModel model = (DefaultTableModel) tblManageWorkQueue.getModel();
         
         model.setRowCount(0);
         for (WorkRequest request : account.getWorkQueue().getWorkRequestList()){
-            Object[] row = new Object[6];
+            Object[] row = new Object[5];
             row[0] = request;
-            System.out.println("Request"+request.getMessage());
+//            System.out.println("Request"+request.getMessage());
             //row[1] = ((MainOfficeWorkRequest) request).getDriverName();
-            row[2] = request.getStatus();
+            row[1] = request.getStatus();
             int quantity = ((FoodWorkRequest) request).getQuantity();
-            row[3] = quantity;
+            row[2] = quantity;
             String location = ((FoodWorkRequest) request).getLocation();
-            row[4]=location;
+            row[3]=location;
             String result = ((FoodWorkRequest) request).getTestResult();
-            row[5] = result == null ? "Waiting" : result;
+            row[4] = result == null ? "Waiting" : result;
             
             model.addRow(row);
         }
@@ -93,11 +93,11 @@ public class DriverWorkAreaJPanel extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Message", "Receiver", "Status", "Quantity", "Location", "Result"
+                "Message", "Status", "Quantity", "Location", "Result"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {

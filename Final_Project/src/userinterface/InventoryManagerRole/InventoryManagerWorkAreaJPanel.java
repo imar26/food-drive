@@ -61,14 +61,13 @@ public class InventoryManagerWorkAreaJPanel extends javax.swing.JPanel {
         for (WorkRequest request : organization.getWorkQueue().getWorkRequestList()){
             Object[] row = new Object[6];
             row[0] = request;
-            row[1] = request.getReceiver();
-            row[2] = request.getStatus();
+            row[1] = request.getStatus();
             int quantity = ((FoodWorkRequest) request).getQuantity();
-            row[3] = quantity;
+            row[2] = quantity;
             String location = ((FoodWorkRequest) request).getLocation();
-            row[4] = location;
+            row[3] = location;
             String result = ((FoodWorkRequest) request).getTestResult();
-            row[5] = result == null ? "Waiting" : result;
+            row[4] = result == null ? "Waiting" : result;
             
             model.addRow(row);
         }
@@ -102,11 +101,11 @@ public class InventoryManagerWorkAreaJPanel extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Message", "Receiver", "Status", "Quantity", "Location", "Result"
+                "Message", "Status", "Quantity", "Location", "Result"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -198,7 +197,6 @@ public class InventoryManagerWorkAreaJPanel extends javax.swing.JPanel {
                                     .addComponent(btnDailySub, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(btnRequestWork, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jButton1)
                                 .addGap(1, 1, 1))))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 493, javax.swing.GroupLayout.PREFERRED_SIZE))
