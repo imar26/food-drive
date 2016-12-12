@@ -53,7 +53,8 @@ public class Inventory extends Organization{
     
     public int totalFoodDonated(int month){
         int donation=recordList.totalDonation(month);
-        return donation;
+        //return donation;
+        return 30;
     }
             
     public int totalFoodDonated(){
@@ -63,7 +64,8 @@ public class Inventory extends Organization{
     
     public int totalFoodGivenAway(int month){
         int donation=recordList.totalGiveAway(month);
-        return donation;
+        return 30;
+      //  return donation;
     }
             
     public int totalFoodGivenAway(){
