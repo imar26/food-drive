@@ -28,16 +28,16 @@ public class ProcessWorkRequestJPanel extends javax.swing.JPanel {
     /**
      * Creates new form ProcessWorkRequestJPanel
      */
-    
     private JPanel userProcessContainer;
     private FoodWorkRequest request;
     private Network network;
-    public ProcessWorkRequestJPanel(JPanel userProcessContainer,Network network, FoodWorkRequest request) {
+
+    public ProcessWorkRequestJPanel(JPanel userProcessContainer, Network network, FoodWorkRequest request) {
         initComponents();
-        this.userProcessContainer=userProcessContainer;
-        this.request=request;
-        this.network=network;
-        
+        this.userProcessContainer = userProcessContainer;
+        this.request = request;
+        this.network = network;
+
     }
 
     /**
@@ -115,21 +115,20 @@ public class ProcessWorkRequestJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         request.setTestResult(txtResult.getText());
         request.setStatus("Completed");
-        for(Enterprise e: network.getEnterpriseDirectory().getEnterpriseList()) {
-            if(e instanceof MainCenterEnterprise) {
-                for(Organization o: e.getOrganizationDirectory().getOrganizationList()) {
+        for (Enterprise e : network.getEnterpriseDirectory().getEnterpriseList()) {
+            if (e instanceof MainCenterEnterprise) {
+                for (Organization o : e.getOrganizationDirectory().getOrganizationList()) {
                     for (Store store : ((StoreChain) o).getStoreChain()) {
-                             if(store.equals(request.getSenderOrganization()))
-                             {
-                                 System.out.println("in store"+request.getSenderOrganization());
-                               Organization org=request.getSenderOrganization();
+                        if (store.equals(request.getSenderOrganization())) {
+                            System.out.println("in store" + request.getSenderOrganization());
+                            Organization org = request.getSenderOrganization();
                             int quantity = request.getQuantity();
-                             int old_qty = ((Store)org).getStock();
-                             System.out.println("old qty: "+old_qty);
-                             ((Store)org).setStock(old_qty+quantity);
-                             JOptionPane.showMessageDialog(null, "Request Completed Successfully");
-                             }
-                         }
+                            int old_qty = ((Store) org).getStock();
+                            System.out.println("old qty: " + old_qty);
+                            ((Store) org).setStock(old_qty + quantity);
+                            JOptionPane.showMessageDialog(null, "Request Completed Successfully");
+                        }
+                    }
                 }
             }
         }
