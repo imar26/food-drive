@@ -403,8 +403,8 @@ public class StoreWorkAreaJPanel extends javax.swing.JPanel {
 
     private void btnDailySubActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDailySubActionPerformed
         // TODO add your handling code here:
-        int ans = JOptionPane.showConfirmDialog(null, "Really want to add?", "Warning", JOptionPane.YES_NO_OPTION);
-        if (ans == 0) {
+        //int ans = JOptionPane.showConfirmDialog(null, "Really want to add?", "Warning", JOptionPane.YES_NO_OPTION);
+        //if (ans == 0) {
             int finalStock = organization.getFinalStock();
             int giveAwaycount = organization.getGiveAway();
             Records records = new Records();
@@ -422,7 +422,7 @@ public class StoreWorkAreaJPanel extends javax.swing.JPanel {
             txtGiveAway.setText(String.valueOf(organization.getGiveAway()));
             txtStock.setText(String.valueOf(organization.getStock()));
             JOptionPane.showMessageDialog(null, "Daily Records Submitted Successfully");
-        }
+        //}
     }//GEN-LAST:event_btnDailySubActionPerformed
 
 
