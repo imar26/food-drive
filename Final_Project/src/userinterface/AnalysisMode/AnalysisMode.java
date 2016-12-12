@@ -49,12 +49,6 @@ public class AnalysisMode extends javax.swing.JPanel {
     private void initComponents() {
 
         tab6 = new javax.swing.JTabbedPane();
-        barPanel = new javax.swing.JPanel();
-        jSplitPane2 = new javax.swing.JSplitPane();
-        jPanel7 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        btnResultQuestion1 = new javax.swing.JButton();
-        jPanel8 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         piePanel = new javax.swing.JPanel();
         jSplitPane3 = new javax.swing.JSplitPane();
@@ -75,12 +69,6 @@ public class AnalysisMode extends javax.swing.JPanel {
         jLabel5 = new javax.swing.JLabel();
         btnResultQuestion4 = new javax.swing.JButton();
         displayPanel4 = new javax.swing.JPanel();
-        jPanel4 = new javax.swing.JPanel();
-        jSplitPane6 = new javax.swing.JSplitPane();
-        jPanel15 = new javax.swing.JPanel();
-        jLabel6 = new javax.swing.JLabel();
-        btnResultQuestion5 = new javax.swing.JButton();
-        displayPanel5 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         jSplitPane1 = new javax.swing.JSplitPane();
         jPanel6 = new javax.swing.JPanel();
@@ -93,56 +81,6 @@ public class AnalysisMode extends javax.swing.JPanel {
         tab6.setBackground(new java.awt.Color(255, 51, 0));
         tab6.setToolTipText("");
         tab6.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-
-        barPanel.setLayout(new java.awt.BorderLayout());
-
-        jSplitPane2.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
-
-        jPanel7.setBackground(new java.awt.Color(0, 102, 102));
-
-        jLabel2.setFont(new java.awt.Font("Lucida Calligraphy", 1, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Analyze amount of growth in donation on monthly basis");
-
-        btnResultQuestion1.setBackground(new java.awt.Color(255, 51, 0));
-        btnResultQuestion1.setFont(new java.awt.Font("Lucida Calligraphy", 0, 12)); // NOI18N
-        btnResultQuestion1.setText("View Result");
-        btnResultQuestion1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnResultQuestion1ActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
-        jPanel7.setLayout(jPanel7Layout);
-        jPanel7Layout.setHorizontalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel7Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnResultQuestion1)
-                .addContainerGap())
-        );
-        jPanel7Layout.setVerticalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel7Layout.createSequentialGroup()
-                .addGap(35, 35, 35)
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(btnResultQuestion1))
-                .addContainerGap(40, Short.MAX_VALUE))
-        );
-
-        jSplitPane2.setTopComponent(jPanel7);
-
-        jPanel8.setBackground(new java.awt.Color(153, 255, 255));
-        jPanel8.setLayout(new java.awt.BorderLayout());
-        jSplitPane2.setRightComponent(jPanel8);
-
-        barPanel.add(jSplitPane2, java.awt.BorderLayout.CENTER);
-
-        tab6.addTab("First Question", barPanel);
 
         jPanel2.setLayout(new java.awt.BorderLayout());
 
@@ -172,7 +110,7 @@ public class AnalysisMode extends javax.swing.JPanel {
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 427, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 250, Short.MAX_VALUE)
                 .addComponent(btnResultQuestion2)
                 .addContainerGap())
         );
@@ -196,7 +134,7 @@ public class AnalysisMode extends javax.swing.JPanel {
 
         jPanel2.add(piePanel, java.awt.BorderLayout.CENTER);
 
-        tab6.addTab("Second  Question", jPanel2);
+        tab6.addTab("First  Question", jPanel2);
 
         jPanel1.setLayout(new java.awt.BorderLayout());
 
@@ -253,7 +191,7 @@ public class AnalysisMode extends javax.swing.JPanel {
 
         jPanel1.add(jSplitPane4, java.awt.BorderLayout.CENTER);
 
-        tab6.addTab("Third Question", jPanel1);
+        tab6.addTab("Second Question", jPanel1);
 
         jPanel3.setLayout(new java.awt.BorderLayout());
 
@@ -281,7 +219,7 @@ public class AnalysisMode extends javax.swing.JPanel {
             .addGroup(jPanel13Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 239, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
                 .addComponent(btnResultQuestion4)
                 .addContainerGap())
         );
@@ -303,57 +241,7 @@ public class AnalysisMode extends javax.swing.JPanel {
 
         jPanel3.add(jSplitPane5, java.awt.BorderLayout.CENTER);
 
-        tab6.addTab("Fourth Question", jPanel3);
-
-        jPanel4.setLayout(new java.awt.BorderLayout());
-
-        jSplitPane6.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
-
-        jPanel15.setBackground(new java.awt.Color(0, 102, 102));
-
-        jLabel6.setFont(new java.awt.Font("Lucida Calligraphy", 1, 14)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("Compare total number of people fed over months:");
-
-        btnResultQuestion5.setBackground(new java.awt.Color(255, 51, 0));
-        btnResultQuestion5.setFont(new java.awt.Font("Lucida Calligraphy", 0, 12)); // NOI18N
-        btnResultQuestion5.setText("View Result");
-        btnResultQuestion5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnResultQuestion5ActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
-        jPanel15.setLayout(jPanel15Layout);
-        jPanel15Layout.setHorizontalGroup(
-            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel15Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 394, Short.MAX_VALUE)
-                .addComponent(btnResultQuestion5)
-                .addContainerGap())
-        );
-        jPanel15Layout.setVerticalGroup(
-            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel15Layout.createSequentialGroup()
-                .addGap(32, 32, 32)
-                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnResultQuestion5)
-                    .addComponent(jLabel6))
-                .addContainerGap(43, Short.MAX_VALUE))
-        );
-
-        jSplitPane6.setTopComponent(jPanel15);
-
-        displayPanel5.setBackground(new java.awt.Color(153, 255, 255));
-        displayPanel5.setLayout(new java.awt.BorderLayout());
-        jSplitPane6.setRightComponent(displayPanel5);
-
-        jPanel4.add(jSplitPane6, java.awt.BorderLayout.CENTER);
-
-        tab6.addTab("Fifth Question", jPanel4);
+        tab6.addTab("Third Question", jPanel3);
 
         jPanel5.setLayout(new java.awt.BorderLayout());
 
@@ -381,7 +269,7 @@ public class AnalysisMode extends javax.swing.JPanel {
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 181, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnResultQuestion6)
                 .addContainerGap())
         );
@@ -403,7 +291,7 @@ public class AnalysisMode extends javax.swing.JPanel {
 
         jPanel5.add(jSplitPane1, java.awt.BorderLayout.CENTER);
 
-        tab6.addTab("Sixth Question", jPanel5);
+        tab6.addTab("Fourth Question", jPanel5);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -416,22 +304,6 @@ public class AnalysisMode extends javax.swing.JPanel {
             .addComponent(tab6)
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnResultQuestion1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResultQuestion1ActionPerformed
-        // TODO add your handling code here:
-        DefaultCategoryDataset barChartData = new DefaultCategoryDataset();
-        barChartData.setValue(business.getDonation(9), "Donation Amount", "Sept");
-        barChartData.setValue(business.getDonation(10), "Donation Amount", "Oct");
-        barChartData.setValue(business.getDonation(11), "Donation Amount", "Nov");
-        JFreeChart barChart = ChartFactory.createBarChart("Food Donation", "Monthly", "Donation Amount", barChartData, PlotOrientation.VERTICAL, false, true, false);
-        CategoryPlot barchrt = barChart.getCategoryPlot();
-        barchrt.setRangeGridlinePaint(Color.ORANGE);
-        ChartPanel barP = new ChartPanel(barChart);
-        barP.setVisible(true);
-        barPanel.removeAll();
-        barPanel.add(barP, BorderLayout.CENTER);
-        barPanel.validate();
-    }//GEN-LAST:event_btnResultQuestion1ActionPerformed
 
     private void btnResultQuestion2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResultQuestion2ActionPerformed
         // TODO add your handling code here:
@@ -488,26 +360,6 @@ public class AnalysisMode extends javax.swing.JPanel {
         displayPanel4.validate();
     }//GEN-LAST:event_btnResultQuestion4ActionPerformed
 
-    private void btnResultQuestion5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResultQuestion5ActionPerformed
-        DefaultCategoryDataset line_chart_dataset = new DefaultCategoryDataset();
-        line_chart_dataset.addValue( business.getGiveAwayAmount(9) , "Donation Amount" , "Sept" );
-        line_chart_dataset.addValue( business.getGiveAwayAmount(10) , "Donation Amount" , "Oct" );
-        line_chart_dataset.addValue( business.getGiveAwayAmount(11) , "Donation Amount" , "Nov" );
-        
-      JFreeChart lineChartObject = ChartFactory.createLineChart(
-         "Food Donation","Monthly",
-         "Donation Amount",
-         line_chart_dataset,PlotOrientation.VERTICAL,
-         true,true,false);
-      CategoryPlot barchrt = lineChartObject.getCategoryPlot();
-       // barchrt.setRangeGridlinePaint(Color.ORANGE);
-        ChartPanel barP = new ChartPanel(lineChartObject);
-        barP.setVisible(true);
-        displayPanel5.removeAll();
-        displayPanel5.add(barP, BorderLayout.CENTER);
-        displayPanel5.validate();
-    }//GEN-LAST:event_btnResultQuestion5ActionPerformed
-
     private void btnResultQuestion6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResultQuestion6ActionPerformed
         DefaultPieDataset pieData = new DefaultPieDataset();
         pieData.setValue("Food Given Away", business.calculatePercentGiveAway());
@@ -525,43 +377,31 @@ public class AnalysisMode extends javax.swing.JPanel {
                                    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel barPanel;
-    private javax.swing.JButton btnResultQuestion1;
     private javax.swing.JButton btnResultQuestion2;
     private javax.swing.JButton btnResultQuestion3;
     private javax.swing.JButton btnResultQuestion4;
-    private javax.swing.JButton btnResultQuestion5;
     private javax.swing.JButton btnResultQuestion6;
     private javax.swing.JComboBox<String> comboBoxCity;
     private javax.swing.JPanel displayPanel3;
     private javax.swing.JPanel displayPanel4;
-    private javax.swing.JPanel displayPanel5;
     private javax.swing.JPanel displayPanelno6;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel13;
-    private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
-    private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JSplitPane jSplitPane1;
-    private javax.swing.JSplitPane jSplitPane2;
     private javax.swing.JSplitPane jSplitPane3;
     private javax.swing.JSplitPane jSplitPane4;
     private javax.swing.JSplitPane jSplitPane5;
-    private javax.swing.JSplitPane jSplitPane6;
     private javax.swing.JPanel piePanel;
     private javax.swing.JTabbedPane tab6;
     // End of variables declaration//GEN-END:variables
