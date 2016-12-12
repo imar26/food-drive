@@ -77,6 +77,7 @@ public class Inventory extends Organization{
     
     public Inventory(){
         super(Organization.Type.Inventory.getValue());
+        recordList=new RecordList();
     }
     @Override
     public ArrayList<Role> getSupportedRole() {

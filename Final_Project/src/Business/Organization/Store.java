@@ -28,6 +28,7 @@ public class Store extends Organization {
     
     public Store() {
         super(Organization.Type.Store.getValue());
+        recordList=new RecordList();
     }
 
     public String getName() {

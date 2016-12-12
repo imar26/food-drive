@@ -18,6 +18,7 @@ public class Composting extends Organization {
     private RecordList recordList;
     public Composting() {
         super(Organization.Type.Composting.getValue());
+        recordList=new RecordList();
     }
 
     public RecordList getRecordList() {
