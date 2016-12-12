@@ -34,16 +34,18 @@ public class RequestTestJPanel extends javax.swing.JPanel {
     private FoodWorkRequest request;
     private UserAccount userAccount;
     private EcoSystem business;
+    private Network network;
     /**
      * Creates new form RequestTestJPanel
      */
-    public RequestTestJPanel(JPanel userProcessContainer, Transport organization, FoodWorkRequest request, UserAccount userAccount, EcoSystem business) {
+    public RequestTestJPanel(JPanel userProcessContainer, Transport organization, FoodWorkRequest request, UserAccount userAccount, EcoSystem business, Network network) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.organization = organization;
         this.request = request;
         this.userAccount = userAccount;
         this.business = business;
+        this.network=network;
         
         populateDriverComboBox();
         
@@ -231,8 +233,7 @@ public class RequestTestJPanel extends javax.swing.JPanel {
                 request.setLocation(txtLocation.getText());
                 request.setStatus("Sent to driver");
 
-                for(Network network : business.getNetworkList()){
-                    System.out.println("Network"+ network.getName());
+                
                     Enterprise en=null;
                     for(Enterprise enterprise : network.getEnterpriseDirectory().getEnterpriseList()){
                         System.out.println("Enterprise"+ enterprise.getName());
@@ -250,6 +251,7 @@ public class RequestTestJPanel extends javax.swing.JPanel {
 
                                     isDriver = ua;
                                     isDriver.getEmployee().setStatus("Busy");
+                                    break;
 
                                 }
                             }
@@ -264,12 +266,10 @@ public class RequestTestJPanel extends javax.swing.JPanel {
                                 txtQuantity.setText("");
                                 txtLocation.setText("");
                             }
-                            else{
-                                //send it to a stall specified
-                            }
+                            
                         }
                     }   
-                }
+                
             }            
         }
     }//GEN-LAST:event_btnRequestActionPerformed

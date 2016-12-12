@@ -51,6 +51,7 @@ public class StoreWorkAreaJPanel extends javax.swing.JPanel {
         this.business = business;
         this.network = network;
         txtStock.setText(Integer.toString(organization.getStock()));
+        txtGiveAway.setText(Integer.toString(organization.getGiveAway()));
         if (Integer.parseInt(txtStock.getText()) < 5) {
             btnRequestFood.setEnabled(true);
         }

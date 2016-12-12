@@ -31,12 +31,14 @@ public class ProcessWorkRequestJPanel extends javax.swing.JPanel {
     private JPanel userProcessContainer;
     private FoodWorkRequest request;
     private Network network;
+    private Inventory organization;
 
-    public ProcessWorkRequestJPanel(JPanel userProcessContainer, Network network, FoodWorkRequest request) {
+    public ProcessWorkRequestJPanel(JPanel userProcessContainer, Network network, FoodWorkRequest request, Inventory organization) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.request = request;
         this.network = network;
+        this.organization=organization;
 
     }
 
@@ -118,17 +120,22 @@ public class ProcessWorkRequestJPanel extends javax.swing.JPanel {
         for (Enterprise e : network.getEnterpriseDirectory().getEnterpriseList()) {
             if (e instanceof MainCenterEnterprise) {
                 for (Organization o : e.getOrganizationDirectory().getOrganizationList()) {
+                    if(o instanceof StoreChain){
                     for (Store store : ((StoreChain) o).getStoreChain()) {
                         if (store.equals(request.getSenderOrganization())) {
                             System.out.println("in store" + request.getSenderOrganization());
                             Organization org = request.getSenderOrganization();
+                            int inventoryStock=organization.getStock();
                             int quantity = request.getQuantity();
+                            int total= inventoryStock-quantity;
+                            organization.setStock(total);
+                            
                             int old_qty = ((Store) org).getStock();
                             System.out.println("old qty: " + old_qty);
                             ((Store) org).setStock(old_qty + quantity);
                             JOptionPane.showMessageDialog(null, "Request Completed Successfully");
                         }
-                    }
+                    }}
                 }
             }
         }
@@ -141,6 +148,7 @@ public class ProcessWorkRequestJPanel extends javax.swing.JPanel {
         Component component = componentArray[componentArray.length - 1];
         InventoryManagerWorkAreaJPanel imwjp = (InventoryManagerWorkAreaJPanel) component;
         imwjp.populateRequestTable();
+        imwjp.refreshButton();
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.previous(userProcessContainer);
     }//GEN-LAST:event_btnBackActionPerformed

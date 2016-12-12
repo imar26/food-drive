@@ -235,7 +235,7 @@ public class InventoryManagerWorkAreaJPanel extends javax.swing.JPanel {
 
             request.setStatus("Processing");
 
-            ProcessWorkRequestJPanel processWorkRequestJPanel = new ProcessWorkRequestJPanel(userProcessContainer, network, request);
+            ProcessWorkRequestJPanel processWorkRequestJPanel = new ProcessWorkRequestJPanel(userProcessContainer, network, request, organization);
             userProcessContainer.add("processWorkRequestIJPanel", processWorkRequestJPanel);
             CardLayout layout = (CardLayout) userProcessContainer.getLayout();
             layout.next(userProcessContainer);
@@ -245,7 +245,9 @@ public class InventoryManagerWorkAreaJPanel extends javax.swing.JPanel {
             return;
         }
     }//GEN-LAST:event_btnProcessActionPerformed
-
+    public void refreshButton(){
+        txtStock.setText(String.valueOf(organization.getStock()));
+    }
     private void txtStockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtStockActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtStockActionPerformed

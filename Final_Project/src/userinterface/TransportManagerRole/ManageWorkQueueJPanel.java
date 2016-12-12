@@ -173,7 +173,7 @@ public class ManageWorkQueueJPanel extends javax.swing.JPanel {
             if(!request.getStatus().equalsIgnoreCase("Food Delivered")){
                 request.setStatus("Processing");
 
-                RequestTestJPanel rtjp = new RequestTestJPanel(userProcessContainer, organization, request, userAccount, business);
+                RequestTestJPanel rtjp = new RequestTestJPanel(userProcessContainer, organization, request, userAccount, business, network);
                 userProcessContainer.add("RequestTestJPanel", rtjp);
                 CardLayout layout = (CardLayout) userProcessContainer.getLayout();
                 layout.next(userProcessContainer);
