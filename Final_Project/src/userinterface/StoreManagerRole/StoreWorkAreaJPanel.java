@@ -30,16 +30,17 @@ import static userinterface.InventoryManagerRole.InventoryManagerWorkAreaJPanel.
  * @author Apurva Sawant
  */
 public class StoreWorkAreaJPanel extends javax.swing.JPanel {
+
     private JPanel userProcessContainer;
     private Store organization;
     private Enterprise enterprise;
     private UserAccount userAccount;
     private EcoSystem business;
     private Network network;
+
     /**
      * Creates new form StoreWorkAreaJPanel
      */
-    
 
     public StoreWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, Store organization, Enterprise enterprise, EcoSystem business, Network network) {
         initComponents();
@@ -47,31 +48,31 @@ public class StoreWorkAreaJPanel extends javax.swing.JPanel {
         this.organization = organization;
         this.enterprise = enterprise;
         this.userAccount = account;
-        this.business=business;
-        this.network=network;
+        this.business = business;
+        this.network = network;
         txtStock.setText(Integer.toString(organization.getStock()));
-        if(Integer.parseInt(txtStock.getText())<5)
-        {
-          btnRequestFood.setEnabled(true);
+        if (Integer.parseInt(txtStock.getText()) < 5) {
+            btnRequestFood.setEnabled(true);
         }
-       populateRequestTable();
+        populateRequestTable();
     }
-    public void populateRequestTable(){
+
+    public void populateRequestTable() {
         DefaultTableModel model = (DefaultTableModel) tblStore.getModel();
-        
+
         model.setRowCount(0);
-        for (WorkRequest request : organization.getWorkQueue().getWorkRequestList()){
+        for (WorkRequest request : organization.getWorkQueue().getWorkRequestList()) {
             Object[] row = new Object[6];
             row[0] = request;
             row[1] = request.getReceiver();
             row[2] = request.getStatus();
             int quantity = ((FoodWorkRequest) request).getQuantity();
             row[3] = quantity;
-            
 
             model.addRow(row);
         }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -257,50 +258,48 @@ public class StoreWorkAreaJPanel extends javax.swing.JPanel {
     private void btnRequestFoodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRequestFoodActionPerformed
         // TODO add your handling code here:
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
-        userProcessContainer.add("RequestFoodJPanel", new RequestFoodJPanel(userProcessContainer, userAccount,organization, enterprise, business, network));
+        userProcessContainer.add("RequestFoodJPanel", new RequestFoodJPanel(userProcessContainer, userAccount, organization, enterprise, business, network));
         layout.next(userProcessContainer);
     }//GEN-LAST:event_btnRequestFoodActionPerformed
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
         int selectedRow = tblStore.getSelectedRow();
-        
-        
+
         if (selectedRow >= 0) {
             FoodWorkRequest request = (FoodWorkRequest) tblStore.getValueAt(selectedRow, 0);
 
-            if(request.getMessage().equalsIgnoreCase("Food given at store"))
-            {    
-            request.setStatus("Added");
-            int stock=organization.getStock();
-            int finalStock=organization.getFinalStock();
-            int quantity = ((FoodWorkRequest) request).getQuantity();
-            int total=stock+quantity;
-            int finalTotal=finalStock+quantity;
-            organization.setFinalStock(finalTotal);
-            organization.setStock(total);
-            txtStock.setText(Integer.toString(total));
-            JOptionPane.showMessageDialog(null, "Stock Updated Successfully."); 
-            organization.getWorkQueue().getWorkRequestList().remove(request);
-            populateRequestTable();
+            if (request.getMessage().equalsIgnoreCase("Food given at store")) {
+                request.setStatus("Added");
+                int stock = organization.getStock();
+                int finalStock = organization.getFinalStock();
+                int quantity = ((FoodWorkRequest) request).getQuantity();
+                int total = stock + quantity;
+                int finalTotal = finalStock + quantity;
+                organization.setFinalStock(finalTotal);
+                organization.setStock(total);
+                txtStock.setText(Integer.toString(total));
+                JOptionPane.showMessageDialog(null, "Stock Updated Successfully.");
+                organization.getWorkQueue().getWorkRequestList().remove(request);
+                populateRequestTable();
 
-        }else {
-                JOptionPane.showMessageDialog(null, "Please select a valid request to process."); 
+            } else {
+                JOptionPane.showMessageDialog(null, "Please select a valid request to process.");
                 return;
-              }
+            }
         } else {
-           JOptionPane.showMessageDialog(null, "Please select a request message to process."); 
+            JOptionPane.showMessageDialog(null, "Please select a request message to process.");
             return;
         }
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnSendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSendActionPerformed
-        
-       int selectedRow = tblStore.getSelectedRow();
-        
-            if (selectedRow >= 0) {
-   //         StoreWorkRequest request = (StoreWorkRequest) tblStore.getValueAt(selectedRow, 0);
-              FoodWorkRequest request = (FoodWorkRequest) tblStore.getValueAt(selectedRow, 0);
+
+        int selectedRow = tblStore.getSelectedRow();
+
+        if (selectedRow >= 0) {
+            //         StoreWorkRequest request = (StoreWorkRequest) tblStore.getValueAt(selectedRow, 0);
+            FoodWorkRequest request = (FoodWorkRequest) tblStore.getValueAt(selectedRow, 0);
 //           for(WorkRequest request1: organization.getWorkQueue().getWorkRequestList())
 //           {
 //               System.out.println("req:"+request.getId());
@@ -315,93 +314,85 @@ public class StoreWorkAreaJPanel extends javax.swing.JPanel {
 //               }
 //           
 //           }
-            
-            if(request.getMessage().equalsIgnoreCase("Request for food"))
-            { 
-                if(request.getStatus().equalsIgnoreCase("Request Sent") || request.getStatus().equalsIgnoreCase("Food Request Partially Completed") )
-                {
-                    if(!txtQuantity.getText().isEmpty())
-                    {
-                    if((organization.getStock()-Integer.parseInt(txtQuantity.getText()))>10)
-                    {
-            //request.setStatus("Food Sent for delivery");
-         //   request.setResult("Yes");
-            Organization senderorg=request.getSenderOrganization();
-            int stock=organization.getStock();
-            int quantity = Integer.parseInt(txtQuantity.getText());
-            int total=stock-quantity;
-            int requestQuantity=request.getQuantity();
-            organization.setStock(total);
-            request.setQuantity(requestQuantity-quantity);
-            if(quantity<requestQuantity){
-                request.setStatus("Food Request Partially Completed");
-            }
-            else{
-                request.setStatus("Food Sent for delivery");
-            }
-            txtStock.setText(Integer.toString(total));
-            JOptionPane.showMessageDialog(null, "Food request accepted"); 
-            populateRequestTable();
-                FoodWorkRequest trasnportRequest=new FoodWorkRequest();
-                trasnportRequest.setQuantity(quantity);
-                trasnportRequest.setLocation(organization.getLocation());
-                trasnportRequest.setSenderOrganization(senderorg);
-                
-                Enterprise en=null;
-            for(Enterprise enterprise : network.getEnterpriseDirectory().getEnterpriseList()){
-                System.out.println("Enterprise"+ enterprise.getName());
-                 if(enterprise instanceof TransportAgencyEnterprise){
-                     System.out.println("Yes");
-                    en = enterprise;
-                    Organization org = null;
-                    for (Organization organization : en.getOrganizationDirectory().getOrganizationList()){
-                        
-                        if (organization instanceof Transport){
-                          //  System.out.println("Yes Organization");
-                            org = organization;
-                            break;
+
+            if (request.getMessage().equalsIgnoreCase("Request for food")) {
+                if (request.getStatus().equalsIgnoreCase("Request Sent") || request.getStatus().equalsIgnoreCase("Food Request Partially Completed")) {
+                    if (!txtQuantity.getText().isEmpty()) {
+                        if ((organization.getStock() - Integer.parseInt(txtQuantity.getText())) > 10) {
+                            //request.setStatus("Food Sent for delivery");
+                            //   request.setResult("Yes");
+                            Organization senderorg = request.getSenderOrganization();
+                            int stock = organization.getStock();
+                            int quantity = Integer.parseInt(txtQuantity.getText());
+                            int total = stock - quantity;
+                            int requestQuantity = request.getQuantity();
+                            organization.setStock(total);
+                            request.setQuantity(requestQuantity - quantity);
+                            if (quantity < requestQuantity) {
+                                request.setStatus("Food Request Partially Completed");
+                            } else {
+                                request.setStatus("Food Sent for delivery");
+                            }
+                            txtStock.setText(Integer.toString(total));
+                            JOptionPane.showMessageDialog(null, "Food request accepted");
+                            populateRequestTable();
+                            FoodWorkRequest trasnportRequest = new FoodWorkRequest();
+                            trasnportRequest.setQuantity(quantity);
+                            trasnportRequest.setLocation(organization.getLocation());
+                            trasnportRequest.setSenderOrganization(senderorg);
+                            trasnportRequest.setStatus("Sent to Transport");
+                            trasnportRequest.setMessage("Ready for pickup");
+                            Enterprise en = null;
+                            for (Enterprise enterprise : network.getEnterpriseDirectory().getEnterpriseList()) {
+                                System.out.println("Enterprise" + enterprise.getName());
+                                if (enterprise instanceof TransportAgencyEnterprise) {
+                                    System.out.println("Yes");
+                                    en = enterprise;
+                                    Organization org = null;
+                                    for (Organization organization : en.getOrganizationDirectory().getOrganizationList()) {
+
+                                        if (organization instanceof Transport) {
+                                            //  System.out.println("Yes Organization");
+                                            org = organization;
+                                            break;
+                                        }
+                                    }
+                                    if (org != null) {
+                                        //  System.out.println("Org"+org.getName());
+                                        //  System.out.println("User Account"+userAccount.getUsername());
+                                        org.getWorkQueue().getWorkRequestList().add(trasnportRequest);
+                                        //  System.out.println("Orga"+org.getWorkQueue().getWorkRequestList());
+                                        userAccount.getWorkQueue().getWorkRequestList().add(trasnportRequest);
+                                    }
+                                }
+                            }
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Stock is below the threshold. Cannot process the request.");
                         }
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Please enter quantity to send food");
                     }
-                    if (org!=null){
-                      //  System.out.println("Org"+org.getName());
-                      //  System.out.println("User Account"+userAccount.getUsername());
-                        org.getWorkQueue().getWorkRequestList().add(trasnportRequest);
-                      //  System.out.println("Orga"+org.getWorkQueue().getWorkRequestList());
-                        userAccount.getWorkQueue().getWorkRequestList().add(trasnportRequest);
-                    }
-                  }
-               }
-              }else{
-                       JOptionPane.showMessageDialog(null, "Stock is below the threshold. Cannot process the request."); 
-                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "Request already processed by another store.");
                 }
-                else {
-                    JOptionPane.showMessageDialog(null, "Please enter quantity to send food");
-             }
-                }
-                    else {
-                       JOptionPane.showMessageDialog(null, "Request already processed by another store."); 
-                   }
+            } else {
+                JOptionPane.showMessageDialog(null, "Invalid action. You cannot send food for this request.");
             }
-            else {
-                    JOptionPane.showMessageDialog(null, "Invalid action. You cannot send food for this request."); 
-                 }
-            }
+        }
     }//GEN-LAST:event_btnSendActionPerformed
 
     private void btnGiveAwayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGiveAwayActionPerformed
         // TODO add your handling code here:
-        int stock=organization.getStock();
-        int giveAway=randInt(1,3);
-        int count= stock-giveAway;
-        if(count<0){
+        int stock = organization.getStock();
+        int giveAway = randInt(1, 3);
+        int count = stock - giveAway;
+        if (count < 0) {
             JOptionPane.showMessageDialog(null, "Not enough stock available for give away");
-        }
-        else{
-            int existingGiveAway=organization.getGiveAway();
-            int total=giveAway+existingGiveAway;
+        } else {
+            int existingGiveAway = organization.getGiveAway();
+            int total = giveAway + existingGiveAway;
             organization.setGiveAway(total);
-            int totalStock=stock-giveAway;
+            int totalStock = stock - giveAway;
             organization.setStock(totalStock);
             txtStock.setText(String.valueOf(totalStock));
             txtGiveAway.setText(String.valueOf(total));
@@ -411,19 +402,19 @@ public class StoreWorkAreaJPanel extends javax.swing.JPanel {
 
     private void btnDailySubActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDailySubActionPerformed
         // TODO add your handling code here:
-        int ans = JOptionPane.showConfirmDialog(null, "Really want to add?","Warning", JOptionPane.YES_NO_OPTION);
+        int ans = JOptionPane.showConfirmDialog(null, "Really want to add?", "Warning", JOptionPane.YES_NO_OPTION);
         if (ans == 0) {
-            int finalStock=organization.getFinalStock();
-            int giveAwaycount= organization.getGiveAway();
-            Records records=new Records();
+            int finalStock = organization.getFinalStock();
+            int giveAwaycount = organization.getGiveAway();
+            Records records = new Records();
             records.setFoodDonated(finalStock);
             records.setFoodGiven(giveAwaycount);
             records.setRequestDate(business.getCurrentDate());
-            System.out.println("current date"+business.getCurrentDate());
+            System.out.println("current date" + business.getCurrentDate());
             //RecordList list=new RecordList();
             organization.getRecordList().addRecords(records);
-          //  list.addRecords(records);
-          //  organization.setRecordList(list);
+            //  list.addRecords(records);
+            //  organization.setRecordList(list);
             organization.setFinalStock(0);
             organization.setGiveAway(0);
             organization.setStock(0);
