@@ -44,8 +44,6 @@ public class RequestFoodJPanel extends javax.swing.JPanel {
     private EcoSystem business;
     private Network network;
 
-    DefaultTableModel model;
-
     /**
      * Creates new form RequestFoodJPanel
      */
@@ -57,10 +55,8 @@ public class RequestFoodJPanel extends javax.swing.JPanel {
         this.userAccount = account;
         this.business = business;
         this.network=network;
-        model = (DefaultTableModel) tblStores.getModel();
-        model.setRowCount(0);
         populateTable();
-        populatestoreTable();
+//        populatestoreTable();
 
     }
 
@@ -128,7 +124,8 @@ public class RequestFoodJPanel extends javax.swing.JPanel {
         while (iterator.hasNext()) {
             String key = iterator.next().toString();
             String value = lmap.get(key).toString();
-            if (!value.equals("0.0") && count<4) {
+            System.out.println("Key: "+key+" Value: "+value);
+            if (!value.equals("0.0") && count<3) {
 
                 Object[] row = new Object[2];
                 row[0] = key;
@@ -204,7 +201,7 @@ public class RequestFoodJPanel extends javax.swing.JPanel {
 
         jLabel2.setFont(new java.awt.Font("Lucida Calligraphy", 1, 12)); // NOI18N
         jLabel2.setText("Quantity: ");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, -1, -1));
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 170, -1, -1));
 
         quantityTxt.setFont(new java.awt.Font("Lucida Calligraphy", 0, 12)); // NOI18N
         quantityTxt.addActionListener(new java.awt.event.ActionListener() {
@@ -212,7 +209,7 @@ public class RequestFoodJPanel extends javax.swing.JPanel {
                 quantityTxtActionPerformed(evt);
             }
         });
-        add(quantityTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 170, 123, -1));
+        add(quantityTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 170, 123, -1));
 
         requestBtn.setBackground(new java.awt.Color(255, 51, 0));
         requestBtn.setFont(new java.awt.Font("Lucida Calligraphy", 0, 12)); // NOI18N
@@ -222,7 +219,7 @@ public class RequestFoodJPanel extends javax.swing.JPanel {
                 requestBtnActionPerformed(evt);
             }
         });
-        add(requestBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 170, -1, -1));
+        add(requestBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 170, -1, -1));
 
         btnRequestInventory.setBackground(new java.awt.Color(255, 51, 0));
         btnRequestInventory.setFont(new java.awt.Font("Lucida Calligraphy", 0, 12)); // NOI18N
@@ -232,7 +229,7 @@ public class RequestFoodJPanel extends javax.swing.JPanel {
                 btnRequestInventoryActionPerformed(evt);
             }
         });
-        add(btnRequestInventory, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 210, -1, -1));
+        add(btnRequestInventory, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 210, -1, -1));
 
         btnBack.setBackground(new java.awt.Color(255, 51, 0));
         btnBack.setFont(new java.awt.Font("Lucida Calligraphy", 0, 12)); // NOI18N
@@ -242,56 +239,56 @@ public class RequestFoodJPanel extends javax.swing.JPanel {
                 btnBackActionPerformed(evt);
             }
         });
-        add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, -1, -1));
+        add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
-    public void populatestoreTable() {
-
-//        for(Organization org: enterprise.getOrganizationDirectory().getOrganizationList())
-//        {
-//            if(org instanceof StoreChain)
-//            {    
-//                for(Store store: ((StoreChain) org).getStoreChain())
-//                {
-//                    for(int i=0; i<tblStores.getRowCount(); i++)
-//                    {    
-//                   if(store.getName().equals(tblStores.getValueAt(i, 0)))
-//                   {
-//                       
-//                       model.setRowCount(0);
-//                      
-//                       Object[] row = new Object[6];
-//                       row[0] = request;
-//                   }
-//                    }
-//                }
-//            }
+//    public void populatestoreTable() {
+//
+////        for(Organization org: enterprise.getOrganizationDirectory().getOrganizationList())
+////        {
+////            if(org instanceof StoreChain)
+////            {    
+////                for(Store store: ((StoreChain) org).getStoreChain())
+////                {
+////                    for(int i=0; i<tblStores.getRowCount(); i++)
+////                    {    
+////                   if(store.getName().equals(tblStores.getValueAt(i, 0)))
+////                   {
+////                       
+////                       model.setRowCount(0);
+////                      
+////                       Object[] row = new Object[6];
+////                       row[0] = request;
+////                   }
+////                    }
+////                }
+////            }
+////        }
+//        model.setRowCount(0);
+//        for (WorkRequest request : userAccount.getWorkQueue().getWorkRequestList()) {
+//            Object[] row = new Object[6];
+//            row[0] = request;
+//            row[1] = request.getReceiver();
+//            row[2] = request.getStatus();
+//            row[3] = ((FoodWorkRequest) request).getQuantity();
+//
+//            String result = ((FoodWorkRequest) request).getTestResult();
+//            row[4] = result == null ? "Waiting" : result;
+//
+//            model.addRow(row);
+//
 //        }
-        model.setRowCount(0);
-        for (WorkRequest request : userAccount.getWorkQueue().getWorkRequestList()) {
-            Object[] row = new Object[6];
-            row[0] = request;
-            row[1] = request.getReceiver();
-            row[2] = request.getStatus();
-            row[3] = ((FoodWorkRequest) request).getQuantity();
-
-            String result = ((FoodWorkRequest) request).getTestResult();
-            row[4] = result == null ? "Waiting" : result;
-
-            model.addRow(row);
-
-        }
-//        boolean flag = false;
-//        for (int i = 0; i < tblStoreWorkQueue.getRowCount(); i++) {
-//            String result = (String) tblStoreWorkQueue.getValueAt(i, 4);
-//            if (!result.equalsIgnoreCase("No")) {
-//                flag = true;
-//            }
-//        }
-//        if (flag == false) {
-//            btnRequestInventory.setEnabled(true);
-//        }
-    }
+////        boolean flag = false;
+////        for (int i = 0; i < tblStoreWorkQueue.getRowCount(); i++) {
+////            String result = (String) tblStoreWorkQueue.getValueAt(i, 4);
+////            if (!result.equalsIgnoreCase("No")) {
+////                flag = true;
+////            }
+////        }
+////        if (flag == false) {
+////            btnRequestInventory.setEnabled(true);
+////        }
+//    }
 
     private void requestBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_requestBtnActionPerformed
         boolean qtyFlag = false;
@@ -321,14 +318,14 @@ public class RequestFoodJPanel extends javax.swing.JPanel {
                                 request.setLocation(store.getLocation());
                                 store.getWorkQueue().getWorkRequestList().add(request);
                                 userAccount.getWorkQueue().getWorkRequestList().add(request);
-                                populateRequestTable(request, store);
-                                JOptionPane.showMessageDialog(null, "Request sent successfully.");
-                                quantityTxt.setText("");
+//                                populateRequestTable(request, store);                                
                             }
                         }
                     }
                 }
             }
+            JOptionPane.showMessageDialog(null, "Request sent successfully.");
+            quantityTxt.setText("");
         }
 
     }//GEN-LAST:event_requestBtnActionPerformed
@@ -385,23 +382,23 @@ public class RequestFoodJPanel extends javax.swing.JPanel {
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.previous(userProcessContainer);
     }//GEN-LAST:event_btnBackActionPerformed
-    public void populateRequestTable(FoodWorkRequest request, Store store) {
-
+//    public void populateRequestTable(FoodWorkRequest request, Store store) {
+//
 //                       DefaultTableModel model = (DefaultTableModel) tblStoreWorkQueue.getModel();
-//                       model.setRowCount(0);
-        Object[] row = new Object[6];
-        row[0] = request;
-        //  System.out.println("store:"+store);
-        row[1] = store;
-        row[2] = request.getStatus();
-        row[3] = request.getQuantity();
-        row[4] = request.getLocation();
-        //     String result = request.getResult();
-        //       row[4] = result == null ? "Waiting" : result;
-
-        model.addRow(row);
-
-    }
+//                      model.setRowCount(0);
+//        Object[] row = new Object[6];
+//        row[0] = request;
+//        //  System.out.println("store:"+store);
+//        row[1] = store;
+//        row[2] = request.getStatus();
+//        row[3] = request.getQuantity();
+//        row[4] = request.getLocation();
+//        //     String result = request.getResult();
+//        //       row[4] = result == null ? "Waiting" : result;
+//
+//        model.addRow(row);
+//
+//    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

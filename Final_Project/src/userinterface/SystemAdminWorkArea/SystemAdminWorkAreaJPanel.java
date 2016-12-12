@@ -38,7 +38,7 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
     }
     
     public void populateTree(){
-        DefaultTreeModel model=(DefaultTreeModel) jTree1.getModel();
+        DefaultTreeModel model=(DefaultTreeModel) jTree.getModel();
         ArrayList<Network> networkList=system.getNetworkList();
         ArrayList<Enterprise> enterpriseList;
         ArrayList<Organization> organizationList;
@@ -92,7 +92,7 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
         jSplitPane = new javax.swing.JSplitPane();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTree1 = new javax.swing.JTree();
+        jTree = new javax.swing.JTree();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         labelViewSelectedNode = new javax.swing.JLabel();
@@ -103,13 +103,13 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
 
         jPanel1.setBackground(new java.awt.Color(153, 255, 255));
 
-        jTree1.setFont(new java.awt.Font("Lucida Calligraphy", 3, 12)); // NOI18N
-        jTree1.addTreeSelectionListener(new javax.swing.event.TreeSelectionListener() {
+        jTree.setFont(new java.awt.Font("Lucida Calligraphy", 3, 12)); // NOI18N
+        jTree.addTreeSelectionListener(new javax.swing.event.TreeSelectionListener() {
             public void valueChanged(javax.swing.event.TreeSelectionEvent evt) {
-                jTree1ValueChanged(evt);
+                jTreeValueChanged(evt);
             }
         });
-        jScrollPane1.setViewportView(jTree1);
+        jScrollPane1.setViewportView(jTree);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -207,15 +207,15 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTree1ValueChanged(javax.swing.event.TreeSelectionEvent evt) {//GEN-FIRST:event_jTree1ValueChanged
+    private void jTreeValueChanged(javax.swing.event.TreeSelectionEvent evt) {//GEN-FIRST:event_jTreeValueChanged
         // TODO add your handling code here:
-        DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode)jTree1.getLastSelectedPathComponent();
+        DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode)jTree.getLastSelectedPathComponent();
         if(selectedNode != null){
             labelViewSelectedNode.setText(selectedNode.toString());
 
         }
 
-    }//GEN-LAST:event_jTree1ValueChanged
+    }//GEN-LAST:event_jTreeValueChanged
 
     private void btnMangeNetworkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMangeNetworkActionPerformed
         // TODO add your handling code here:
@@ -244,7 +244,7 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSplitPane jSplitPane;
-    private javax.swing.JTree jTree1;
+    private javax.swing.JTree jTree;
     private javax.swing.JLabel labelViewSelectedNode;
     // End of variables declaration//GEN-END:variables
 }
