@@ -206,7 +206,7 @@ public class AnalysisMode extends javax.swing.JPanel {
 
         jLabel4.setFont(new java.awt.Font("Lucida Calligraphy", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("Store comparison that fed maximum number of people across different cities");
+        jLabel4.setText("Store comparison that fed people across different cities");
 
         btnResultQuestion3.setBackground(new java.awt.Color(255, 51, 0));
         btnResultQuestion3.setFont(new java.awt.Font("Lucida Calligraphy", 0, 12)); // NOI18N
@@ -263,7 +263,7 @@ public class AnalysisMode extends javax.swing.JPanel {
 
         jLabel5.setFont(new java.awt.Font("Lucida Calligraphy", 1, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("Comparison of donation received from Hotel vs Event");
+        jLabel5.setText("Comparison of donation received from Individual vs Hotel vs Event");
 
         btnResultQuestion4.setBackground(new java.awt.Color(255, 51, 0));
         btnResultQuestion4.setFont(new java.awt.Font("Lucida Calligraphy", 0, 12)); // NOI18N
@@ -281,7 +281,7 @@ public class AnalysisMode extends javax.swing.JPanel {
             .addGroup(jPanel13Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 357, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 239, Short.MAX_VALUE)
                 .addComponent(btnResultQuestion4)
                 .addContainerGap())
         );
