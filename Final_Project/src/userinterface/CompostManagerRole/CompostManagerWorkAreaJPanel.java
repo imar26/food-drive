@@ -131,6 +131,7 @@ public class CompostManagerWorkAreaJPanel extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Lucida Calligraphy", 1, 12)); // NOI18N
         jLabel1.setText("Items Composed: ");
 
+        txtItemsComposed.setEditable(false);
         txtItemsComposed.setFont(new java.awt.Font("Lucida Calligraphy", 0, 12)); // NOI18N
 
         btnDaily.setBackground(new java.awt.Color(255, 51, 0));

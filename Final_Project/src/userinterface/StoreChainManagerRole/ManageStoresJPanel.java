@@ -226,7 +226,9 @@ public class ManageStoresJPanel extends javax.swing.JPanel {
                 longitudeTxt.setText("");
                 populateTable();
             } catch (Exception ex) {
-                Logger.getLogger(ManageStoresJPanel.class.getName()).log(Level.SEVERE, null, ex);
+               // Logger.getLogger(ManageStoresJPanel.class.getName()).log(Level.SEVERE, null, ex);
+               JOptionPane.showMessageDialog(null, "Invalid address. Please enter a valid address");
+               return;
             }
         }
     }//GEN-LAST:event_addJButtonActionPerformed

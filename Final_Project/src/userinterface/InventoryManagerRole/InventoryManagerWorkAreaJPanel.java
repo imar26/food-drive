@@ -139,6 +139,7 @@ public class InventoryManagerWorkAreaJPanel extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Lucida Calligraphy", 1, 12)); // NOI18N
         jLabel1.setText("Stock:");
 
+        txtStock.setEditable(false);
         txtStock.setFont(new java.awt.Font("Lucida Calligraphy", 0, 12)); // NOI18N
         txtStock.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -167,6 +168,7 @@ public class InventoryManagerWorkAreaJPanel extends javax.swing.JPanel {
         jLabel2.setFont(new java.awt.Font("Lucida Calligraphy", 1, 12)); // NOI18N
         jLabel2.setText("Give Away:");
 
+        txtGiveAway.setEditable(false);
         txtGiveAway.setFont(new java.awt.Font("Lucida Calligraphy", 0, 12)); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);

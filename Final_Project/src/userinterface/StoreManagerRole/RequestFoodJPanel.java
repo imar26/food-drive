@@ -184,7 +184,7 @@ public class RequestFoodJPanel extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Name", "Distance(Kms)"
+                "Name", "Distance(miles)"
             }
         ) {
             boolean[] canEdit = new boolean [] {

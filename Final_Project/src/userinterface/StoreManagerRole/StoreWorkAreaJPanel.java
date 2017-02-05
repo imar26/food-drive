@@ -7,14 +7,18 @@ package userinterface.StoreManagerRole;
 
 import Business.EcoSystem;
 import Business.Enterprise.Enterprise;
+import Business.Enterprise.MainCenterEnterprise;
 import Business.Enterprise.TransportAgencyEnterprise;
 import Business.Network.Network;
+import Business.Organization.Inventory;
 import Business.Organization.Organization;
 import Business.Organization.RecordList;
 import Business.Organization.Records;
 import Business.Organization.Store;
+import Business.Organization.StoreChain;
 import Business.Organization.Transport;
 import Business.UserAccount.UserAccount;
+import Business.Validations;
 import Business.WorkQueue.FoodWorkRequest;
 import Business.WorkQueue.StoreWorkRequest;
 import Business.WorkQueue.TransportWorkRequest;
@@ -149,6 +153,7 @@ public class StoreWorkAreaJPanel extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Lucida Calligraphy", 1, 12)); // NOI18N
         jLabel1.setText("Current Stock:");
 
+        txtStock.setEditable(false);
         txtStock.setFont(new java.awt.Font("Lucida Calligraphy", 0, 12)); // NOI18N
 
         btnSend.setBackground(new java.awt.Color(255, 51, 0));
@@ -163,6 +168,7 @@ public class StoreWorkAreaJPanel extends javax.swing.JPanel {
         jLabel2.setFont(new java.awt.Font("Lucida Calligraphy", 1, 12)); // NOI18N
         jLabel2.setText("Give Away:");
 
+        txtGiveAway.setEditable(false);
         txtGiveAway.setFont(new java.awt.Font("Lucida Calligraphy", 0, 12)); // NOI18N
 
         btnGiveAway.setBackground(new java.awt.Color(255, 51, 0));
@@ -317,7 +323,7 @@ public class StoreWorkAreaJPanel extends javax.swing.JPanel {
 
             if (request.getMessage().equalsIgnoreCase("Request for food")) {
                 if (request.getStatus().equalsIgnoreCase("Request Sent") || request.getStatus().equalsIgnoreCase("Food Request Partially Completed")) {
-                    if (!txtQuantity.getText().isEmpty()) {
+                    if (!txtQuantity.getText().isEmpty() && Validations.isDigit(txtQuantity.getText())) {
                         if ((organization.getStock() - Integer.parseInt(txtQuantity.getText())) > 10) {
                             //request.setStatus("Food Sent for delivery");
                             //   request.setResult("Yes");
@@ -370,7 +376,7 @@ public class StoreWorkAreaJPanel extends javax.swing.JPanel {
                             JOptionPane.showMessageDialog(null, "Stock is below the threshold. Cannot process the request.");
                         }
                     } else {
-                        JOptionPane.showMessageDialog(null, "Please enter quantity to send food");
+                        JOptionPane.showMessageDialog(null, "Please enter a valid quantity to send food");
                     }
                 } else {
                     JOptionPane.showMessageDialog(null, "Request already processed by another store.");
@@ -378,6 +384,8 @@ public class StoreWorkAreaJPanel extends javax.swing.JPanel {
             } else {
                 JOptionPane.showMessageDialog(null, "Invalid action. You cannot send food for this request.");
             }
+        } else {
+             JOptionPane.showMessageDialog(null, "Please select a request.");
         }
     }//GEN-LAST:event_btnSendActionPerformed
 
@@ -410,9 +418,21 @@ public class StoreWorkAreaJPanel extends javax.swing.JPanel {
             records.setFoodDonated(finalStock);
             records.setFoodGiven(giveAwaycount);
             records.setRequestDate(business.getCurrentDate());
-            System.out.println("current date" + business.getCurrentDate());
+          //  System.out.println("current date" + business.getCurrentDate());
             //RecordList list=new RecordList();
             organization.getRecordList().addRecords(records);
+            for(Enterprise enterprise: network.getEnterpriseDirectory().getEnterpriseList())
+                if(enterprise instanceof MainCenterEnterprise){
+                   for(Organization organization: enterprise.getOrganizationDirectory().getOrganizationList()){
+                     if(organization instanceof Inventory){
+                         int finalStockInv=((Inventory) organization).getFinalStock();
+                          ((Inventory) organization).setFinalStock(finalStockInv+Integer.parseInt(txtStock.getText()));
+                         int stockInv=((Inventory) organization).getStock();
+                          ((Inventory) organization).setStock(stockInv+Integer.parseInt(txtStock.getText()));
+                        }
+                     }
+                   }
+                
             //  list.addRecords(records);
             //  organization.setRecordList(list);
             organization.setFinalStock(0);
